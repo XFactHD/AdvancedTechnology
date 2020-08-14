@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "advtech:steel_ingot_to_block"
+    ]
+  },
+  "criteria": {
+    "has_ingot_steel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/steel"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "advtech:steel_ingot_to_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_ingot_steel",
+      "has_the_recipe"
+    ]
+  ]
+}

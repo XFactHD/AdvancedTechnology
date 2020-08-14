@@ -1,0 +1,87 @@
+package xfacthd.advtech.client;
+
+import net.minecraft.client.gui.ScreenManager;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderTypeLookup;
+import net.minecraft.client.renderer.color.BlockColors;
+import net.minecraft.client.renderer.color.ItemColors;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.*;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DeferredWorkQueue;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import xfacthd.advtech.AdvancedTechnology;
+import xfacthd.advtech.client.color.item.*;
+import xfacthd.advtech.client.color.block.BlockColorMachine;
+import xfacthd.advtech.client.color.block.BlockColorMaterial;
+import xfacthd.advtech.client.gui.generator.ScreenBurnerGenerator;
+import xfacthd.advtech.client.gui.machine.*;
+import xfacthd.advtech.common.ATContent;
+import xfacthd.advtech.common.data.types.ContainerTypes;
+
+@Mod.EventBusSubscriber(value = Dist.CLIENT, modid = AdvancedTechnology.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+public class ATClient
+{
+    @SubscribeEvent
+    public static void onClientSetup(final FMLClientSetupEvent event)
+    {
+        ATContent.blockOre.forEach((mat, block) -> RenderTypeLookup.setRenderLayer(block, RenderType.getCutoutMipped()));
+
+        RenderTypeLookup.setRenderLayer(ATContent.blockElectricFurnace, RenderType.getCutoutMipped());
+        RenderTypeLookup.setRenderLayer(ATContent.blockCrusher, RenderType.getCutoutMipped());
+        RenderTypeLookup.setRenderLayer(ATContent.blockAlloySmelter, RenderType.getCutoutMipped());
+        RenderTypeLookup.setRenderLayer(ATContent.blockMetalPress, RenderType.getCutoutMipped());
+
+        RenderTypeLookup.setRenderLayer(ATContent.blockBurnerGenerator, RenderType.getCutoutMipped());
+
+        //noinspection deprecation
+        DeferredWorkQueue.runLater(() ->
+        {
+            ScreenManager.registerFactory(ContainerTypes.containerTypeElectricFurnace, ScreenElectricFurnace::new);
+            ScreenManager.registerFactory(ContainerTypes.containerTypeCrusher, ScreenCrusher::new);
+            ScreenManager.registerFactory(ContainerTypes.containerTypeAlloySmelter, ScreenAlloySmelter::new);
+            ScreenManager.registerFactory(ContainerTypes.containerTypeMetalPress, ScreenMetalPress::new);
+
+            ScreenManager.registerFactory(ContainerTypes.containerTypeBurnerGenerator, ScreenBurnerGenerator::new);
+        });
+    }
+
+    @SubscribeEvent
+    public static void onRegisterModels(final ModelRegistryEvent event)
+    {
+
+    }
+
+    @SubscribeEvent
+    public static void onTexturePreStitch(final TextureStitchEvent.Pre event)
+    {
+
+    }
+
+    @SubscribeEvent
+    public static void onTexturePostStitch(final TextureStitchEvent.Post event)
+    {
+
+    }
+
+    @SubscribeEvent
+    public static void onBlockColors(final ColorHandlerEvent.Block event)
+    {
+        BlockColors blockColors = event.getBlockColors();
+
+        blockColors.register(new BlockColorMaterial(), BlockColorMaterial.getBlocks());
+        blockColors.register(new BlockColorMachine(), BlockColorMachine.getBlocks());
+    }
+
+    @SubscribeEvent
+    public static void onItemColors(final ColorHandlerEvent.Item event)
+    {
+        ItemColors itemColors = event.getItemColors();
+
+        itemColors.register(new ItemColorMaterial(), ItemColorMaterial.getItems());
+        itemColors.register(new ItemColorMachine(), ItemColorMachine.getItems());
+        itemColors.register(new ItemColorUpgrade(), ItemColorUpgrade.getItems());
+        itemColors.register(new ItemColorComponent(), ItemColorComponent.getItems());
+    }
+}

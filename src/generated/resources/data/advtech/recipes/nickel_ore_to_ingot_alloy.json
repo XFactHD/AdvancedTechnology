@@ -1,0 +1,16 @@
+{
+  "type": "advtech:alloy_smelter",
+  "energy": 4000,
+  "primaryInput": {
+    "tag": "forge:ores/nickel"
+  },
+  "primaryInputCount": 1,
+  "secondaryInput": {
+    "tag": "forge:sand"
+  },
+  "secondaryInputCount": 1,
+  "primaryOutput": {
+    "item": "advtech:item_ingot_nickel",
+    "count": 2
+  }
+}

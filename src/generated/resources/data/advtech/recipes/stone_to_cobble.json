@@ -1,0 +1,10 @@
+{
+  "type": "advtech:crusher",
+  "energy": 1000,
+  "input": {
+    "item": "minecraft:stone"
+  },
+  "primary": {
+    "item": "minecraft:cobblestone"
+  }
+}

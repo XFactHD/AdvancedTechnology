@@ -1,0 +1,11 @@
+{
+  "type": "advtech:crusher",
+  "energy": 3000,
+  "input": {
+    "item": "minecraft:sandstone"
+  },
+  "primary": {
+    "item": "minecraft:sand",
+    "count": 2
+  }
+}

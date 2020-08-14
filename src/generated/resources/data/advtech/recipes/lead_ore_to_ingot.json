@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "tag": "forge:ores/lead"
+  },
+  "result": "advtech:item_ingot_lead",
+  "experience": 1.0,
+  "cookingtime": 200
+}

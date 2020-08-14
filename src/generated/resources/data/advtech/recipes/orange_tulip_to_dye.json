@@ -1,0 +1,11 @@
+{
+  "type": "advtech:crusher",
+  "energy": 2000,
+  "input": {
+    "item": "minecraft:orange_tulip"
+  },
+  "primary": {
+    "item": "minecraft:orange_dye",
+    "count": 4
+  }
+}

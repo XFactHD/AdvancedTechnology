@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "III",
+    "CCC"
+  ],
+  "key": {
+    "C": {
+      "tag": "forge:ingots/copper"
+    },
+    "I": {
+      "tag": "forge:ingots/iron"
+    }
+  },
+  "result": {
+    "item": "advtech:item_reception_coil",
+    "count": 3
+  }
+}

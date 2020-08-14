@@ -1,0 +1,14 @@
+{
+  "type": "advtech:crusher",
+  "energy": 3000,
+  "input": {
+    "item": "minecraft:light_gray_wool"
+  },
+  "primary": {
+    "item": "minecraft:string"
+  },
+  "secondary": {
+    "item": "minecraft:light_gray_dye",
+    "chance": 0.15000000596046448
+  }
+}

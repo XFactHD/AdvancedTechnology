@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "advtech:constantan_powder_to_ingot"
+    ]
+  },
+  "criteria": {
+    "has_powder_constantan": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:dusts/constantan"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "advtech:constantan_powder_to_ingot"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_powder_constantan",
+      "has_the_recipe"
+    ]
+  ]
+}

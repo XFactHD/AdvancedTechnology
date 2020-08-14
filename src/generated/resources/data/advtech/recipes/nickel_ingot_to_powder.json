@@ -1,0 +1,10 @@
+{
+  "type": "advtech:crusher",
+  "energy": 2000,
+  "input": {
+    "tag": "forge:ingots/nickel"
+  },
+  "primary": {
+    "item": "advtech:item_powder_nickel"
+  }
+}

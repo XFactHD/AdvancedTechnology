@@ -1,0 +1,14 @@
+{
+  "type": "advtech:crusher",
+  "energy": 4000,
+  "input": {
+    "item": "minecraft:netherrack"
+  },
+  "primary": {
+    "item": "minecraft:gravel"
+  },
+  "secondary": {
+    "item": "advtech:item_powder_sulfur",
+    "chance": 0.15000000596046448
+  }
+}

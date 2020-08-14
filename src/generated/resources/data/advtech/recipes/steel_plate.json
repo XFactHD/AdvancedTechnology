@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "II ",
+    "II ",
+    "   "
+  ],
+  "key": {
+    "I": {
+      "tag": "forge:ingots/steel"
+    }
+  },
+  "result": {
+    "item": "advtech:item_plate_steel"
+  }
+}

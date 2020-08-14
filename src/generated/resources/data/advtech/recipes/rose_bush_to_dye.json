@@ -1,0 +1,11 @@
+{
+  "type": "advtech:crusher",
+  "energy": 2000,
+  "input": {
+    "item": "minecraft:rose_bush"
+  },
+  "primary": {
+    "item": "minecraft:red_dye",
+    "count": 4
+  }
+}

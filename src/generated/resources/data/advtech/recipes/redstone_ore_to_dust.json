@@ -1,0 +1,11 @@
+{
+  "type": "advtech:crusher",
+  "energy": 4000,
+  "input": {
+    "item": "minecraft:redstone_ore"
+  },
+  "primary": {
+    "item": "minecraft:redstone",
+    "count": 6
+  }
+}

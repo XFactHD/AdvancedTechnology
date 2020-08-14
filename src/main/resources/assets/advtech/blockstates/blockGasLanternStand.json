@@ -1,6 +1,0 @@
-{
-  "variants": {
-    "level=top":     { "model": "advtech:light/gas_lantern_stand_top" },
-    "level=bottom":  { "model": "advtech:light/gas_lantern_stand_bottom" }
-  }
-}

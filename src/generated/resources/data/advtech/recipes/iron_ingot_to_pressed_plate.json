@@ -1,0 +1,14 @@
+{
+  "type": "advtech:metal_press",
+  "energy": 4000,
+  "input": {
+    "tag": "forge:ingots/iron"
+  },
+  "inputCount": 1,
+  "mold": {
+    "item": "advtech:item_plate_mold"
+  },
+  "output": {
+    "item": "advtech:item_plate_iron"
+  }
+}

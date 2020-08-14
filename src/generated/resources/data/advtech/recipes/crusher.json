@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IFI",
+    "EME",
+    "ICI"
+  ],
+  "key": {
+    "I": {
+      "tag": "forge:ingots/iron"
+    },
+    "F": {
+      "item": "minecraft:flint"
+    },
+    "E": {
+      "item": "advtech:item_electric_motor"
+    },
+    "M": {
+      "item": "advtech:block_casing"
+    },
+    "C": {
+      "item": "advtech:item_reception_coil"
+    }
+  },
+  "result": {
+    "item": "advtech:block_crusher"
+  }
+}

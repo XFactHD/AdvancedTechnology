@@ -1,0 +1,16 @@
+{
+  "type": "advtech:alloy_smelter",
+  "energy": 2400,
+  "primaryInput": {
+    "tag": "forge:ingots/silver"
+  },
+  "primaryInputCount": 1,
+  "secondaryInput": {
+    "tag": "forge:ingots/gold"
+  },
+  "secondaryInputCount": 1,
+  "primaryOutput": {
+    "item": "advtech:item_ingot_electrum",
+    "count": 2
+  }
+}

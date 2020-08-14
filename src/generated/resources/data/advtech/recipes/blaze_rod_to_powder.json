@@ -1,0 +1,15 @@
+{
+  "type": "advtech:crusher",
+  "energy": 3000,
+  "input": {
+    "item": "minecraft:blaze_rod"
+  },
+  "primary": {
+    "item": "minecraft:blaze_powder",
+    "count": 4
+  },
+  "secondary": {
+    "item": "advtech:item_powder_sulfur",
+    "chance": 0.5
+  }
+}

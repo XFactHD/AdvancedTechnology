@@ -1,0 +1,26 @@
+modLoader="javafml"
+loaderVersion="[31,)"
+issueTrackerURL="http://my.issue.tracker/" #optional
+[[mods]] #mandatory
+	modId="advtech"
+	version="${file.jarVersion}"
+	displayName="AdvancedTechnology"
+	#updateJSONURL="http://myurl.me/" #optional
+	#displayURL="http://example.com/" #optional
+	logoFile="advtech.png" #optional
+	#credits="Thanks for this example mod goes to Java" #optional
+	authors="XFactHD" #optional
+	description=''''''
+# A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
+[[dependencies.advtech]] #optional
+    modId="forge"
+    mandatory=true
+    versionRange="[31,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.advtech]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.15.2]"
+    ordering="NONE"
+    side="BOTH"

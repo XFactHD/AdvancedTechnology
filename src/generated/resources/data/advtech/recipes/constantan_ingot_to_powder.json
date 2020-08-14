@@ -1,0 +1,10 @@
+{
+  "type": "advtech:crusher",
+  "energy": 2000,
+  "input": {
+    "tag": "forge:ingots/constantan"
+  },
+  "primary": {
+    "item": "advtech:item_powder_constantan"
+  }
+}

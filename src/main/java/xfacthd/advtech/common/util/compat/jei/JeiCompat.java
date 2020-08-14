@@ -1,0 +1,68 @@
+package xfacthd.advtech.common.util.compat.jei;
+
+import mezz.jei.api.IModPlugin;
+import mezz.jei.api.JeiPlugin;
+import mezz.jei.api.constants.VanillaRecipeCategoryUid;
+import mezz.jei.api.helpers.IGuiHelper;
+import mezz.jei.api.registration.*;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import xfacthd.advtech.AdvancedTechnology;
+import xfacthd.advtech.client.gui.machine.*;
+import xfacthd.advtech.common.ATContent;
+import xfacthd.advtech.common.data.recipes.*;
+import xfacthd.advtech.common.util.compat.jei.categories.*;
+import xfacthd.advtech.common.util.compat.jei.gui_handlers.AdvancedGuiHandler;
+
+@JeiPlugin
+public class JeiCompat implements IModPlugin
+{
+    private static final ResourceLocation UID = new ResourceLocation(AdvancedTechnology.MODID, "jei_plugin");
+
+    @Override
+    public ResourceLocation getPluginUid() { return UID; }
+
+    @Override
+    public void registerCategories(IRecipeCategoryRegistration registration)
+    {
+        IGuiHelper guiHelper = registration.getJeiHelpers().getGuiHelper();
+
+        registration.addRecipeCategories(
+                new CategoryCrusher(guiHelper),
+                new CategoryAlloySmelter(guiHelper),
+                new CategoryMetalPress(guiHelper)
+        );
+    }
+
+    @Override
+    public void registerRecipes(IRecipeRegistration registration)
+    {
+        registration.addRecipes(CrusherRecipe.RECIPES, CrusherRecipe.UID);
+        registration.addRecipes(AlloySmelterRecipe.RECIPES, AlloySmelterRecipe.UID);
+        registration.addRecipes(MetalPressRecipe.RECIPES, MetalPressRecipe.UID);
+    }
+
+    @Override
+    public void registerRecipeCatalysts(IRecipeCatalystRegistration registration)
+    {
+        registration.addRecipeCatalyst(new ItemStack(ATContent.blockElectricFurnace), VanillaRecipeCategoryUid.FURNACE);
+        registration.addRecipeCatalyst(new ItemStack(ATContent.blockCrusher), CrusherRecipe.UID);
+        registration.addRecipeCatalyst(new ItemStack(ATContent.blockAlloySmelter), AlloySmelterRecipe.UID);
+        registration.addRecipeCatalyst(new ItemStack(ATContent.blockMetalPress), MetalPressRecipe.UID);
+    }
+
+    @Override
+    public void registerGuiHandlers(IGuiHandlerRegistration registration)
+    {
+        registration.addGuiContainerHandler(ScreenElectricFurnace.class, new AdvancedGuiHandler());
+        registration.addGuiContainerHandler(ScreenCrusher.class, new AdvancedGuiHandler());
+        registration.addGuiContainerHandler(ScreenAlloySmelter.class, new AdvancedGuiHandler());
+        registration.addGuiContainerHandler(ScreenMetalPress.class, new AdvancedGuiHandler());
+        //Other guis may need extended GuiHandlers because they contain fluid ingredients
+
+        registration.addRecipeClickArea(ScreenElectricFurnace.class,    77, 45, 22, 16, VanillaRecipeCategoryUid.FURNACE);
+        registration.addRecipeClickArea(ScreenCrusher.class,            77, 45, 22, 16, CrusherRecipe.UID);
+        registration.addRecipeClickArea(ScreenAlloySmelter.class,       77, 45, 22, 16, AlloySmelterRecipe.UID);
+        registration.addRecipeClickArea(ScreenMetalPress.class,         77, 45, 22, 16, MetalPressRecipe.UID);
+    }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "III",
+    "IPI",
+    "III"
+  ],
+  "key": {
+    "I": {
+      "tag": "forge:ingots/iron"
+    },
+    "P": {
+      "tag": "forge:plates/iron"
+    }
+  },
+  "result": {
+    "item": "advtech:item_plate_mold"
+  }
+}

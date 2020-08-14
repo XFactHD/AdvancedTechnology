@@ -1,0 +1,15 @@
+{
+  "type": "advtech:crusher",
+  "energy": 4000,
+  "input": {
+    "tag": "forge:ores/lead"
+  },
+  "primary": {
+    "item": "advtech:item_powder_lead",
+    "count": 2
+  },
+  "secondary": {
+    "item": "advtech:item_powder_silver",
+    "chance": 0.10000000149011612
+  }
+}

@@ -1,7 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "advtech:items/energy/battery_outer_8",
-    "layer1": "advtech:items/energy/battery_inner"
-  }
-}

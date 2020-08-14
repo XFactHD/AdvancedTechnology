@@ -1,48 +1,142 @@
 buildscript {
     repositories {
+        maven { url = 'https://files.minecraftforge.net/maven' }
         jcenter()
-        maven { url = "http://files.minecraftforge.net/maven" }
+        mavenCentral()
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
     }
 }
-apply plugin: 'net.minecraftforge.gradle.forge'
 
+apply plugin: 'net.minecraftforge.gradle'
+// Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
+apply plugin: 'idea'
+apply plugin: 'maven-publish'
 
-version = "0.0.1"
-group= "XFactHD.advtech"
-archivesBaseName = "AdvancedTechnology"
+version = '0.0.0.1'
+group = 'xfacthd.advtech' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = 'AdvancedTechnology'
 
-sourceCompatibility = targetCompatibility = "1.8"
-compileJava {
-    sourceCompatibility = "1.8"
-    targetCompatibility = "1.8"
+sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
+//Print out JVM information so that we know what version is running. Extreamly useful for people to know when helping you.
+println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
+
+repositories {
+//    maven { url 'https://modmaven.k-4u.nl/' }
+    maven {
+        // location of the maven that hosts JEI files
+        name = "Progwml6 maven"
+        url = "https://dvs1.progwml6.com/files/maven/"
+    }
 }
 
 minecraft {
-    version = "1.10.2-12.18.2.2151"
-    runDir = "run"
+    mappings channel: 'snapshot', version: '20200808-1.15.1'
     
-    mappings = "snapshot_20161111"
+    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+
+    // Default run configurations.
+    // These can be tweaked, removed, or duplicated as needed.
+    runs {
+        client {
+            workingDirectory project.file('run')
+
+            // Recommended logging data for a userdev environment
+            // property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+
+            // Recommended logging level for the console
+            property 'forge.logging.console.level', 'debug'
+
+            mods {
+                advtech {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        server {
+            workingDirectory project.file('run')
+
+            // Recommended logging data for a userdev environment
+            // property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+
+            // Recommended logging level for the console
+            property 'forge.logging.console.level', 'debug'
+
+            mods {
+                advtech {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        data {
+            workingDirectory project.file('run')
+
+            // Recommended logging data for a userdev environment
+            // property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+
+            // Recommended logging level for the console
+            property 'forge.logging.console.level', 'debug'
+
+            args '--mod', 'advtech', '--all', '--output', file('src/generated/resources/'), '--existing', sourceSets.main.resources.srcDirs[0]
+
+            mods {
+                advtech {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+sourceSets {
+    main.resources.srcDirs += 'src/generated/resources'
 }
 
 dependencies {
+    minecraft 'net.minecraftforge:forge:1.15.2-31.2.36'
 
+    // compileOnly "mekanism:Mekanism:${mekanism_version}:api"
+    // runtimeOnly fg.deobf("mekanism:Mekanism:${mekanism_version}")
+
+    // compile against the JEI API but do not include it at runtime
+    compileOnly fg.deobf("mezz.jei:jei-1.15.2:6.0.0.4:api")
+    // at runtime, use the full JEI jar
+    runtimeOnly fg.deobf("mezz.jei:jei-1.15.2:6.0.0.4")
 }
 
-processResources
-{
-    inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
-
-    from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
-                
-        expand 'version':project.version, 'mcversion':project.minecraft.version
+// Example for how to get properties into the manifest for reading by the runtime..
+jar {
+    manifest {
+        attributes([
+            "Specification-Title": "advtech",
+            "Specification-Vendor": "xfacthd",
+            "Specification-Version": "1", // We are version 1 of ourselves
+            "Implementation-Title": project.name,
+            "Implementation-Version": "${version}",
+            "Implementation-Vendor" :"xfacthd",
+            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
     }
-        
-    from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
+}
+
+// Example configuration to allow publishing using the maven-publish task
+// This is the preferred method to reobfuscate your jar file
+jar.finalizedBy('reobfJar') 
+// However if you are in a multi-project build, dev time needs unobfed jar files, so you can delay the obfuscation until publishing by doing
+//publish.dependsOn('reobfJar')
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact jar
+        }
+    }
+    repositories {
+        maven {
+            url "file:///${project.projectDir}/mcmodsrepo"
+        }
     }
 }

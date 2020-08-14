@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "advtech:block_ore_copper",
+    "advtech:block_ore_tin",
+    "advtech:block_ore_silver",
+    "advtech:block_ore_lead",
+    "advtech:block_ore_aluminum",
+    "advtech:block_ore_nickel",
+    "advtech:block_ore_platinum",
+    "advtech:block_ore_sulfur"
+  ]
+}

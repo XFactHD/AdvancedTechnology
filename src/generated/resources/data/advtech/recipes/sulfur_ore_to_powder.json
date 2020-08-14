@@ -1,0 +1,11 @@
+{
+  "type": "advtech:crusher",
+  "energy": 4000,
+  "input": {
+    "tag": "forge:ores/sulfur"
+  },
+  "primary": {
+    "item": "advtech:item_powder_sulfur",
+    "count": 12
+  }
+}

@@ -1,7 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "advtech:items/material/lamp",
-    "layer1": "advtech:items/material/lamp_glass"
-  }
-}

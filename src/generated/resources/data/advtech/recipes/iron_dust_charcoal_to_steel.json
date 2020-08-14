@@ -1,0 +1,15 @@
+{
+  "type": "advtech:alloy_smelter",
+  "energy": 4000,
+  "primaryInput": {
+    "tag": "forge:dusts/iron"
+  },
+  "primaryInputCount": 1,
+  "secondaryInput": {
+    "tag": "forge:dusts/charcoal"
+  },
+  "secondaryInputCount": 4,
+  "primaryOutput": {
+    "item": "advtech:item_ingot_steel"
+  }
+}

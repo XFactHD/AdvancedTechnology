@@ -1,0 +1,11 @@
+{
+  "type": "advtech:crusher",
+  "energy": 2000,
+  "input": {
+    "item": "minecraft:oxeye_daisy"
+  },
+  "primary": {
+    "item": "minecraft:light_gray_dye",
+    "count": 4
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "advtech:item/component/item_coil",
+    "layer1": "advtech:item/component/item_coil_metal"
+  }
+}

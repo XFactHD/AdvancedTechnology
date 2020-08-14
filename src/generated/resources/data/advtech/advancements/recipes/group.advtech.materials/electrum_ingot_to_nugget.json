@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "advtech:electrum_ingot_to_nugget"
+    ]
+  },
+  "criteria": {
+    "has_ingot_electrum": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/electrum"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "advtech:electrum_ingot_to_nugget"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_ingot_electrum",
+      "has_the_recipe"
+    ]
+  ]
+}

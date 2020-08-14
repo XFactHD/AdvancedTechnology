@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "advtech:lead_ingot_to_nugget"
+    ]
+  },
+  "criteria": {
+    "has_ingot_lead": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/lead"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "advtech:lead_ingot_to_nugget"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_ingot_lead",
+      "has_the_recipe"
+    ]
+  ]
+}

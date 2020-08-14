@@ -1,6 +1,0 @@
-{
-    "parent": "block/cube_all",
-    "textures": {
-        "all": "advtech:blocks/material/concrete/blockConcrete_White_NONE"
-    }
-}

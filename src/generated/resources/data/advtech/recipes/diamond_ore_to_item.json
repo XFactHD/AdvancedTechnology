@@ -1,0 +1,11 @@
+{
+  "type": "advtech:crusher",
+  "energy": 4000,
+  "input": {
+    "item": "minecraft:diamond_ore"
+  },
+  "primary": {
+    "item": "minecraft:diamond",
+    "count": 2
+  }
+}

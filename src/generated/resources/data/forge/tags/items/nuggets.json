@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "advtech:item_nugget_copper",
+    "advtech:item_nugget_tin",
+    "advtech:item_nugget_silver",
+    "advtech:item_nugget_lead",
+    "advtech:item_nugget_aluminum",
+    "advtech:item_nugget_nickel",
+    "advtech:item_nugget_platinum",
+    "advtech:item_nugget_steel",
+    "advtech:item_nugget_electrum",
+    "advtech:item_nugget_bronze",
+    "advtech:item_nugget_constantan"
+  ]
+}

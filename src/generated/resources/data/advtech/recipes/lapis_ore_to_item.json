@@ -1,0 +1,15 @@
+{
+  "type": "advtech:crusher",
+  "energy": 4000,
+  "input": {
+    "item": "minecraft:lapis_ore"
+  },
+  "primary": {
+    "item": "minecraft:lapis_lazuli",
+    "count": 10
+  },
+  "secondary": {
+    "item": "advtech:item_powder_sulfur",
+    "chance": 0.20000000298023224
+  }
+}

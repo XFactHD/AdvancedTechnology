@@ -1,0 +1,11 @@
+{
+  "type": "advtech:crusher",
+  "energy": 4000,
+  "input": {
+    "tag": "forge:ores/gold"
+  },
+  "primary": {
+    "item": "advtech:item_powder_gold",
+    "count": 2
+  }
+}

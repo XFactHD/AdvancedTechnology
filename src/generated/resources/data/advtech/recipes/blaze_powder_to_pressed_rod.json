@@ -1,0 +1,14 @@
+{
+  "type": "advtech:metal_press",
+  "energy": 4000,
+  "input": {
+    "item": "minecraft:blaze_powder"
+  },
+  "inputCount": 5,
+  "mold": {
+    "item": "advtech:item_rod_mold"
+  },
+  "output": {
+    "item": "minecraft:blaze_rod"
+  }
+}

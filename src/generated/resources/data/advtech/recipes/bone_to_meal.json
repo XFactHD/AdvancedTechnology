@@ -1,0 +1,11 @@
+{
+  "type": "advtech:crusher",
+  "energy": 4000,
+  "input": {
+    "tag": "forge:bones"
+  },
+  "primary": {
+    "item": "minecraft:bone_meal",
+    "count": 6
+  }
+}

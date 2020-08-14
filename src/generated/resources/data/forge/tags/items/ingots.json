@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "advtech:item_ingot_copper",
+    "advtech:item_ingot_tin",
+    "advtech:item_ingot_silver",
+    "advtech:item_ingot_lead",
+    "advtech:item_ingot_aluminum",
+    "advtech:item_ingot_nickel",
+    "advtech:item_ingot_platinum",
+    "advtech:item_ingot_steel",
+    "advtech:item_ingot_electrum",
+    "advtech:item_ingot_bronze",
+    "advtech:item_ingot_constantan"
+  ]
+}
