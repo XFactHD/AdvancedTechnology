@@ -1,0 +1,38 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "advtech:machine/refinery_base"
+  },
+  "variants": {
+    "tower": {
+      "base": { },
+      "one": {
+        "model": "advtech:machine/refinery_tower"
+      },
+      "two": {
+        "model": "advtech:machine/refinery_tower"
+      },
+      "three": {
+        "model": "advtech:machine/refinery_tower"
+      },
+      "four": {
+        "model": "advtech:machine/refinery_tower"
+      },
+      "five": {
+        "model": "advtech:machine/refinery_tower_top"
+      }
+    },
+    "facing": {
+      "north": { },
+      "east": {
+        "y": 90
+      },
+      "south": {
+        "y": 180
+      },
+      "west": {
+        "y": 270
+      }
+    }
+  }
+}

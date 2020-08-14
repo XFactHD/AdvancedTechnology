@@ -1,0 +1,23 @@
+{
+    "multipart": [
+        {   "apply": { "model": "advtech:energy/node_center" }},
+        {   "when": { "con_u": "true" },
+            "apply": { "model": "advtech:energy/node_con", "x": -90 }
+        },
+        {   "when": { "con_d": "true" },
+            "apply": { "model": "advtech:energy/node_con", "x": 90 }
+        },
+        {   "when": { "con_n": "true" },
+            "apply": { "model": "advtech:energy/node_con" }
+        },
+        {   "when": { "con_e": "true" },
+            "apply": { "model": "advtech:energy/node_con", "y": 90 }
+        },
+        {   "when": { "con_s": "true" },
+            "apply": { "model": "advtech:energy/node_con", "y": 180 }
+        },
+        {   "when": { "con_w": "true" },
+            "apply": { "model": "advtech:energy/node_con", "y": 270 }
+        }
+    ]
+}

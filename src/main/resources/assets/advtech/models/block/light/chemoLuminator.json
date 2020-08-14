@@ -1,0 +1,33 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "frame": "advtech:blocks/light/chemoLuminator",
+    "colored": "advtech:blocks/light/chemoLuminator_effect"
+  },
+  "elements": [
+    {
+      "from": [ 0, 0, 0 ],
+      "to": [ 16, 16, 16 ],
+      "faces": {
+        "down":  { "uv": [ 0, 0, 16, 16 ], "texture": "#colored", "tintindex": 1, "cullface": "down" },
+        "up":    { "uv": [ 0, 0, 16, 16 ], "texture": "#colored", "tintindex": 1, "cullface": "up" },
+        "north": { "uv": [ 0, 0, 16, 16 ], "texture": "#colored", "tintindex": 1, "cullface": "north" },
+        "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#colored", "tintindex": 1, "cullface": "south" },
+        "west":  { "uv": [ 0, 0, 16, 16 ], "texture": "#colored", "tintindex": 1, "cullface": "west" },
+        "east":  { "uv": [ 0, 0, 16, 16 ], "texture": "#colored", "tintindex": 1, "cullface": "east" }
+      }
+    },
+    {
+      "from": [ 0, 0, 0 ],
+      "to": [ 16, 16, 16 ],
+      "faces": {
+        "down":  { "uv": [ 0, 0, 16, 16 ], "texture": "#frame", "cullface": "down" },
+        "up":    { "uv": [ 0, 0, 16, 16 ], "texture": "#frame", "cullface": "up" },
+        "north": { "uv": [ 0, 0, 16, 16 ], "texture": "#frame", "cullface": "north" },
+        "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#frame", "cullface": "south" },
+        "west":  { "uv": [ 0, 0, 16, 16 ], "texture": "#frame", "cullface": "west" },
+        "east":  { "uv": [ 0, 0, 16, 16 ], "texture": "#frame", "cullface": "east" }
+      }
+    }
+  ]
+}

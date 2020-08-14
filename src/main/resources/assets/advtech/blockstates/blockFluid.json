@@ -1,0 +1,44 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "forge:fluid"
+  },
+  "variants": {
+    "hydrogenperoxide": [{
+      "custom": { "fluid": "advtech:hydrogenperoxide" }
+    }],
+    "oxalacid": [{
+      "custom": { "fluid": "advtech:oxalacid" }
+    }],
+    "sulfuricacid": [{
+      "custom": { "fluid": "advtech:sulfuricacid" }
+    }],
+    "biogas": [{
+      "custom": { "fluid": "advtech:biogas" }
+    }],
+    "oxygen": [{
+      "custom": { "fluid": "advtech:oxygen" }
+    }],
+    "hydrogen": [{
+      "custom": { "fluid": "advtech:hydrogen" }
+    }],
+    "oil": [{
+      "custom": { "fluid": "advtech:oil" }
+    }],
+    "naturalgas": [{
+      "custom": { "fluid": "advtech:naturalgas" }
+    }],
+    "fuel": [{
+      "custom": { "fluid": "advtech:fuel" }
+    }],
+    "petroleum": [{
+      "custom": { "fluid": "advtech:petroleum" }
+    }],
+    "diesel": [{
+      "custom": { "fluid": "advtech:diesel" }
+    }],
+    "lubricant": [{
+      "custom": { "fluid": "advtech:lubricant" }
+    }]
+  }
+}

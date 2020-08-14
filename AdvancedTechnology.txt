@@ -1,0 +1,21 @@
+﻿﻿﻿﻿﻿AdvancedTechnology
+- Fluorescent Lamp ✔ 
+- Hydrogen Peroxide
+- Oxal Acid (C2H2O4) (translation?)
+- Chemical Reaction Chamber
+- Sulfuric Acid
+- Jetpacks
+- Tanks
+- Oxygen
+- Hydrogen
+- Fluid Pipes
+- Energy Pipes ✔ 
+- Biogas
+- Worldwide Per-Player Energy Network ✔
+- 1 and 3 block high gas lantern ✔
+- Alloy Furnace
+- Crusher
+- Metal Press
+- Refinery
+- Battery Pack ✔
+- Electric Furnace ✔

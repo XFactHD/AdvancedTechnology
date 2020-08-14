@@ -1,0 +1,9 @@
+{
+  "variants": {
+    "active=false,auto=false": { "model": "advtech:light/gas_lantern" },
+    "active=true,auto=false":  { "model": "advtech:light/gas_lantern_on" },
+
+    "active=false,auto=true":  { "model": "advtech:light/gas_lantern_auto" },
+    "active=true,auto=true":   { "model": "advtech:light/gas_lantern_auto_on" }
+  }
+}

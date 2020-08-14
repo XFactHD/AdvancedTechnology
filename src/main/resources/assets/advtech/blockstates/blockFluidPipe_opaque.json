@@ -1,0 +1,41 @@
+{
+    "multipart": [
+        {   "apply": { "model": "advtech:transport/fluidPipe_opaque_center" }},
+        {   "when": { "con_type_u": "cable" },
+            "apply": { "model": "advtech:transport/fluidPipe_opaque_con", "x": -90 }
+        },
+        {   "when": { "con_type_d": "cable" },
+            "apply": { "model": "advtech:transport/fluidPipe_opaque_con", "x": 90 }
+        },
+        {   "when": { "con_type_n": "cable" },
+            "apply": { "model": "advtech:transport/fluidPipe_opaque_con" }
+        },
+        {   "when": { "con_type_e": "cable" },
+            "apply": { "model": "advtech:transport/fluidPipe_opaque_con", "y": 90 }
+        },
+        {   "when": { "con_type_s": "cable" },
+            "apply": { "model": "advtech:transport/fluidPipe_opaque_con", "y": 180 }
+        },
+        {   "when": { "con_type_w": "cable" },
+            "apply": { "model": "advtech:transport/fluidPipe_opaque_con", "y": 270 }
+        },
+        {   "when": { "con_type_u": "block" },
+            "apply": { "model": "advtech:transport/fluidPipe_opaque_con_block", "x": -90 }
+        },
+        {   "when": { "con_type_d": "block" },
+            "apply": { "model": "advtech:transport/fluidPipe_opaque_con_block", "x": 90 }
+        },
+        {   "when": { "con_type_n": "block" },
+            "apply": { "model": "advtech:transport/fluidPipe_opaque_con_block" }
+        },
+        {   "when": { "con_type_e": "block" },
+            "apply": { "model": "advtech:transport/fluidPipe_opaque_con_block", "y": 90 }
+        },
+        {   "when": { "con_type_s": "block" },
+            "apply": { "model": "advtech:transport/fluidPipe_opaque_con_block", "y": 180 }
+        },
+        {   "when": { "con_type_w": "block" },
+            "apply": { "model": "advtech:transport/fluidPipe_opaque_con_block", "y": 270 }
+        }
+    ]
+}
