@@ -77,6 +77,7 @@ public abstract class AdvancedScreen<T extends Container> extends ContainerScree
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
     {
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.disableDepthTest();
 
         //noinspection ConstantConditions
         minecraft.getTextureManager().bindTexture(getBackground());
