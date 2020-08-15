@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "advtech:block/debug/block_item_source"
+    }
+  }
+}
