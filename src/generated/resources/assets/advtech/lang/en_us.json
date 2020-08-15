@@ -8,8 +8,6 @@
   "block.advtech.block_coke": "Block of Coke",
   "block.advtech.block_constantan": "Block of Constantan",
   "block.advtech.block_copper": "Block of Copper",
-  "block.advtech.block_creative_energy_source": "Creative Energy Source",
-  "block.advtech.block_creative_item_source": "Creative Item Source",
   "block.advtech.block_crusher": "Crusher",
   "block.advtech.block_electric_furnace": "Electric Furnace",
   "block.advtech.block_electrum": "Block of Electrum",
@@ -29,6 +27,7 @@
   "block.advtech.block_steel": "Block of Steel",
   "block.advtech.block_sulfur": "Block of Sulfur",
   "block.advtech.block_tin": "Block of Tin",
+  "block.advtech.creative_energy_source": "Creative Energy Source",
   "gui.advtech.alloy_smelter": "Alloy Smelter",
   "gui.advtech.burner_generator": "Burner Generator",
   "gui.advtech.crusher": "Crusher",
@@ -121,7 +120,7 @@
   "itemGroup.group.advtech.tools": "AdvancedTechnology - Tools",
   "jei_cat.advtech.alloy_smelter": "Alloy Smelting",
   "jei_cat.advtech.crusher": "Crushing",
-  "jei_cat.advtech.metal_press": "Metal Forming",
+  "jei_cat.advtech.metal_press": "Metal Pressing",
   "msg.advtech.upgrade.failed": "Upgrade failed!",
   "msg.advtech.upgrade.success": "Machine upgraded!"
 }
