@@ -65,32 +65,32 @@ public abstract class AbstractTab<T extends AdvancedScreen<?>> extends Widget
         {
             mc.getTextureManager().bindTexture(OPEN);
 
-            TextureDrawer.drawTexture(x, y, SIZE_OPEN, 3, 0, 1, 0, 3F/40F);
+            TextureDrawer.drawGuiTexture(screen, x, y, SIZE_OPEN, 3, 0, 1, 0, 3F/40F);
 
             int height = getOpenHeight() - 7;
             for (int h = 0; h < height; h += 33)
             {
                 int segH = Math.min(height - h, 33);
                 float maxV = (3F/40F) + ((33F/40F) * ((float)segH / 33F));
-                TextureDrawer.drawTexture(x, y + 3 + h, 90, segH, 0, 1, 3F/40F, maxV);
+                TextureDrawer.drawGuiTexture(screen, x, y + 3 + h, 90, segH, 0, 1, 3F/40F, maxV);
             }
 
-            TextureDrawer.drawTexture(x, y + getOpenHeight() - 4, SIZE_OPEN, 4, 0, 1, 36F/40F, 1);
+            TextureDrawer.drawGuiTexture(screen, x, y + getOpenHeight() - 4, SIZE_OPEN, 4, 0, 1, 36F/40F, 1);
         }
         else
         {
             mc.getTextureManager().bindTexture(CLOSED);
-            TextureDrawer.drawTexture(x, y, SIZE_CLOSED, SIZE_CLOSED, 0, 1, 0, 1);
+            TextureDrawer.drawGuiTexture(screen, x, y, SIZE_CLOSED, SIZE_CLOSED, 0, 1, 0, 1);
         }
 
         if (last)
         {
             int height = (open ? getOpenHeight() : SIZE_CLOSED) - 1;
-            TextureDrawer.drawTexture(x, y + height, 2, 1, 0, 2F / 40F, 38F / 40F, 39F / 40F);
+            TextureDrawer.drawGuiTexture(screen, x, y + height, 2, 1, 0, 2F / 40F, 38F / 40F, 39F / 40F);
         }
 
         mc.getTextureManager().bindTexture(getIconLocation());
-        TextureDrawer.drawTexture(x, y, 20, 20, 0, 1, 0, 1);
+        TextureDrawer.drawGuiTexture(screen, x, y, 20, 20, 0, 1, 0, 1);
 
         if (open)
         {

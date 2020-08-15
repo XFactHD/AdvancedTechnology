@@ -40,10 +40,10 @@ public class TabMachinePort extends AbstractTab<ScreenMachine<?>>
     public void drawTabBackgroundLayer(int mouseX, int mouseY, float partialTicks)
     {
         mc.getTextureManager().bindTexture(GRID_TEXTURE);
-        TextureDrawer.drawTexture(x + 21, y + 21, 62, 62, 0, 1, 0, 1);
+        TextureDrawer.drawGuiTexture(screen, x + 21, y + 21, 62, 62, 0, 1, 0, 1);
 
         mc.getTextureManager().bindTexture(screen.getContainer().getMachineType().getTexture());
-        TextureDrawer.drawTexture(x + 44, y + 44, 16, 16, 0, 1, 0, 1);
+        TextureDrawer.drawGuiTexture(screen, x + 44, y + 44, 16, 16, 0, 1, 0, 1);
 
         mc.getTextureManager().bindTexture(PORT_TEXTURE);
         for (Side side : Side.values())
@@ -51,14 +51,14 @@ public class TabMachinePort extends AbstractTab<ScreenMachine<?>>
             Rectangle2d coords = PORT_COORDS.get(side);
             int color = screen.getContainer().getPortSetting(side).getColor();
             color = (color << 8) | 0xFF;
-            TextureDrawer.drawTexture(x + coords.getX() + 2, y + coords.getY() + 2, 16, 16, 0, 1, 0, 1, color);
+            TextureDrawer.drawGuiTexture(screen, x + coords.getX() + 2, y + coords.getY() + 2, 16, 16, 0, 1, 0, 1, color);
         }
 
         if (producer)
         {
             mc.getTextureManager().bindTexture(new ResourceLocation("textures/gui/checkbox.png"));
             float vOff = prodContainer.shouldForceOutput() ? (20F / 64F) : 0;
-            TextureDrawer.drawTexture(x + 68, y + 21, 15, 15, 0, 20F / 32F, vOff, (20F / 64F) + vOff);
+            TextureDrawer.drawGuiTexture(screen, x + 68, y + 21, 15, 15, 0, 20F / 32F, vOff, (20F / 64F) + vOff);
         }
     }
 

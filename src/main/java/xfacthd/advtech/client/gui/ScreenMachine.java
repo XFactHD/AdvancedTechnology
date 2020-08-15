@@ -3,7 +3,6 @@ package xfacthd.advtech.client.gui;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
-import xfacthd.advtech.AdvancedTechnology;
 import xfacthd.advtech.client.util.TextureDrawer;
 import xfacthd.advtech.common.container.ContainerMachine;
 import xfacthd.advtech.common.data.states.Side;
@@ -32,7 +31,7 @@ public abstract class ScreenMachine<C extends ContainerMachine<?, ?>> extends Ad
 
         float height = Math.round(energy * 60F);
         float minV = 1F - (height / 60F);
-        TextureDrawer.drawTexture(x, y + (60F - height), 12, height, 0, 1, minV, 1);
+        TextureDrawer.drawGuiTexture(this, x, y + (60F - height), 12, height, 0, 1, minV, 1);
     }
 
     protected void drawProgressBar(int x, int y, float progress)
@@ -41,7 +40,7 @@ public abstract class ScreenMachine<C extends ContainerMachine<?, ?>> extends Ad
 
         float width = Math.round(progress * 22F);
         float maxU = width / 22F;
-        TextureDrawer.drawTexture(x, y, width, 16, 0, maxU, 0, 1);
+        TextureDrawer.drawGuiTexture(this, x, y, width, 16, 0, maxU, 0, 1);
     }
 
     protected void drawWorkingIcon(int x, int y, float percentage, ResourceLocation texture)
@@ -53,7 +52,7 @@ public abstract class ScreenMachine<C extends ContainerMachine<?, ?>> extends Ad
         float height = Math.round(percentage * 14F);
         float minV = 1F - (height / 14F);
 
-        TextureDrawer.drawTexture(x, y + (14F - height), 14, height, 0, 1, minV, 1);
+        TextureDrawer.drawGuiTexture(this, x, y + (14F - height), 14, height, 0, 1, minV, 1);
     }
 
     protected void drawSlotOverlay(int x, int y, Slot slot)
@@ -73,7 +72,7 @@ public abstract class ScreenMachine<C extends ContainerMachine<?, ?>> extends Ad
         {
             bindTexture(SLOT_OVERLAY);
             int color = (mode.getColor() << 8) | 0xFF;
-            TextureDrawer.drawTexture(x, y, 20, 20, 0, 1, 0, 1, color);
+            TextureDrawer.drawGuiTexture(this, x, y, 20, 20, 0, 1, 0, 1, color);
         }
     }
 
