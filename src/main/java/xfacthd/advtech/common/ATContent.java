@@ -40,7 +40,7 @@ public class ATContent
     public static Map<Materials, BlockStorage> blockStorage;    //STATUS: Complete
 
     public static BlockBase blockCreativeEnergySource;          //STATUS: Complete
-    public static BlockBase blockCreativeItemSource;            //STATUS: Not implemented
+    public static BlockBase blockCreativeItemSource;            //STATUS: Complete
 
     public static BlockMachine blockMachineCasing;              //STATUS: Complete
     public static BlockMachine blockElectricFurnace;            //STATUS: Complete

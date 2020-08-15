@@ -30,25 +30,30 @@ public class TileEntityCreativeEnergySource extends TileEntityBase implements IT
     @Override
     public void tick()
     {
-        for (Direction dir : Direction.values())
+        //noinspection ConstantConditions
+        if (!world.isRemote())
         {
-            LazyOptional<IEnergyStorage> neighbor = neighbors.get(dir);
-            if (!neighbor.isPresent())
+            for (Direction dir : Direction.values())
             {
-                //noinspection ConstantConditions
-                TileEntity te = world.getTileEntity(pos.offset(dir));
-                if (te != null)
+                if (world.isAirBlock(pos.offset(dir))) { continue; }
+
+                LazyOptional<IEnergyStorage> neighbor = neighbors.get(dir);
+                if (!neighbor.isPresent())
                 {
-                    neighbor = te.getCapability(CapabilityEnergy.ENERGY);
-                    if (neighbor.isPresent())
+                    TileEntity te = world.getTileEntity(pos.offset(dir));
+                    if (te != null && !(te instanceof TileEntityCreativeEnergySource))
                     {
-                        neighbor.addListener((storage) -> invalidateNeighbor(dir));
-                        neighbors.put(dir, neighbor);
+                        neighbor = te.getCapability(CapabilityEnergy.ENERGY, dir.getOpposite());
+                        if (neighbor.isPresent())
+                        {
+                            neighbor.addListener((storage) -> invalidateNeighbor(dir));
+                            neighbors.put(dir, neighbor);
+                        }
                     }
                 }
-            }
 
-            neighbor.ifPresent(storage -> storage.receiveEnergy(Integer.MAX_VALUE, false));
+                neighbor.ifPresent(storage -> storage.receiveEnergy(Integer.MAX_VALUE, false));
+            }
         }
     }
 

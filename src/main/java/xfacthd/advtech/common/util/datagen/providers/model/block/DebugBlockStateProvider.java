@@ -16,13 +16,16 @@ public class DebugBlockStateProvider extends ATBlockStateProvider
                 .withExistingParent("block/debug/block_energy_source", "block/cube_all")
                 .texture("all", modLoc("block/debug/block_energy_source"));
         simpleState(ATContent.blockCreativeEnergySource, energySourceModel);
+
+        ModelFile itemSourceModel = models()
+                .withExistingParent("block/debug/block_item_source", "block/cube_all")
+                .texture("all", modLoc("block/debug/block_item_source"));
+        simpleState(ATContent.blockCreativeItemSource, itemSourceModel);
     }
 
     private void simpleState(Block block, ModelFile model)
     {
-        ConfiguredModel[] confModel = ConfiguredModel.builder().modelFile(model).build();
-        getVariantBuilder(block).partialState().setModels(confModel);
-
+        simpleBlock(block, model);
         simpleBlockItem(block, model);
     }
 

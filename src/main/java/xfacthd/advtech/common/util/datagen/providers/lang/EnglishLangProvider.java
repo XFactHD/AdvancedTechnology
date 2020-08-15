@@ -69,6 +69,7 @@ public class EnglishLangProvider extends ATLanguageProvider
         }
 
         add(ATContent.blockCreativeEnergySource, "Creative Energy Source");
+        add(ATContent.blockCreativeItemSource, "Creative Item Source");
 
         add(ATContent.blockMachineCasing, "Machine Casing");
         add(ATContent.blockElectricFurnace, "Electric Furnace");

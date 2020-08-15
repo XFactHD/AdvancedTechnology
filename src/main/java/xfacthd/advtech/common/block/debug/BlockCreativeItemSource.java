@@ -14,6 +14,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.*;
 import xfacthd.advtech.common.block.BlockBase;
+import xfacthd.advtech.common.capability.item.InfiniteItemHandler;
 import xfacthd.advtech.common.data.ItemGroups;
 import xfacthd.advtech.common.tileentity.debug.TileEntityCreativeItemSource;
 
@@ -35,16 +36,16 @@ public class BlockCreativeItemSource extends BlockBase
     {
         ItemStack stack = player.getHeldItem(hand);
         TileEntity te = world.getTileEntity(pos);
-        if (!stack.isEmpty() && te != null)
+        if (te != null)
         {
             LazyOptional<IItemHandler> itemHandler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
             if (itemHandler.isPresent())
             {
                 itemHandler.ifPresent(handler ->
                 {
-                    if (handler instanceof ItemStackHandler)
+                    if (handler instanceof InfiniteItemHandler)
                     {
-                        ((ItemStackHandler)handler).setStackInSlot(0, stack.copy());
+                        ((InfiniteItemHandler) handler).setStack(stack);
                     }
                 });
                 return ActionResultType.SUCCESS;
