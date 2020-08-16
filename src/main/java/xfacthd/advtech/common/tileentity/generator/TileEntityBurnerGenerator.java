@@ -128,7 +128,7 @@ public class TileEntityBurnerGenerator extends TileEntityGenerator
     public boolean canExtract(Direction side, int slot) { return false; }
 
     @Override
-    protected int getBaseCapacity() { return BASE_CAPACITY; }
+    protected int getBaseEnergyCapacity() { return BASE_CAPACITY; }
 
     @Override
     protected int getBaseExtract() { return BASE_EXTRACT; }

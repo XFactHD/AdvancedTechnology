@@ -62,7 +62,7 @@ public abstract class TileEntityProducer extends TileEntityMachine
         int mult = (int)Math.pow(2, level.ordinal());
         energyConsumption = getBaseConsumption() * mult;
 
-        int capacity = getBaseCapacity() * mult;
+        int capacity = getBaseEnergyCapacity() * mult;
         int maxReceive = energyConsumption * 10;
         energyHandler.reconfigure(capacity, maxReceive, 0);
     }
@@ -72,7 +72,7 @@ public abstract class TileEntityProducer extends TileEntityMachine
     {
         super.initCapabilities();
 
-        energyHandler = new EnergySink(getBaseCapacity(), getBaseConsumption() * 10);
+        energyHandler = new EnergySink(getBaseEnergyCapacity(), getBaseConsumption() * 10);
     }
 
     protected abstract int getBaseConsumption();
@@ -108,9 +108,9 @@ public abstract class TileEntityProducer extends TileEntityMachine
      * Recipe stuff
      */
 
-    protected final IRecipe<IInventory> findRecipe(boolean checkCounts) { return findRecipe(recipeInv, checkCounts); }
+    protected final IRecipe<IInventory> findRecipe() { return findRecipeWithInv(recipeInv, true); }
 
-    protected IRecipe<IInventory> findRecipe(IInventory inv, boolean checkCounts)
+    protected IRecipe<IInventory> findRecipeWithInv(IInventory inv, boolean checkCounts)
     {
         //noinspection ConstantConditions
         return world.getRecipeManager().getRecipe(recipeType, inv, world).orElse(null);

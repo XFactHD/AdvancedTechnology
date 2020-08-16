@@ -46,7 +46,7 @@ public class TileEntityAlloySmelter extends TileEntityProducer
         {
             if (recipe == null && (!internalItemHandler.getStackInSlot(0).isEmpty() || !internalItemHandler.getStackInSlot(1).isEmpty()))
             {
-                recipe = findRecipe(true);
+                recipe = findRecipe();
             }
 
             if (recipe != null && hasEnoughEnergy() && (active || canStart()))
@@ -136,7 +136,7 @@ public class TileEntityAlloySmelter extends TileEntityProducer
                 lastMainInput = main.getItem();
                 lastSecondInput = second.getItem();
 
-                recipe = findRecipe(true);
+                recipe = findRecipe();
             }
         }
     }
@@ -163,7 +163,7 @@ public class TileEntityAlloySmelter extends TileEntityProducer
 
             ItemStack other = slot == 0 ? internalItemHandler.getStackInSlot(1) : internalItemHandler.getStackInSlot(0);
             IInventory inv = new RecipeSearchInventory(stack, other);
-            return findRecipe(inv, false) != null;
+            return findRecipeWithInv(inv, false) != null;
         }
     }
 
@@ -235,9 +235,9 @@ public class TileEntityAlloySmelter extends TileEntityProducer
     }
 
     @Override
-    protected IRecipe<IInventory> findRecipe(IInventory inv, boolean checkCounts)
+    protected IRecipe<IInventory> findRecipeWithInv(IInventory inv, boolean checkCounts)
     {
-        IRecipe<IInventory> recipe = super.findRecipe(inv, checkCounts);
+        IRecipe<IInventory> recipe = super.findRecipeWithInv(inv, checkCounts);
 
         if (!checkCounts) { return recipe; }
 
@@ -260,7 +260,7 @@ public class TileEntityAlloySmelter extends TileEntityProducer
     protected int getEnergyRequired() { return energy; }
 
     @Override
-    protected int getBaseCapacity() { return BASE_CAPACITY; }
+    protected int getBaseEnergyCapacity() { return BASE_CAPACITY; }
 
     @Override
     protected int getBaseConsumption() { return BASE_CONSUMPTION; }

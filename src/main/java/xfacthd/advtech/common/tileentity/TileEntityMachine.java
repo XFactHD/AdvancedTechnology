@@ -146,12 +146,17 @@ public abstract class TileEntityMachine extends TileEntityBase implements ITicka
 
     public final void remapPortsToFacing(Direction facing)
     {
+        boolean changed = false;
         for (Side side : Side.values())
         {
             SideAccess setting = ports.get(side);
             Direction dir = side.mapFacing(facing);
 
-            cardinalPorts.put(dir, setting);
+            if (cardinalPorts.get(dir) != setting)
+            {
+                cardinalPorts.put(dir, setting);
+                changed = true;
+            }
 
             if (lazyItemHandlers.get(dir).isPresent() && setting.isDisabled())
             {
@@ -163,7 +168,7 @@ public abstract class TileEntityMachine extends TileEntityBase implements ITicka
             }
         }
 
-        markFullUpdate();
+        if (changed) { markFullUpdate(); }
     }
 
     public abstract void onLevelChanged();
@@ -214,7 +219,7 @@ public abstract class TileEntityMachine extends TileEntityBase implements ITicka
     }
 
     /**
-     * Super call MUST happen after initializing the {@link TileEntityMachine::internalItemHandler}
+     * Super call MUST happen after initializing the {@link TileEntityMachine#internalItemHandler}
      */
     protected void initCapabilities()
     {
@@ -251,7 +256,7 @@ public abstract class TileEntityMachine extends TileEntityBase implements ITicka
 
     protected void onNeighborInvalidate(Direction side) { neighborCache.put(side, LazyOptional.empty()); }
 
-    protected abstract int getBaseCapacity();
+    protected abstract int getBaseEnergyCapacity();
 
     /*
      * Inventory stuff

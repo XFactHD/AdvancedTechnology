@@ -45,7 +45,7 @@ public class TileEntityMetalPress extends TileEntityProducer
         {
             if (recipe == null && slotNotEmpty(0) && slotNotEmpty(1))
             {
-                recipe = findRecipe(true);
+                recipe = findRecipe();
             }
 
             if (recipe != null && hasEnoughEnergy() && (active || canStart()) && slotNotEmpty(0) && slotNotEmpty(1))
@@ -110,7 +110,7 @@ public class TileEntityMetalPress extends TileEntityProducer
             else if (input.getItem() != lastInput)
             {
                 lastInput = input.getItem();
-                recipe = findRecipe(true);
+                recipe = findRecipe();
             }
         }
         else if (slot == 1)
@@ -129,7 +129,7 @@ public class TileEntityMetalPress extends TileEntityProducer
                 lastMold = mold.getItem();
                 if (!internalItemHandler.getStackInSlot(0).isEmpty())
                 {
-                    recipe = findRecipe(true);
+                    recipe = findRecipe();
                 }
             }
         }
@@ -150,7 +150,7 @@ public class TileEntityMetalPress extends TileEntityProducer
             else
             {
                 IInventory inv = new RecipeSearchInventory(stack, internalItemHandler.getStackInSlot(1));
-                return findRecipe(inv, false) != null;
+                return findRecipeWithInv(inv, false) != null;
             }
         }
         else if (slot == 1)
@@ -241,9 +241,9 @@ public class TileEntityMetalPress extends TileEntityProducer
     public boolean canExtract(Direction side, int slot) { return cardinalPorts.get(side).isOutput() && slot == 2; }
 
     @Override
-    protected IRecipe<IInventory> findRecipe(IInventory inv, boolean checkCounts)
+    protected IRecipe<IInventory> findRecipeWithInv(IInventory inv, boolean checkCounts)
     {
-        IRecipe<IInventory> recipe = super.findRecipe(inv, checkCounts);
+        IRecipe<IInventory> recipe = super.findRecipeWithInv(inv, checkCounts);
 
         if (!checkCounts) { return recipe; }
 
@@ -259,7 +259,7 @@ public class TileEntityMetalPress extends TileEntityProducer
     }
 
     @Override
-    protected int getBaseCapacity() { return BASE_CAPACITY; }
+    protected int getBaseEnergyCapacity() { return BASE_CAPACITY; }
 
     @Override
     protected int getBaseConsumption() { return BASE_CONSUMPTION; }

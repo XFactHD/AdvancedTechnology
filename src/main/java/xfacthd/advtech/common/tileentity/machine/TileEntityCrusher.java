@@ -45,7 +45,7 @@ public class TileEntityCrusher extends TileEntityProducer
         {
             if (recipe == null && slotNotEmpty(0))
             {
-                recipe = findRecipe(true);
+                recipe = findRecipe();
             }
 
             if (recipe != null && hasEnoughEnergy() && (active || canStart()) && slotNotEmpty(0))
@@ -115,7 +115,7 @@ public class TileEntityCrusher extends TileEntityProducer
             else if (input.getItem() != lastInput)
             {
                 lastInput = input.getItem();
-                recipe = findRecipe(true);
+                recipe = findRecipe();
             }
         }
     }
@@ -140,7 +140,7 @@ public class TileEntityCrusher extends TileEntityProducer
             }
 
             IInventory inv = new RecipeSearchInventory(stack);
-            return findRecipe(inv, false) != null;
+            return findRecipeWithInv(inv, false) != null;
         }
     }
 
@@ -235,7 +235,7 @@ public class TileEntityCrusher extends TileEntityProducer
     protected int getEnergyRequired() { return energy; }
 
     @Override
-    protected int getBaseCapacity() { return BASE_CAPACITY; }
+    protected int getBaseEnergyCapacity() { return BASE_CAPACITY; }
 
     @Override
     protected int getBaseConsumption() { return BASE_CONSUMPTION; }

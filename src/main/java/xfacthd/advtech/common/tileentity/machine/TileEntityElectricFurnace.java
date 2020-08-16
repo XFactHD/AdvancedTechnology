@@ -42,7 +42,7 @@ public class TileEntityElectricFurnace extends TileEntityProducer
         {
             if (recipe == null && !internalItemHandler.getStackInSlot(0).isEmpty())
             {
-                recipe = findRecipe(true);
+                recipe = findRecipe();
             }
 
             if (recipe != null && hasEnoughEnergy() && (active || canStart()) && canFitInSlot(1, recipe.getRecipeOutput()) && slotNotEmpty(0))
@@ -99,7 +99,7 @@ public class TileEntityElectricFurnace extends TileEntityProducer
             else if (input.getItem() != lastInput)
             {
                 lastInput = input.getItem();
-                recipe = findRecipe(true);
+                recipe = findRecipe();
             }
         }
     }
@@ -117,7 +117,7 @@ public class TileEntityElectricFurnace extends TileEntityProducer
             if (recipe != null) { return true; }
 
             IInventory inv = new RecipeSearchInventory(stack);
-            return findRecipe(inv, false) != null;
+            return findRecipeWithInv(inv, false) != null;
         }
     }
 
@@ -182,7 +182,7 @@ public class TileEntityElectricFurnace extends TileEntityProducer
     protected int getEnergyRequired() { return burnTime; }
 
     @Override
-    protected int getBaseCapacity() { return BASE_CAPACITY; }
+    protected int getBaseEnergyCapacity() { return BASE_CAPACITY; }
 
     @Override
     protected int getBaseConsumption() { return BASE_CONSUMPTION; }

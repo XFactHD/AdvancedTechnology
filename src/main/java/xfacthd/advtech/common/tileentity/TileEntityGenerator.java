@@ -18,7 +18,7 @@ public abstract class TileEntityGenerator extends TileEntityMachine
     {
         int mult = (int)Math.pow(2, level.ordinal());
         productionMult = mult;
-        int capacity = getBaseCapacity() * mult;
+        int capacity = getBaseEnergyCapacity() * mult;
         int maxExtract = getBaseExtract() * mult;
         energyHandler.reconfigure(capacity, 0, maxExtract);
     }
@@ -30,7 +30,7 @@ public abstract class TileEntityGenerator extends TileEntityMachine
 
         super.initCapabilities();
 
-        energyHandler = new EnergySource(getBaseCapacity(), getBaseExtract());
+        energyHandler = new EnergySource(getBaseEnergyCapacity(), getBaseExtract());
     }
 
     protected abstract int getBaseExtract();
