@@ -123,7 +123,7 @@ public class TextureDrawer
 
     /**
      * Start drawing textures to a buffer<br>
-     * Call before using {@code fillBuffer}
+     * Call before using {@link TextureDrawer#fillBuffer}
      */
     public static void start()
     {
@@ -135,7 +135,7 @@ public class TextureDrawer
 
     /**
      * Start drawing tinted textures to a buffer<br>
-     * Call before using {@code fillBuffer}
+     * Call before using {@link TextureDrawer#fillBuffer}
      */
     public static void startColored()
     {
@@ -275,7 +275,7 @@ public class TextureDrawer
 
     /**
      * Finish drawing textures to a buffer<br>
-     * Call after {@code start()} and one or more {@code fillBuffer()} calls
+     * Call after {@link TextureDrawer#start} and one or more {@link TextureDrawer#fillBuffer} calls
      */
     public static void end()
     {
