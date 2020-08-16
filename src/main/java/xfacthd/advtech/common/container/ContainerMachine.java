@@ -5,9 +5,6 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.util.*;
 import net.minecraftforge.energy.CapabilityEnergy;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.SlotItemHandler;
-import net.minecraftforge.items.wrapper.InvWrapper;
 import xfacthd.advtech.common.block.BlockMachine;
 import xfacthd.advtech.common.data.states.Side;
 import xfacthd.advtech.common.data.states.SideAccess;
@@ -22,7 +19,6 @@ public abstract class ContainerMachine<B extends BlockMachine, T extends TileEnt
 {
     protected final B block;
     protected final T machine;
-    protected final IItemHandler playerInventory;
     protected final IWorldPosCallable worldPosCallable;
     protected final IntReferenceHolder energyHolder = IntReferenceHolder.single();
     protected final IntReferenceHolder capacityHolder = IntReferenceHolder.single();
@@ -32,11 +28,10 @@ public abstract class ContainerMachine<B extends BlockMachine, T extends TileEnt
 
     protected ContainerMachine(ContainerType<?> type, int id, B block, T machine, PlayerInventory inventory)
     {
-        super(type, id);
+        super(type, id, inventory);
 
         this.block = block;
         this.machine = machine;
-        this.playerInventory = new InvWrapper(inventory);
 
         //noinspection ConstantConditions
         worldPosCallable = IWorldPosCallable.of(machine.getWorld(), machine.getPos());
@@ -86,23 +81,4 @@ public abstract class ContainerMachine<B extends BlockMachine, T extends TileEnt
     }
 
     public abstract MachineType getMachineType();
-
-    protected void layoutPlayerInventorySlots(int posX, int posY)
-    {
-        // Player inventory
-        for (int y = 0; y < 3; y++)
-        {
-            for (int x = 0; x < 9; x++)
-            {
-                addSlot(new SlotItemHandler(playerInventory, (y * 9) + x + 9, posX + (x * 18), posY + (y * 18)));
-            }
-        }
-
-        // Hotbar
-        posY += 58;
-        for (int x = 0; x < 9; x++)
-        {
-            addSlot(new SlotItemHandler(playerInventory, x, posX + (x * 18), posY));
-        }
-    }
 }
