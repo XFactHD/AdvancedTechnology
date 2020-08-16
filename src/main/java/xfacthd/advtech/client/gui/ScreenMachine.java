@@ -101,12 +101,6 @@ public abstract class ScreenMachine<C extends ContainerMachine<?, ?>> extends Ad
         }
     }
 
-    protected final void bindTexture(ResourceLocation texture)
-    {
-        //noinspection ConstantConditions
-        minecraft.getTextureManager().bindTexture(texture);
-    }
-
     protected enum Slot
     {
         IN_MAIN((mode) -> mode == SideAccess.INPUT_ALL || mode == SideAccess.INPUT_MAIN),

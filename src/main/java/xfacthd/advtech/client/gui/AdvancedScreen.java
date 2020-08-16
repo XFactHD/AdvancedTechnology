@@ -108,6 +108,12 @@ public abstract class AdvancedScreen<T extends Container> extends ContainerScree
         }
     }
 
+    protected final void bindTexture(ResourceLocation texture)
+    {
+        //noinspection ConstantConditions
+        minecraft.getTextureManager().bindTexture(texture);
+    }
+
     protected static ResourceLocation background(String name)
     {
         return new ResourceLocation(AdvancedTechnology.MODID, "textures/gui/" + name + ".png");
