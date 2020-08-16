@@ -156,7 +156,7 @@ public class BlockMachine extends BlockBase
     @Override
     public void onReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean isMoving)
     {
-        if (state.getBlock() != newState.getBlock())
+        if (!type.isCasing() && state.getBlock() != newState.getBlock())
         {
             TileEntity te = world.getTileEntity(pos);
             if (te instanceof TileEntityMachine)
