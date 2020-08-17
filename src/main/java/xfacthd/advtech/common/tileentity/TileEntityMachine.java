@@ -168,7 +168,8 @@ public abstract class TileEntityMachine extends TileEntityBase implements ITicka
             }
         }
 
-        if (changed) { markFullUpdate(); }
+        //noinspection ConstantConditions
+        if (changed || world.isRemote()) { markFullUpdate(); }
     }
 
     public abstract void onLevelChanged();
