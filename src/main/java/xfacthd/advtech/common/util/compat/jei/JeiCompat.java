@@ -3,11 +3,15 @@ package xfacthd.advtech.common.util.compat.jei;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.VanillaRecipeCategoryUid;
+import mezz.jei.api.gui.handlers.IGuiContainerHandler;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.registration.*;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import xfacthd.advtech.AdvancedTechnology;
+import xfacthd.advtech.client.gui.AdvancedScreen;
+import xfacthd.advtech.client.gui.energy.ScreenEnergyCube;
+import xfacthd.advtech.client.gui.generator.ScreenBurnerGenerator;
 import xfacthd.advtech.client.gui.machine.*;
 import xfacthd.advtech.common.ATContent;
 import xfacthd.advtech.common.data.recipes.*;
@@ -54,10 +58,13 @@ public class JeiCompat implements IModPlugin
     @Override
     public void registerGuiHandlers(IGuiHandlerRegistration registration)
     {
-        registration.addGuiContainerHandler(ScreenElectricFurnace.class, new AdvancedGuiHandler());
-        registration.addGuiContainerHandler(ScreenCrusher.class, new AdvancedGuiHandler());
-        registration.addGuiContainerHandler(ScreenAlloySmelter.class, new AdvancedGuiHandler());
-        registration.addGuiContainerHandler(ScreenMetalPress.class, new AdvancedGuiHandler());
+        IGuiContainerHandler<AdvancedScreen<?>> simpleGuiHandler = new AdvancedGuiHandler();
+        registration.addGuiContainerHandler(ScreenElectricFurnace.class, simpleGuiHandler);
+        registration.addGuiContainerHandler(ScreenCrusher.class, simpleGuiHandler);
+        registration.addGuiContainerHandler(ScreenAlloySmelter.class, simpleGuiHandler);
+        registration.addGuiContainerHandler(ScreenMetalPress.class, simpleGuiHandler);
+        registration.addGuiContainerHandler(ScreenBurnerGenerator.class, simpleGuiHandler);
+        registration.addGuiContainerHandler(ScreenEnergyCube.class, simpleGuiHandler);
         //Other guis may need extended GuiHandlers because they contain fluid ingredients
 
         registration.addRecipeClickArea(ScreenElectricFurnace.class,    77, 45, 22, 16, VanillaRecipeCategoryUid.FURNACE);
