@@ -1,6 +1,7 @@
 modLoader="javafml"
 loaderVersion="[31,)"
-issueTrackerURL="http://my.issue.tracker/" #optional
+license="LGPLv3"
+issueTrackerURL="https://github.com/XFactHD/AdvancedTechnology/issues" #optional
 [[mods]] #mandatory
 	modId="advtech"
 	version="${file.jarVersion}"
@@ -22,5 +23,11 @@ issueTrackerURL="http://my.issue.tracker/" #optional
     modId="minecraft"
     mandatory=true
     versionRange="[1.15.2]"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.advtech]]
+    modId="jei"
+    mandatory=false
+    versionRange="[6.0.0.4,)"
     ordering="NONE"
     side="BOTH"
