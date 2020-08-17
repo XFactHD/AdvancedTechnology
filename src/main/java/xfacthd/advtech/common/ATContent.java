@@ -13,9 +13,11 @@ import net.minecraftforge.registries.IForgeRegistry;
 import xfacthd.advtech.AdvancedTechnology;
 import xfacthd.advtech.common.block.*;
 import xfacthd.advtech.common.block.debug.*;
+import xfacthd.advtech.common.block.energy.BlockEnergyCube;
 import xfacthd.advtech.common.block.generator.BlockBurnerGenerator;
 import xfacthd.advtech.common.block.machine.*;
 import xfacthd.advtech.common.block.material.*;
+import xfacthd.advtech.common.container.ContainerEnergyCube;
 import xfacthd.advtech.common.container.generator.ContainerBurnerGenerator;
 import xfacthd.advtech.common.container.machine.*;
 import xfacthd.advtech.common.data.ItemGroups;
@@ -28,6 +30,7 @@ import xfacthd.advtech.common.item.debug.ItemBlockRemover;
 import xfacthd.advtech.common.item.material.*;
 import xfacthd.advtech.common.item.tool.*;
 import xfacthd.advtech.common.tileentity.debug.*;
+import xfacthd.advtech.common.tileentity.energy.TileEntityEnergyCube;
 import xfacthd.advtech.common.tileentity.generator.TileEntityBurnerGenerator;
 import xfacthd.advtech.common.tileentity.machine.*;
 
@@ -54,6 +57,8 @@ public class ATContent
     public static BlockMachine blockBurnerGenerator;            //STATUS: Complete
     public static BlockMachine blockSteamGenerator;             //STATUS: Not implemented
     public static BlockMachine blockMagmaGenerator;             //STATUS: Not implemented
+
+    public static BlockBase blockEnergyCube;                    //STATUS: Not implemented
 
     public static Map<Materials, ItemPowder> itemPowder;        //STATUS: Complete
     public static Map<Materials, ItemIngot> itemIngot;          //STATUS: Complete
@@ -90,6 +95,8 @@ public class ATContent
         registry.register(blockMetalPress = new BlockMetalPress());
 
         registry.register(blockBurnerGenerator = new BlockBurnerGenerator());
+
+        registry.register(blockEnergyCube = new BlockEnergyCube());
     }
 
     @SubscribeEvent
@@ -110,6 +117,8 @@ public class ATContent
         registry.register(blockMetalPress.createItemBlock());
 
         registry.register(blockBurnerGenerator.createItemBlock());
+
+        registry.register(blockEnergyCube.createItemBlock());
 
         registry.registerAll(ItemPowder.registerItems());
         registry.registerAll(ItemIngot.registerItems());
@@ -145,6 +154,8 @@ public class ATContent
         TileEntityTypes.tileTypeMetalPress = TileEntityTypes.create(TileEntityMetalPress::new, "tile_metal_press", blockMetalPress);
 
         TileEntityTypes.tileTypeBurnerGenerator = TileEntityTypes.create(TileEntityBurnerGenerator::new, "tile_burner_generator", blockBurnerGenerator);
+
+        TileEntityTypes.tileTypeEnergyCube = TileEntityTypes.create(TileEntityEnergyCube::new, "tile_energy_cube", blockEnergyCube);
     }
 
     @SubscribeEvent
@@ -182,6 +193,15 @@ public class ATContent
         {
             TileEntity te = inv.player.world.getTileEntity(data.readBlockPos());
             return new ContainerBurnerGenerator(windowId, (TileEntityBurnerGenerator)te, inv);
+        });
+
+
+
+        ContainerTypes.containerTypeEnergyCube = ContainerTypes.create("container_energy_cube", (windowId, inv, data) ->
+        {
+            TileEntity te = inv.player.world.getTileEntity(data.readBlockPos());
+            //noinspection ConstantConditions
+            return new ContainerEnergyCube(windowId, (TileEntityEnergyCube)te, inv);
         });
     }
 

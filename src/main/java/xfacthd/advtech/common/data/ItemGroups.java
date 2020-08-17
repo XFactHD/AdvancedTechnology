@@ -22,7 +22,11 @@ public class ItemGroups
         Block b1 = ((BlockItem)s1.getItem()).getBlock();
         Block b2 = ((BlockItem)s2.getItem()).getBlock();
 
-        return ((BlockMachine)b1).getType().compareTo(((BlockMachine)b2).getType());
+        if (b1 instanceof BlockMachine && b2 instanceof BlockMachine)
+        {
+            return ((BlockMachine) b1).getType().compareTo(((BlockMachine) b2).getType());
+        }
+        return 0;
     });
 
     public static void finalizeItemGroups()

@@ -7,6 +7,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 import xfacthd.advtech.AdvancedTechnology;
 import xfacthd.advtech.common.tileentity.debug.TileEntityCreativeEnergySource;
 import xfacthd.advtech.common.tileentity.debug.TileEntityCreativeItemSource;
+import xfacthd.advtech.common.tileentity.energy.TileEntityEnergyCube;
 import xfacthd.advtech.common.tileentity.generator.TileEntityBurnerGenerator;
 import xfacthd.advtech.common.tileentity.machine.*;
 
@@ -25,6 +26,8 @@ public class TileEntityTypes
     public static TileEntityType<TileEntityMetalPress>      tileTypeMetalPress;
 
     public static TileEntityType<TileEntityBurnerGenerator> tileTypeBurnerGenerator;
+
+    public static TileEntityType<TileEntityEnergyCube>      tileTypeEnergyCube;
 
     public static void setRegistry(IForgeRegistry<TileEntityType<?>> registry) { typeRegistry = registry; }
 

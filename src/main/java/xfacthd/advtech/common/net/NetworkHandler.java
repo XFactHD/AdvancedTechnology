@@ -9,6 +9,7 @@ import net.minecraftforge.fml.network.simple.SimpleChannel;
 import xfacthd.advtech.AdvancedTechnology;
 import xfacthd.advtech.common.net.packets.AbstractPacket;
 import xfacthd.advtech.common.net.packets.container.*;
+import xfacthd.advtech.common.net.packets.energy.PacketConfigEnergyCubeSide;
 import xfacthd.advtech.common.net.packets.machine.*;
 
 public class NetworkHandler
@@ -30,6 +31,7 @@ public class NetworkHandler
         //Client to server packets
         CHANNEL.registerMessage(idx++, PacketConfigureSide.class,       PacketConfigureSide::encode,        PacketConfigureSide::new,       PacketConfigureSide::handle);
         CHANNEL.registerMessage(idx++, PacketSwitchActiveOutput.class,  PacketSwitchActiveOutput::encode,   PacketSwitchActiveOutput::new,  PacketSwitchActiveOutput::handle);
+        CHANNEL.registerMessage(idx++, PacketConfigEnergyCubeSide.class, PacketConfigEnergyCubeSide::encode, PacketConfigEnergyCubeSide::new, PacketConfigEnergyCubeSide::handle);
 
         //Server to client packets
         CHANNEL.registerMessage(idx++, PacketSyncByteHolder.class,      PacketSyncByteHolder::encode,       PacketSyncByteHolder::new,      PacketSyncByteHolder::handle);

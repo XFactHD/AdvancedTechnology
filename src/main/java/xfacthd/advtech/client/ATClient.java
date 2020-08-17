@@ -5,20 +5,23 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraft.client.renderer.color.ItemColors;
+import net.minecraft.inventory.container.PlayerContainer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.*;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DeferredWorkQueue;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import xfacthd.advtech.AdvancedTechnology;
+import xfacthd.advtech.client.color.block.*;
 import xfacthd.advtech.client.color.item.*;
-import xfacthd.advtech.client.color.block.BlockColorMachine;
-import xfacthd.advtech.client.color.block.BlockColorMaterial;
-import xfacthd.advtech.client.gui.generator.ScreenBurnerGenerator;
+import xfacthd.advtech.client.gui.energy.ScreenEnergyCube;
+import xfacthd.advtech.client.gui.generator.*;
 import xfacthd.advtech.client.gui.machine.*;
+import xfacthd.advtech.client.render.ter.*;
 import xfacthd.advtech.common.ATContent;
-import xfacthd.advtech.common.data.types.ContainerTypes;
+import xfacthd.advtech.common.data.types.*;
 
 @Mod.EventBusSubscriber(value = Dist.CLIENT, modid = AdvancedTechnology.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ATClient
@@ -35,6 +38,10 @@ public class ATClient
 
         RenderTypeLookup.setRenderLayer(ATContent.blockBurnerGenerator, RenderType.getCutoutMipped());
 
+        RenderTypeLookup.setRenderLayer(ATContent.blockEnergyCube, type -> type == RenderType.getCutoutMipped() || type == RenderType.getTranslucent());
+
+        ClientRegistry.bindTileEntityRenderer(TileEntityTypes.tileTypeEnergyCube, RenderEnergyCube::new);
+
         //noinspection deprecation
         DeferredWorkQueue.runLater(() ->
         {
@@ -44,6 +51,8 @@ public class ATClient
             ScreenManager.registerFactory(ContainerTypes.containerTypeMetalPress, ScreenMetalPress::new);
 
             ScreenManager.registerFactory(ContainerTypes.containerTypeBurnerGenerator, ScreenBurnerGenerator::new);
+
+            ScreenManager.registerFactory(ContainerTypes.containerTypeEnergyCube, ScreenEnergyCube::new);
         });
     }
 
@@ -54,15 +63,27 @@ public class ATClient
     }
 
     @SubscribeEvent
-    public static void onTexturePreStitch(final TextureStitchEvent.Pre event)
+    public static void onModelBake(final ModelBakeEvent event)
     {
 
     }
 
     @SubscribeEvent
+    public static void onTexturePreStitch(final TextureStitchEvent.Pre event)
+    {
+        if (event.getMap().getTextureLocation().equals(PlayerContainer.LOCATION_BLOCKS_TEXTURE))
+        {
+            RenderEnergyCube.registerTextures(event);
+        }
+    }
+
+    @SubscribeEvent
     public static void onTexturePostStitch(final TextureStitchEvent.Post event)
     {
-
+        if (event.getMap().getTextureLocation().equals(PlayerContainer.LOCATION_BLOCKS_TEXTURE))
+        {
+            RenderEnergyCube.retrieveSprites(event.getMap());
+        }
     }
 
     @SubscribeEvent
@@ -72,6 +93,7 @@ public class ATClient
 
         blockColors.register(new BlockColorMaterial(), BlockColorMaterial.getBlocks());
         blockColors.register(new BlockColorMachine(), BlockColorMachine.getBlocks());
+        blockColors.register(new BlockColorEnergyCube(), ATContent.blockEnergyCube);
     }
 
     @SubscribeEvent
@@ -83,5 +105,6 @@ public class ATClient
         itemColors.register(new ItemColorMachine(), ItemColorMachine.getItems());
         itemColors.register(new ItemColorUpgrade(), ItemColorUpgrade.getItems());
         itemColors.register(new ItemColorComponent(), ItemColorComponent.getItems());
+        itemColors.register(new ItemColorEnergyCube(), ATContent.blockEnergyCube);
     }
 }

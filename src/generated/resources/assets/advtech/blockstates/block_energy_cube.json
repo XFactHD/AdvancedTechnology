@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "advtech:block/energy/block_energy_cube"
+    }
+  }
+}

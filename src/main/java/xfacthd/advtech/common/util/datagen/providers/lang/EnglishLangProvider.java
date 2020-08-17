@@ -78,6 +78,8 @@ public class EnglishLangProvider extends ATLanguageProvider
         add(ATContent.blockMetalPress, "Metal Press");
         add(ATContent.blockBurnerGenerator, "Burner Generator");
 
+        add(ATContent.blockEnergyCube, "Energy Cube");
+
         add(ATContent.itemWrench, "Wrench");
 
         for (MachineLevel level : MachineLevel.values())
