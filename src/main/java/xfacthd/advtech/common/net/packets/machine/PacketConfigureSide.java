@@ -2,15 +2,13 @@ package xfacthd.advtech.common.net.packets.machine;
 
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.dimension.DimensionType;
 import net.minecraftforge.fml.network.NetworkEvent;
 import xfacthd.advtech.common.data.states.Side;
 import xfacthd.advtech.common.data.states.SideAccess;
 import xfacthd.advtech.common.net.packets.AbstractPacket;
-import xfacthd.advtech.common.tileentity.TileEntityMachine;
+import xfacthd.advtech.common.tileentity.TileEntityInventoryMachine;
 
 import java.util.function.Supplier;
 
@@ -56,9 +54,9 @@ public class PacketConfigureSide extends AbstractPacket
             //noinspection ConstantConditions
             World world = ctx.get().getSender().world;
             TileEntity te = world.getTileEntity(pos);
-            if (te instanceof TileEntityMachine)
+            if (te instanceof TileEntityInventoryMachine)
             {
-                TileEntityMachine machine = (TileEntityMachine)te;
+                TileEntityInventoryMachine machine = (TileEntityInventoryMachine)te;
 
                 if (side != null)
                 {

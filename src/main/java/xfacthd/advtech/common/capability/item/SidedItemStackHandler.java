@@ -3,15 +3,15 @@ package xfacthd.advtech.common.capability.item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraftforge.items.ItemStackHandler;
-import xfacthd.advtech.common.tileentity.TileEntityMachine;
+import xfacthd.advtech.common.tileentity.TileEntityInventoryMachine;
 
 public class SidedItemStackHandler extends ItemStackHandler
 {
-    private final TileEntityMachine te;
+    private final TileEntityInventoryMachine te;
     private final MachineItemStackHandler internalHandler;
     private final Direction side;
 
-    public SidedItemStackHandler(TileEntityMachine te, MachineItemStackHandler internalHandler, Direction side, int size)
+    public SidedItemStackHandler(TileEntityInventoryMachine te, MachineItemStackHandler internalHandler, Direction side, int size)
     {
         super(size);
         this.te = te;

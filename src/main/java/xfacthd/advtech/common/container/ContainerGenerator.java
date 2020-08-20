@@ -8,7 +8,7 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import xfacthd.advtech.common.block.BlockMachine;
 import xfacthd.advtech.common.tileentity.TileEntityGenerator;
 
-public abstract class ContainerGenerator<B extends BlockMachine, T extends TileEntityGenerator> extends ContainerMachine<B, T>
+public abstract class ContainerGenerator<B extends BlockMachine, T extends TileEntityGenerator> extends ContainerInventoryMachine<B, T>
 {
     protected final LazyOptional<IFluidHandler> fluidHandler;
 

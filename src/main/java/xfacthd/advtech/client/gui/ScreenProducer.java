@@ -5,7 +5,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import xfacthd.advtech.common.container.ContainerProducer;
 
-public abstract class ScreenProducer<C extends ContainerProducer<?, ?>> extends ScreenMachine<C>
+public abstract class ScreenProducer<C extends ContainerProducer<?, ?>> extends ScreenInventoryMachine<C>
 {
     protected ScreenProducer(C container, PlayerInventory inventory, ITextComponent title, int xSize, int ySize)
     {

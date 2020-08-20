@@ -8,7 +8,7 @@ import xfacthd.advtech.common.net.NetworkHandler;
 import xfacthd.advtech.common.net.packets.machine.PacketSwitchActiveOutput;
 import xfacthd.advtech.common.tileentity.TileEntityProducer;
 
-public abstract class ContainerProducer<B extends BlockMachine, T extends TileEntityProducer> extends ContainerMachine<B, T>
+public abstract class ContainerProducer<B extends BlockMachine, T extends TileEntityProducer> extends ContainerInventoryMachine<B, T>
 {
     protected final IntReferenceHolder forceHolder = IntReferenceHolder.single();
 

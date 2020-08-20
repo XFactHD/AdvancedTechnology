@@ -7,8 +7,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import xfacthd.advtech.AdvancedTechnology;
-import xfacthd.advtech.client.gui.ScreenMachine;
-import xfacthd.advtech.client.gui.ScreenProducer;
+import xfacthd.advtech.client.gui.*;
 import xfacthd.advtech.client.util.TextureDrawer;
 import xfacthd.advtech.common.container.ContainerProducer;
 import xfacthd.advtech.common.data.states.Side;
@@ -16,7 +15,7 @@ import xfacthd.advtech.common.data.states.Side;
 import java.util.EnumMap;
 import java.util.Map;
 
-public class TabMachinePort extends AbstractTab<ScreenMachine<?>>
+public class TabMachinePort extends AbstractTab<ScreenInventoryMachine<?>>
 {
     public static final ITextComponent TITLE = new TranslationTextComponent("gui." + AdvancedTechnology.MODID + ".tab.machine_port");
     public static final ITextComponent BTN_TOOLTIP = new TranslationTextComponent("gui." + AdvancedTechnology.MODID + ".tooltip.active_output");
@@ -29,7 +28,7 @@ public class TabMachinePort extends AbstractTab<ScreenMachine<?>>
     private final boolean producer;
     private final ContainerProducer<?, ?> prodContainer;
 
-    public TabMachinePort(ScreenMachine<?> screen)
+    public TabMachinePort(ScreenInventoryMachine<?> screen)
     {
         super(screen, TITLE);
         producer = screen instanceof ScreenProducer;

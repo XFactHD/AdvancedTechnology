@@ -22,7 +22,6 @@ public abstract class ContainerMachine<B extends BlockMachine, T extends TileEnt
     protected final IWorldPosCallable worldPosCallable;
     protected final IntReferenceHolder energyHolder = IntReferenceHolder.single();
     protected final IntReferenceHolder capacityHolder = IntReferenceHolder.single();
-    protected final IIntArray portArray = new IntArray(6);
     protected final BoolReferenceHolder activeHolder = new BoolReferenceHolder();
     protected final ByteReferenceHolder progressHolder = new ByteReferenceHolder();
 
@@ -38,7 +37,6 @@ public abstract class ContainerMachine<B extends BlockMachine, T extends TileEnt
 
         trackRealInt(energyHolder);
         trackRealInt(capacityHolder);
-        trackIntArray(portArray);
         trackBool(activeHolder);
         trackByte(progressHolder);
     }
@@ -52,11 +50,6 @@ public abstract class ContainerMachine<B extends BlockMachine, T extends TileEnt
             capacityHolder.set(energy.getMaxEnergyStored());
         });
 
-        for (Side side : Side.values())
-        {
-            portArray.set(side.ordinal(), machine.getSidePort(side).ordinal());
-        }
-
         activeHolder.set(machine.isActive());
         progressHolder.set((byte)(100F * machine.getProgress()));
 
@@ -69,16 +62,9 @@ public abstract class ContainerMachine<B extends BlockMachine, T extends TileEnt
 
     public final int getEnergyCapacity() { return capacityHolder.get(); }
 
-    public final SideAccess getPortSetting(Side side) { return SideAccess.values()[portArray.get(side.ordinal())]; }
-
     public boolean isActive() { return activeHolder.get(); }
 
     public float getProgress() { return (float)progressHolder.get() / 100F; }
-
-    public void configureSide(Side side, int dir)
-    {
-        NetworkHandler.sendToServer(new PacketConfigureSide(machine.getPos(), side, dir));
-    }
 
     public abstract MachineType getMachineType();
 }

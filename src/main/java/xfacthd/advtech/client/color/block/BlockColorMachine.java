@@ -8,7 +8,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ILightReader;
 import xfacthd.advtech.common.ATContent;
 import xfacthd.advtech.common.data.states.Side;
-import xfacthd.advtech.common.tileentity.TileEntityMachine;
+import xfacthd.advtech.common.tileentity.TileEntityInventoryMachine;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +21,9 @@ public class BlockColorMachine implements IBlockColor
         if (lightReader != null)
         {
             TileEntity te = lightReader.getTileEntity(pos);
-            if (te instanceof TileEntityMachine)
+            if (te instanceof TileEntityInventoryMachine)
             {
-                TileEntityMachine machine = (TileEntityMachine)te;
+                TileEntityInventoryMachine machine = (TileEntityInventoryMachine)te;
                 if (tintIndex == 6)
                 {
                     return machine.getLevel().getColor();

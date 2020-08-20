@@ -10,7 +10,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
 import xfacthd.advtech.common.capability.energy.EnergySink;
 
-public abstract class TileEntityProducer extends TileEntityMachine
+public abstract class TileEntityProducer extends TileEntityInventoryMachine
 {
     protected final IRecipeType<? extends IRecipe<IInventory>> recipeType;
     protected final IInventory recipeInv;

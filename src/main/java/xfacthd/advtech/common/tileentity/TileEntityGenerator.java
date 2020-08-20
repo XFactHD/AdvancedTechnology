@@ -6,7 +6,7 @@ import net.minecraft.util.math.MathHelper;
 import xfacthd.advtech.common.capability.energy.EnergySource;
 import xfacthd.advtech.common.capability.item.MachineItemStackHandler;
 
-public abstract class TileEntityGenerator extends TileEntityMachine
+public abstract class TileEntityGenerator extends TileEntityInventoryMachine
 {
     protected int productionMult = 1;
     protected int progress = -1;

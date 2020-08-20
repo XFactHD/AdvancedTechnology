@@ -23,6 +23,7 @@ import xfacthd.advtech.common.data.states.MachineLevel;
 import xfacthd.advtech.common.data.subtypes.MachineType;
 import xfacthd.advtech.common.item.tool.ItemUpgrade;
 import xfacthd.advtech.common.item.tool.ItemWrench;
+import xfacthd.advtech.common.tileentity.TileEntityInventoryMachine;
 import xfacthd.advtech.common.tileentity.TileEntityMachine;
 import xfacthd.advtech.common.util.StatusMessages;
 import xfacthd.advtech.common.util.data.PropertyHolder;
@@ -98,9 +99,9 @@ public class BlockMachine extends BlockBase
 
                     world.setBlockState(pos, state.with(PropertyHolder.FACING_HOR, facing));
                     TileEntity te = world.getTileEntity(pos);
-                    if (te instanceof TileEntityMachine)
+                    if (te instanceof TileEntityInventoryMachine)
                     {
-                        ((TileEntityMachine)te).remapPortsToFacing(facing);
+                        ((TileEntityInventoryMachine)te).remapPortsToFacing(facing);
                     }
                 }
             }
