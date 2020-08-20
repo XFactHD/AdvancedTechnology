@@ -26,11 +26,11 @@ public abstract class TileEntityMachine extends TileEntityBase implements ITicka
     private boolean firstTick = true;
     private long lastHiccup = 0;
 
-    public TileEntityMachine(TileEntityType<?> type)
+    public TileEntityMachine(TileEntityType<?> type, boolean capInit)
     {
         super(type);
 
-        initCapabilities();
+        if (capInit) { initCapabilities(); }
     }
 
     @Override

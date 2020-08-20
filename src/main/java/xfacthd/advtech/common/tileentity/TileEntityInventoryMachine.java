@@ -34,10 +34,12 @@ public abstract class TileEntityInventoryMachine extends TileEntityMachine
 
     public TileEntityInventoryMachine(TileEntityType<?> type)
     {
-        super(type);
+        super(type, false);
 
         for (Side side : Side.values()) { ports.put(side, SideAccess.NONE); }
         for (Direction side : Direction.values()) { cardinalPorts.put(side, SideAccess.NONE); }
+
+        initCapabilities();
     }
 
     @Override
