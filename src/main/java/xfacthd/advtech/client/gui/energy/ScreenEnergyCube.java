@@ -6,7 +6,7 @@ import net.minecraft.util.text.ITextComponent;
 import xfacthd.advtech.client.gui.AdvancedScreen;
 import xfacthd.advtech.client.gui.tabs.TabEnergyPort;
 import xfacthd.advtech.client.util.TextureDrawer;
-import xfacthd.advtech.common.container.ContainerEnergyCube;
+import xfacthd.advtech.common.container.energy.ContainerEnergyCube;
 
 public class ScreenEnergyCube extends AdvancedScreen<ContainerEnergyCube>
 {

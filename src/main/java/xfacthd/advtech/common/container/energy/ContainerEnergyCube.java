@@ -1,10 +1,11 @@
-package xfacthd.advtech.common.container;
+package xfacthd.advtech.common.container.energy;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.*;
 import net.minecraftforge.energy.CapabilityEnergy;
 import xfacthd.advtech.common.ATContent;
+import xfacthd.advtech.common.container.AdvancedContainer;
 import xfacthd.advtech.common.data.states.Side;
 import xfacthd.advtech.common.data.states.SideAccess;
 import xfacthd.advtech.common.data.types.ContainerTypes;

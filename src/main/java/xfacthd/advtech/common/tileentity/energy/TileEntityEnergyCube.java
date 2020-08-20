@@ -11,7 +11,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.util.LazyOptional;
 import xfacthd.advtech.AdvancedTechnology;
 import xfacthd.advtech.common.capability.energy.ATEnergyStorage;
-import xfacthd.advtech.common.container.ContainerEnergyCube;
+import xfacthd.advtech.common.container.energy.ContainerEnergyCube;
 import xfacthd.advtech.common.data.states.*;
 import xfacthd.advtech.common.data.types.TileEntityTypes;
 import xfacthd.advtech.common.tileentity.TileEntityEnergyHandler;

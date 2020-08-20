@@ -17,7 +17,7 @@ import xfacthd.advtech.common.block.energy.BlockEnergyCube;
 import xfacthd.advtech.common.block.generator.BlockBurnerGenerator;
 import xfacthd.advtech.common.block.machine.*;
 import xfacthd.advtech.common.block.material.*;
-import xfacthd.advtech.common.container.ContainerEnergyCube;
+import xfacthd.advtech.common.container.energy.ContainerEnergyCube;
 import xfacthd.advtech.common.container.generator.ContainerBurnerGenerator;
 import xfacthd.advtech.common.container.machine.*;
 import xfacthd.advtech.common.data.ItemGroups;
