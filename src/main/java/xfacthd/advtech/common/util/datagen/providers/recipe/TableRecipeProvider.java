@@ -98,6 +98,8 @@ public class TableRecipeProvider extends ATRecipeProvider
                 .addCriterion("has_ingot_iron", hasItem(TagHolder.INGOTS.get(Materials.IRON)))
                 .build(consumer, name("wrench"));
 
+
+
         ShapedRecipeBuilder.shapedRecipe(ATContent.blockMachineCasing)
                 .patternLine("IPI")
                 .patternLine("PGP")
@@ -107,6 +109,8 @@ public class TableRecipeProvider extends ATRecipeProvider
                 .key('G', TagHolder.GEARS.get(Materials.COPPER))
                 .addCriterion("has_gear_copper", hasItem(TagHolder.GEARS.get(Materials.COPPER)))
                 .build(consumer, name("machine_casing"));
+
+
 
         ShapedRecipeBuilder.shapedRecipe(ATContent.blockElectricFurnace)
                 .patternLine("IRI")
@@ -131,6 +135,8 @@ public class TableRecipeProvider extends ATRecipeProvider
                 .key('C', ATContent.itemComponent.get(Components.RECEPTION_COIL))
                 .addCriterion("has_casing", hasItem(ATContent.blockMachineCasing))
                 .build(consumer, name("crusher"));
+
+
 
         ShapedRecipeBuilder.shapedRecipe(ATContent.itemComponent.get(Components.TRANSMISSION_COIL), 3)
                 .patternLine("EEE")
@@ -189,5 +195,14 @@ public class TableRecipeProvider extends ATRecipeProvider
                 .key('G', TagHolder.GEARS.get(Materials.IRON))
                 .addCriterion("has_iron_gear", hasItem(ATContent.itemGear.get(Materials.IRON)))
                 .build(consumer, name("gear_mold"));
+
+        ShapedRecipeBuilder.shapedRecipe(ATContent.itemRodMold)
+                .patternLine("III")
+                .patternLine("IRI")
+                .patternLine("III")
+                .key('I', TagHolder.INGOTS.get(Materials.IRON))
+                .key('R', Items.STICK)
+                .addCriterion("has_stick", hasItem(Items.STICK))
+                .build(consumer, name("stick_mold"));
     }
 }
