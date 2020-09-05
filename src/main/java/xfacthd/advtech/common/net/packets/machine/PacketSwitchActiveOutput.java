@@ -3,6 +3,7 @@ package xfacthd.advtech.common.net.packets.machine;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkEvent;
 import xfacthd.advtech.common.net.packets.AbstractPacket;
 import xfacthd.advtech.common.tileentity.TileEntityProducer;
@@ -29,7 +30,10 @@ public class PacketSwitchActiveOutput extends AbstractPacket
         ctx.get().enqueueWork(() ->
         {
             //noinspection ConstantConditions
-            TileEntity te = ctx.get().getSender().world.getTileEntity(pos);
+            World world = ctx.get().getSender().world;
+            if (!world.isAreaLoaded(pos, 0)) { return; }
+
+            TileEntity te = world.getTileEntity(pos);
             if (te instanceof TileEntityProducer)
             {
                 ((TileEntityProducer) te).switchForceOutput();
