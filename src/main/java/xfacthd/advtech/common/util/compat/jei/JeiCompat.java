@@ -10,9 +10,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import xfacthd.advtech.AdvancedTechnology;
 import xfacthd.advtech.client.gui.AdvancedScreen;
-import xfacthd.advtech.client.gui.energy.ScreenEnergyCube;
-import xfacthd.advtech.client.gui.generator.ScreenBurnerGenerator;
+import xfacthd.advtech.client.gui.energy.*;
+import xfacthd.advtech.client.gui.generator.*;
 import xfacthd.advtech.client.gui.machine.*;
+import xfacthd.advtech.client.gui.utility.*;
 import xfacthd.advtech.common.ATContent;
 import xfacthd.advtech.common.data.recipes.*;
 import xfacthd.advtech.common.util.compat.jei.categories.*;
@@ -65,6 +66,7 @@ public class JeiCompat implements IModPlugin
         registration.addGuiContainerHandler(ScreenMetalPress.class, simpleGuiHandler);
         registration.addGuiContainerHandler(ScreenBurnerGenerator.class, simpleGuiHandler);
         registration.addGuiContainerHandler(ScreenEnergyCube.class, simpleGuiHandler);
+        registration.addGuiContainerHandler(ScreenChunkLoader.class, simpleGuiHandler);
         //Other guis may need extended GuiHandlers because they contain fluid ingredients
 
         registration.addRecipeClickArea(ScreenElectricFurnace.class,    77, 45, 22, 16, VanillaRecipeCategoryUid.FURNACE);

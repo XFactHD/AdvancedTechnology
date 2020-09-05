@@ -9,7 +9,8 @@ import net.minecraftforge.fml.network.simple.SimpleChannel;
 import xfacthd.advtech.AdvancedTechnology;
 import xfacthd.advtech.common.net.packets.AbstractPacket;
 import xfacthd.advtech.common.net.packets.container.*;
-import xfacthd.advtech.common.net.packets.energy.PacketConfigEnergyCubeSide;
+import xfacthd.advtech.common.net.packets.debug.*;
+import xfacthd.advtech.common.net.packets.energy.*;
 import xfacthd.advtech.common.net.packets.machine.*;
 
 public class NetworkHandler
@@ -29,14 +30,16 @@ public class NetworkHandler
         int idx = 0;
 
         //Client to server packets
-        CHANNEL.registerMessage(idx++, PacketConfigureSide.class,       PacketConfigureSide::encode,        PacketConfigureSide::new,       PacketConfigureSide::handle);
-        CHANNEL.registerMessage(idx++, PacketSwitchActiveOutput.class,  PacketSwitchActiveOutput::encode,   PacketSwitchActiveOutput::new,  PacketSwitchActiveOutput::handle);
+        CHANNEL.registerMessage(idx++, PacketConfigureSide.class,        PacketConfigureSide::encode,        PacketConfigureSide::new,        PacketConfigureSide::handle);
+        CHANNEL.registerMessage(idx++, PacketSwitchActiveOutput.class,   PacketSwitchActiveOutput::encode,   PacketSwitchActiveOutput::new,   PacketSwitchActiveOutput::handle);
         CHANNEL.registerMessage(idx++, PacketConfigEnergyCubeSide.class, PacketConfigEnergyCubeSide::encode, PacketConfigEnergyCubeSide::new, PacketConfigEnergyCubeSide::handle);
+        CHANNEL.registerMessage(idx++, PacketChangeChunkRadius.class,    PacketChangeChunkRadius::encode,    PacketChangeChunkRadius::new,    PacketChangeChunkRadius::handle);
 
         //Server to client packets
         CHANNEL.registerMessage(idx++, PacketSyncByteHolder.class,      PacketSyncByteHolder::encode,       PacketSyncByteHolder::new,      PacketSyncByteHolder::handle);
         CHANNEL.registerMessage(idx++, PacketSyncIntHolder.class,       PacketSyncIntHolder::encode,        PacketSyncIntHolder::new,       PacketSyncIntHolder::handle);
         CHANNEL.registerMessage(idx++, PacketSyncBoolHolder.class,      PacketSyncBoolHolder::encode,       PacketSyncBoolHolder::new,      PacketSyncBoolHolder::handle);
+        CHANNEL.registerMessage(idx++, PacketDebugForcedChunks.class,   PacketDebugForcedChunks::encode,    PacketDebugForcedChunks::new,   PacketDebugForcedChunks::handle);
     }
 
     public static void sendToServer(AbstractPacket packet) { CHANNEL.sendToServer(packet); }

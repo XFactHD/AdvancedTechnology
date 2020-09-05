@@ -41,6 +41,12 @@ public class MachineBlockStateProvider extends ATBlockStateProvider
         ModelFile burnerGeneratorModel = machineModel("block_burner_generator");
         ModelFile burnerGeneratorModelOn = machineModel("block_burner_generator_on");
         machineState(ATContent.blockBurnerGenerator, burnerGeneratorModel, burnerGeneratorModelOn);
+
+
+
+        ModelFile chunkLoaderModel = pillarModel("block_chunk_loader");
+        ModelFile chunkLoaderModelOn = pillarModel("block_chunk_loader_on");
+        machineState(ATContent.blockChunkLoader, chunkLoaderModel, chunkLoaderModelOn);
     }
 
     private ModelFile casingModel()
@@ -104,6 +110,30 @@ public class MachineBlockStateProvider extends ATBlockStateProvider
                     .end();
     }
 
+    private ModelFile pillarModel(String name)
+    {
+        return models()
+                .withExistingParent("block/machine/" + name, "block/cube")
+                .texture("bottom", modLoc("block/machine/block_machine_bottom"))
+                .texture("side", modLoc("block/machine/" + name))
+                .texture("top", modLoc("block/machine/block_machine_top"))
+                .texture("level", modLoc("block/machine/block_machine_level"))
+                .texture("particle", modLoc("block/machine/block_machine_top"))
+                .element()
+                    .cube("#bottom")
+                    .faces((dir, builder) ->
+                    {
+                        if (dir == Direction.DOWN) { builder.texture("#bottom").end(); }
+                        else if (dir == Direction.UP) { builder.texture("#top").end(); }
+                        else { builder.texture("#side").end(); }
+                    })
+                    .end()
+                .element()
+                    .cube("#level")
+                    .faces((dir, builder) -> builder.tintindex(6))
+                    .end();
+    }
+
     private void casingState(BlockMachine block, ModelFile model)
     {
         ConfiguredModel[] confModel = ConfiguredModel.builder().modelFile(model).build();
@@ -145,6 +175,6 @@ public class MachineBlockStateProvider extends ATBlockStateProvider
 
     //private void allFacesExcept(Direction except, BiConsumer<Direction, FaceBuilder> action)
     //{
-    //    Arrays.stream(Direction.values()).filter(dir -> dir == except).forEach(d -> action.accept(d, face(d)));
+    //    Arrays.stream(Direction.values()).filter(dir -> dir != except).forEach(d -> action.accept(d, face(d)));
     //}
 }

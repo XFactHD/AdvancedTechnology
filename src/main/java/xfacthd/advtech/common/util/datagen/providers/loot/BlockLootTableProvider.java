@@ -48,6 +48,8 @@ public class BlockLootTableProvider extends LootTableProvider
 
             blocks.add(ATContent.blockEnergyCube);
 
+            blocks.add(ATContent.blockChunkLoader);
+
             return blocks;
         }
 
@@ -65,6 +67,8 @@ public class BlockLootTableProvider extends LootTableProvider
             registerDropSelfLootTable(ATContent.blockBurnerGenerator);
 
             registerDropSelfLootTable(ATContent.blockEnergyCube);
+
+            registerDropSelfLootTable(ATContent.blockChunkLoader);
         }
     }
 }

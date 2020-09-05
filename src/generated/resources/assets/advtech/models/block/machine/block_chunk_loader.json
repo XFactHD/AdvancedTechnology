@@ -1,0 +1,94 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "bottom": "advtech:block/machine/block_machine_bottom",
+    "side": "advtech:block/machine/block_chunk_loader",
+    "top": "advtech:block/machine/block_machine_top",
+    "level": "advtech:block/machine/block_machine_level",
+    "particle": "advtech:block/machine/block_machine_top"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
+      "faces": {
+        "down": {
+          "texture": "#bottom",
+          "cullface": "down"
+        },
+        "up": {
+          "texture": "#top",
+          "cullface": "up"
+        },
+        "north": {
+          "texture": "#side",
+          "cullface": "north"
+        },
+        "south": {
+          "texture": "#side",
+          "cullface": "south"
+        },
+        "west": {
+          "texture": "#side",
+          "cullface": "west"
+        },
+        "east": {
+          "texture": "#side",
+          "cullface": "east"
+        }
+      }
+    },
+    {
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
+      "faces": {
+        "down": {
+          "texture": "#level",
+          "cullface": "down",
+          "tintindex": 6
+        },
+        "up": {
+          "texture": "#level",
+          "cullface": "up",
+          "tintindex": 6
+        },
+        "north": {
+          "texture": "#level",
+          "cullface": "north",
+          "tintindex": 6
+        },
+        "south": {
+          "texture": "#level",
+          "cullface": "south",
+          "tintindex": 6
+        },
+        "west": {
+          "texture": "#level",
+          "cullface": "west",
+          "tintindex": 6
+        },
+        "east": {
+          "texture": "#level",
+          "cullface": "east",
+          "tintindex": 6
+        }
+      }
+    }
+  ]
+}

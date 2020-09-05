@@ -38,6 +38,8 @@ public class ItemColorMachine implements IItemColor
 
         items.add(ATContent.blockBurnerGenerator);
 
+        items.add(ATContent.blockChunkLoader);
+
         return items.toArray(items.toArray(new IItemProvider[0]));
     }
 }

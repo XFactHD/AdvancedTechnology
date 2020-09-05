@@ -16,9 +16,10 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import xfacthd.advtech.AdvancedTechnology;
 import xfacthd.advtech.client.color.block.*;
 import xfacthd.advtech.client.color.item.*;
-import xfacthd.advtech.client.gui.energy.ScreenEnergyCube;
+import xfacthd.advtech.client.gui.energy.*;
 import xfacthd.advtech.client.gui.generator.*;
 import xfacthd.advtech.client.gui.machine.*;
+import xfacthd.advtech.client.gui.utility.*;
 import xfacthd.advtech.client.render.ter.*;
 import xfacthd.advtech.common.ATContent;
 import xfacthd.advtech.common.data.types.*;
@@ -40,7 +41,10 @@ public class ATClient
 
         RenderTypeLookup.setRenderLayer(ATContent.blockEnergyCube, type -> type == RenderType.getCutoutMipped() || type == RenderType.getTranslucent());
 
+        RenderTypeLookup.setRenderLayer(ATContent.blockChunkLoader, RenderType.getCutoutMipped());
+
         ClientRegistry.bindTileEntityRenderer(TileEntityTypes.tileTypeEnergyCube, RenderEnergyCube::new);
+        ClientRegistry.bindTileEntityRenderer(TileEntityTypes.tileTypeChunkLoader, RenderChunkLoader::new);
 
         //noinspection deprecation
         DeferredWorkQueue.runLater(() ->
@@ -53,6 +57,8 @@ public class ATClient
             ScreenManager.registerFactory(ContainerTypes.containerTypeBurnerGenerator, ScreenBurnerGenerator::new);
 
             ScreenManager.registerFactory(ContainerTypes.containerTypeEnergyCube, ScreenEnergyCube::new);
+
+            ScreenManager.registerFactory(ContainerTypes.containerTypeChunkLoader, ScreenChunkLoader::new);
         });
     }
 

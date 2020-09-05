@@ -3,6 +3,7 @@ package xfacthd.advtech.common.util.datagen.providers.lang;
 import net.minecraft.data.DataGenerator;
 import org.apache.commons.lang3.StringUtils;
 import xfacthd.advtech.client.gui.tabs.*;
+import xfacthd.advtech.client.gui.utility.*;
 import xfacthd.advtech.common.ATContent;
 import xfacthd.advtech.common.data.ItemGroups;
 import xfacthd.advtech.common.data.states.MachineLevel;
@@ -10,6 +11,7 @@ import xfacthd.advtech.common.data.subtypes.Components;
 import xfacthd.advtech.common.data.subtypes.Materials;
 import xfacthd.advtech.common.tileentity.generator.*;
 import xfacthd.advtech.common.tileentity.machine.*;
+import xfacthd.advtech.common.tileentity.utility.*;
 import xfacthd.advtech.common.util.StatusMessages;
 
 public class EnglishLangProvider extends ATLanguageProvider
@@ -80,6 +82,8 @@ public class EnglishLangProvider extends ATLanguageProvider
 
         add(ATContent.blockEnergyCube, "Energy Cube");
 
+        add(ATContent.blockChunkLoader, "Chunk Loader");
+
         add(ATContent.itemWrench, "Wrench");
 
         for (MachineLevel level : MachineLevel.values())
@@ -107,12 +111,17 @@ public class EnglishLangProvider extends ATLanguageProvider
         add(TileEntityAlloySmelter.TITLE, "Alloy Smelter");
         add(TileEntityMetalPress.TITLE, "Metal Press");
         add(TileEntityBurnerGenerator.TITLE, "Burner Generator");
+        add(TileEntityChunkLoader.TITLE, "Chunk Loader");
 
         add(TabMachinePort.TITLE, "Port Settings");
         add(TabMachineUpgrades.TITLE, "Upgrades");
         add(TabRedstoneSettings.TITLE, "Redstone");
-
         add(TabMachinePort.BTN_TOOLTIP, "Active output");
+
+        add(ScreenChunkLoader.RADIUS, "Radius:");
+        add(ScreenChunkLoader.CHUNKS, "Chunks loaded:");
+        add(ScreenChunkLoader.SHOW, "Show chunks");
+        add(ScreenChunkLoader.HIDE, "Hide chunks");
 
         add("jei_cat.advtech.crusher", "Crushing");
         add("jei_cat.advtech.alloy_smelter", "Alloy Smelting");

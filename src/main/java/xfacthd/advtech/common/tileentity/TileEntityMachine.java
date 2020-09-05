@@ -39,13 +39,12 @@ public abstract class TileEntityMachine extends TileEntityBase implements ITicka
         if (firstTick)
         {
             firstTick();
+            firstTick = false;
         }
     }
 
     protected void firstTick()
     {
-        firstTick = false;
-
         onLevelChanged();
         setActive(false);
         lastHiccup = 0; //Set to 0 so the machine can start immediately if possible
@@ -164,9 +163,7 @@ public abstract class TileEntityMachine extends TileEntityBase implements ITicka
     public CompoundNBT write(CompoundNBT nbt)
     {
         nbt.putInt("level", level.ordinal());
-
         nbt.put("energy", energyHandler.serializeNBT());
-
         return super.write(nbt);
     }
 

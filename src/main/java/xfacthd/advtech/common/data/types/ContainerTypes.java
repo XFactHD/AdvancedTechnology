@@ -6,9 +6,10 @@ import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.fml.network.IContainerFactory;
 import net.minecraftforge.registries.IForgeRegistry;
 import xfacthd.advtech.AdvancedTechnology;
-import xfacthd.advtech.common.container.energy.ContainerEnergyCube;
-import xfacthd.advtech.common.container.generator.ContainerBurnerGenerator;
+import xfacthd.advtech.common.container.energy.*;
+import xfacthd.advtech.common.container.generator.*;
 import xfacthd.advtech.common.container.machine.*;
+import xfacthd.advtech.common.container.utility.*;
 
 public class ContainerTypes
 {
@@ -22,6 +23,8 @@ public class ContainerTypes
     public static ContainerType<ContainerBurnerGenerator>   containerTypeBurnerGenerator;
 
     public static ContainerType<ContainerEnergyCube>        containerTypeEnergyCube;
+
+    public static ContainerType<ContainerChunkLoader>       containerTypeChunkLoader;
 
     public static void setRegistry(IForgeRegistry<ContainerType<?>> registry) { typeRegistry = registry; }
 

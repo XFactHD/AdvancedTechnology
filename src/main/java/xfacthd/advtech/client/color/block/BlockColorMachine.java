@@ -9,6 +9,7 @@ import net.minecraft.world.ILightReader;
 import xfacthd.advtech.common.ATContent;
 import xfacthd.advtech.common.data.states.Side;
 import xfacthd.advtech.common.tileentity.TileEntityInventoryMachine;
+import xfacthd.advtech.common.tileentity.TileEntityMachine;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,17 +22,14 @@ public class BlockColorMachine implements IBlockColor
         if (lightReader != null)
         {
             TileEntity te = lightReader.getTileEntity(pos);
-            if (te instanceof TileEntityInventoryMachine)
+            if (tintIndex == 6 && te instanceof TileEntityMachine)
+            {
+                return ((TileEntityMachine) te).getLevel().getColor();
+            }
+            else if (te instanceof TileEntityInventoryMachine)
             {
                 TileEntityInventoryMachine machine = (TileEntityInventoryMachine)te;
-                if (tintIndex == 6)
-                {
-                    return machine.getLevel().getColor();
-                }
-                else
-                {
-                    return machine.getSidePort(Side.values()[tintIndex]).getColor();
-                }
+                return machine.getSidePort(Side.values()[tintIndex]).getColor();
             }
         }
         return 0xFFFFFFFF;
@@ -47,6 +45,8 @@ public class BlockColorMachine implements IBlockColor
         blocks.add(ATContent.blockMetalPress);
 
         blocks.add(ATContent.blockBurnerGenerator);
+
+        blocks.add(ATContent.blockChunkLoader);
 
         return blocks.toArray(blocks.toArray(new Block[0]));
     }
