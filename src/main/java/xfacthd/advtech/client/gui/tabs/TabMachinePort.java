@@ -9,7 +9,6 @@ import net.minecraft.util.text.TranslationTextComponent;
 import xfacthd.advtech.AdvancedTechnology;
 import xfacthd.advtech.client.gui.*;
 import xfacthd.advtech.client.util.TextureDrawer;
-import xfacthd.advtech.common.container.ContainerProducer;
 import xfacthd.advtech.common.data.states.Side;
 
 import java.util.EnumMap;
@@ -25,14 +24,16 @@ public class TabMachinePort extends AbstractTab<ScreenInventoryMachine<?>>
 
     private static final Map<Side, Rectangle2d> PORT_COORDS;
 
-    private final boolean producer;
-    private final ContainerProducer<?, ?> prodContainer;
+    private final boolean canForcePush;
+    private final Side frontSide;
+    private final Rectangle2d frontCoords;
 
     public TabMachinePort(ScreenInventoryMachine<?> screen)
     {
         super(screen, TITLE);
-        producer = screen instanceof ScreenProducer;
-        prodContainer = producer ? (ContainerProducer<?, ?>)screen.getContainer() : null;
+        canForcePush = screen.getContainer().canForcePush();
+        frontSide = screen.getContainer().getFrontSide();
+        frontCoords = PORT_COORDS.get(frontSide);
     }
 
     @Override
@@ -42,7 +43,7 @@ public class TabMachinePort extends AbstractTab<ScreenInventoryMachine<?>>
         TextureDrawer.drawGuiTexture(screen, x + 21, y + 21, 62, 62, 0, 1, 0, 1);
 
         mc.getTextureManager().bindTexture(screen.getContainer().getMachineType().getTexture());
-        TextureDrawer.drawGuiTexture(screen, x + 44, y + 44, 16, 16, 0, 1, 0, 1);
+        TextureDrawer.drawGuiTexture(screen, x + frontCoords.getX() + 2, y + frontCoords.getY() + 2, 16, 16, 0, 1, 0, 1);
 
         mc.getTextureManager().bindTexture(PORT_TEXTURE);
         for (Side side : Side.values())
@@ -53,10 +54,10 @@ public class TabMachinePort extends AbstractTab<ScreenInventoryMachine<?>>
             TextureDrawer.drawGuiTexture(screen, x + coords.getX() + 2, y + coords.getY() + 2, 16, 16, 0, 1, 0, 1, color);
         }
 
-        if (producer)
+        if (canForcePush)
         {
             mc.getTextureManager().bindTexture(new ResourceLocation("textures/gui/checkbox.png"));
-            float vOff = prodContainer.shouldForceOutput() ? (20F / 64F) : 0;
+            float vOff = screen.getContainer().shouldForceOutput() ? (20F / 64F) : 0;
             TextureDrawer.drawGuiTexture(screen, x + 68, y + 21, 15, 15, 0, 20F / 32F, vOff, (20F / 64F) + vOff);
         }
     }
@@ -93,7 +94,7 @@ public class TabMachinePort extends AbstractTab<ScreenInventoryMachine<?>>
 
         if (pressed)
         {
-            if (sideHit == Side.FRONT)
+            if (sideHit == frontSide)
             {
                 if (Screen.hasShiftDown() && button == 0)
                 {
@@ -119,10 +120,10 @@ public class TabMachinePort extends AbstractTab<ScreenInventoryMachine<?>>
             }
         }
 
-        if (producer && mouseX >= x + 68 && mouseX <= x + 83 && mouseY >= y + 21 && mouseY <= y + 36)
+        if (canForcePush && mouseX >= x + 68 && mouseX <= x + 83 && mouseY >= y + 21 && mouseY <= y + 36)
         {
             playDownSound(mc.getSoundHandler());
-            prodContainer.switchActiveOutput();
+            screen.getContainer().switchActiveOutput();
         }
     }
 

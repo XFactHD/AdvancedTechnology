@@ -31,6 +31,7 @@ public abstract class TileEntityInventoryMachine extends TileEntityMachine
     protected MachineItemStackHandler internalItemHandler;
 
     private int changedSlot = -1;
+    private boolean forceOutput = false;
 
     public TileEntityInventoryMachine(TileEntityType<?> type)
     {
@@ -55,6 +56,8 @@ public abstract class TileEntityInventoryMachine extends TileEntityMachine
                 onSlotChangedInternal(changedSlot);
                 changedSlot = -1;
             }
+
+            if (forceOutput) { pushOutputs(); }
         }
     }
 
@@ -77,7 +80,7 @@ public abstract class TileEntityInventoryMachine extends TileEntityMachine
 
     public SideAccess getNextPortSetting(Side side)
     {
-        if (side == Side.FRONT) { return SideAccess.NONE; }
+        if (side == getFrontSide()) { return SideAccess.NONE; }
 
         SideAccess port = ports.get(side);
         return SideAccess.values()[(port.ordinal() + 1) % SideAccess.values().length];
@@ -85,12 +88,18 @@ public abstract class TileEntityInventoryMachine extends TileEntityMachine
 
     public SideAccess getPriorPortSetting(Side side)
     {
-        if (side == Side.FRONT) { return SideAccess.NONE; }
+        if (side == getFrontSide()) { return SideAccess.NONE; }
 
         SideAccess port = ports.get(side);
         int ord = (port.ordinal() - 1) % SideAccess.values().length;
         return SideAccess.values()[ord >= 0 ? ord : SideAccess.values().length - 1];
     }
+
+    /**
+     * Returns the {@link Side} that shows the machine specific texture and therefore cannot be configured as a port
+     * Must be constant!!!
+     */
+    public Side getFrontSide() { return Side.FRONT; }
 
     protected final void remapPorts() { remapPortsToFacing(getBlockState().get(PropertyHolder.FACING_HOR)); }
 
@@ -196,7 +205,25 @@ public abstract class TileEntityInventoryMachine extends TileEntityMachine
      * Inventory stuff
      */
 
-    public abstract boolean canInsert(Direction side, int slot); //TODO: default impl
+    /**
+     * Wether the machine supports force-pushing
+     * Must be constant!!!
+     */
+    public abstract boolean canForcePush();
+
+    public void setForceOutput(boolean force)
+    {
+        forceOutput = force;
+        markDirty();
+    }
+
+    public void switchForceOutput() { setForceOutput(!forceOutput); }
+
+    public boolean shouldForceOutput() { return forceOutput; }
+
+    protected abstract void pushOutputs();
+
+    public abstract boolean canInsert(Direction side, int slot);
 
     public abstract boolean canExtract(Direction side, int slot);
 
@@ -263,6 +290,7 @@ public abstract class TileEntityInventoryMachine extends TileEntityMachine
         for (Side side : Side.values()) { ports.put(side, SideAccess.values()[nbt.getInt(side.getName())]); }
 
         internalItemHandler.deserializeNBT(nbt.getCompound("inventory"));
+        forceOutput = nbt.getBoolean("force");
     }
 
     @Override
@@ -271,6 +299,7 @@ public abstract class TileEntityInventoryMachine extends TileEntityMachine
         for (Side side : Side.values()) { nbt.putInt(side.getName(), ports.get(side).ordinal()); }
 
         nbt.put("inventory", internalItemHandler.serializeNBT());
+        nbt.putBoolean("force", forceOutput);
 
         return super.write(nbt);
     }
@@ -280,5 +309,6 @@ public abstract class TileEntityInventoryMachine extends TileEntityMachine
     {
         super.writeToItemData(nbt);
         for (Side side : Side.values()) { nbt.putInt(side.getName(), ports.get(side).ordinal()); }
+        nbt.putBoolean("force", forceOutput);
     }
 }

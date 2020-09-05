@@ -54,6 +54,12 @@ public abstract class TileEntityGenerator extends TileEntityInventoryMachine
     }
 
     @Override
+    public boolean canForcePush() { return false; }
+
+    @Override
+    protected void pushOutputs() { /*NOOP*/ }
+
+    @Override
     public void read(CompoundNBT nbt)
     {
         super.read(nbt);

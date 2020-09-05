@@ -2,24 +2,27 @@ package xfacthd.advtech.common.container;
 
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.ContainerType;
-import net.minecraft.util.IIntArray;
-import net.minecraft.util.IntArray;
+import net.minecraft.util.*;
 import xfacthd.advtech.common.block.BlockMachine;
 import xfacthd.advtech.common.data.states.Side;
 import xfacthd.advtech.common.data.states.SideAccess;
 import xfacthd.advtech.common.net.NetworkHandler;
 import xfacthd.advtech.common.net.packets.machine.PacketConfigureSide;
+import xfacthd.advtech.common.net.packets.machine.PacketSwitchActiveOutput;
 import xfacthd.advtech.common.tileentity.TileEntityInventoryMachine;
+import xfacthd.advtech.common.util.sync.BoolReferenceHolder;
 
 public abstract class ContainerInventoryMachine<B extends BlockMachine, T extends TileEntityInventoryMachine> extends ContainerMachine<B, T>
 {
     protected final IIntArray portArray = new IntArray(6);
+    protected final BoolReferenceHolder forceHolder = new BoolReferenceHolder();
 
     protected ContainerInventoryMachine(ContainerType<?> type, int id, B block, T machine, PlayerInventory inventory)
     {
         super(type, id, block, machine, inventory);
 
         trackIntArray(portArray);
+        trackBool(forceHolder);
     }
 
     @Override
@@ -30,6 +33,8 @@ public abstract class ContainerInventoryMachine<B extends BlockMachine, T extend
             portArray.set(side.ordinal(), machine.getSidePort(side).ordinal());
         }
 
+        forceHolder.set(machine.shouldForceOutput());
+
         super.detectAndSendChanges();
     }
 
@@ -39,4 +44,12 @@ public abstract class ContainerInventoryMachine<B extends BlockMachine, T extend
     {
         NetworkHandler.sendToServer(new PacketConfigureSide(machine.getPos(), side, dir));
     }
+
+    public Side getFrontSide() { return machine.getFrontSide(); }
+
+    public boolean canForcePush() { return machine.canForcePush(); }
+
+    public boolean shouldForceOutput() { return forceHolder.get(); }
+
+    public void switchActiveOutput() { NetworkHandler.sendToServer(new PacketSwitchActiveOutput(machine.getPos())); }
 }

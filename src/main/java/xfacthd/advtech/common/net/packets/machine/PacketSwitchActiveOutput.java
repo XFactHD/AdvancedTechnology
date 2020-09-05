@@ -6,7 +6,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkEvent;
 import xfacthd.advtech.common.net.packets.AbstractPacket;
-import xfacthd.advtech.common.tileentity.TileEntityProducer;
+import xfacthd.advtech.common.tileentity.TileEntityInventoryMachine;
 
 import java.util.function.Supplier;
 
@@ -34,9 +34,9 @@ public class PacketSwitchActiveOutput extends AbstractPacket
             if (!world.isAreaLoaded(pos, 0)) { return; }
 
             TileEntity te = world.getTileEntity(pos);
-            if (te instanceof TileEntityProducer)
+            if (te instanceof TileEntityInventoryMachine)
             {
-                ((TileEntityProducer) te).switchForceOutput();
+                ((TileEntityInventoryMachine) te).switchForceOutput();
             }
         });
         ctx.get().setPacketHandled(true);

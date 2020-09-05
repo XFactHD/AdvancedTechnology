@@ -18,7 +18,6 @@ public abstract class TileEntityProducer extends TileEntityInventoryMachine
     protected int progress = -1;
     protected int energyConsumption = 0;
     protected IRecipe<?> recipe = null;
-    private boolean forceOutput = false;
 
     public TileEntityProducer(TileEntityType<?> type, IRecipeType<? extends IRecipe<IInventory>> recipeType)
     {
@@ -51,8 +50,6 @@ public abstract class TileEntityProducer extends TileEntityInventoryMachine
                     progress += result;
                 }
             }
-
-            if (forceOutput) { pushOutputs(); }
         }
     }
 
@@ -88,17 +85,8 @@ public abstract class TileEntityProducer extends TileEntityInventoryMachine
      * Inventory
      */
 
-    public void setForceOutput(boolean force)
-    {
-        forceOutput = force;
-        markDirty();
-    }
-
-    public void switchForceOutput() { setForceOutput(!forceOutput); }
-
-    public boolean shouldForceOutput() { return forceOutput; }
-
-    protected abstract void pushOutputs();
+    @Override
+    public boolean canForcePush() { return true; }
 
     protected abstract int getEnergyRequired();
 
@@ -142,26 +130,5 @@ public abstract class TileEntityProducer extends TileEntityInventoryMachine
         super.writeNetworkNBT(nbt);
 
         nbt.putString("recipe", recipe != null ? recipe.getId().toString() : "null");
-    }
-
-    @Override
-    public void read(CompoundNBT nbt)
-    {
-        super.read(nbt);
-        forceOutput = nbt.getBoolean("force");
-    }
-
-    @Override
-    public CompoundNBT write(CompoundNBT nbt)
-    {
-        nbt.putBoolean("force", forceOutput);
-        return super.write(nbt);
-    }
-
-    @Override
-    public void writeToItemData(CompoundNBT nbt)
-    {
-        super.writeToItemData(nbt);
-        nbt.putBoolean("force", forceOutput);
     }
 }
