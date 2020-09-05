@@ -6,8 +6,10 @@ import net.minecraft.util.NonNullList;
 import xfacthd.advtech.AdvancedTechnology;
 import xfacthd.advtech.common.ATContent;
 import xfacthd.advtech.common.block.BlockMachine;
+import xfacthd.advtech.common.block.energy.BlockEnergyCube;
 import xfacthd.advtech.common.block.material.BlockOre;
 import xfacthd.advtech.common.block.material.BlockStorage;
+import xfacthd.advtech.common.data.subtypes.MachineType;
 import xfacthd.advtech.common.data.subtypes.Materials;
 import xfacthd.advtech.common.item.material.*;
 
@@ -17,17 +19,7 @@ public class ItemGroups
 {
     public static final ATItemGroup MATERIAL_GROUP = new ATItemGroup("materials", new MaterialComparator());
     public static final ATItemGroup TOOL_GROUP = new ATItemGroup("tools");
-    public static final ATItemGroup MACHINE_GROUP = new ATItemGroup("machines", (s1, s2) ->
-    {
-        Block b1 = ((BlockItem)s1.getItem()).getBlock();
-        Block b2 = ((BlockItem)s2.getItem()).getBlock();
-
-        if (b1 instanceof BlockMachine && b2 instanceof BlockMachine)
-        {
-            return ((BlockMachine) b1).getType().compareTo(((BlockMachine) b2).getType());
-        }
-        return 0;
-    });
+    public static final ATItemGroup MACHINE_GROUP = new ATItemGroup("machines", new MachineComparator());
 
     public static void finalizeItemGroups()
     {
@@ -159,6 +151,33 @@ public class ItemGroups
             GEAR,
             PLATE,
             COMPONENT
+        }
+    }
+
+    private static final class MachineComparator implements Comparator<ItemStack>
+    {
+        @Override
+        public int compare(ItemStack s1, ItemStack s2)
+        {
+            Block b1 = ((BlockItem)s1.getItem()).getBlock();
+            Block b2 = ((BlockItem)s2.getItem()).getBlock();
+
+            if (b1 instanceof BlockMachine && b2 instanceof BlockMachine)
+            {
+                return ((BlockMachine) b1).getType().compareTo(((BlockMachine) b2).getType());
+            }
+            return category(s1).compareTo(category(s2));
+        }
+
+        private MachineType.Category category(ItemStack stack)
+        {
+            if (!(stack.getItem() instanceof BlockItem)) { throw new IllegalArgumentException("Machine item group can only contain blocks!"); }
+
+            Block b = ((BlockItem)stack.getItem()).getBlock();
+            if (b instanceof BlockMachine) { return ((BlockMachine)b).getType().getCategory(); }
+            else if (b instanceof BlockEnergyCube) { return MachineType.Category.ENERGY; }
+
+            throw new IllegalArgumentException("The item '" + stack.getItem().getRegistryName() + "' should not be in this ItemGroup!");
         }
     }
 }
