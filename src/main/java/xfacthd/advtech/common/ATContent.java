@@ -77,6 +77,7 @@ public class ATContent
 
     public static ItemBase itemWrench;                          //STATUS: Complete
     public static Map<MachineLevel, ItemUpgrade> itemUpgrade;   //STATUS: Complete
+    public static ItemEnhancement.Holder itemEnhancement;       //STATUS: Missing types
     public static ItemBase itemPlateMold;                       //STATUS: Complete
     public static ItemBase itemGearMold;                        //STATUS: Complete
     public static ItemBase itemRodMold;                         //STATUS: Complete
@@ -141,6 +142,7 @@ public class ATContent
 
         registry.register(itemWrench = new ItemWrench());
         registry.registerAll(ItemUpgrade.registerItems());
+        registry.registerAll((itemEnhancement = new ItemEnhancement.Holder()).registerItems());
         registry.register(itemPlateMold = new ItemPlateMold());
         registry.register(itemGearMold = new ItemGearMold());
         registry.register(itemRodMold = new ItemRodMold());

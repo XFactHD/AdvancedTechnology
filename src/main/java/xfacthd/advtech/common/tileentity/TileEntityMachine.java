@@ -1,6 +1,7 @@
 package xfacthd.advtech.common.tileentity;
 
 import net.minecraft.inventory.container.INamedContainerProvider;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntityType;
@@ -9,10 +10,12 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
 import xfacthd.advtech.common.capability.energy.EnergyMachine;
+import xfacthd.advtech.common.capability.item.EnhancementItemStackHandler;
 import xfacthd.advtech.common.data.states.MachineLevel;
+import xfacthd.advtech.common.data.subtypes.Enhancements;
+import xfacthd.advtech.common.item.tool.ItemEnhancement;
 import xfacthd.advtech.common.util.data.PropertyHolder;
 
-//TODO: implement upgrade system
 public abstract class TileEntityMachine extends TileEntityBase implements ITickableTileEntity, INamedContainerProvider
 {
     private static final int HICCUP_TIMEOUT = 20;
@@ -20,6 +23,7 @@ public abstract class TileEntityMachine extends TileEntityBase implements ITicka
     protected MachineLevel level = MachineLevel.BASIC;
 
     private LazyOptional<EnergyMachine> lazyEnergyHandler = LazyOptional.empty();
+    protected final EnhancementItemStackHandler upgradeInventory = new EnhancementItemStackHandler(this);
     protected EnergyMachine energyHandler;
 
     protected boolean active = false;
@@ -81,6 +85,46 @@ public abstract class TileEntityMachine extends TileEntityBase implements ITicka
     public final boolean isActive() { return active; }
 
     public abstract float getProgress();
+
+    /*
+     * Upgrade system
+     */
+
+    /**
+     * Returns whether the machine supports upgrades
+     */
+    public abstract boolean supportsEnhancements();
+
+    /**
+     * Returns wether the {@link Enhancements upgrade} can be installed in this machine
+     * Default impl checks whether the given {@link Enhancements} is already installed
+     * @param upgrade The {@link Enhancements} to install
+     * @return If the given {@link Enhancements} can be installed
+     */
+    public boolean canInstallEnhancement(Enhancements upgrade)
+    {
+        if (!supportsEnhancements()) { return false; }
+
+        for (int i = 0; i < upgradeInventory.getSlots(); i++)
+        {
+            ItemStack stack = upgradeInventory.getStackInSlot(i);
+            if (stack.getItem() instanceof ItemEnhancement)
+            {
+                Enhancements type = ((ItemEnhancement) stack.getItem()).getType();
+                if (type == upgrade)
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public void installEnhancement(Enhancements upgrade, int level) { }
+
+    public void removeEnhancement(Enhancements upgrade) { }
+
+    public EnhancementItemStackHandler getUpgradeInventory() { return upgradeInventory; }
 
     /*
      * Helpers
@@ -157,6 +201,7 @@ public abstract class TileEntityMachine extends TileEntityBase implements ITicka
         level = MachineLevel.values()[nbt.getInt("level")];
 
         energyHandler.deserializeNBT(nbt.getCompound("energy"));
+        upgradeInventory.deserializeNBT(nbt.getCompound("upgrades"));
     }
 
     @Override
@@ -164,6 +209,7 @@ public abstract class TileEntityMachine extends TileEntityBase implements ITicka
     {
         nbt.putInt("level", level.ordinal());
         nbt.put("energy", energyHandler.serializeNBT());
+        nbt.put("upgrades", upgradeInventory.serializeNBT());
         return super.write(nbt);
     }
 
@@ -171,5 +217,6 @@ public abstract class TileEntityMachine extends TileEntityBase implements ITicka
     {
         nbt.putInt("level", level.ordinal());
         nbt.put("energy", energyHandler.serializeNBT());
+        nbt.put("upgrades", upgradeInventory.serializeNBT());
     }
 }

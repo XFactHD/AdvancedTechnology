@@ -7,8 +7,7 @@ import xfacthd.advtech.client.gui.utility.*;
 import xfacthd.advtech.common.ATContent;
 import xfacthd.advtech.common.data.ItemGroups;
 import xfacthd.advtech.common.data.states.MachineLevel;
-import xfacthd.advtech.common.data.subtypes.Components;
-import xfacthd.advtech.common.data.subtypes.Materials;
+import xfacthd.advtech.common.data.subtypes.*;
 import xfacthd.advtech.common.tileentity.generator.*;
 import xfacthd.advtech.common.tileentity.machine.*;
 import xfacthd.advtech.common.tileentity.utility.*;
@@ -92,6 +91,16 @@ public class EnglishLangProvider extends ATLanguageProvider
 
             String name = StringUtils.capitalize(level.getName());
             add(ATContent.itemUpgrade.get(level), "Upgrade (" + name + ")");
+        }
+
+        for (Enhancements type : Enhancements.values())
+        {
+            String typeName = StringUtils.capitalize(type.getName()) + " Upgrade";
+            for (int level = 0; level < type.getLevels(); level++)
+            {
+                String name = typeName + " (Level " + (level + 1) + ")";
+                add(ATContent.itemEnhancement.get(type).get(level), name);
+            }
         }
 
         add(ATContent.itemPlateMold, "Plate Mold");

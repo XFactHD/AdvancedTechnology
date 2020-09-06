@@ -3,14 +3,11 @@ package xfacthd.advtech.common.container;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.ContainerType;
-import net.minecraft.util.*;
+import net.minecraft.util.IWorldPosCallable;
+import net.minecraft.util.IntReferenceHolder;
 import net.minecraftforge.energy.CapabilityEnergy;
 import xfacthd.advtech.common.block.BlockMachine;
-import xfacthd.advtech.common.data.states.Side;
-import xfacthd.advtech.common.data.states.SideAccess;
 import xfacthd.advtech.common.data.subtypes.MachineType;
-import xfacthd.advtech.common.net.NetworkHandler;
-import xfacthd.advtech.common.net.packets.machine.PacketConfigureSide;
 import xfacthd.advtech.common.tileentity.TileEntityMachine;
 import xfacthd.advtech.common.util.sync.BoolReferenceHolder;
 import xfacthd.advtech.common.util.sync.ByteReferenceHolder;
@@ -31,6 +28,11 @@ public abstract class ContainerMachine<B extends BlockMachine, T extends TileEnt
 
         this.block = block;
         this.machine = machine;
+
+        if (machine.supportsEnhancements())
+        {
+            //TODO: handle upgrade inventory slots
+        }
 
         //noinspection ConstantConditions
         worldPosCallable = IWorldPosCallable.of(machine.getWorld(), machine.getPos());

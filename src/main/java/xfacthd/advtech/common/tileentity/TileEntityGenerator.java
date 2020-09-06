@@ -59,6 +59,9 @@ public abstract class TileEntityGenerator extends TileEntityInventoryMachine
     @Override
     protected void pushOutputs() { /*NOOP*/ }
 
+    @Override //TODO: implement enhancement support on generators and make this true
+    public boolean supportsEnhancements() { return false; }
+
     @Override
     public void read(CompoundNBT nbt)
     {

@@ -224,6 +224,9 @@ public class TileEntityChunkLoader extends TileEntityMachine
     protected int getBaseEnergyCapacity() { return BASE_CAPACITY; }
 
     @Override
+    public boolean supportsEnhancements() { return false; }
+
+    @Override
     public void readNetworkNBT(CompoundNBT nbt)
     {
         super.readNetworkNBT(nbt);

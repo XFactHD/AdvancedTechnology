@@ -81,6 +81,9 @@ public abstract class TileEntityProducer extends TileEntityInventoryMachine
         return MathHelper.clamp((float)progress / (float) getEnergyRequired(), 0, 1);
     }
 
+    @Override //TODO: implement enhancement support on producers and make this true
+    public boolean supportsEnhancements() { return false; }
+
     /*
      * Inventory
      */
