@@ -18,7 +18,7 @@ public enum MachineType implements IStringSerializable
     FLUID_FILLER    (Category.PRODUCER),
     FREEZER         (Category.PRODUCER),
     CHARGER         (Category.PRODUCER),
-    PLANTER         (Category.PRODUCER),
+    PLANTER         (Category.PRODUCER, false),
     HARVESTER       (Category.PRODUCER),
     FERTILIZER      (Category.PRODUCER),
 
@@ -26,17 +26,26 @@ public enum MachineType implements IStringSerializable
     STEAM_GENERATOR (Category.GENERATOR), // Use boiler upgrade to consume steam instead of burnable stuff and water, use steam upgrade to create steam instead of power
     MAGMA_GENERATOR (Category.GENERATOR),
 
-    CHUNK_LOADER(Category.UTILITY);
+    CHUNK_LOADER(Category.UTILITY, false);
 
     private final ResourceLocation texture = new ResourceLocation(AdvancedTechnology.MODID, "textures/block/machine/block_" + getName() + ".png");
     private final Category cat;
+    private final boolean rotatable;
 
-    MachineType(Category cat) { this.cat = cat; }
+    MachineType(Category cat) { this(cat, true); }
+
+    MachineType(Category cat, boolean rotatable)
+    {
+        this.cat = cat;
+        this.rotatable = rotatable;
+    }
 
     @Override
     public String getName() { return toString().toLowerCase(Locale.ENGLISH); }
 
     public boolean isCasing() { return this == CASING; }
+
+    public boolean canBeRotated() { return rotatable; }
 
     public Category getCategory() { return cat; }
 

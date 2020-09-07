@@ -36,6 +36,10 @@ public class MachineBlockStateProvider extends ATBlockStateProvider
         ModelFile metalPressModelOn = machineModel("block_metal_press_on");
         machineState(ATContent.blockMetalPress, metalPressModel, metalPressModelOn);
 
+        ModelFile planterModel = topModel("block_planter");
+        ModelFile planterModelOn = topModel("block_planter_on");
+        unrotatableMachineState(ATContent.blockPlanter, planterModel, planterModelOn);
+
 
 
         ModelFile burnerGeneratorModel = machineModel("block_burner_generator");
@@ -46,7 +50,7 @@ public class MachineBlockStateProvider extends ATBlockStateProvider
 
         ModelFile chunkLoaderModel = pillarModel("block_chunk_loader");
         ModelFile chunkLoaderModelOn = pillarModel("block_chunk_loader_on");
-        machineState(ATContent.blockChunkLoader, chunkLoaderModel, chunkLoaderModelOn);
+        unrotatableMachineState(ATContent.blockChunkLoader, chunkLoaderModel, chunkLoaderModelOn);
     }
 
     private ModelFile casingModel()
@@ -105,8 +109,6 @@ public class MachineBlockStateProvider extends ATBlockStateProvider
                     //{
                     //    builder.texture("#port").tintindex(dir.getIndex());
                     //})
-                    //.cube("#port")
-                    //.faces((dir, builder) -> builder.tintindex(dir.getIndex()))
                     .end();
     }
 
@@ -134,9 +136,44 @@ public class MachineBlockStateProvider extends ATBlockStateProvider
                     .end();
     }
 
+    private ModelFile topModel(String name)
+    {
+        return models().withExistingParent("block/machine/" + name, "block/cube")
+                .texture("bottom", modLoc("block/machine/block_machine_bottom"))
+                .texture("side", modLoc("block/machine/block_machine_side"))
+                .texture("top", modLoc("block/machine/" + name))
+                .texture("level", modLoc("block/machine/block_machine_level"))
+                .texture("port", modLoc("block/machine/block_machine_port"))
+                .texture("particle", modLoc("block/machine/block_machine_top"))
+                .element()
+                    .cube("#bottom")
+                    .faces((dir, builder) ->
+                    {
+                        if (dir == Direction.DOWN) { builder.texture("#bottom"); }
+                        else if (dir == Direction.UP) { builder.texture("#top"); }
+                        else { builder.texture("#side"); }
+                    })
+                    .end()
+                .element()
+                    .cube("#level")
+                    .faces((dir, builder) -> builder.tintindex(6))
+                    .end()
+                .element()
+                    .face(Direction.DOWN).texture("#port").tintindex(Direction.DOWN.getIndex()).end()
+                    .face(Direction.NORTH).texture("#port").tintindex(Direction.NORTH.getIndex()).end()
+                    .face(Direction.EAST).texture("#port").tintindex(Direction.EAST.getIndex()).end()
+                    .face(Direction.SOUTH).texture("#port").tintindex(Direction.SOUTH.getIndex()).end()
+                    .face(Direction.WEST).texture("#port").tintindex(Direction.WEST.getIndex()).end()
+                    //.allFacesExcept(Direction.UP, (dir, builder) ->
+                    //{
+                    //    builder.texture("#port").tintindex(dir.getIndex());
+                    //})
+                    .end();
+    }
+
     private void casingState(BlockMachine block, ModelFile model)
     {
-        ConfiguredModel[] confModel = ConfiguredModel.builder().modelFile(model).build();
+        ConfiguredModel confModel = ConfiguredModel.builder().modelFile(model).buildLast();
         getVariantBuilder(block).partialState().setModels(confModel);
 
         simpleBlockItem(block, model);
@@ -148,19 +185,19 @@ public class MachineBlockStateProvider extends ATBlockStateProvider
 
         for (Direction facing : Direction.Plane.HORIZONTAL)
         {
-            ConfiguredModel[] confOff = ConfiguredModel.builder()
+            ConfiguredModel confOff = ConfiguredModel.builder()
                     .modelFile(modelOff)
                     .rotationY((int)facing.getOpposite().getHorizontalAngle())
-                    .build();
-            ConfiguredModel[] confOn =  ConfiguredModel.builder()
+                    .buildLast();
+            ConfiguredModel confOn =  ConfiguredModel.builder()
                     .modelFile(modelOn)
                     .rotationY((int)facing.getOpposite().getHorizontalAngle())
-                    .build();
+                    .buildLast();
 
             builder.addModels(builder
-                            .partialState()
-                            .with(PropertyHolder.FACING_HOR, facing)
-                            .with(PropertyHolder.ACTIVE, false), confOff);
+                     .partialState()
+                     .with(PropertyHolder.FACING_HOR, facing)
+                     .with(PropertyHolder.ACTIVE, false), confOff);
             builder.addModels(builder
                     .partialState()
                     .with(PropertyHolder.FACING_HOR, facing)
@@ -168,6 +205,25 @@ public class MachineBlockStateProvider extends ATBlockStateProvider
         }
 
         simpleBlockItem(block, modelOff);
+    }
+
+    private void unrotatableMachineState(BlockMachine block, ModelFile modelOff, ModelFile modelOn)
+    {
+        VariantBlockStateBuilder builder = getVariantBuilder(block);
+
+        ConfiguredModel confOff = ConfiguredModel.builder()
+                .modelFile(modelOff)
+                .buildLast();
+        ConfiguredModel confOn = ConfiguredModel.builder()
+                .modelFile(modelOn)
+                .buildLast();
+
+        builder.addModels(builder
+                .partialState()
+                .with(PropertyHolder.ACTIVE, false), confOff);
+        builder.addModels(builder
+                .partialState()
+                .with(PropertyHolder.ACTIVE, true), confOn);
     }
 
     @Override
