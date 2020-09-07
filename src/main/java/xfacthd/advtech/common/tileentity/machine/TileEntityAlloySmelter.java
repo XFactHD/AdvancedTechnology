@@ -22,6 +22,7 @@ import xfacthd.advtech.common.tileentity.TileEntityProducer;
 import xfacthd.advtech.common.util.inventory.RecipeSearchInventory;
 
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class TileEntityAlloySmelter extends TileEntityProducer
 {
@@ -172,6 +173,7 @@ public class TileEntityAlloySmelter extends TileEntityProducer
     {
         if (internalItemHandler.getStackInSlot(1).isEmpty() && internalItemHandler.getStackInSlot(2).isEmpty()) { return; }
 
+        AtomicBoolean worked = new AtomicBoolean(false);
         for (Direction dir : Direction.values())
         {
             SideAccess mode = cardinalPorts.get(dir);
@@ -187,6 +189,7 @@ public class TileEntityAlloySmelter extends TileEntityProducer
                         {
                             ItemStack remainder = ItemHandlerHelper.insertItemStacked(handler, stack, false);
                             internalItemHandler.setStackInSlot(1, remainder);
+                            worked.set(true);
                         }
                     }
 
@@ -197,11 +200,13 @@ public class TileEntityAlloySmelter extends TileEntityProducer
                         {
                             ItemStack remainder = ItemHandlerHelper.insertItemStacked(handler, stack, false);
                             internalItemHandler.setStackInSlot(2, remainder);
+                            worked.set(true);
                         }
                     }
                 });
             }
         }
+        if (worked.get()) { markDirty(); }
     }
 
     @Override

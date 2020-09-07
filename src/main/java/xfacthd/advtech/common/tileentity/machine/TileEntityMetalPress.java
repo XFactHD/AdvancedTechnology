@@ -23,6 +23,8 @@ import xfacthd.advtech.common.tileentity.TileEntityProducer;
 import xfacthd.advtech.common.util.data.TagHolder;
 import xfacthd.advtech.common.util.inventory.RecipeSearchInventory;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 public class TileEntityMetalPress extends TileEntityProducer
 {
     public static final ITextComponent TITLE = new TranslationTextComponent("gui." + AdvancedTechnology.MODID + ".metal_press");
@@ -169,6 +171,7 @@ public class TileEntityMetalPress extends TileEntityProducer
     {
         if (internalItemHandler.getStackInSlot(2).isEmpty()) { return; }
 
+        AtomicBoolean worked = new AtomicBoolean(false);
         for (Direction dir : Direction.values())
         {
             SideAccess mode = cardinalPorts.get(dir);
@@ -182,10 +185,12 @@ public class TileEntityMetalPress extends TileEntityProducer
                     {
                         ItemStack remainder = ItemHandlerHelper.insertItemStacked(handler, stack, false);
                         internalItemHandler.setStackInSlot(2, remainder);
+                        worked.set(true);
                     }
                 });
             }
         }
+        if (worked.get()) { markDirty(); }
     }
 
     @Override

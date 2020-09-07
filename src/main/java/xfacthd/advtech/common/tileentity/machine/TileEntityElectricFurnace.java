@@ -21,6 +21,8 @@ import xfacthd.advtech.common.data.types.TileEntityTypes;
 import xfacthd.advtech.common.tileentity.TileEntityProducer;
 import xfacthd.advtech.common.util.inventory.RecipeSearchInventory;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 public class TileEntityElectricFurnace extends TileEntityProducer
 {
     public static final ITextComponent TITLE = new TranslationTextComponent("gui." + AdvancedTechnology.MODID + ".furnace");
@@ -126,6 +128,7 @@ public class TileEntityElectricFurnace extends TileEntityProducer
     {
         if (internalItemHandler.getStackInSlot(1).isEmpty()) { return; }
 
+        AtomicBoolean worked = new AtomicBoolean(false);
         for (Direction dir : Direction.values())
         {
             SideAccess port = cardinalPorts.get(dir);
@@ -137,9 +140,11 @@ public class TileEntityElectricFurnace extends TileEntityProducer
                     ItemStack stack = internalItemHandler.getStackInSlot(1);
                     ItemStack remainder = ItemHandlerHelper.insertItemStacked(handler, stack, false);
                     internalItemHandler.setStackInSlot(1, remainder);
+                    worked.set(true);
                 });
             }
         }
+        if (worked.get()) { markDirty(); }
     }
 
     @Override
