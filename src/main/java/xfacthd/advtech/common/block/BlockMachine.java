@@ -173,6 +173,14 @@ public class BlockMachine extends BlockBase
                     return ActionResultType.FAIL;
                 }
             }
+            else
+            {
+                if (world.isRemote())
+                {
+                    player.sendStatusMessage(StatusMessages.NO_SUPPORT, false);
+                }
+                return ActionResultType.FAIL;
+            }
         }
         else if (!type.isCasing())
         {
