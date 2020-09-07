@@ -21,6 +21,7 @@ public class TabMachinePort extends AbstractTab<ScreenInventoryMachine<?>>
     private static final ResourceLocation GRID_TEXTURE = new ResourceLocation(AdvancedTechnology.MODID, "textures/gui/tabs/port_setting.png");
     private static final ResourceLocation ICON_TEXTURE = new ResourceLocation(AdvancedTechnology.MODID, "textures/gui/tabs/icon_port_setting.png");
     private static final ResourceLocation PORT_TEXTURE = new ResourceLocation(AdvancedTechnology.MODID, "textures/block/machine/block_machine_port.png");
+    private static final ResourceLocation TICKBOX_TEXTURE = new ResourceLocation("textures/gui/checkbox.png");
 
     private static final Map<Side, Rectangle2d> PORT_COORDS;
 
@@ -56,7 +57,7 @@ public class TabMachinePort extends AbstractTab<ScreenInventoryMachine<?>>
 
         if (canForcePush)
         {
-            mc.getTextureManager().bindTexture(new ResourceLocation("textures/gui/checkbox.png"));
+            mc.getTextureManager().bindTexture(TICKBOX_TEXTURE);
             float vOff = screen.getContainer().shouldForceOutput() ? (20F / 64F) : 0;
             TextureDrawer.drawGuiTexture(screen, x + 68, y + 21, 15, 15, 0, 20F / 32F, vOff, (20F / 64F) + vOff);
         }

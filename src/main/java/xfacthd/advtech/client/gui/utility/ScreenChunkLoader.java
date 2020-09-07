@@ -29,8 +29,6 @@ public class ScreenChunkLoader extends ScreenMachine<ContainerChunkLoader>
     {
         super.init(mc, width, height);
 
-        //addTab(new TabRedstoneSettings(this)); //TODO: activate when implemented
-
         addButton(new Button(guiLeft +  40, guiTop + 23, 20, 20, "-", btn -> container.changeRadius(false)));
         addButton(new Button(guiLeft + 116, guiTop + 23, 20, 20, "+", btn -> container.changeRadius(true)));
         addButton(new Button(guiLeft +  40, guiTop + 65, 96, 20, container.showChunks() ? HIDE.getFormattedText() : SHOW.getFormattedText(), btn ->
@@ -38,6 +36,12 @@ public class ScreenChunkLoader extends ScreenMachine<ContainerChunkLoader>
             boolean show = container.switchShowChunks();
             btn.setMessage(show ? HIDE.getFormattedText() : SHOW.getFormattedText());
         }));
+    }
+
+    @Override
+    protected void gatherTabs()
+    {
+        //addTab(new TabRedstoneSettings(this)); //TODO: activate when implemented
     }
 
     @Override
