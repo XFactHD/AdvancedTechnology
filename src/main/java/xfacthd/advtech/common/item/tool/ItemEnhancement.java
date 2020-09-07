@@ -4,30 +4,30 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectArrayMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import xfacthd.advtech.common.ATContent;
 import xfacthd.advtech.common.data.ItemGroups;
-import xfacthd.advtech.common.data.subtypes.Enhancements;
+import xfacthd.advtech.common.data.subtypes.Enhancement;
 import xfacthd.advtech.common.item.ItemBase;
 
 import java.util.*;
 
 public class ItemEnhancement extends ItemBase
 {
-    private final Enhancements type;
+    private final Enhancement type;
     private final int level;
 
-    public ItemEnhancement(Enhancements type, int level)
+    public ItemEnhancement(Enhancement type, int level)
     {
         super(type.getName() + "_" + level, ItemGroups.TOOL_GROUP);
         this.type = type;
         this.level = level;
     }
 
-    public Enhancements getType() { return type; }
+    public Enhancement getType() { return type; }
 
     public int getLevel() { return level; }
 
     public static class Holder
     {
-        private final Map<Enhancements, Int2ObjectMap<ItemEnhancement>> items = new EnumMap<>(Enhancements.class);
+        private final Map<Enhancement, Int2ObjectMap<ItemEnhancement>> items = new EnumMap<>(Enhancement.class);
 
         private void addItem(ItemEnhancement item)
         {
@@ -39,14 +39,14 @@ public class ItemEnhancement extends ItemBase
             items.get(item.type).put(item.level, item);
         }
 
-        public Int2ObjectMap<ItemEnhancement> get(Enhancements upgrade) { return items.get(upgrade); }
+        public Int2ObjectMap<ItemEnhancement> get(Enhancement upgrade) { return items.get(upgrade); }
 
         public ItemEnhancement[] registerItems()
         {
             ATContent.itemEnhancement = new Holder();
             List<ItemEnhancement> items = new ArrayList<>();
 
-            for (Enhancements type : Enhancements.values())
+            for (Enhancement type : Enhancement.values())
             {
                 for (int level = 0; level < type.getLevels(); level++)
                 {

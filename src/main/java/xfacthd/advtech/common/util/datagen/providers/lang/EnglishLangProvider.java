@@ -93,7 +93,7 @@ public class EnglishLangProvider extends ATLanguageProvider
             add(ATContent.itemUpgrade.get(level), "Upgrade (" + name + ")");
         }
 
-        for (Enhancements type : Enhancements.values())
+        for (Enhancement type : Enhancement.values())
         {
             String typeName = StringUtils.capitalize(type.getName()) + " Upgrade";
             for (int level = 0; level < type.getLevels(); level++)

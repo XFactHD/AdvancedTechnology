@@ -2,7 +2,7 @@ package xfacthd.advtech.common.capability.item;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
-import xfacthd.advtech.common.data.subtypes.Enhancements;
+import xfacthd.advtech.common.data.subtypes.Enhancement;
 import xfacthd.advtech.common.item.tool.ItemEnhancement;
 import xfacthd.advtech.common.tileentity.TileEntityMachine;
 
@@ -17,12 +17,15 @@ public class EnhancementItemStackHandler extends ItemStackHandler
     }
 
     @Override
+    public int getSlotLimit(int slot) { return 1; }
+
+    @Override
     public boolean isItemValid(int slot, ItemStack stack)
     {
         if (stack.isEmpty()) { return true; }
         if (stack.getItem() instanceof ItemEnhancement)
         {
-            Enhancements upgrade = ((ItemEnhancement)stack.getItem()).getType();
+            Enhancement upgrade = ((ItemEnhancement)stack.getItem()).getType();
             return machine.canInstallEnhancement(upgrade);
         }
         return false;
@@ -32,10 +35,10 @@ public class EnhancementItemStackHandler extends ItemStackHandler
     public ItemStack insertItem(int slot, ItemStack stack, boolean simulate)
     {
         ItemStack result = super.insertItem(slot, stack, simulate);
-        if (result.isEmpty()) //Empty means the item was inserted -> activate effects in machine
+        if (result.isEmpty() && !simulate) //Empty means the item was inserted -> activate effects in machine
         {
             ItemEnhancement upgrade = (ItemEnhancement)stack.getItem();
-            Enhancements type = upgrade.getType();
+            Enhancement type = upgrade.getType();
             int level = upgrade.getLevel();
             machine.installEnhancement(type, level);
         }
@@ -46,12 +49,35 @@ public class EnhancementItemStackHandler extends ItemStackHandler
     public ItemStack extractItem(int slot, int amount, boolean simulate)
     {
         ItemStack result = super.extractItem(slot, amount, simulate);
-        if (!result.isEmpty()) //Not empty means the item was removed -> deactivate effects on machine
+        if (!result.isEmpty() && !simulate) //Not empty means the item was removed -> deactivate effects on machine
         {
             ItemEnhancement upgrade = (ItemEnhancement)result.getItem();
-            Enhancements type = upgrade.getType();
+            Enhancement type = upgrade.getType();
             machine.removeEnhancement(type);
         }
         return result;
+    }
+
+    @Override
+    public void setStackInSlot(int slot, ItemStack stack)
+    {
+        validateSlotIndex(slot);
+        ItemStack oldStack = getStackInSlot(slot);
+        super.setStackInSlot(slot, stack);
+
+        if (oldStack.getItem() instanceof ItemEnhancement)
+        {
+            ItemEnhancement upgrade = (ItemEnhancement)oldStack.getItem();
+            Enhancement type = upgrade.getType();
+            machine.removeEnhancement(type);
+        }
+
+        if (stack.getItem() instanceof ItemEnhancement)
+        {
+            ItemEnhancement upgrade = (ItemEnhancement)stack.getItem();
+            Enhancement type = upgrade.getType();
+            int level = upgrade.getLevel();
+            machine.installEnhancement(type, level);
+        }
     }
 }

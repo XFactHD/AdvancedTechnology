@@ -12,7 +12,7 @@ import net.minecraftforge.energy.CapabilityEnergy;
 import xfacthd.advtech.common.capability.energy.EnergyMachine;
 import xfacthd.advtech.common.capability.item.EnhancementItemStackHandler;
 import xfacthd.advtech.common.data.states.MachineLevel;
-import xfacthd.advtech.common.data.subtypes.Enhancements;
+import xfacthd.advtech.common.data.subtypes.Enhancement;
 import xfacthd.advtech.common.item.tool.ItemEnhancement;
 import xfacthd.advtech.common.util.data.PropertyHolder;
 
@@ -96,12 +96,12 @@ public abstract class TileEntityMachine extends TileEntityBase implements ITicka
     public abstract boolean supportsEnhancements();
 
     /**
-     * Returns wether the {@link Enhancements upgrade} can be installed in this machine
-     * Default impl checks whether the given {@link Enhancements} is already installed
-     * @param upgrade The {@link Enhancements} to install
-     * @return If the given {@link Enhancements} can be installed
+     * Returns wether the {@link Enhancement upgrade} can be installed in this machine
+     * Default impl checks whether the given {@link Enhancement} is already installed
+     * @param upgrade The {@link Enhancement} to install
+     * @return If the given {@link Enhancement} can be installed
      */
-    public boolean canInstallEnhancement(Enhancements upgrade)
+    public boolean canInstallEnhancement(Enhancement upgrade)
     {
         if (!supportsEnhancements()) { return false; }
 
@@ -110,19 +110,23 @@ public abstract class TileEntityMachine extends TileEntityBase implements ITicka
             ItemStack stack = upgradeInventory.getStackInSlot(i);
             if (stack.getItem() instanceof ItemEnhancement)
             {
-                Enhancements type = ((ItemEnhancement) stack.getItem()).getType();
-                if (type == upgrade)
+                Enhancement type = ((ItemEnhancement) stack.getItem()).getType();
+                if (type == upgrade && upgrade.singleInstance())
                 {
                     return false;
                 }
             }
+            else if (stack.isEmpty())
+            {
+                return true;
+            }
         }
-        return true;
+        return false;
     }
 
-    public void installEnhancement(Enhancements upgrade, int level) { }
+    public void installEnhancement(Enhancement upgrade, int level) { }
 
-    public void removeEnhancement(Enhancements upgrade) { }
+    public void removeEnhancement(Enhancement upgrade) { }
 
     public EnhancementItemStackHandler getUpgradeInventory() { return upgradeInventory; }
 

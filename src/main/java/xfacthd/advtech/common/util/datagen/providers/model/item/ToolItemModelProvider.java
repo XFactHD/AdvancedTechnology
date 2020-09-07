@@ -3,7 +3,7 @@ package xfacthd.advtech.common.util.datagen.providers.model.item;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.client.model.generators.*;
 import xfacthd.advtech.common.data.states.MachineLevel;
-import xfacthd.advtech.common.data.subtypes.Enhancements;
+import xfacthd.advtech.common.data.subtypes.Enhancement;
 
 public class ToolItemModelProvider extends ATItemModelProvider
 {
@@ -24,7 +24,7 @@ public class ToolItemModelProvider extends ATItemModelProvider
             simpleItem("item_upgrade_" + level.getName(), modLoc("item/tool/item_upgrade"));
         }
 
-        for (Enhancements type : Enhancements.values())
+        for (Enhancement type : Enhancement.values())
         {
             for (int level = 0; level < type.getLevels(); level++)
             {

@@ -10,7 +10,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import xfacthd.advtech.AdvancedTechnology;
 import xfacthd.advtech.client.gui.tabs.AbstractTab;
+import xfacthd.advtech.client.gui.tabs.TabMachineUpgrades;
 import xfacthd.advtech.client.util.TextureDrawer;
+import xfacthd.advtech.common.container.ContainerMachine;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -105,6 +107,12 @@ public abstract class AdvancedScreen<T extends Container> extends ContainerScree
             {
                 tab.offsetY(yOffset);
             }
+        }
+
+        if (changedTab instanceof TabMachineUpgrades)
+        {
+            ContainerMachine<?, ?> cont = (ContainerMachine<?, ?>)container;
+            cont.switchEnhancementSlots(open);
         }
     }
 
