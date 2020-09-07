@@ -2,6 +2,10 @@ package xfacthd.advtech.common.item.tool;
 
 import it.unimi.dsi.fastutil.ints.Int2ObjectArrayMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IWorldReader;
 import xfacthd.advtech.common.ATContent;
 import xfacthd.advtech.common.data.ItemGroups;
 import xfacthd.advtech.common.data.subtypes.Enhancement;
@@ -20,6 +24,9 @@ public class ItemEnhancement extends ItemBase
         this.type = type;
         this.level = level;
     }
+
+    @Override
+    public boolean doesSneakBypassUse(ItemStack stack, IWorldReader world, BlockPos pos, PlayerEntity player) { return true; }
 
     public Enhancement getType() { return type; }
 

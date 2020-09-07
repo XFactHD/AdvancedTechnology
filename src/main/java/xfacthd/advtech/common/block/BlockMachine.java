@@ -5,8 +5,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
@@ -18,11 +17,11 @@ import net.minecraft.world.storage.loot.LootContext;
 import net.minecraft.world.storage.loot.LootParameters;
 import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.ItemHandlerHelper;
 import xfacthd.advtech.common.data.ItemGroups;
 import xfacthd.advtech.common.data.states.MachineLevel;
 import xfacthd.advtech.common.data.subtypes.MachineType;
-import xfacthd.advtech.common.item.tool.ItemUpgrade;
-import xfacthd.advtech.common.item.tool.ItemWrench;
+import xfacthd.advtech.common.item.tool.*;
 import xfacthd.advtech.common.tileentity.TileEntityInventoryMachine;
 import xfacthd.advtech.common.tileentity.TileEntityMachine;
 import xfacthd.advtech.common.util.StatusMessages;
@@ -61,21 +60,22 @@ public class BlockMachine extends BlockBase
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context)
     {
-        if (type.isCasing()) { return getDefaultState(); }
+        if (type.isCasing() || !type.canBeRotated()) { return getDefaultState(); }
         return getDefaultState().with(PropertyHolder.FACING_HOR, context.getPlacementHorizontalFacing().getOpposite());
     }
 
     @Override
     public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit)
     {
-        if (hand == Hand.OFF_HAND && player.getHeldItemMainhand().getItem() instanceof ItemUpgrade)
+        Item mainItem = player.getHeldItemMainhand().getItem();
+        if (hand == Hand.OFF_HAND && (mainItem instanceof ItemUpgrade || mainItem instanceof ItemEnhancement))
         {
-            //If the player has an upgrade in the main hand and using it fails, then the off hand is ignored to prevent opening the gui
+            //If the player has an upgrade or enhancement in the main hand and using it fails, then the off hand is ignored to prevent opening the gui
             return super.onBlockActivated(state, world, pos, player, hand, hit);
         }
 
         ItemStack stack = player.getHeldItem(hand);
-        if (stack.getItem().isIn(TagHolder.WRENCHES) || stack.getToolTypes().contains(ItemWrench.TOOL_WRENCH))
+        if (type.canBeRotated() && (stack.getItem().isIn(TagHolder.WRENCHES) || stack.getToolTypes().contains(ItemWrench.TOOL_WRENCH)))
         {
             if (!world.isRemote())
             {
@@ -134,6 +134,41 @@ public class BlockMachine extends BlockBase
                     if (world.isRemote())
                     {
                         player.sendStatusMessage(StatusMessages.CANT_UPGRADE, false);
+                    }
+                    return ActionResultType.FAIL;
+                }
+            }
+        }
+        else if (stack.getItem() instanceof ItemEnhancement && player.isCrouching())
+        {
+            TileEntity te = world.getTileEntity(pos);
+            if (te instanceof TileEntityMachine && ((TileEntityMachine) te).supportsEnhancements())
+            {
+                TileEntityMachine machine = (TileEntityMachine)te;
+
+                ItemEnhancement upgrade = (ItemEnhancement) stack.getItem();
+                if (machine.canInstallEnhancement(upgrade.getType()))
+                {
+                    if (!world.isRemote())
+                    {
+                        ItemStack toInsert = stack.copy();
+                        toInsert.setCount(1);
+
+                        ItemStack result = ItemHandlerHelper.insertItem(machine.getUpgradeInventory(), toInsert, false);
+                        if (result.isEmpty() && !player.isCreative())
+                        {
+                            stack.shrink(1);
+                            player.inventory.markDirty();
+                        }
+                        player.sendStatusMessage(StatusMessages.INSTALLED, false);
+                    }
+                    return ActionResultType.SUCCESS;
+                }
+                else
+                {
+                    if (!world.isRemote()) //TODO: test if this works on a dedi server aswell
+                    {
+                        player.sendStatusMessage(StatusMessages.CANT_INSTALL, false);
                     }
                     return ActionResultType.FAIL;
                 }
