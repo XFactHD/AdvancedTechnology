@@ -73,9 +73,9 @@ public class TabMachinePort extends AbstractTab<ScreenInventoryMachine<?>>
     }
 
     @Override
-    public void onClick(double mouseX, double mouseY, int button)
+    public boolean onClick(double mouseX, double mouseY, int button)
     {
-        super.onClick(mouseX, mouseY, button);
+        if (super.onClick(mouseX, mouseY, button)) { return true; }
 
         boolean pressed = false;
         Side sideHit = null;
@@ -119,13 +119,16 @@ public class TabMachinePort extends AbstractTab<ScreenInventoryMachine<?>>
                     playDownSound(mc.getSoundHandler());
                 }
             }
+            return true;
         }
 
         if (canForcePush && mouseX >= x + 68 && mouseX <= x + 83 && mouseY >= y + 21 && mouseY <= y + 36)
         {
             playDownSound(mc.getSoundHandler());
             screen.getContainer().switchActiveOutput();
+            return true;
         }
+        return false;
     }
 
     @Override

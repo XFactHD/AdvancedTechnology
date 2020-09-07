@@ -113,14 +113,13 @@ public abstract class AbstractTab<T extends AdvancedScreen<?>> extends Widget
             boolean clicked = clicked(mouseX, mouseY);
             if (clicked)
             {
-                onClick(mouseX, mouseY, button);
-                return true;
+                return onClick(mouseX, mouseY, button);
             }
         }
         return false;
     }
 
-    public void onClick(double mouseX, double mouseY, int button)
+    public boolean onClick(double mouseX, double mouseY, int button)
     {
         if (button == 0 && mouseX >= x && mouseX <= x + BUTTON_SIZE && mouseY >= y && mouseY <= y + BUTTON_SIZE)
         {
@@ -132,9 +131,18 @@ public abstract class AbstractTab<T extends AdvancedScreen<?>> extends Widget
 
             screen.notifyTabChanged(this, open);
             playDownSound(mc.getSoundHandler());
+
+            return true;
         }
 
-        widgets.forEach(w -> w.onClick(mouseX, mouseY));
+        for (Widget w : widgets)
+        {
+            if (w.mouseClicked(mouseX, mouseY, button))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

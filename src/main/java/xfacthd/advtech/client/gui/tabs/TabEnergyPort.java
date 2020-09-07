@@ -51,9 +51,9 @@ public class TabEnergyPort extends AbstractTab<ScreenEnergyCube>
     }
 
     @Override
-    public void onClick(double mouseX, double mouseY, int button)
+    public boolean onClick(double mouseX, double mouseY, int button)
     {
-        super.onClick(mouseX, mouseY, button);
+        if (super.onClick(mouseX, mouseY, button)) { return true; }
 
         boolean pressed = false;
         Side sideHit = null;
@@ -87,6 +87,8 @@ public class TabEnergyPort extends AbstractTab<ScreenEnergyCube>
                 playDownSound(mc.getSoundHandler());
             }
         }
+
+        return pressed;
     }
 
     @Override
