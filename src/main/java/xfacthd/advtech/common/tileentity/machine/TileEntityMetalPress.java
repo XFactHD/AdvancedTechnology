@@ -188,6 +188,7 @@ public class TileEntityMetalPress extends TileEntityProducer
                         worked.set(true);
                     }
                 });
+                if (internalItemHandler.getStackInSlot(2).isEmpty()) { break; }
             }
         }
         if (worked.get()) { markDirty(); }

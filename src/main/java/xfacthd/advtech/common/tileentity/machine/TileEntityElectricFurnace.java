@@ -138,10 +138,14 @@ public class TileEntityElectricFurnace extends TileEntityProducer
                 adj.ifPresent(handler ->
                 {
                     ItemStack stack = internalItemHandler.getStackInSlot(1);
-                    ItemStack remainder = ItemHandlerHelper.insertItemStacked(handler, stack, false);
-                    internalItemHandler.setStackInSlot(1, remainder);
-                    worked.set(true);
+                    if (!stack.isEmpty())
+                    {
+                        ItemStack remainder = ItemHandlerHelper.insertItemStacked(handler, stack, false);
+                        internalItemHandler.setStackInSlot(1, remainder);
+                        worked.set(true);
+                    }
                 });
+                if (internalItemHandler.getStackInSlot(1).isEmpty()) { break; }
             }
         }
         if (worked.get()) { markDirty(); }

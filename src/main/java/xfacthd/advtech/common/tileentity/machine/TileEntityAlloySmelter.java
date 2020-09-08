@@ -184,7 +184,7 @@ public class TileEntityAlloySmelter extends TileEntityProducer
                 {
                     if (mode == SideAccess.OUTPUT_MAIN || mode == SideAccess.OUTPUT_ALL)
                     {
-                        ItemStack stack = internalItemHandler.getStackInSlot(1);
+                        ItemStack stack = internalItemHandler.getStackInSlot(2);
                         if (!stack.isEmpty())
                         {
                             ItemStack remainder = ItemHandlerHelper.insertItemStacked(handler, stack, false);
@@ -195,7 +195,7 @@ public class TileEntityAlloySmelter extends TileEntityProducer
 
                     if (mode == SideAccess.OUTPUT_SECOND || mode == SideAccess.OUTPUT_ALL)
                     {
-                        ItemStack stack = internalItemHandler.getStackInSlot(2);
+                        ItemStack stack = internalItemHandler.getStackInSlot(3);
                         if (!stack.isEmpty())
                         {
                             ItemStack remainder = ItemHandlerHelper.insertItemStacked(handler, stack, false);
@@ -204,6 +204,7 @@ public class TileEntityAlloySmelter extends TileEntityProducer
                         }
                     }
                 });
+                if (internalItemHandler.getStackInSlot(1).isEmpty() && internalItemHandler.getStackInSlot(2).isEmpty()) { break; }
             }
         }
         if (worked.get()) { markDirty(); }

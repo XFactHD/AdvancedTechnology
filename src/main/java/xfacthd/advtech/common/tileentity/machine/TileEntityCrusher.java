@@ -181,6 +181,7 @@ public class TileEntityCrusher extends TileEntityProducer
                         }
                     }
                 });
+                if (internalItemHandler.getStackInSlot(1).isEmpty() && internalItemHandler.getStackInSlot(2).isEmpty()) { break; }
             }
         }
         if (worked.get()) { markDirty(); }
