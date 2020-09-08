@@ -34,6 +34,7 @@ public class NetworkHandler
         CHANNEL.registerMessage(idx++, PacketSwitchActiveOutput.class,   PacketSwitchActiveOutput::encode,   PacketSwitchActiveOutput::new,   PacketSwitchActiveOutput::handle);
         CHANNEL.registerMessage(idx++, PacketConfigEnergyCubeSide.class, PacketConfigEnergyCubeSide::encode, PacketConfigEnergyCubeSide::new, PacketConfigEnergyCubeSide::handle);
         CHANNEL.registerMessage(idx++, PacketChangeChunkRadius.class,    PacketChangeChunkRadius::encode,    PacketChangeChunkRadius::new,    PacketChangeChunkRadius::handle);
+        CHANNEL.registerMessage(idx++, PacketPlanterSetFilter.class,     PacketPlanterSetFilter::encode,     PacketPlanterSetFilter::new,     PacketPlanterSetFilter::handle);
 
         //Server to client packets
         CHANNEL.registerMessage(idx++, PacketSyncByteHolder.class,      PacketSyncByteHolder::encode,       PacketSyncByteHolder::new,      PacketSyncByteHolder::handle);

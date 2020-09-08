@@ -2,6 +2,7 @@ package xfacthd.advtech.common.util.datagen.providers.lang;
 
 import net.minecraft.data.DataGenerator;
 import org.apache.commons.lang3.StringUtils;
+import xfacthd.advtech.client.gui.machine.ScreenPlanter;
 import xfacthd.advtech.client.gui.tabs.*;
 import xfacthd.advtech.client.gui.utility.*;
 import xfacthd.advtech.common.ATContent;
@@ -77,6 +78,7 @@ public class EnglishLangProvider extends ATLanguageProvider
         add(ATContent.blockCrusher, "Crusher");
         add(ATContent.blockAlloySmelter, "Alloy Smelter");
         add(ATContent.blockMetalPress, "Metal Press");
+        add(ATContent.blockPlanter, "Planter");
         add(ATContent.blockBurnerGenerator, "Burner Generator");
 
         add(ATContent.blockEnergyCube, "Energy Cube");
@@ -114,11 +116,15 @@ public class EnglishLangProvider extends ATLanguageProvider
 
         add(StatusMessages.UPGRADED, "Machine upgraded!");
         add(StatusMessages.CANT_UPGRADE, "Upgrade failed!");
+        add(StatusMessages.INSTALLED, "Upgrade installed!");
+        add(StatusMessages.CANT_INSTALL, "Can't install upgrade!");
+        add(StatusMessages.NO_SUPPORT, "Machine does not support upgrades!");
 
         add(TileEntityElectricFurnace.TITLE, "Electric Furnace");
         add(TileEntityCrusher.TITLE, "Crusher");
         add(TileEntityAlloySmelter.TITLE, "Alloy Smelter");
         add(TileEntityMetalPress.TITLE, "Metal Press");
+        add(TileEntityPlanter.TITLE, "Planter");
         add(TileEntityBurnerGenerator.TITLE, "Burner Generator");
         add(TileEntityChunkLoader.TITLE, "Chunk Loader");
 
@@ -127,6 +133,8 @@ public class EnglishLangProvider extends ATLanguageProvider
         add(TabRedstoneSettings.TITLE, "Redstone");
         add(TabMachinePort.BTN_TOOLTIP, "Active output");
 
+        add(ScreenPlanter.SET_FILTER, "Set filter");
+        add(ScreenPlanter.CLEAR_FILTER, "Clear filter");
         add(ScreenChunkLoader.RADIUS, "Radius:");
         add(ScreenChunkLoader.CHUNKS, "Chunks loaded:");
         add(ScreenChunkLoader.SHOW, "Show chunks");

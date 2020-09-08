@@ -64,6 +64,7 @@ public class JeiCompat implements IModPlugin
         registration.addGuiContainerHandler(ScreenCrusher.class, simpleGuiHandler);
         registration.addGuiContainerHandler(ScreenAlloySmelter.class, simpleGuiHandler);
         registration.addGuiContainerHandler(ScreenMetalPress.class, simpleGuiHandler);
+        registration.addGuiContainerHandler(ScreenPlanter.class, simpleGuiHandler);
         registration.addGuiContainerHandler(ScreenBurnerGenerator.class, simpleGuiHandler);
         registration.addGuiContainerHandler(ScreenEnergyCube.class, simpleGuiHandler);
         registration.addGuiContainerHandler(ScreenChunkLoader.class, simpleGuiHandler);

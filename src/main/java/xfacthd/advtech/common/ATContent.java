@@ -57,6 +57,9 @@ public class ATContent
     public static BlockMachine blockFluidFiller;                //STATUS: Not implemented
     public static BlockMachine blockFreezer;                    //STATUS: Not implemented
     public static BlockMachine blockCharger;                    //STATUS: Not implemented
+    public static BlockMachine blockPlanter;                    //STATUS: Not implemented
+    public static BlockMachine blockHarvester;                  //STATUS: Not implemented
+    public static BlockMachine blockFertilizer;                 //STATUS: Not implemented
 
     public static BlockMachine blockBurnerGenerator;            //STATUS: Complete
     public static BlockMachine blockSteamGenerator;             //STATUS: Not implemented
@@ -100,6 +103,7 @@ public class ATContent
         registry.register(blockCrusher = new BlockCrusher());
         registry.register(blockAlloySmelter = new BlockAlloySmelter());
         registry.register(blockMetalPress = new BlockMetalPress());
+        registry.register(blockPlanter = new BlockPlanter());
 
         registry.register(blockBurnerGenerator = new BlockBurnerGenerator());
 
@@ -124,6 +128,7 @@ public class ATContent
         registry.register(blockCrusher.createItemBlock());
         registry.register(blockAlloySmelter.createItemBlock());
         registry.register(blockMetalPress.createItemBlock());
+        registry.register(blockPlanter.createItemBlock());
 
         registry.register(blockBurnerGenerator.createItemBlock());
 
@@ -164,6 +169,7 @@ public class ATContent
         TileEntityTypes.tileTypeCrusher = TileEntityTypes.create(TileEntityCrusher::new, "tile_crusher", blockCrusher);
         TileEntityTypes.tileTypeAlloySmelter = TileEntityTypes.create(TileEntityAlloySmelter::new, "tile_alloy_smelter", blockAlloySmelter);
         TileEntityTypes.tileTypeMetalPress = TileEntityTypes.create(TileEntityMetalPress::new, "tile_metal_press", blockMetalPress);
+        TileEntityTypes.tileTypePlanter = TileEntityTypes.create(TileEntityPlanter::new, "tile_planter", blockPlanter);
 
         TileEntityTypes.tileTypeBurnerGenerator = TileEntityTypes.create(TileEntityBurnerGenerator::new, "tile_burner_generator", blockBurnerGenerator);
 
@@ -199,6 +205,12 @@ public class ATContent
         {
             TileEntity te = inv.player.world.getTileEntity(data.readBlockPos());
             return new ContainerMetalPress(windowId, (TileEntityMetalPress)te, inv);
+        });
+
+        ContainerTypes.containerTypePlanter = ContainerTypes.create("container_planter", (windowId, inv, data) ->
+        {
+            TileEntity te = inv.player.world.getTileEntity(data.readBlockPos());
+            return new ContainerPlanter(windowId, (TileEntityPlanter)te, inv);
         });
 
 
