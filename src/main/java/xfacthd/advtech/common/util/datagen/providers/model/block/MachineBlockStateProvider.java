@@ -224,6 +224,8 @@ public class MachineBlockStateProvider extends ATBlockStateProvider
         builder.addModels(builder
                 .partialState()
                 .with(PropertyHolder.ACTIVE, true), confOn);
+
+        simpleBlockItem(block, modelOff);
     }
 
     @Override
