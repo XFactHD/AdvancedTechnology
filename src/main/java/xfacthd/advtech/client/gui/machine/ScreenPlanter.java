@@ -63,6 +63,16 @@ public class ScreenPlanter extends ScreenInventoryMachine<ContainerPlanter>
             }
         }
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+
+        drawSlotOverlay(guiLeft + 58, guiTop + 24, Slot.IN_MAIN);
+        drawSlotOverlay(guiLeft + 78, guiTop + 24, Slot.IN_MAIN);
+        drawSlotOverlay(guiLeft + 98, guiTop + 24, Slot.IN_MAIN);
+        drawSlotOverlay(guiLeft + 58, guiTop + 44, Slot.IN_MAIN);
+        drawSlotOverlay(guiLeft + 78, guiTop + 44, Slot.IN_MAIN);
+        drawSlotOverlay(guiLeft + 98, guiTop + 44, Slot.IN_MAIN);
+        drawSlotOverlay(guiLeft + 58, guiTop + 64, Slot.IN_MAIN);
+        drawSlotOverlay(guiLeft + 78, guiTop + 64, Slot.IN_MAIN);
+        drawSlotOverlay(guiLeft + 98, guiTop + 64, Slot.IN_MAIN);
     }
 
     @Override
