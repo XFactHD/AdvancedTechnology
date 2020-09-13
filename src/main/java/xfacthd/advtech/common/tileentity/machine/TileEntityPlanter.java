@@ -120,6 +120,9 @@ public class TileEntityPlanter extends TileEntityInventoryMachine
             ItemStack seeds = internalItemHandler.getStackInSlot(slot);
             if (!seeds.isEmpty())
             {
+                BlockPos soilPos = scanPos.down();
+                BlockState soilState = world.getBlockState(soilPos);
+
                 BlockState plantState = null;
                 if (seeds.getItem() instanceof IPlantable)
                 {
@@ -127,8 +130,6 @@ public class TileEntityPlanter extends TileEntityInventoryMachine
 
                     if (plantable.getPlantType(world, scanPos) == PlantType.Crop)
                     {
-                        BlockPos soilPos = scanPos.down();
-                        BlockState soilState = world.getBlockState(soilPos);
                         if (soilState.canSustainPlant(world, soilPos, Direction.UP, plantable))
                         {
                             plantState = plantable.getPlant(world, scanPos);
@@ -137,7 +138,7 @@ public class TileEntityPlanter extends TileEntityInventoryMachine
                 }
                 else
                 {
-                    plantState = findVanillaCropState(seeds);
+                    plantState = findVanillaCropState(seeds, soilState);
                 }
 
                 if (plantState != null)
@@ -151,24 +152,31 @@ public class TileEntityPlanter extends TileEntityInventoryMachine
         }
     }
 
-    private BlockState findVanillaCropState(ItemStack stack)
+    private BlockState findVanillaCropState(ItemStack stack, BlockState soilState)
     {
+        boolean farmland = soilState.getBlock() == Blocks.FARMLAND;
+        boolean sand = soilState.getBlock() == Blocks.SAND;
+
         Item seeds = stack.getItem();
-        if (seeds == Items.WHEAT_SEEDS)
+        if (seeds == Items.WHEAT_SEEDS && farmland)
         {
             return Blocks.WHEAT.getDefaultState();
         }
-        else if (seeds == Items.POTATO)
+        else if (seeds == Items.POTATO && farmland)
         {
             return Blocks.POTATOES.getDefaultState();
         }
-        else if (seeds == Items.CARROT)
+        else if (seeds == Items.CARROT && farmland)
         {
             return Blocks.CARROTS.getDefaultState();
         }
-        else if (seeds == Items.BEETROOT_SEEDS)
+        else if (seeds == Items.BEETROOT_SEEDS && farmland)
         {
             return Blocks.BEETROOTS.getDefaultState();
+        }
+        else if (seeds == Items.SUGAR_CANE && sand)
+        {
+            return null;//return Blocks.SUGAR_CANE.getDefaultState(); //TODO: implement special casing in harvester before activating
         }
         return null;
     }
