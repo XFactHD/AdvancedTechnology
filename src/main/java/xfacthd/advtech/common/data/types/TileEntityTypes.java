@@ -28,6 +28,7 @@ public class TileEntityTypes
     public static TileEntityType<TileEntityMetalPress>      tileTypeMetalPress;
 
     public static TileEntityType<TileEntityPlanter>         tileTypePlanter;
+    public static TileEntityType<TileEntityHarvester>       tileTypeHarvester;
 
     //Generator
     public static TileEntityType<TileEntityBurnerGenerator> tileTypeBurnerGenerator;

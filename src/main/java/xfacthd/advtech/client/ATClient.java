@@ -37,6 +37,7 @@ public class ATClient
         RenderTypeLookup.setRenderLayer(ATContent.blockAlloySmelter, RenderType.getCutoutMipped());
         RenderTypeLookup.setRenderLayer(ATContent.blockMetalPress, RenderType.getCutoutMipped());
         RenderTypeLookup.setRenderLayer(ATContent.blockPlanter, RenderType.getCutoutMipped());
+        RenderTypeLookup.setRenderLayer(ATContent.blockHarvester, RenderType.getCutoutMipped());
 
         RenderTypeLookup.setRenderLayer(ATContent.blockBurnerGenerator, RenderType.getCutoutMipped());
 
@@ -55,6 +56,7 @@ public class ATClient
             ScreenManager.registerFactory(ContainerTypes.containerTypeAlloySmelter, ScreenAlloySmelter::new);
             ScreenManager.registerFactory(ContainerTypes.containerTypeMetalPress, ScreenMetalPress::new);
             ScreenManager.registerFactory(ContainerTypes.containerTypePlanter, ScreenPlanter::new);
+            ScreenManager.registerFactory(ContainerTypes.containerTypeHarvester, ScreenHarvester::new);
 
             ScreenManager.registerFactory(ContainerTypes.containerTypeBurnerGenerator, ScreenBurnerGenerator::new);
 

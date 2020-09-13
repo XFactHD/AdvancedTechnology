@@ -40,6 +40,10 @@ public class MachineBlockStateProvider extends ATBlockStateProvider
         ModelFile planterModelOn = topModel("block_planter_on");
         unrotatableMachineState(ATContent.blockPlanter, planterModel, planterModelOn);
 
+        ModelFile harvesterModel = machineModel("block_harvester");
+        ModelFile harvesterModelOn = machineModel("block_harvester_on");
+        machineState(ATContent.blockHarvester, harvesterModel, harvesterModelOn);
+
 
 
         ModelFile burnerGeneratorModel = machineModel("block_burner_generator");
