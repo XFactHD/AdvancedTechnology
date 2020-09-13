@@ -40,7 +40,8 @@ public abstract class TileEntityMachine extends TileEntityBase implements ITicka
     @Override
     public void tick()
     {
-        if (firstTick)
+        //noinspection ConstantConditions
+        if (firstTick && !world.isRemote())
         {
             firstTick();
             firstTick = false;
