@@ -127,9 +127,13 @@ public abstract class TileEntityInventoryMachine extends TileEntityMachine
             }
         }
 
+        onPortMappingChanged(facing);
+
         //noinspection ConstantConditions
         if (changed || world.isRemote()) { markFullUpdate(); }
     }
+
+    protected void onPortMappingChanged(Direction facing) { }
 
     protected boolean canFitInSlot(int slot, ItemStack candidate)
     {
