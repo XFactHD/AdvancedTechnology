@@ -60,8 +60,11 @@ public class BlockMachine extends BlockBase
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context)
     {
-        if (type.isCasing() || !type.canBeRotated()) { return getDefaultState(); }
-        return getDefaultState().with(PropertyHolder.FACING_HOR, context.getPlacementHorizontalFacing().getOpposite());
+        if (type.isCasing() || !type.canBeRotated() || context.getPlayer() == null) { return getDefaultState(); }
+
+        Direction facing = context.getPlacementHorizontalFacing();
+        if (!context.getPlayer().isCrouching()) { facing = facing.getOpposite(); }
+        return getDefaultState().with(PropertyHolder.FACING_HOR, facing);
     }
 
     @Override
