@@ -12,13 +12,15 @@ import xfacthd.advtech.common.block.material.BlockStorage;
 import xfacthd.advtech.common.data.subtypes.MachineType;
 import xfacthd.advtech.common.data.subtypes.Materials;
 import xfacthd.advtech.common.item.material.*;
+import xfacthd.advtech.common.item.tool.ItemEnhancement;
+import xfacthd.advtech.common.item.tool.ItemUpgrade;
 
 import java.util.Comparator;
 
 public class ItemGroups
 {
     public static final ATItemGroup MATERIAL_GROUP = new ATItemGroup("materials", new MaterialComparator());
-    public static final ATItemGroup TOOL_GROUP = new ATItemGroup("tools");
+    public static final ATItemGroup TOOL_GROUP = new ATItemGroup("tools", new ToolComparator());
     public static final ATItemGroup MACHINE_GROUP = new ATItemGroup("machines", new MachineComparator());
 
     public static void finalizeItemGroups()
@@ -151,6 +153,30 @@ public class ItemGroups
             GEAR,
             PLATE,
             COMPONENT
+        }
+    }
+
+    private static final class ToolComparator implements Comparator<ItemStack>
+    {
+        @Override
+        public int compare(ItemStack s1, ItemStack s2)
+        {
+            if (s1.getItem() instanceof ItemUpgrade && s2.getItem() instanceof ItemUpgrade)
+            {
+                return ((ItemUpgrade) s1.getItem()).getLevel().compareTo(((ItemUpgrade) s2.getItem()).getLevel());
+            }
+            else if (s1.getItem() instanceof ItemEnhancement && s2.getItem() instanceof ItemEnhancement)
+            {
+                ItemEnhancement i1 = (ItemEnhancement)s1.getItem();
+                ItemEnhancement i2 = (ItemEnhancement)s2.getItem();
+
+                if (i1.getType() == i2.getType())
+                {
+                    return Integer.compare(i1.getLevel(), i2.getLevel());
+                }
+                return i1.getType().compareTo(i2.getType());
+            }
+            return 0;
         }
     }
 
