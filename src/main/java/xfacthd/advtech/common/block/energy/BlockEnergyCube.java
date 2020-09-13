@@ -59,7 +59,11 @@ public class BlockEnergyCube extends BlockBase
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context)
     {
-        return getDefaultState().with(PropertyHolder.FACING_HOR, context.getPlacementHorizontalFacing().getOpposite());
+        if (context.getPlayer() == null) { return getDefaultState(); }
+
+        Direction facing = context.getPlacementHorizontalFacing();
+        if (!context.getPlayer().isSneaking()) { facing = facing.getOpposite(); }
+        return getDefaultState().with(PropertyHolder.FACING_HOR, facing);
     }
 
     @Override
