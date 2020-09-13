@@ -76,7 +76,7 @@ public class BlockEnergyCube extends BlockBase
         {
             if (!world.isRemote())
             {
-                if (player.isCrouching())
+                if (player.isSneaking())
                 {
                     world.destroyBlock(pos, true);
                 }
@@ -104,7 +104,7 @@ public class BlockEnergyCube extends BlockBase
             }
             return ActionResultType.SUCCESS;
         }
-        else if (stack.getItem() instanceof ItemUpgrade && player.isCrouching())
+        else if (stack.getItem() instanceof ItemUpgrade && player.isSneaking())
         {
             TileEntity te = world.getTileEntity(pos);
             if (te instanceof TileEntityEnergyCube)

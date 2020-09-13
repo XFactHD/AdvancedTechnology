@@ -63,7 +63,7 @@ public class BlockMachine extends BlockBase
         if (type.isCasing() || !type.canBeRotated() || context.getPlayer() == null) { return getDefaultState(); }
 
         Direction facing = context.getPlacementHorizontalFacing();
-        if (!context.getPlayer().isCrouching()) { facing = facing.getOpposite(); }
+        if (!context.getPlayer().isSneaking()) { facing = facing.getOpposite(); }
         return getDefaultState().with(PropertyHolder.FACING_HOR, facing);
     }
 
@@ -82,7 +82,7 @@ public class BlockMachine extends BlockBase
         {
             if (!world.isRemote())
             {
-                if (player.isCrouching())
+                if (player.isSneaking())
                 {
                     world.destroyBlock(pos, true);
                 }
@@ -110,7 +110,7 @@ public class BlockMachine extends BlockBase
             }
             return ActionResultType.SUCCESS;
         }
-        else if (stack.getItem() instanceof ItemUpgrade && player.isCrouching())
+        else if (stack.getItem() instanceof ItemUpgrade && player.isSneaking())
         {
             TileEntity te = world.getTileEntity(pos);
             if (te instanceof TileEntityMachine)
@@ -142,7 +142,7 @@ public class BlockMachine extends BlockBase
                 }
             }
         }
-        else if (stack.getItem() instanceof ItemEnhancement && player.isCrouching())
+        else if (stack.getItem() instanceof ItemEnhancement && player.isSneaking())
         {
             TileEntity te = world.getTileEntity(pos);
             if (te instanceof TileEntityMachine && ((TileEntityMachine) te).supportsEnhancements())
