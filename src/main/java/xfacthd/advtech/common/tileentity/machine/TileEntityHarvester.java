@@ -197,7 +197,7 @@ public class TileEntityHarvester extends TileEntityInventoryMachine
     public boolean canInsert(Direction side, int slot) { return false; }
 
     @Override
-    public boolean canExtract(Direction side, int slot) { return cardinalPorts.get(side).isOutput() && slot >= 9; }
+    public boolean canExtract(Direction side, int slot) { return cardinalPorts.get(side).isOutput() && slot < 9; }
 
     @Override
     public boolean isItemValid(int slot, ItemStack stack) { return true; }
