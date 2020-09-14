@@ -1,14 +1,13 @@
 package xfacthd.advtech.common.tileentity.machine;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
+import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
-import net.minecraft.util.Direction;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -146,6 +145,8 @@ public class TileEntityPlanter extends TileEntityInventoryMachine
                     world.setBlockState(scanPos, plantState);
                     plantState.getBlock().onBlockPlacedBy(world, scanPos, plantState, null, seeds);
 
+                    playPlaceSound(plantState);
+
                     internalItemHandler.extractItem(slot, 1, false);
                 }
             }
@@ -181,6 +182,15 @@ public class TileEntityPlanter extends TileEntityInventoryMachine
         return null;
     }
 
+    private void playPlaceSound(BlockState plantState)
+    {
+        SoundType type = plantState.getSoundType(world, scanPos, null);
+        SoundEvent event = type.getPlaceSound();
+
+        //noinspection ConstantConditions
+        world.playSound(null, scanPos, event, SoundCategory.BLOCKS, (type.getVolume() + 1.0F) / 2.0F, type.getPitch() * 0.8F);
+    }
+    
     @Override
     protected void firstTick()
     {
