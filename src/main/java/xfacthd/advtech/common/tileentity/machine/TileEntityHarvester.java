@@ -7,6 +7,7 @@ import net.minecraft.inventory.container.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -25,7 +26,7 @@ import xfacthd.advtech.common.data.types.TileEntityTypes;
 import xfacthd.advtech.common.tileentity.TileEntityInventoryMachine;
 import xfacthd.advtech.common.util.data.PropertyHolder;
 
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class TileEntityHarvester extends TileEntityInventoryMachine
@@ -125,6 +126,8 @@ public class TileEntityHarvester extends TileEntityInventoryMachine
 
     private void tryHarvestCrop()
     {
+        List<ItemStack> drops = Collections.emptyList();
+
         //noinspection ConstantConditions
         BlockState state = world.getBlockState(scanPos);
         if (state.getBlock() instanceof CropsBlock)
@@ -132,26 +135,86 @@ public class TileEntityHarvester extends TileEntityInventoryMachine
             CropsBlock crops = (CropsBlock)state.getBlock();
             if (crops.isMaxAge(state))
             {
-                List<ItemStack> drops = Block.getDrops(state, (ServerWorld)world, scanPos, null);
-                boolean fits = true;
-                for (ItemStack stack : drops)
-                {
-                    stack = ItemHandlerHelper.insertItem(internalItemHandler, stack, true);
-                    if (!stack.isEmpty()) { fits = false; }
-                }
-
-                if (fits)
-                {
-                    world.destroyBlock(scanPos, false);
-
-                    for (ItemStack stack : drops)
-                    {
-                        ItemHandlerHelper.insertItem(internalItemHandler, stack, false);
-                    }
-                }
+                drops = Block.getDrops(state, (ServerWorld)world, scanPos, null);
             }
         }
-        //TODO: special case certain plants like sugar cane
+        //else if (state.getBlock() instanceof ...) { } //TODO: special case certain plants like sugar cane
+
+        if (!drops.isEmpty() && canStoreDrops(drops))
+        {
+            world.destroyBlock(scanPos, false);
+
+            for (ItemStack stack : drops)
+            {
+                ItemHandlerHelper.insertItem(internalItemHandler, stack, false);
+            }
+        }
+    }
+
+    private boolean canStoreDrops(List<ItemStack> drops)
+    {
+        List<ItemStack> cache = NonNullList.withSize(9, ItemStack.EMPTY);
+
+        for (ItemStack stack : drops)
+        {
+            ItemStack copy = stack.copy();
+            for (int i = 0; i < 9; i++)
+            {
+                ItemStack slot = internalItemHandler.getStackInSlot(i);
+                if (!cache.get(i).isEmpty())
+                {
+                    ItemStack cached = cache.get(i);
+                    if (ItemHandlerHelper.canItemStacksStack(copy, cached))
+                    {
+                        int limit = Math.min(internalItemHandler.getSlotLimit(i), stack.getMaxStackSize());
+                        int size = cached.getCount();
+                        int total = size + copy.getCount();
+                        if (total <= limit)
+                        {
+                            cached.setCount(total);
+                            copy = ItemStack.EMPTY;
+                            break;
+                        }
+
+                        int toAdd = limit - size;
+                        if (toAdd > 0)
+                        {
+                            cached.grow(toAdd);
+                            copy.shrink(toAdd);
+                        }
+                    }
+                }
+                else if (!slot.isEmpty())
+                {
+                    int size = copy.getCount();
+                    copy = internalItemHandler.insertItem(i, copy, true);
+                    int remainder = copy.getCount();
+                    if (remainder < size) //Something was inserted
+                    {
+                        ItemStack toCache = internalItemHandler.getStackInSlot(i).copy();
+                        toCache.grow(size - remainder);
+                        cache.set(i, toCache);
+                    }
+
+                    if (copy.isEmpty())
+                    {
+                        break;
+                    }
+                }
+                else //Slot empty and cache empty
+                {
+                    cache.set(i, copy);
+                    copy = ItemStack.EMPTY;
+                    break;
+                }
+            }
+            if (!copy.isEmpty())
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     @Override
