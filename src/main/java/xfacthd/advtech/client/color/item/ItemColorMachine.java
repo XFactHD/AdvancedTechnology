@@ -37,6 +37,7 @@ public class ItemColorMachine implements IItemColor
         items.add(ATContent.blockMetalPress);
         items.add(ATContent.blockPlanter);
         items.add(ATContent.blockHarvester);
+        items.add(ATContent.blockFertilizer);
 
         items.add(ATContent.blockBurnerGenerator);
 

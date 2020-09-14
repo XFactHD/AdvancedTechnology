@@ -80,6 +80,7 @@ public class EnglishLangProvider extends ATLanguageProvider
         add(ATContent.blockMetalPress, "Metal Press");
         add(ATContent.blockPlanter, "Planter");
         add(ATContent.blockHarvester, "Harvester");
+        add(ATContent.blockFertilizer, "Fertilizer");
 
         add(ATContent.blockBurnerGenerator, "Burner Generator");
 
@@ -128,6 +129,7 @@ public class EnglishLangProvider extends ATLanguageProvider
         add(TileEntityMetalPress.TITLE, "Metal Press");
         add(TileEntityPlanter.TITLE, "Planter");
         add(TileEntityHarvester.TITLE, "Harvester");
+        add(TileEntityFertilizer.TITLE, "Fertilizer");
         add(TileEntityBurnerGenerator.TITLE, "Burner Generator");
         add(TileEntityChunkLoader.TITLE, "Chunk Loader");
 

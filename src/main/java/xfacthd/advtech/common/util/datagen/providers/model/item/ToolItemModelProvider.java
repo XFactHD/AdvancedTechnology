@@ -24,7 +24,7 @@ public class ToolItemModelProvider extends ATItemModelProvider
             simpleItem("item_upgrade_" + level.getName(), modLoc("item/tool/item_upgrade"));
         }
 
-        for (Enhancement type : Enhancement.values())
+        for (Enhancement type : Enhancement.values()) //TODO: add textures
         {
             for (int level = 0; level < type.getLevels(); level++)
             {

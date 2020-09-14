@@ -29,6 +29,7 @@ public class TileEntityTypes
 
     public static TileEntityType<TileEntityPlanter>         tileTypePlanter;
     public static TileEntityType<TileEntityHarvester>       tileTypeHarvester;
+    public static TileEntityType<TileEntityFertilizer>      tileTypeFertilizer;
 
     //Generator
     public static TileEntityType<TileEntityBurnerGenerator> tileTypeBurnerGenerator;

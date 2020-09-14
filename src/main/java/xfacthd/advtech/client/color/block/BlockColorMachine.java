@@ -45,6 +45,7 @@ public class BlockColorMachine implements IBlockColor
         blocks.add(ATContent.blockMetalPress);
         blocks.add(ATContent.blockPlanter);
         blocks.add(ATContent.blockHarvester);
+        blocks.add(ATContent.blockFertilizer);
 
         blocks.add(ATContent.blockBurnerGenerator);
 
