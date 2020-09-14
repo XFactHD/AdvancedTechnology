@@ -15,6 +15,7 @@ import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.PlantType;
 import net.minecraftforge.common.util.Constants;
 import xfacthd.advtech.AdvancedTechnology;
+import xfacthd.advtech.client.util.IRangedMachine;
 import xfacthd.advtech.common.capability.energy.EnergySink;
 import xfacthd.advtech.common.capability.item.MachineItemStackHandler;
 import xfacthd.advtech.common.container.machine.ContainerPlanter;
@@ -25,7 +26,7 @@ import xfacthd.advtech.common.data.types.TileEntityTypes;
 import xfacthd.advtech.common.tileentity.TileEntityInventoryMachine;
 import xfacthd.advtech.common.util.LogHelper;
 
-public class TileEntityPlanter extends TileEntityInventoryMachine
+public class TileEntityPlanter extends TileEntityInventoryMachine implements IRangedMachine
 {
     public static final ITextComponent TITLE = new TranslationTextComponent("gui." + AdvancedTechnology.MODID + ".planter");
     private static final int BASE_CAPACITY = 20000;
@@ -38,6 +39,7 @@ public class TileEntityPlanter extends TileEntityInventoryMachine
     private int patchSize = 1;
     private int progress = 0;
     private BlockPos scanPos = BlockPos.ZERO;
+    private boolean showArea = false;
 
     public TileEntityPlanter()
     {
@@ -190,7 +192,7 @@ public class TileEntityPlanter extends TileEntityInventoryMachine
         //noinspection ConstantConditions
         world.playSound(null, scanPos, event, SoundCategory.BLOCKS, (type.getVolume() + 1.0F) / 2.0F, type.getPitch() * 0.8F);
     }
-    
+
     @Override
     protected void firstTick()
     {
@@ -345,7 +347,7 @@ public class TileEntityPlanter extends TileEntityInventoryMachine
             }
 
             scanPos = pos.north(radius).west(radius).up(2);
-            markDirty();
+            markFullUpdate();
         }
     }
 
@@ -362,7 +364,7 @@ public class TileEntityPlanter extends TileEntityInventoryMachine
 
             scanPos = pos.north().west().up(2);
 
-            markDirty();
+            markFullUpdate();
         }
     }
 
@@ -390,9 +392,19 @@ public class TileEntityPlanter extends TileEntityInventoryMachine
     protected int getBaseEnergyCapacity() { return BASE_CAPACITY; }
 
     @Override
+    public int getRadius() { return radius; }
+
+    @Override
+    public boolean showArea() { return showArea; }
+
+    public void switchShowArea() { showArea = !showArea; } //TODO: add button in gui
+
+    @Override
     public void writeNetworkNBT(CompoundNBT nbt)
     {
         super.writeNetworkNBT(nbt);
+
+        nbt.putInt("radius", radius);
 
         ListNBT filterList = new ListNBT();
         for (int i = 0; i < 9; i++)
@@ -406,6 +418,8 @@ public class TileEntityPlanter extends TileEntityInventoryMachine
     public void readNetworkNBT(CompoundNBT nbt)
     {
         super.readNetworkNBT(nbt);
+
+        radius = nbt.getInt("radius");
 
         ListNBT filterList = nbt.getList("filters", Constants.NBT.TAG_COMPOUND);
         for (int i = 0; i < 9; i++)

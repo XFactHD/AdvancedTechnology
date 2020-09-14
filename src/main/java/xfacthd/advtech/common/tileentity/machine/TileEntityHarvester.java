@@ -16,6 +16,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import xfacthd.advtech.AdvancedTechnology;
+import xfacthd.advtech.client.util.IRangedMachine;
 import xfacthd.advtech.common.capability.energy.EnergySink;
 import xfacthd.advtech.common.capability.item.MachineItemStackHandler;
 import xfacthd.advtech.common.container.machine.ContainerHarvester;
@@ -29,7 +30,7 @@ import xfacthd.advtech.common.util.data.PropertyHolder;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class TileEntityHarvester extends TileEntityInventoryMachine
+public class TileEntityHarvester extends TileEntityInventoryMachine implements IRangedMachine
 {
     public static final ITextComponent TITLE = new TranslationTextComponent("gui." + AdvancedTechnology.MODID + ".harvester");
     private static final int BASE_CAPACITY = 20000;
@@ -41,6 +42,7 @@ public class TileEntityHarvester extends TileEntityInventoryMachine
     private int progress = 0;
     private Direction facing = Direction.NORTH;
     private BlockPos scanPos = BlockPos.ZERO;
+    private boolean showArea = false;
 
     public TileEntityHarvester() { super(TileEntityTypes.tileTypeHarvester); }
 
@@ -315,7 +317,7 @@ public class TileEntityHarvester extends TileEntityInventoryMachine
 
             Direction facing = getBlockState().get(PropertyHolder.FACING_HOR);
             scanPos = pos.offset(facing).offset(facing.rotateYCCW(), radius);
-            markDirty();
+            markFullUpdate();
         }
     }
 
@@ -332,7 +334,7 @@ public class TileEntityHarvester extends TileEntityInventoryMachine
             Direction facing = getBlockState().get(PropertyHolder.FACING_HOR);
             scanPos = pos.offset(facing).offset(facing.rotateYCCW());
 
-            markDirty();
+            markFullUpdate();
         }
     }
 
@@ -397,6 +399,30 @@ public class TileEntityHarvester extends TileEntityInventoryMachine
 
     @Override
     protected int getBaseEnergyCapacity() { return BASE_CAPACITY; }
+
+    @Override
+    public int getRadius() { return radius; }
+
+    @Override
+    public boolean showArea() { return showArea; }
+
+    public void switchShowArea() { showArea = !showArea; } //TODO: add button in gui
+
+    @Override
+    public void writeNetworkNBT(CompoundNBT nbt)
+    {
+        super.writeNetworkNBT(nbt);
+
+        nbt.putInt("radius", radius);
+    }
+
+    @Override
+    public void readNetworkNBT(CompoundNBT nbt)
+    {
+        super.readNetworkNBT(nbt);
+
+        radius = nbt.getInt("radius");
+    }
 
     @Override
     public CompoundNBT write(CompoundNBT nbt)

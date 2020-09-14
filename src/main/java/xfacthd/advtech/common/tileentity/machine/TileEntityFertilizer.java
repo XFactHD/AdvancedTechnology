@@ -13,6 +13,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import xfacthd.advtech.AdvancedTechnology;
+import xfacthd.advtech.client.util.IRangedMachine;
 import xfacthd.advtech.common.capability.energy.EnergySink;
 import xfacthd.advtech.common.capability.item.MachineItemStackHandler;
 import xfacthd.advtech.common.container.machine.ContainerFertilizer;
@@ -23,7 +24,7 @@ import xfacthd.advtech.common.data.types.TileEntityTypes;
 import xfacthd.advtech.common.tileentity.TileEntityInventoryMachine;
 import xfacthd.advtech.common.util.data.PropertyHolder;
 
-public class TileEntityFertilizer extends TileEntityInventoryMachine
+public class TileEntityFertilizer extends TileEntityInventoryMachine implements IRangedMachine
 {
     public static final ITextComponent TITLE = new TranslationTextComponent("gui." + AdvancedTechnology.MODID + ".fertilizer");
     private static final int BASE_CAPACITY = 20000;
@@ -36,6 +37,7 @@ public class TileEntityFertilizer extends TileEntityInventoryMachine
     private Direction facing = Direction.NORTH;
     private BlockPos scanPos = BlockPos.ZERO;
     private ItemStack boneMealCache = ItemStack.EMPTY;
+    private boolean showArea = false;
 
     public TileEntityFertilizer() { super(TileEntityTypes.tileTypeFertilizer); }
 
@@ -221,7 +223,7 @@ public class TileEntityFertilizer extends TileEntityInventoryMachine
 
             Direction facing = getBlockState().get(PropertyHolder.FACING_HOR);
             scanPos = pos.offset(facing).offset(facing.rotateYCCW(), radius);
-            markDirty();
+            markFullUpdate();
         }
     }
 
@@ -238,7 +240,7 @@ public class TileEntityFertilizer extends TileEntityInventoryMachine
             Direction facing = getBlockState().get(PropertyHolder.FACING_HOR);
             scanPos = pos.offset(facing).offset(facing.rotateYCCW());
 
-            markDirty();
+            markFullUpdate();
         }
     }
 
@@ -303,6 +305,30 @@ public class TileEntityFertilizer extends TileEntityInventoryMachine
 
     @Override
     protected int getBaseEnergyCapacity() { return BASE_CAPACITY; }
+
+    @Override
+    public int getRadius() { return radius; }
+
+    @Override
+    public boolean showArea() { return showArea; }
+
+    public void switchShowArea() { showArea = !showArea; } //TODO: add button in gui
+
+    @Override
+    public void writeNetworkNBT(CompoundNBT nbt)
+    {
+        super.writeNetworkNBT(nbt);
+
+        nbt.putInt("radius", radius);
+    }
+
+    @Override
+    public void readNetworkNBT(CompoundNBT nbt)
+    {
+        super.readNetworkNBT(nbt);
+
+        radius = nbt.getInt("radius");
+    }
 
     @Override
     public CompoundNBT write(CompoundNBT nbt)
