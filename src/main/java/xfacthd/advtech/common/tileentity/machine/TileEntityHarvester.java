@@ -81,7 +81,7 @@ public class TileEntityHarvester extends TileEntityInventoryMachine
                             {
                                 int scanX = scanPos.getX();
                                 int posX = pos.getX();
-                                diffCross = positive ? (scanX - posX) : (posX - scanX);
+                                diffCross = positive ? (posX - scanX) : (scanX - posX);
                                 diffFace = Math.abs(scanPos.getZ() - pos.getZ());
                                 break;
                             }
