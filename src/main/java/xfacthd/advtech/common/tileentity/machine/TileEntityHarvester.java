@@ -183,7 +183,7 @@ public class TileEntityHarvester extends TileEntityInventoryMachine
                         if (!stack.isEmpty())
                         {
                             ItemStack remainder = ItemHandlerHelper.insertItemStacked(handler, stack, false);
-                            internalItemHandler.setStackInSlot(1, remainder);
+                            internalItemHandler.setStackInSlot(i, remainder);
                             worked.set(true);
                         }
                     }
