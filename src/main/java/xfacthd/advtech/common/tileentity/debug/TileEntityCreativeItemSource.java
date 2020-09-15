@@ -1,5 +1,6 @@
 package xfacthd.advtech.common.tileentity.debug;
 
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
@@ -44,11 +45,19 @@ public class TileEntityCreativeItemSource extends TileEntityBase
         lazyItemHandler = LazyOptional.empty();
     }
 
-    @Override
-    public void writeNetworkNBT(CompoundNBT nbt) { }
+    public ItemStack getItem() { return itemHandler.getStackInSlot(0); }
+
+    public void setItem(ItemStack stack)
+    {
+        itemHandler.setStack(stack);
+        markFullUpdate();
+    }
 
     @Override
-    public void readNetworkNBT(CompoundNBT nbt) { }
+    public void writeNetworkNBT(CompoundNBT nbt) { nbt.put("inv", itemHandler.serializeNBT()); }
+
+    @Override
+    public void readNetworkNBT(CompoundNBT nbt) { itemHandler.deserializeNBT(nbt.getCompound("inv")); }
 
     @Override
     public CompoundNBT write(CompoundNBT nbt)

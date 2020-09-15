@@ -11,10 +11,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.*;
 import xfacthd.advtech.common.block.BlockBase;
-import xfacthd.advtech.common.capability.item.InfiniteItemHandler;
 import xfacthd.advtech.common.data.ItemGroups;
 import xfacthd.advtech.common.tileentity.debug.TileEntityCreativeItemSource;
 
@@ -34,21 +31,13 @@ public class BlockCreativeItemSource extends BlockBase
     @Override
     public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit)
     {
-        ItemStack stack = player.getHeldItem(hand);
-        TileEntity te = world.getTileEntity(pos);
-        if (te != null)
+        if (!world.isRemote())
         {
-            LazyOptional<IItemHandler> itemHandler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY);
-            if (itemHandler.isPresent())
+            ItemStack stack = player.getHeldItem(hand);
+            TileEntity te = world.getTileEntity(pos);
+            if (te instanceof TileEntityCreativeItemSource)
             {
-                itemHandler.ifPresent(handler ->
-                {
-                    if (handler instanceof InfiniteItemHandler)
-                    {
-                        ((InfiniteItemHandler) handler).setStack(stack);
-                    }
-                });
-                return ActionResultType.SUCCESS;
+                ((TileEntityCreativeItemSource) te).setItem(stack);
             }
         }
         return super.onBlockActivated(state, world, pos, player, hand, hit);
