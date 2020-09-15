@@ -46,6 +46,10 @@ public class ATClient
 
         RenderTypeLookup.setRenderLayer(ATContent.blockChunkLoader, RenderType.getCutoutMipped());
 
+        ClientRegistry.bindTileEntityRenderer(TileEntityTypes.tileTypePlanter, RenderRangedMachine::new);
+        ClientRegistry.bindTileEntityRenderer(TileEntityTypes.tileTypeHarvester, RenderRangedMachine::new);
+        ClientRegistry.bindTileEntityRenderer(TileEntityTypes.tileTypeFertilizer, RenderRangedMachine::new);
+
         ClientRegistry.bindTileEntityRenderer(TileEntityTypes.tileTypeEnergyCube, RenderEnergyCube::new);
         ClientRegistry.bindTileEntityRenderer(TileEntityTypes.tileTypeChunkLoader, RenderChunkLoader::new);
 
@@ -85,6 +89,7 @@ public class ATClient
     {
         if (event.getMap().getTextureLocation().equals(PlayerContainer.LOCATION_BLOCKS_TEXTURE))
         {
+            RenderRangedMachine.registerTextures(event);
             RenderEnergyCube.registerTextures(event);
         }
     }
@@ -94,6 +99,7 @@ public class ATClient
     {
         if (event.getMap().getTextureLocation().equals(PlayerContainer.LOCATION_BLOCKS_TEXTURE))
         {
+            RenderRangedMachine.retrieveSprites(event.getMap());
             RenderEnergyCube.retrieveSprites(event.getMap());
         }
     }

@@ -9,6 +9,7 @@ import net.minecraft.item.BoneMealItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -22,6 +23,7 @@ import xfacthd.advtech.common.data.states.SideAccess;
 import xfacthd.advtech.common.data.subtypes.Enhancement;
 import xfacthd.advtech.common.data.types.TileEntityTypes;
 import xfacthd.advtech.common.tileentity.TileEntityInventoryMachine;
+import xfacthd.advtech.common.util.Utils;
 import xfacthd.advtech.common.util.data.PropertyHolder;
 
 public class TileEntityFertilizer extends TileEntityInventoryMachine implements IRangedMachine
@@ -251,8 +253,8 @@ public class TileEntityFertilizer extends TileEntityInventoryMachine implements 
         if (!world.isRemote())
         {
             scanPos = pos.offset(facing).offset(facing.rotateYCCW());
-            this.facing = facing;
         }
+        this.facing = facing;
     }
 
     @Override
@@ -315,6 +317,9 @@ public class TileEntityFertilizer extends TileEntityInventoryMachine implements 
     public void switchShowArea() { showArea = !showArea; } //TODO: add button in gui
 
     @Override
+    public Direction getAreaOffsetDir() { return facing; }
+
+    @Override
     public void writeNetworkNBT(CompoundNBT nbt)
     {
         super.writeNetworkNBT(nbt);
@@ -354,4 +359,7 @@ public class TileEntityFertilizer extends TileEntityInventoryMachine implements 
     {
         return new ContainerFertilizer(windowId, this, inventory);
     }
+
+    @Override
+    public AxisAlignedBB getRenderBoundingBox() { return showArea ? INFINITE_EXTENT_AABB : Utils.NULL_AABB; }
 }

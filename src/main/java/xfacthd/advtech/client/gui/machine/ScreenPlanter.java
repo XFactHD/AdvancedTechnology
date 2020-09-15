@@ -32,6 +32,7 @@ public class ScreenPlanter extends ScreenInventoryMachine<ContainerPlanter>
 
         addButton(new Button(guiLeft + 120, guiTop + 31, 50, 20, SET_FILTER.getFormattedText(), btn -> container.configureFilter(false)));
         addButton(new Button(guiLeft + 120, guiTop + 57, 50, 20, CLEAR_FILTER.getFormattedText(), btn -> container.configureFilter(true)));
+        addButton(new Button(guiLeft +  58, guiTop + 84, 60, 20, SHOW_AREA.getFormattedText(), btn -> container.switchShowArea()));
     }
 
     @Override

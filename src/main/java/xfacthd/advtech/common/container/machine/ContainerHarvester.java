@@ -31,6 +31,8 @@ public class ContainerHarvester extends ContainerInventoryMachine<BlockHarvester
         });
     }
 
+    public void switchShowArea() { machine.switchShowArea(); }
+
     @Override
     public MachineType getMachineType() { return MachineType.HARVESTER; }
 }

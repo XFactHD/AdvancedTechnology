@@ -37,6 +37,8 @@ public class ContainerPlanter extends ContainerInventoryMachine<BlockPlanter, Ti
 
     public void configureFilter(boolean clear) { NetworkHandler.sendToServer(new PacketPlanterSetFilter(machine.getPos(), clear)); }
 
+    public void switchShowArea() { machine.switchShowArea(); }
+
     @Override
     public MachineType getMachineType() { return MachineType.PLANTER; }
 }

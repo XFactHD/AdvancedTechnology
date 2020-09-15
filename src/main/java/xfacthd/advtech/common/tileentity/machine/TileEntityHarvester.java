@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -25,6 +26,7 @@ import xfacthd.advtech.common.data.states.SideAccess;
 import xfacthd.advtech.common.data.subtypes.Enhancement;
 import xfacthd.advtech.common.data.types.TileEntityTypes;
 import xfacthd.advtech.common.tileentity.TileEntityInventoryMachine;
+import xfacthd.advtech.common.util.Utils;
 import xfacthd.advtech.common.util.data.PropertyHolder;
 
 import java.util.*;
@@ -345,8 +347,8 @@ public class TileEntityHarvester extends TileEntityInventoryMachine implements I
         if (!world.isRemote())
         {
             scanPos = pos.offset(facing).offset(facing.rotateYCCW());
-            this.facing = facing;
         }
+        this.facing = facing;
     }
 
     @Override
@@ -409,6 +411,9 @@ public class TileEntityHarvester extends TileEntityInventoryMachine implements I
     public void switchShowArea() { showArea = !showArea; } //TODO: add button in gui
 
     @Override
+    public Direction getAreaOffsetDir() { return facing; }
+
+    @Override
     public void writeNetworkNBT(CompoundNBT nbt)
     {
         super.writeNetworkNBT(nbt);
@@ -448,4 +453,7 @@ public class TileEntityHarvester extends TileEntityInventoryMachine implements I
     {
         return new ContainerHarvester(windowId, this, inventory);
     }
+
+    @Override
+    public AxisAlignedBB getRenderBoundingBox() { return showArea ? INFINITE_EXTENT_AABB : Utils.NULL_AABB; }
 }

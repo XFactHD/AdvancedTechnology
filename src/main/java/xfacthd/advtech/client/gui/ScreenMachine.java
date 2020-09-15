@@ -3,11 +3,14 @@ package xfacthd.advtech.client.gui;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
+import xfacthd.advtech.AdvancedTechnology;
 import xfacthd.advtech.client.util.TextureDrawer;
 import xfacthd.advtech.common.container.ContainerMachine;
 
 public abstract class ScreenMachine<C extends ContainerMachine<?, ?>> extends AdvancedScreen<C>
 {
+    public static final ITextComponent SHOW_AREA = new TranslationTextComponent("gui." + AdvancedTechnology.MODID + ".show_area");
     private static final ResourceLocation ENERGY_BAR = widget("energy_bar");
     private static final ResourceLocation PROGRESS_BAR = widget("progress_bar");
 

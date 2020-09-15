@@ -2,6 +2,7 @@ package xfacthd.advtech.common.util.datagen.providers.lang;
 
 import net.minecraft.data.DataGenerator;
 import org.apache.commons.lang3.StringUtils;
+import xfacthd.advtech.client.gui.ScreenMachine;
 import xfacthd.advtech.client.gui.machine.ScreenPlanter;
 import xfacthd.advtech.client.gui.tabs.*;
 import xfacthd.advtech.client.gui.utility.*;
@@ -138,6 +139,7 @@ public class EnglishLangProvider extends ATLanguageProvider
         add(TabRedstoneSettings.TITLE, "Redstone");
         add(TabMachinePort.BTN_TOOLTIP, "Active output");
 
+        add(ScreenMachine.SHOW_AREA, "Show area");
         add(ScreenPlanter.SET_FILTER, "Set filter");
         add(ScreenPlanter.CLEAR_FILTER, "Clear filter");
         add(ScreenChunkLoader.RADIUS, "Radius:");

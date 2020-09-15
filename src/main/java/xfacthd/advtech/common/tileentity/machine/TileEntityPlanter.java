@@ -8,6 +8,7 @@ import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.util.*;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -25,6 +26,7 @@ import xfacthd.advtech.common.data.subtypes.Enhancement;
 import xfacthd.advtech.common.data.types.TileEntityTypes;
 import xfacthd.advtech.common.tileentity.TileEntityInventoryMachine;
 import xfacthd.advtech.common.util.LogHelper;
+import xfacthd.advtech.common.util.Utils;
 
 public class TileEntityPlanter extends TileEntityInventoryMachine implements IRangedMachine
 {
@@ -395,9 +397,15 @@ public class TileEntityPlanter extends TileEntityInventoryMachine implements IRa
     public int getRadius() { return radius; }
 
     @Override
+    public boolean isAreaCentered() { return true; }
+
+    @Override
     public boolean showArea() { return showArea; }
 
     public void switchShowArea() { showArea = !showArea; } //TODO: add button in gui
+
+    @Override
+    public int getAreaOffsetY() { return 2; }
 
     @Override
     public void writeNetworkNBT(CompoundNBT nbt)
@@ -479,4 +487,7 @@ public class TileEntityPlanter extends TileEntityInventoryMachine implements IRa
     {
         return new ContainerPlanter(windowId, this, inventory);
     }
+
+    @Override
+    public AxisAlignedBB getRenderBoundingBox() { return showArea ? INFINITE_EXTENT_AABB : Utils.NULL_AABB; }
 }

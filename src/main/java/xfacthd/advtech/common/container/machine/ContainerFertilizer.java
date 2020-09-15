@@ -31,6 +31,8 @@ public class ContainerFertilizer extends ContainerInventoryMachine<BlockFertiliz
         });
     }
 
+    public void switchShowArea() { machine.switchShowArea(); }
+
     @Override
     public MachineType getMachineType() { return MachineType.FERTILIZER; }
 }
