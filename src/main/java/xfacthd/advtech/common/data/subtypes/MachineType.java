@@ -3,38 +3,39 @@ package xfacthd.advtech.common.data.subtypes;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.ResourceLocation;
 import xfacthd.advtech.AdvancedTechnology;
+import xfacthd.advtech.common.data.sorting.MachineCategory;
 
 import java.util.Locale;
 
 public enum MachineType implements IStringSerializable
 {
-    CASING          (Category.CASING),
+    CASING          (MachineCategory.CASING),
 
-    ELECTRIC_FURNACE(Category.PRODUCER),
-    CRUSHER         (Category.PRODUCER),
-    ALLOY_SMELTER   (Category.PRODUCER),
-    METAL_PRESS     (Category.PRODUCER),
-    LIQUIFIER       (Category.PRODUCER),
-    FLUID_FILLER    (Category.PRODUCER),
-    FREEZER         (Category.PRODUCER),
-    CHARGER         (Category.PRODUCER),
-    PLANTER         (Category.PRODUCER, false),
-    HARVESTER       (Category.PRODUCER),
-    FERTILIZER      (Category.PRODUCER),
+    ELECTRIC_FURNACE(MachineCategory.PRODUCER),
+    CRUSHER         (MachineCategory.PRODUCER),
+    ALLOY_SMELTER   (MachineCategory.PRODUCER),
+    METAL_PRESS     (MachineCategory.PRODUCER),
+    LIQUIFIER       (MachineCategory.PRODUCER),
+    FLUID_FILLER    (MachineCategory.PRODUCER),
+    FREEZER         (MachineCategory.PRODUCER),
+    CHARGER         (MachineCategory.PRODUCER),
+    PLANTER         (MachineCategory.PRODUCER, false),
+    HARVESTER       (MachineCategory.PRODUCER),
+    FERTILIZER      (MachineCategory.PRODUCER),
 
-    BURNER_GENERATOR(Category.GENERATOR),
-    STEAM_GENERATOR (Category.GENERATOR), // Use boiler upgrade to consume steam instead of burnable stuff and water, use steam upgrade to create steam instead of power
-    MAGMA_GENERATOR (Category.GENERATOR),
+    BURNER_GENERATOR(MachineCategory.GENERATOR),
+    STEAM_GENERATOR (MachineCategory.GENERATOR), // Use boiler upgrade to consume steam instead of burnable stuff and water, use steam upgrade to create steam instead of power
+    MAGMA_GENERATOR (MachineCategory.GENERATOR),
 
-    CHUNK_LOADER(Category.UTILITY, false);
+    CHUNK_LOADER    (MachineCategory.UTILITY, false);
 
     private final ResourceLocation texture = new ResourceLocation(AdvancedTechnology.MODID, "textures/block/machine/block_" + getName() + ".png");
-    private final Category cat;
+    private final MachineCategory cat;
     private final boolean rotatable;
 
-    MachineType(Category cat) { this(cat, true); }
+    MachineType(MachineCategory cat) { this(cat, true); }
 
-    MachineType(Category cat, boolean rotatable)
+    MachineType(MachineCategory cat, boolean rotatable)
     {
         this.cat = cat;
         this.rotatable = rotatable;
@@ -47,16 +48,7 @@ public enum MachineType implements IStringSerializable
 
     public boolean canBeRotated() { return rotatable; }
 
-    public Category getCategory() { return cat; }
+    public MachineCategory getCategory() { return cat; }
 
     public ResourceLocation getTexture() { return texture; }
-
-    public enum Category
-    {
-        CASING,
-        PRODUCER,
-        GENERATOR,
-        UTILITY,
-        ENERGY
-    }
 }

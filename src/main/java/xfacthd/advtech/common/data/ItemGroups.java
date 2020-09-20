@@ -6,14 +6,12 @@ import net.minecraft.util.NonNullList;
 import xfacthd.advtech.AdvancedTechnology;
 import xfacthd.advtech.common.ATContent;
 import xfacthd.advtech.common.block.BlockMachine;
-import xfacthd.advtech.common.block.energy.BlockEnergyCube;
-import xfacthd.advtech.common.block.material.BlockOre;
-import xfacthd.advtech.common.block.material.BlockStorage;
-import xfacthd.advtech.common.data.subtypes.MachineType;
-import xfacthd.advtech.common.data.subtypes.Materials;
+import xfacthd.advtech.common.block.energy.*;
+import xfacthd.advtech.common.block.material.*;
+import xfacthd.advtech.common.data.sorting.*;
+import xfacthd.advtech.common.data.subtypes.*;
 import xfacthd.advtech.common.item.material.*;
-import xfacthd.advtech.common.item.tool.ItemEnhancement;
-import xfacthd.advtech.common.item.tool.ItemUpgrade;
+import xfacthd.advtech.common.item.tool.*;
 
 import java.util.Comparator;
 
@@ -195,13 +193,13 @@ public class ItemGroups
             return category(s1).compareTo(category(s2));
         }
 
-        private MachineType.Category category(ItemStack stack)
+        private MachineCategory category(ItemStack stack)
         {
             if (!(stack.getItem() instanceof BlockItem)) { throw new IllegalArgumentException("Machine item group can only contain blocks!"); }
 
             Block b = ((BlockItem)stack.getItem()).getBlock();
             if (b instanceof BlockMachine) { return ((BlockMachine)b).getType().getCategory(); }
-            else if (b instanceof BlockEnergyCube) { return MachineType.Category.ENERGY; }
+            else if (b instanceof BlockEnergyCube) { return MachineCategory.ENERGY; }
 
             throw new IllegalArgumentException("The item '" + stack.getItem().getRegistryName() + "' should not be in this ItemGroup!");
         }
