@@ -169,7 +169,7 @@ public class BlockMachine extends BlockBase
                 }
                 else
                 {
-                    if (!world.isRemote()) //TODO: test if this works on a dedi server aswell
+                    if (!world.isRemote())
                     {
                         player.sendStatusMessage(StatusMessages.CANT_INSTALL, false);
                     }

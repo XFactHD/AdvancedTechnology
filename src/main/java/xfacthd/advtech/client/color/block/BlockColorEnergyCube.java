@@ -6,7 +6,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ILightReader;
-import xfacthd.advtech.common.data.states.SideAccess;
 import xfacthd.advtech.common.tileentity.energy.TileEntityEnergyCube;
 
 public class BlockColorEnergyCube implements IBlockColor

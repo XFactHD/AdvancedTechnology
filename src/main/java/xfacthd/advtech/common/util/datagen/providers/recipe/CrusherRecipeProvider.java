@@ -5,7 +5,6 @@ import net.minecraft.data.*;
 import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.item.*;
 import net.minecraftforge.common.Tags;
-import xfacthd.advtech.common.ATContent;
 import xfacthd.advtech.common.data.subtypes.Materials;
 import xfacthd.advtech.common.util.data.TagHolder;
 import xfacthd.advtech.common.util.datagen.builders.recipe.CrusherRecipeBuilder;
@@ -23,77 +22,77 @@ public class CrusherRecipeProvider extends ATRecipeProvider
         {
             if (material.isMetal())
             {
-                CrusherRecipeBuilder.crusherRecipe(ATContent.itemPowder.get(material))
+                CrusherRecipeBuilder.crusherRecipe(powderAsItem(material))
                         .input(TagHolder.INGOTS.get(material))
                         .energy(2000)
                         .build(consumer, name(material.getName() + "_ingot_to_powder"));
             }
         }
 
-        CrusherRecipeBuilder.crusherRecipe(ATContent.itemPowder.get(Materials.IRON), 2)
+        CrusherRecipeBuilder.crusherRecipe(powderAsItem(Materials.IRON), 2)
                 .input(TagHolder.ITEM_ORES.get(Materials.IRON))
                 .energy(4000)
-                .secondary(ATContent.itemPowder.get(Materials.NICKEL))
+                .secondary(powderAsItem(Materials.NICKEL))
                 .chance(.1F)
                 .build(consumer, name("iron_ore_to_powder"));
 
-        CrusherRecipeBuilder.crusherRecipe(ATContent.itemPowder.get(Materials.GOLD), 2)
+        CrusherRecipeBuilder.crusherRecipe(powderAsItem(Materials.GOLD), 2)
                 .input(TagHolder.ITEM_ORES.get(Materials.GOLD))
                 .energy(4000)
-                //.secondary(ATContent.itemPowder.get(Materials.COPPER))
+                //.secondary(powderAsItem(Materials.COPPER))
                 //.chance(.1F)
                 .build(consumer, name("gold_ore_to_powder"));
 
-        CrusherRecipeBuilder.crusherRecipe(ATContent.itemPowder.get(Materials.COPPER), 2)
+        CrusherRecipeBuilder.crusherRecipe(powderAsItem(Materials.COPPER), 2)
                 .input(TagHolder.ITEM_ORES.get(Materials.COPPER))
                 .energy(4000)
-                .secondary(ATContent.itemPowder.get(Materials.GOLD))
+                .secondary(powderAsItem(Materials.GOLD))
                 .chance(.1F)
                 .build(consumer, name("copper_ore_to_powder"));
 
-        CrusherRecipeBuilder.crusherRecipe(ATContent.itemPowder.get(Materials.TIN), 2)
+        CrusherRecipeBuilder.crusherRecipe(powderAsItem(Materials.TIN), 2)
                 .input(TagHolder.ITEM_ORES.get(Materials.TIN))
                 .energy(4000)
-                .secondary(ATContent.itemPowder.get(Materials.IRON))
+                .secondary(powderAsItem(Materials.IRON))
                 .chance(.1F)
                 .build(consumer, name("tin_ore_to_powder"));
 
-        CrusherRecipeBuilder.crusherRecipe(ATContent.itemPowder.get(Materials.SILVER), 2)
+        CrusherRecipeBuilder.crusherRecipe(powderAsItem(Materials.SILVER), 2)
                 .input(TagHolder.ITEM_ORES.get(Materials.SILVER))
                 .energy(4000)
-                .secondary(ATContent.itemPowder.get(Materials.LEAD))
+                .secondary(powderAsItem(Materials.LEAD))
                 .chance(.1F)
                 .build(consumer, name("silver_ore_to_powder"));
 
-        CrusherRecipeBuilder.crusherRecipe(ATContent.itemPowder.get(Materials.LEAD), 2)
+        CrusherRecipeBuilder.crusherRecipe(powderAsItem(Materials.LEAD), 2)
                 .input(TagHolder.ITEM_ORES.get(Materials.LEAD))
                 .energy(4000)
-                .secondary(ATContent.itemPowder.get(Materials.SILVER))
+                .secondary(powderAsItem(Materials.SILVER))
                 .chance(.1F)
                 .build(consumer, name("lead_ore_to_powder"));
 
-        CrusherRecipeBuilder.crusherRecipe(ATContent.itemPowder.get(Materials.ALUMINUM), 2)
+        CrusherRecipeBuilder.crusherRecipe(powderAsItem(Materials.ALUMINUM), 2)
                 .input(TagHolder.ITEM_ORES.get(Materials.ALUMINUM))
                 .energy(4000)
-                .secondary(ATContent.itemPowder.get(Materials.IRON))
+                .secondary(powderAsItem(Materials.IRON))
                 .chance(.1F)
                 .build(consumer, name("aluminum_ore_to_powder"));
 
-        CrusherRecipeBuilder.crusherRecipe(ATContent.itemPowder.get(Materials.NICKEL), 2)
+        CrusherRecipeBuilder.crusherRecipe(powderAsItem(Materials.NICKEL), 2)
                 .input(TagHolder.ITEM_ORES.get(Materials.NICKEL))
                 .energy(4000)
-                .secondary(ATContent.itemPowder.get(Materials.PLATINUM))
+                .secondary(powderAsItem(Materials.PLATINUM))
                 .chance(.1F)
                 .build(consumer, name("nickel_ore_to_powder"));
 
-        CrusherRecipeBuilder.crusherRecipe(ATContent.itemPowder.get(Materials.PLATINUM), 2)
+        CrusherRecipeBuilder.crusherRecipe(powderAsItem(Materials.PLATINUM), 2)
                 .input(TagHolder.ITEM_ORES.get(Materials.PLATINUM))
                 .energy(4000)
-                //.secondary(ATContent.itemPowder.get(Materials.NICKEL))
+                //.secondary(powderAsItem(Materials.NICKEL))
                 //.chance(.1F)
                 .build(consumer, name("platinum_ore_to_powder"));
 
-        CrusherRecipeBuilder.crusherRecipe(ATContent.itemPowder.get(Materials.SULFUR), 12)
+        CrusherRecipeBuilder.crusherRecipe(powderAsItem(Materials.SULFUR), 12)
                 .input(TagHolder.ITEM_ORES.get(Materials.SULFUR))
                 .energy(4000)
                 .build(consumer, name("sulfur_ore_to_powder"));
@@ -101,23 +100,23 @@ public class CrusherRecipeProvider extends ATRecipeProvider
         CrusherRecipeBuilder.crusherRecipe(Items.COAL, 3)
                 .input(TagHolder.ITEM_ORES.get(Materials.COAL))
                 .energy(4000)
-                .secondary(ATContent.itemPowder.get(Materials.COAL))
+                .secondary(powderAsItem(Materials.COAL))
                 .chance(.25F)
                 .build(consumer, name("coal_ore_to_item"));
 
-        CrusherRecipeBuilder.crusherRecipe(ATContent.itemPowder.get(Materials.COAL))
+        CrusherRecipeBuilder.crusherRecipe(powderAsItem(Materials.COAL))
                 .input(Items.COAL)
                 .energy(2000)
-                .secondary(ATContent.itemPowder.get(Materials.SULFUR))
+                .secondary(powderAsItem(Materials.SULFUR))
                 .chance(.15F)
                 .build(consumer, name("coal_to_powder"));
 
-        CrusherRecipeBuilder.crusherRecipe(ATContent.itemPowder.get(Materials.COAL))
+        CrusherRecipeBuilder.crusherRecipe(powderAsItem(Materials.COAL))
                 .input(Items.CHARCOAL)
                 .energy(2000)
                 .build(consumer, name("charcoal_to_powder"));
 
-        CrusherRecipeBuilder.crusherRecipe(ATContent.itemPowder.get(Materials.COKE))
+        CrusherRecipeBuilder.crusherRecipe(powderAsItem(Materials.COKE))
                 .input(TagHolder.MATERIALS.get(Materials.COKE))
                 .energy(2000)
                 .build(consumer, name("coke_to_powder"));
@@ -125,21 +124,21 @@ public class CrusherRecipeProvider extends ATRecipeProvider
         CrusherRecipeBuilder.crusherRecipe(Items.BLAZE_POWDER, 4)
                 .input(Items.BLAZE_ROD)
                 .energy(3000)
-                .secondary(ATContent.itemPowder.get(Materials.SULFUR))
+                .secondary(powderAsItem(Materials.SULFUR))
                 .chance(.5F)
                 .build(consumer, name("blaze_rod_to_powder"));
 
         CrusherRecipeBuilder.crusherRecipe(Items.LAPIS_LAZULI, 10)
                 .input(Blocks.LAPIS_ORE)
                 .energy(4000)
-                .secondary(ATContent.itemPowder.get(Materials.SULFUR))
+                .secondary(powderAsItem(Materials.SULFUR))
                 .chance(.2F)
                 .build(consumer, name("lapis_ore_to_item"));
 
         CrusherRecipeBuilder.crusherRecipe(Items.QUARTZ, 3)
                 .input(Blocks.NETHER_QUARTZ_ORE)
                 .energy(4000)
-                .secondary(ATContent.itemPowder.get(Materials.SULFUR))
+                .secondary(powderAsItem(Materials.SULFUR))
                 .chance(.15F)
                 .build(consumer, name("quartz_ore_to_item"));
 
@@ -158,7 +157,7 @@ public class CrusherRecipeProvider extends ATRecipeProvider
         CrusherRecipeBuilder.crusherRecipe(Blocks.GRAVEL)
                 .input(Blocks.NETHERRACK)
                 .energy(4000)
-                .secondary(ATContent.itemPowder.get(Materials.SULFUR))
+                .secondary(powderAsItem(Materials.SULFUR))
                 .chance(.15F)
                 .build(consumer, name("netherrack_to_gravel"));
 
@@ -179,7 +178,7 @@ public class CrusherRecipeProvider extends ATRecipeProvider
                 .energy(3000)
                 .build(consumer, name("red_sandstone_to_red_sand"));
 
-        CrusherRecipeBuilder.crusherRecipe(ATContent.itemPowder.get(Materials.OBSIDIAN), 4)
+        CrusherRecipeBuilder.crusherRecipe(powderAsItem(Materials.OBSIDIAN), 4)
                 .input(Blocks.OBSIDIAN)
                 .energy(6000)
                 .build(consumer, name("obsidian_to_dust"));

@@ -3,7 +3,6 @@ package xfacthd.advtech.common.item.material;
 import xfacthd.advtech.common.ATContent;
 import xfacthd.advtech.common.data.ItemGroups;
 import xfacthd.advtech.common.data.subtypes.Components;
-import xfacthd.advtech.common.data.subtypes.Materials;
 import xfacthd.advtech.common.item.ItemBase;
 
 import java.util.*;
