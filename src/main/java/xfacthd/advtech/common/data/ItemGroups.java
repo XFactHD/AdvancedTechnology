@@ -6,7 +6,7 @@ import net.minecraft.util.NonNullList;
 import xfacthd.advtech.AdvancedTechnology;
 import xfacthd.advtech.common.ATContent;
 import xfacthd.advtech.common.block.BlockMachine;
-import xfacthd.advtech.common.block.energy.*;
+import xfacthd.advtech.common.block.storage.*;
 import xfacthd.advtech.common.block.material.*;
 import xfacthd.advtech.common.data.sorting.*;
 import xfacthd.advtech.common.data.subtypes.*;

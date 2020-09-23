@@ -11,7 +11,7 @@ import xfacthd.advtech.common.data.states.SideAccess;
 import xfacthd.advtech.common.data.types.ContainerTypes;
 import xfacthd.advtech.common.net.NetworkHandler;
 import xfacthd.advtech.common.net.packets.energy.PacketConfigEnergyCubeSide;
-import xfacthd.advtech.common.tileentity.energy.TileEntityEnergyCube;
+import xfacthd.advtech.common.tileentity.storage.TileEntityEnergyCube;
 
 public class ContainerEnergyCube extends AdvancedContainer
 {

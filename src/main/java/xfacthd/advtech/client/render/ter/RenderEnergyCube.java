@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import xfacthd.advtech.client.util.Utils;
-import xfacthd.advtech.common.tileentity.energy.TileEntityEnergyCube;
+import xfacthd.advtech.common.tileentity.storage.TileEntityEnergyCube;
 
 public class RenderEnergyCube extends TileEntityRenderer<TileEntityEnergyCube>
 {

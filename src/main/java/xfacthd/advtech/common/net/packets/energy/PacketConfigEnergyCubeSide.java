@@ -8,7 +8,7 @@ import net.minecraftforge.fml.network.NetworkEvent;
 import xfacthd.advtech.common.data.states.Side;
 import xfacthd.advtech.common.data.states.SideAccess;
 import xfacthd.advtech.common.net.packets.AbstractPacket;
-import xfacthd.advtech.common.tileentity.energy.TileEntityEnergyCube;
+import xfacthd.advtech.common.tileentity.storage.TileEntityEnergyCube;
 
 import java.util.function.Supplier;
 

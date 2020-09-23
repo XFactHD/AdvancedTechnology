@@ -6,7 +6,7 @@ import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.registries.IForgeRegistry;
 import xfacthd.advtech.AdvancedTechnology;
 import xfacthd.advtech.common.tileentity.debug.*;
-import xfacthd.advtech.common.tileentity.energy.*;
+import xfacthd.advtech.common.tileentity.storage.*;
 import xfacthd.advtech.common.tileentity.generator.*;
 import xfacthd.advtech.common.tileentity.machine.*;
 import xfacthd.advtech.common.tileentity.utility.*;
@@ -34,7 +34,7 @@ public class TileEntityTypes
     //Generator
     public static TileEntityType<TileEntityBurnerGenerator> tileTypeBurnerGenerator;
 
-    //Energy
+    //Storage
     public static TileEntityType<TileEntityEnergyCube>      tileTypeEnergyCube;
 
     //Utility

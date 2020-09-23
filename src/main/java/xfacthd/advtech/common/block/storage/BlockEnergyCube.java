@@ -1,4 +1,4 @@
-package xfacthd.advtech.common.block.energy;
+package xfacthd.advtech.common.block.storage;
 
 import com.google.common.collect.Maps;
 import net.minecraft.block.Block;
@@ -24,7 +24,7 @@ import xfacthd.advtech.common.data.ItemGroups;
 import xfacthd.advtech.common.data.states.MachineLevel;
 import xfacthd.advtech.common.item.tool.ItemUpgrade;
 import xfacthd.advtech.common.item.tool.ItemWrench;
-import xfacthd.advtech.common.tileentity.energy.TileEntityEnergyCube;
+import xfacthd.advtech.common.tileentity.storage.TileEntityEnergyCube;
 import xfacthd.advtech.common.util.StatusMessages;
 import xfacthd.advtech.common.util.Utils;
 import xfacthd.advtech.common.util.data.PropertyHolder;

@@ -13,7 +13,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 import xfacthd.advtech.AdvancedTechnology;
 import xfacthd.advtech.common.block.*;
 import xfacthd.advtech.common.block.debug.*;
-import xfacthd.advtech.common.block.energy.*;
+import xfacthd.advtech.common.block.storage.*;
 import xfacthd.advtech.common.block.generator.*;
 import xfacthd.advtech.common.block.machine.*;
 import xfacthd.advtech.common.block.material.*;
@@ -32,7 +32,7 @@ import xfacthd.advtech.common.item.debug.*;
 import xfacthd.advtech.common.item.material.*;
 import xfacthd.advtech.common.item.tool.*;
 import xfacthd.advtech.common.tileentity.debug.*;
-import xfacthd.advtech.common.tileentity.energy.*;
+import xfacthd.advtech.common.tileentity.storage.*;
 import xfacthd.advtech.common.tileentity.generator.*;
 import xfacthd.advtech.common.tileentity.machine.*;
 import xfacthd.advtech.common.tileentity.utility.*;
@@ -66,6 +66,7 @@ public class ATContent
     public static BlockMachine blockMagmaGenerator;             //STATUS: Not implemented
 
     public static BlockBase blockEnergyCube;                    //STATUS: Complete
+    public static BlockBase blockFluidTank;                     //STATUS: Missing model, TER and VoxelShape
 
     public static BlockMachine blockChunkLoader;                //STATUS: Complete
 
@@ -110,6 +111,7 @@ public class ATContent
         registry.register(blockBurnerGenerator = new BlockBurnerGenerator());
 
         registry.register(blockEnergyCube = new BlockEnergyCube());
+        registry.register(blockFluidTank = new BlockFluidTank());
 
         registry.register(blockChunkLoader = new BlockChunkLoader());
     }
@@ -137,6 +139,7 @@ public class ATContent
         registry.register(blockBurnerGenerator.createItemBlock());
 
         registry.register(blockEnergyCube.createItemBlock());
+        registry.register(blockFluidTank.createItemBlock());
 
         registry.register(blockChunkLoader.createItemBlock());
 
@@ -180,6 +183,7 @@ public class ATContent
         TileEntityTypes.tileTypeBurnerGenerator = TileEntityTypes.create(TileEntityBurnerGenerator::new, "tile_burner_generator", blockBurnerGenerator);
 
         TileEntityTypes.tileTypeEnergyCube = TileEntityTypes.create(TileEntityEnergyCube::new, "tile_energy_cube", blockEnergyCube);
+        TileEntityTypes.tileTypeFluidTank = TileEntityTypes.create(TileEntityFluidTank::new, "tile_fluid_tank", blockFluidTank);
 
         TileEntityTypes.tileTypeChunkLoader = TileEntityTypes.create(TileEntityChunkLoader::new, "tile_chunk_loader", blockChunkLoader);
     }
