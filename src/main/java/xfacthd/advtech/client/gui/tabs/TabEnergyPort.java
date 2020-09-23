@@ -7,7 +7,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import xfacthd.advtech.AdvancedTechnology;
-import xfacthd.advtech.client.gui.energy.ScreenEnergyCube;
+import xfacthd.advtech.client.gui.storage.ScreenEnergyCube;
 import xfacthd.advtech.client.util.TextureDrawer;
 import xfacthd.advtech.client.util.Utils;
 import xfacthd.advtech.common.data.states.Side;

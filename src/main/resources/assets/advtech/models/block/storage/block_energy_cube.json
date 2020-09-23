@@ -2,14 +2,14 @@
 	"loader": "forge:multi-layer",
 	"parent": "block/cube",
 	"textures": {
-		"particle": "advtech:block/energy/block_energy_cube"
+		"particle": "advtech:block/storage/block_energy_cube"
 	},
 	"layers": {
 		"cutout_mipped": {
 			"textures": {
-				"frame": "advtech:block/energy/block_energy_cube",
+				"frame": "advtech:block/storage/block_energy_cube",
 				"level": "advtech:block/machine/block_machine_level",
-				"port": "advtech:block/energy/block_energy_cube_port"
+				"port": "advtech:block/storage/block_energy_cube_port"
 			},
 			"elements": [
 				{
@@ -234,7 +234,7 @@
 		},
 		"translucent": {
 			"textures": {
-				"fill": "advtech:block/energy/block_energy_cube_redstone"
+				"fill": "advtech:block/storage/block_energy_cube_redstone"
 			},
 			"elements": [
 				{

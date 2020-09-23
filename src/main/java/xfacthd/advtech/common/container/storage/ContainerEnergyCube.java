@@ -1,4 +1,4 @@
-package xfacthd.advtech.common.container.energy;
+package xfacthd.advtech.common.container.storage;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;

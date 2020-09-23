@@ -18,7 +18,7 @@ import xfacthd.advtech.common.block.generator.*;
 import xfacthd.advtech.common.block.machine.*;
 import xfacthd.advtech.common.block.material.*;
 import xfacthd.advtech.common.block.utility.*;
-import xfacthd.advtech.common.container.energy.*;
+import xfacthd.advtech.common.container.storage.*;
 import xfacthd.advtech.common.container.generator.*;
 import xfacthd.advtech.common.container.machine.*;
 import xfacthd.advtech.common.container.utility.*;

@@ -6,7 +6,7 @@ import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.fml.network.IContainerFactory;
 import net.minecraftforge.registries.IForgeRegistry;
 import xfacthd.advtech.AdvancedTechnology;
-import xfacthd.advtech.common.container.energy.*;
+import xfacthd.advtech.common.container.storage.*;
 import xfacthd.advtech.common.container.generator.*;
 import xfacthd.advtech.common.container.machine.*;
 import xfacthd.advtech.common.container.utility.*;

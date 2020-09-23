@@ -1,4 +1,4 @@
-package xfacthd.advtech.client.gui.energy;
+package xfacthd.advtech.client.gui.storage;
 
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
@@ -6,7 +6,7 @@ import net.minecraft.util.text.ITextComponent;
 import xfacthd.advtech.client.gui.AdvancedScreen;
 import xfacthd.advtech.client.gui.tabs.TabEnergyPort;
 import xfacthd.advtech.client.util.TextureDrawer;
-import xfacthd.advtech.common.container.energy.ContainerEnergyCube;
+import xfacthd.advtech.common.container.storage.ContainerEnergyCube;
 
 public class ScreenEnergyCube extends AdvancedScreen<ContainerEnergyCube>
 {

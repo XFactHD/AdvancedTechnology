@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import xfacthd.advtech.AdvancedTechnology;
 import xfacthd.advtech.client.gui.AdvancedScreen;
-import xfacthd.advtech.client.gui.energy.*;
+import xfacthd.advtech.client.gui.storage.*;
 import xfacthd.advtech.client.gui.generator.*;
 import xfacthd.advtech.client.gui.machine.*;
 import xfacthd.advtech.client.gui.utility.*;

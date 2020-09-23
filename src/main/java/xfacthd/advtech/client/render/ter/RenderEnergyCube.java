@@ -13,8 +13,8 @@ import xfacthd.advtech.common.tileentity.storage.TileEntityEnergyCube;
 
 public class RenderEnergyCube extends TileEntityRenderer<TileEntityEnergyCube>
 {
-    private static final ResourceLocation ENERGY_EMPTY = Utils.modLocation("block/energy/block_energy_cube_bar_empty");
-    private static final ResourceLocation ENERGY_FULL = Utils.modLocation("block/energy/block_energy_cube_bar_full");
+    private static final ResourceLocation ENERGY_EMPTY = Utils.modLocation("block/storage/block_energy_cube_bar_empty");
+    private static final ResourceLocation ENERGY_FULL = Utils.modLocation("block/storage/block_energy_cube_bar_full");
 
     private static TextureAtlasSprite spriteEmpty;
     private static TextureAtlasSprite spriteFull;

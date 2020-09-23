@@ -16,7 +16,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import xfacthd.advtech.AdvancedTechnology;
 import xfacthd.advtech.client.color.block.*;
 import xfacthd.advtech.client.color.item.*;
-import xfacthd.advtech.client.gui.energy.*;
+import xfacthd.advtech.client.gui.storage.*;
 import xfacthd.advtech.client.gui.generator.*;
 import xfacthd.advtech.client.gui.machine.*;
 import xfacthd.advtech.client.gui.utility.*;

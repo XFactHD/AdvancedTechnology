@@ -6,14 +6,14 @@ import net.minecraftforge.client.model.generators.ExistingFileHelper;
 import net.minecraftforge.client.model.generators.ModelFile;
 import xfacthd.advtech.common.ATContent;
 
-public class EnergyBlockStateProvider extends ATBlockStateProvider
+public class StorageBlockStateProvider extends ATBlockStateProvider
 {
-    public EnergyBlockStateProvider(DataGenerator gen, ExistingFileHelper fileHelper) { super(gen, fileHelper); }
+    public StorageBlockStateProvider(DataGenerator gen, ExistingFileHelper fileHelper) { super(gen, fileHelper); }
 
     @Override
     protected void registerStatesAndModels()
     {
-        ModelFile energyCubeModel = models().getExistingFile(modLoc("block/energy/block_energy_cube"));
+        ModelFile energyCubeModel = models().getExistingFile(modLoc("block/storage/block_energy_cube"));
         simpleBlockWithItem(ATContent.blockEnergyCube, energyCubeModel);
     }
 

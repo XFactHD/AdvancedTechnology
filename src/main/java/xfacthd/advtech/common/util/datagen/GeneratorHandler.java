@@ -25,7 +25,7 @@ public class GeneratorHandler
         gen.addProvider(new MaterialBlockStateProvider(gen, fileHelper));
         gen.addProvider(new DebugBlockStateProvider(gen, fileHelper));
         gen.addProvider(new MachineBlockStateProvider(gen, fileHelper));
-        gen.addProvider(new EnergyBlockStateProvider(gen, fileHelper));
+        gen.addProvider(new StorageBlockStateProvider(gen, fileHelper));
 
         gen.addProvider(new MaterialItemModelProvider(gen, fileHelper));
         gen.addProvider(new ComponentItemModelProvider(gen, fileHelper));
