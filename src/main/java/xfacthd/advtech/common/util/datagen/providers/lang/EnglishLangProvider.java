@@ -86,6 +86,7 @@ public class EnglishLangProvider extends ATLanguageProvider
         add(ATContent.blockBurnerGenerator, "Burner Generator");
 
         add(ATContent.blockEnergyCube, "Energy Cube");
+        add(ATContent.blockFluidTank, "Fluid Tank");
 
         add(ATContent.blockChunkLoader, "Chunk Loader");
 

@@ -15,6 +15,9 @@ public class StorageBlockStateProvider extends ATBlockStateProvider
     {
         ModelFile energyCubeModel = models().getExistingFile(modLoc("block/storage/block_energy_cube"));
         simpleBlockWithItem(ATContent.blockEnergyCube, energyCubeModel);
+
+        ModelFile fluidTankModel = models().getExistingFile(modLoc("block/storage/block_fluid_tank"));
+        simpleBlockWithItem(ATContent.blockFluidTank, fluidTankModel);
     }
 
     private void simpleBlockWithItem(Block block, ModelFile modelFile)
@@ -24,5 +27,5 @@ public class StorageBlockStateProvider extends ATBlockStateProvider
     }
 
     @Override
-    protected String getProviderName() { return "energy_block_states"; }
+    protected String getProviderName() { return "storage_block_states"; }
 }

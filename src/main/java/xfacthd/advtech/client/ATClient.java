@@ -20,6 +20,7 @@ import xfacthd.advtech.client.gui.storage.*;
 import xfacthd.advtech.client.gui.generator.*;
 import xfacthd.advtech.client.gui.machine.*;
 import xfacthd.advtech.client.gui.utility.*;
+import xfacthd.advtech.client.render.ister.*;
 import xfacthd.advtech.client.render.ter.*;
 import xfacthd.advtech.common.ATContent;
 import xfacthd.advtech.common.data.types.*;
@@ -43,6 +44,7 @@ public class ATClient
         RenderTypeLookup.setRenderLayer(ATContent.blockBurnerGenerator, RenderType.getCutoutMipped());
 
         RenderTypeLookup.setRenderLayer(ATContent.blockEnergyCube, type -> type == RenderType.getCutoutMipped() || type == RenderType.getTranslucent());
+        RenderTypeLookup.setRenderLayer(ATContent.blockFluidTank, RenderType.getCutoutMipped());
 
         RenderTypeLookup.setRenderLayer(ATContent.blockChunkLoader, RenderType.getCutoutMipped());
 
@@ -53,6 +55,8 @@ public class ATClient
         ClientRegistry.bindTileEntityRenderer(TileEntityTypes.tileTypeFertilizer, RenderRangedMachine::new);
 
         ClientRegistry.bindTileEntityRenderer(TileEntityTypes.tileTypeEnergyCube, RenderEnergyCube::new);
+        ClientRegistry.bindTileEntityRenderer(TileEntityTypes.tileTypeFluidTank, RenderFluidTank::new);
+
         ClientRegistry.bindTileEntityRenderer(TileEntityTypes.tileTypeChunkLoader, RenderChunkLoader::new);
 
         //noinspection deprecation
@@ -83,7 +87,7 @@ public class ATClient
     @SubscribeEvent
     public static void onModelBake(final ModelBakeEvent event)
     {
-
+        RenderItemFluidTank.handleModel(event.getModelRegistry());
     }
 
     @SubscribeEvent
@@ -114,6 +118,7 @@ public class ATClient
         blockColors.register(new BlockColorMaterial(), BlockColorMaterial.getBlocks());
         blockColors.register(new BlockColorMachine(), BlockColorMachine.getBlocks());
         blockColors.register(new BlockColorEnergyCube(), ATContent.blockEnergyCube);
+        blockColors.register(new BlockColorFluidTank(), ATContent.blockFluidTank);
     }
 
     @SubscribeEvent
@@ -126,5 +131,6 @@ public class ATClient
         itemColors.register(new ItemColorUpgrade(), ItemColorUpgrade.getItems());
         itemColors.register(new ItemColorComponent(), ItemColorComponent.getItems());
         itemColors.register(new ItemColorEnergyCube(), ATContent.blockEnergyCube);
+        itemColors.register(new ItemColorFluidTank(), ATContent.blockFluidTank);
     }
 }

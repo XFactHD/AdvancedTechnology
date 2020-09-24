@@ -66,7 +66,7 @@ public class ATContent
     public static BlockMachine blockMagmaGenerator;             //STATUS: Not implemented
 
     public static BlockBase blockEnergyCube;                    //STATUS: Complete
-    public static BlockBase blockFluidTank;                     //STATUS: Missing model, TER and VoxelShape
+    public static BlockBase blockFluidTank;                     //STATUS: Complete
 
     public static BlockMachine blockChunkLoader;                //STATUS: Complete
 

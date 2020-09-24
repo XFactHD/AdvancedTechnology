@@ -36,6 +36,7 @@ public class TileEntityTypes
 
     //Storage
     public static TileEntityType<TileEntityEnergyCube>      tileTypeEnergyCube;
+    public static TileEntityType<TileEntityFluidTank>       tileTypeFluidTank;
 
     //Utility
     public static TileEntityType<TileEntityChunkLoader>     tileTypeChunkLoader;

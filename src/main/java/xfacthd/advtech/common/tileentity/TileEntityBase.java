@@ -34,7 +34,7 @@ public abstract class TileEntityBase extends TileEntity
     @Override
     public final void handleUpdateTag(CompoundNBT nbt) { readNetworkNBT(nbt); }
 
-    @Override
+    @Override //TODO: implement custom server->client sync to avoid redrawing a complete chunk when only the TER should change
     public final SUpdateTileEntityPacket getUpdatePacket()
     {
         CompoundNBT nbt = new CompoundNBT();

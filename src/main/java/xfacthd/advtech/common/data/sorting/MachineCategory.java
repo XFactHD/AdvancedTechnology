@@ -6,6 +6,5 @@ public enum MachineCategory
     PRODUCER,
     GENERATOR,
     UTILITY,
-    ENERGY,
-    FLUID
+    STORAGE
 }

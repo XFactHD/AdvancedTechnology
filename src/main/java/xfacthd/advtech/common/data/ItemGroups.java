@@ -199,7 +199,7 @@ public class ItemGroups
 
             Block b = ((BlockItem)stack.getItem()).getBlock();
             if (b instanceof BlockMachine) { return ((BlockMachine)b).getType().getCategory(); }
-            else if (b instanceof BlockEnergyCube) { return MachineCategory.ENERGY; }
+            else if (b instanceof BlockEnergyCube || b instanceof BlockFluidTank) { return MachineCategory.STORAGE; }
 
             throw new IllegalArgumentException("The item '" + stack.getItem().getRegistryName() + "' should not be in this ItemGroup!");
         }
