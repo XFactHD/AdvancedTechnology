@@ -107,6 +107,7 @@ public class ATClient
         {
             RenderRangedMachine.retrieveSprites(event.getMap());
             RenderEnergyCube.retrieveSprites(event.getMap());
+            RenderFluidTank.invalidateSpriteCache();
         }
     }
 

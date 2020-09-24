@@ -117,17 +117,17 @@ public class RenderFluidTank extends TileEntityRenderer<TileEntityFluidTank>
         builder.pos(matrix, MIN_X, minY, MAX_Z).color(color[0], color[1], color[2], color[3]).tex(minU, maxV).overlay(overlay).lightmap(light).normal(normal, -1, 0,  0).endVertex();
     }
 
-    private static TextureAtlasSprite getStillTexture(FluidStack fluid)
+    public static TextureAtlasSprite getStillTexture(FluidStack fluid)
     {
         return SPRITE_CACHE.getUnchecked(fluid.getFluid().getAttributes().getStillTexture(fluid));
     }
 
-    private static TextureAtlasSprite getFlowingTexture(FluidStack fluid)
+    public static TextureAtlasSprite getFlowingTexture(FluidStack fluid)
     {
         return SPRITE_CACHE.getUnchecked(fluid.getFluid().getAttributes().getFlowingTexture(fluid));
     }
 
-    public static void onResourceReload() { SPRITE_CACHE.invalidateAll(); } //TODO: implement reload listener
+    public static void invalidateSpriteCache() { SPRITE_CACHE.invalidateAll(); }
 
     private static LoadingCache<ResourceLocation, TextureAtlasSprite> buildCache ()
     {
