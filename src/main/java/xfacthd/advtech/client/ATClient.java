@@ -49,6 +49,7 @@ public class ATClient
         RenderTypeLookup.setRenderLayer(ATContent.blockChunkLoader, RenderType.getCutoutMipped());
 
         ClientRegistry.bindTileEntityRenderer(TileEntityTypes.tileTypeCreativeItemSource, RenderCreativeItemSource::new);
+        ClientRegistry.bindTileEntityRenderer(TileEntityTypes.tileTypeCreativeFluidSource, RenderCreativeFluidSource::new);
 
         ClientRegistry.bindTileEntityRenderer(TileEntityTypes.tileTypePlanter, RenderRangedMachine::new);
         ClientRegistry.bindTileEntityRenderer(TileEntityTypes.tileTypeHarvester, RenderRangedMachine::new);

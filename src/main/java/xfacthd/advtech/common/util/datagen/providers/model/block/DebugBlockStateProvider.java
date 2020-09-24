@@ -21,6 +21,11 @@ public class DebugBlockStateProvider extends ATBlockStateProvider
                 .withExistingParent("block/debug/block_item_source", "block/cube_all")
                 .texture("all", modLoc("block/debug/block_item_source"));
         simpleState(ATContent.blockCreativeItemSource, itemSourceModel);
+
+        ModelFile fluidSourceModel = models()
+                .withExistingParent("block/debug/block_fluid_source", "block/cube_all")
+                .texture("all", modLoc("block/debug/block_fluid_source"));
+        simpleState(ATContent.blockCreativeFluidSource, fluidSourceModel);
     }
 
     private void simpleState(Block block, ModelFile model)

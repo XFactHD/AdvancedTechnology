@@ -47,6 +47,7 @@ public class ATContent
 
     public static BlockBase blockCreativeEnergySource;          //STATUS: Complete
     public static BlockBase blockCreativeItemSource;            //STATUS: Complete
+    public static BlockBase blockCreativeFluidSource;           //STATUS: Complete
 
     public static BlockMachine blockMachineCasing;              //STATUS: Complete
     public static BlockMachine blockElectricFurnace;            //STATUS: Complete
@@ -98,6 +99,7 @@ public class ATContent
 
         registry.register(blockCreativeEnergySource = new BlockCreativeEnergySource());
         registry.register(blockCreativeItemSource = new BlockCreativeItemSource());
+        registry.register(blockCreativeFluidSource = new BlockCreativeFluidSource());
 
         registry.register(blockMachineCasing = new BlockMachineCasing());
         registry.register(blockElectricFurnace = new BlockElectricFurnace());
@@ -126,6 +128,7 @@ public class ATContent
 
         registry.register(blockCreativeEnergySource.createItemBlock());
         registry.register(blockCreativeItemSource.createItemBlock());
+        registry.register(blockCreativeFluidSource.createItemBlock());
 
         registry.register(blockMachineCasing.createItemBlock());
         registry.register(blockElectricFurnace.createItemBlock());
@@ -171,6 +174,7 @@ public class ATContent
 
         TileEntityTypes.tileTypeCreativeEnergySource = TileEntityTypes.create(TileEntityCreativeEnergySource::new, "tile_creative_energy_source", blockCreativeEnergySource);
         TileEntityTypes.tileTypeCreativeItemSource = TileEntityTypes.create(TileEntityCreativeItemSource::new, "tile_creative_item_source", blockCreativeItemSource);
+        TileEntityTypes.tileTypeCreativeFluidSource = TileEntityTypes.create(TileEntityCreativeFluidSource::new, "tile_creative_fluid_source", blockCreativeFluidSource);
 
         TileEntityTypes.tileTypeElectricFurnace = TileEntityTypes.create(TileEntityElectricFurnace::new, "tile_electric_furnace", blockElectricFurnace);
         TileEntityTypes.tileTypeCrusher = TileEntityTypes.create(TileEntityCrusher::new, "tile_crusher", blockCrusher);

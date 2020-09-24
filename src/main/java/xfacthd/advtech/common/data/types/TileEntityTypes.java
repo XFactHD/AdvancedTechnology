@@ -20,6 +20,7 @@ public class TileEntityTypes
     //Debug
     public static TileEntityType<TileEntityCreativeEnergySource>    tileTypeCreativeEnergySource;
     public static TileEntityType<TileEntityCreativeItemSource>      tileTypeCreativeItemSource;
+    public static TileEntityType<TileEntityCreativeFluidSource>     tileTypeCreativeFluidSource;
 
     //Machine
     public static TileEntityType<TileEntityElectricFurnace> tileTypeElectricFurnace;
