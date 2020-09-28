@@ -16,9 +16,6 @@ public class TableRecipeProvider extends ATRecipeProvider
     public TableRecipeProvider(DataGenerator generator) { super(generator); }
 
     @Override
-    public String getProviderName() { return "table_recipes"; }
-
-    @Override
     protected void registerRecipes(Consumer<IFinishedRecipe> consumer)
     {
         for (Materials material : Materials.values())
@@ -205,4 +202,7 @@ public class TableRecipeProvider extends ATRecipeProvider
                 .addCriterion("has_stick", hasItem(Items.STICK))
                 .build(consumer, name("stick_mold"));
     }
+
+    @Override
+    public String getRecipePrefix() { return "table"; }
 }

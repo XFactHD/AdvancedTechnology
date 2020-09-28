@@ -11,9 +11,6 @@ public class FurnaceRecipeProvider extends ATRecipeProvider
     public FurnaceRecipeProvider(DataGenerator generator) { super(generator); }
 
     @Override
-    public String getProviderName() { return "furnace_recipes"; }
-
-    @Override
     protected void registerRecipes(Consumer<IFinishedRecipe> consumer)
     {
         for (Materials material : Materials.values())
@@ -41,4 +38,7 @@ public class FurnaceRecipeProvider extends ATRecipeProvider
             }
         }
     }
+
+    @Override
+    public String getRecipePrefix() { return "furnace"; }
 }

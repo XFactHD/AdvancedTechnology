@@ -147,5 +147,5 @@ public class AlloySmelterRecipeProvider extends ATRecipeProvider
     }
 
     @Override
-    protected String getProviderName() { return "alloy_smelter_recipes"; }
+    protected String getRecipePrefix() { return "alloy_smelter"; }
 }

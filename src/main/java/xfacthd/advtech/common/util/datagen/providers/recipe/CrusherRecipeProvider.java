@@ -400,5 +400,5 @@ public class CrusherRecipeProvider extends ATRecipeProvider
     }
 
     @Override
-    public String getProviderName() { return "crusher_recipes"; }
+    public String getRecipePrefix() { return "crusher"; }
 }

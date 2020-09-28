@@ -51,5 +51,5 @@ public class MetalPressRecipeProvider extends ATRecipeProvider
     }
 
     @Override
-    protected String getProviderName() { return "metal_press_recipes"; }
+    protected String getRecipePrefix() { return "metal_press"; }
 }

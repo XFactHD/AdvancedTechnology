@@ -18,7 +18,9 @@ public abstract class ATRecipeProvider extends RecipeProvider
     @Override
     public final String getName() { return AdvancedTechnology.MODID + "." + getProviderName(); }
 
-    protected abstract String getProviderName();
+    protected String getProviderName() { return getRecipePrefix() + "_recipes"; }
+
+    protected abstract String getRecipePrefix();
 
     protected static Ingredient oreAsTag(Materials material)
     {
@@ -39,5 +41,8 @@ public abstract class ATRecipeProvider extends RecipeProvider
         return ATContent.itemIngot.get(material);
     }
 
-    protected static ResourceLocation name(String name) { return new ResourceLocation(AdvancedTechnology.MODID, name); }
+    protected ResourceLocation name(String name)
+    {
+        return new ResourceLocation(AdvancedTechnology.MODID, getRecipePrefix() + "_" + name);
+    }
 }
