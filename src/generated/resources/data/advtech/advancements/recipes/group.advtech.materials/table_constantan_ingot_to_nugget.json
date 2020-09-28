@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "advtech:table_constantan_ingot_to_nugget"
+    ]
+  },
+  "criteria": {
+    "has_ingot_constantan": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/constantan"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "advtech:table_constantan_ingot_to_nugget"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_ingot_constantan",
+      "has_the_recipe"
+    ]
+  ]
+}

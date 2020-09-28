@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "advtech:table_plate_mold"
+    ]
+  },
+  "criteria": {
+    "has_iron_plate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "advtech:item_plate_iron"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "advtech:table_plate_mold"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_iron_plate",
+      "has_the_recipe"
+    ]
+  ]
+}

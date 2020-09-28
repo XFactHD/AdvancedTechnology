@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "advtech:table_platinum_nugget_to_ingot"
+    ]
+  },
+  "criteria": {
+    "has_nugget_platinum": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:nuggets/platinum"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "advtech:table_platinum_nugget_to_ingot"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_nugget_platinum",
+      "has_the_recipe"
+    ]
+  ]
+}
