@@ -148,7 +148,7 @@ public class TileEntityEnergyCube extends TileEntityEnergyHandler implements INa
     {
         int mult = (int)Math.pow(2, level.ordinal());
         int capacity = BASE_CAPACITY * mult;
-        int maxTransfer = BASE_TRANSFER * 10;
+        int maxTransfer = BASE_TRANSFER * mult;
         internalEnergyHandler.reconfigure(capacity, maxTransfer, maxTransfer);
     }
 

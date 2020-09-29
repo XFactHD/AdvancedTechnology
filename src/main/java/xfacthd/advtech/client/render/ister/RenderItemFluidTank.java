@@ -28,11 +28,11 @@ public class RenderItemFluidTank extends ItemStackTileEntityRenderer
     {
         if (renderer == null) { renderer = Minecraft.getInstance().getItemRenderer(); }
 
-        stack.pop(); //
+        stack.pop(); //Clear changes made by the call to ItemRenderer#renderItem() that led here
         //noinspection ConstantConditions
         boolean leftHand = Minecraft.getInstance().player.getHeldItemOffhand() == item;
         renderer.renderItem(item, proxyModel.getTransform(), leftHand, stack, buffer, combinedLight, combinedOverlay, tankModel);
-        stack.push();
+        stack.push(); //Push to ensure correct stack size
 
         FluidStack fluid = BlockItemFluidTank.getContents(item);
         float height = BlockItemFluidTank.getFluidHeight(item);
@@ -41,7 +41,7 @@ public class RenderItemFluidTank extends ItemStackTileEntityRenderer
             tankModel.handlePerspective(proxyModel.getTransform(), stack);
             stack.translate(-.5, -.5, -.5);
             RenderFluidTank.renderContents(fluid, height, stack, buffer, combinedLight, combinedOverlay);
-            stack.pop();
+            stack.pop(); //IForgeBakedModel#handlePerspective() does the associated MatrixStack#push
         }
     }
 

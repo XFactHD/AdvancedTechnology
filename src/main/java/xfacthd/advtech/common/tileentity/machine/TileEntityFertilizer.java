@@ -314,7 +314,7 @@ public class TileEntityFertilizer extends TileEntityInventoryMachine implements 
     @Override
     public boolean showArea() { return showArea; }
 
-    public void switchShowArea() { showArea = !showArea; } //TODO: add button in gui
+    public void switchShowArea() { showArea = !showArea; }
 
     @Override
     public Direction getAreaOffsetDir() { return facing; }
