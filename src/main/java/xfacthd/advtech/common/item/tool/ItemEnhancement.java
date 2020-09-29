@@ -20,7 +20,7 @@ public class ItemEnhancement extends ItemBase
 
     public ItemEnhancement(Enhancement type, int level)
     {
-        super(type.getName() + "_" + level, ItemGroups.TOOL_GROUP);
+        super("item_enhancement_" + type.getName() + "_" + level, ItemGroups.TOOL_GROUP);
         this.type = type;
         this.level = level;
     }
