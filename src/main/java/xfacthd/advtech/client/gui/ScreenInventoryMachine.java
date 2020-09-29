@@ -13,6 +13,7 @@ import java.util.function.Predicate;
 public abstract class ScreenInventoryMachine<C extends ContainerInventoryMachine<?, ?>> extends ScreenMachine<C>
 {
     private static final ResourceLocation SLOT_OVERLAY = widget("slot_overlay");
+    private static final ResourceLocation TANK_OVERLAY = widget("tank_overlay");
 
     protected ScreenInventoryMachine(C container, PlayerInventory inventory, ITextComponent title, int xSize, int ySize)
     {
@@ -37,6 +38,27 @@ public abstract class ScreenInventoryMachine<C extends ContainerInventoryMachine
             bindTexture(SLOT_OVERLAY);
             int color = (mode.getColor() << 8) | 0xFF;
             TextureDrawer.drawGuiTexture(this, x, y, 20, 20, 0, 1, 0, 1, color);
+        }
+    }
+
+    protected void drawTankOverlay(int x, int y, Slot slot)
+    {
+        SideAccess mode = SideAccess.NONE;
+
+        for (Side side : Side.values())
+        {
+            SideAccess sideMode = container.getPortSetting(side);
+            if (slot.hasEffect(sideMode) && sideMode.overrules(mode))
+            {
+                mode = sideMode;
+            }
+        }
+
+        if (mode != SideAccess.NONE)
+        {
+            bindTexture(TANK_OVERLAY);
+            int color = (mode.getColor() << 8) | 0xFF;
+            TextureDrawer.drawGuiTexture(this, x, y, 20, 64, 0, 1, 0, 1, color);
         }
     }
 
