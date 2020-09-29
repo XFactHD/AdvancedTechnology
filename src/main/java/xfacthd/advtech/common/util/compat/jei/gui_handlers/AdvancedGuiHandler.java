@@ -8,10 +8,10 @@ import xfacthd.advtech.client.gui.tabs.AbstractTab;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdvancedGuiHandler implements IGuiContainerHandler<AdvancedScreen<?>>
+public class AdvancedGuiHandler<T extends AdvancedScreen<?>> implements IGuiContainerHandler<T>
 {
     @Override
-    public List<Rectangle2d> getGuiExtraAreas(AdvancedScreen<?> screen)
+    public List<Rectangle2d> getGuiExtraAreas(T screen)
     {
         List<Rectangle2d> areas = new ArrayList<>();
         List<AbstractTab<?>> tabs = screen.getTabs();

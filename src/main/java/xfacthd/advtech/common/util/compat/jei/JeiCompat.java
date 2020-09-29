@@ -17,7 +17,7 @@ import xfacthd.advtech.client.gui.utility.*;
 import xfacthd.advtech.common.ATContent;
 import xfacthd.advtech.common.data.recipes.*;
 import xfacthd.advtech.common.util.compat.jei.categories.*;
-import xfacthd.advtech.common.util.compat.jei.gui_handlers.AdvancedGuiHandler;
+import xfacthd.advtech.common.util.compat.jei.gui_handlers.*;
 
 @JeiPlugin
 public class JeiCompat implements IModPlugin
@@ -59,7 +59,7 @@ public class JeiCompat implements IModPlugin
     @Override
     public void registerGuiHandlers(IGuiHandlerRegistration registration)
     {
-        IGuiContainerHandler<AdvancedScreen<?>> simpleGuiHandler = new AdvancedGuiHandler();
+        IGuiContainerHandler<AdvancedScreen<?>> simpleGuiHandler = new AdvancedGuiHandler<>();
         registration.addGuiContainerHandler(ScreenElectricFurnace.class, simpleGuiHandler);
         registration.addGuiContainerHandler(ScreenCrusher.class, simpleGuiHandler);
         registration.addGuiContainerHandler(ScreenAlloySmelter.class, simpleGuiHandler);
