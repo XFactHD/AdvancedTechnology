@@ -41,6 +41,7 @@ public class NetworkHandler
         CHANNEL.registerMessage(idx++, PacketSyncIntHolder.class,       PacketSyncIntHolder::encode,        PacketSyncIntHolder::new,       PacketSyncIntHolder::handle);
         CHANNEL.registerMessage(idx++, PacketSyncBoolHolder.class,      PacketSyncBoolHolder::encode,       PacketSyncBoolHolder::new,      PacketSyncBoolHolder::handle);
         CHANNEL.registerMessage(idx++, PacketDebugForcedChunks.class,   PacketDebugForcedChunks::encode,    PacketDebugForcedChunks::new,   PacketDebugForcedChunks::handle);
+        CHANNEL.registerMessage(idx++, PacketUpdateFluid.class,         PacketUpdateFluid::encode,          PacketUpdateFluid::new,         PacketUpdateFluid::handle);
     }
 
     public static void sendToServer(AbstractPacket packet) { CHANNEL.sendToServer(packet); }

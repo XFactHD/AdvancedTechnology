@@ -1,0 +1,12 @@
+{
+  "type": "advtech:liquifier",
+  "energy": 800,
+  "input": {
+    "item": "minecraft:snow_block"
+  },
+  "inputCount": 1,
+  "output": {
+    "name": "minecraft:water",
+    "amount": 500
+  }
+}

@@ -35,7 +35,8 @@ public class JeiCompat implements IModPlugin
         registration.addRecipeCategories(
                 new CategoryCrusher(guiHelper),
                 new CategoryAlloySmelter(guiHelper),
-                new CategoryMetalPress(guiHelper)
+                new CategoryMetalPress(guiHelper),
+                new CategoryLiquifier(guiHelper)
         );
     }
 
@@ -45,6 +46,7 @@ public class JeiCompat implements IModPlugin
         registration.addRecipes(CrusherRecipe.RECIPES, CrusherRecipe.UID);
         registration.addRecipes(AlloySmelterRecipe.RECIPES, AlloySmelterRecipe.UID);
         registration.addRecipes(MetalPressRecipe.RECIPES, MetalPressRecipe.UID);
+        registration.addRecipes(LiquifierRecipe.RECIPES, LiquifierRecipe.UID);
     }
 
     @Override
@@ -54,6 +56,7 @@ public class JeiCompat implements IModPlugin
         registration.addRecipeCatalyst(new ItemStack(ATContent.blockCrusher), CrusherRecipe.UID);
         registration.addRecipeCatalyst(new ItemStack(ATContent.blockAlloySmelter), AlloySmelterRecipe.UID);
         registration.addRecipeCatalyst(new ItemStack(ATContent.blockMetalPress), MetalPressRecipe.UID);
+        registration.addRecipeCatalyst(new ItemStack(ATContent.blockLiquifier), LiquifierRecipe.UID);
     }
 
     @Override
@@ -64,6 +67,7 @@ public class JeiCompat implements IModPlugin
         registration.addGuiContainerHandler(ScreenCrusher.class, simpleGuiHandler);
         registration.addGuiContainerHandler(ScreenAlloySmelter.class, simpleGuiHandler);
         registration.addGuiContainerHandler(ScreenMetalPress.class, simpleGuiHandler);
+        registration.addGuiContainerHandler(ScreenLiquifier.class, new LiquifierGuiHandler());
         registration.addGuiContainerHandler(ScreenPlanter.class, simpleGuiHandler);
         registration.addGuiContainerHandler(ScreenHarvester.class, simpleGuiHandler);
         registration.addGuiContainerHandler(ScreenFertilizer.class, simpleGuiHandler);
@@ -76,5 +80,6 @@ public class JeiCompat implements IModPlugin
         registration.addRecipeClickArea(ScreenCrusher.class,            77, 45, 22, 16, CrusherRecipe.UID);
         registration.addRecipeClickArea(ScreenAlloySmelter.class,       77, 45, 22, 16, AlloySmelterRecipe.UID);
         registration.addRecipeClickArea(ScreenMetalPress.class,         77, 45, 22, 16, MetalPressRecipe.UID);
+        registration.addRecipeClickArea(ScreenLiquifier.class,          77, 45, 22, 16, LiquifierRecipe.UID);
     }
 }

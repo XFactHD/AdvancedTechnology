@@ -19,6 +19,7 @@ public class ContainerTypes
     public static ContainerType<ContainerCrusher>           containerTypeCrusher;
     public static ContainerType<ContainerAlloySmelter>      containerTypeAlloySmelter;
     public static ContainerType<ContainerMetalPress>        containerTypeMetalPress;
+    public static ContainerType<ContainerLiquifier>         containerTypeLiquifier;
     public static ContainerType<ContainerPlanter>           containerTypePlanter;
     public static ContainerType<ContainerHarvester>         containerTypeHarvester;
     public static ContainerType<ContainerFertilizer>        containerTypeFertilizer;

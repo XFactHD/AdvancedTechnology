@@ -1,9 +1,14 @@
 package xfacthd.advtech.common.util;
 
+import com.google.gson.JsonObject;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.util.Direction;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class Utils
 {
@@ -28,5 +33,26 @@ public class Utils
         }
 
         return buffer[0];
+    }
+
+    public static JsonObject writeFluidStackToJson(FluidStack stack)
+    {
+        JsonObject json = new JsonObject();
+
+        //noinspection ConstantConditions
+        json.addProperty("name", stack.getFluid().getRegistryName().toString());
+        json.addProperty("amount", stack.getAmount());
+
+        return json;
+    }
+
+    public static FluidStack readFluidStackFromJson(JsonObject json)
+    {
+        ResourceLocation fluidName = new ResourceLocation(json.get("name").getAsString());
+        Fluid fluid = ForgeRegistries.FLUIDS.getValue(fluidName);
+        if (fluid == null) { throw new IllegalArgumentException("Invalid fluid: " + fluidName); }
+
+        int amount = json.get("amount").getAsInt();
+        return new FluidStack(fluid, amount);
     }
 }

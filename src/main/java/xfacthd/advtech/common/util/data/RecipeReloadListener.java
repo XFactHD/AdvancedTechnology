@@ -39,6 +39,7 @@ public class RecipeReloadListener implements IResourceManagerReloadListener
         CrusherRecipe.RECIPES = filterByType(recipes, CrusherRecipe.class, CrusherRecipe.TYPE);
         AlloySmelterRecipe.RECIPES = filterByType(recipes, AlloySmelterRecipe.class, AlloySmelterRecipe.TYPE);
         MetalPressRecipe.RECIPES = filterByType(recipes, MetalPressRecipe.class, MetalPressRecipe.TYPE);
+        LiquifierRecipe.RECIPES = filterByType(recipes, LiquifierRecipe.class, LiquifierRecipe.TYPE);
     }
 
     private <R extends IRecipe<?>> List<R> filterByType(Collection<IRecipe<?>> recipes, Class<R> recipeClass, IRecipeType<R> recipeType)

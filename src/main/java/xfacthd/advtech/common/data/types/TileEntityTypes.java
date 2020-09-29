@@ -27,7 +27,7 @@ public class TileEntityTypes
     public static TileEntityType<TileEntityCrusher>         tileTypeCrusher;
     public static TileEntityType<TileEntityAlloySmelter>    tileTypeAlloySmelter;
     public static TileEntityType<TileEntityMetalPress>      tileTypeMetalPress;
-
+    public static TileEntityType<TileEntityLiquifier>       tileTypeLiquifier;
     public static TileEntityType<TileEntityPlanter>         tileTypePlanter;
     public static TileEntityType<TileEntityHarvester>       tileTypeHarvester;
     public static TileEntityType<TileEntityFertilizer>      tileTypeFertilizer;

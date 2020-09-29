@@ -80,6 +80,7 @@ public class EnglishLangProvider extends ATLanguageProvider
         add(ATContent.blockCrusher, "Crusher");
         add(ATContent.blockAlloySmelter, "Alloy Smelter");
         add(ATContent.blockMetalPress, "Metal Press");
+        add(ATContent.blockLiquifier, "Liquifier");
         add(ATContent.blockPlanter, "Planter");
         add(ATContent.blockHarvester, "Harvester");
         add(ATContent.blockFertilizer, "Fertilizer");
@@ -130,6 +131,7 @@ public class EnglishLangProvider extends ATLanguageProvider
         add(TileEntityCrusher.TITLE, "Crusher");
         add(TileEntityAlloySmelter.TITLE, "Alloy Smelter");
         add(TileEntityMetalPress.TITLE, "Metal Press");
+        add(TileEntityLiquifier.TITLE, "Liquifier");
         add(TileEntityPlanter.TITLE, "Planter");
         add(TileEntityHarvester.TITLE, "Harvester");
         add(TileEntityFertilizer.TITLE, "Fertilizer");
@@ -142,6 +144,7 @@ public class EnglishLangProvider extends ATLanguageProvider
         add(TabMachinePort.BTN_TOOLTIP, "Active output");
 
         add(ScreenMachine.SHOW_AREA, "Show area");
+        add(ScreenMachine.TANK_EMPTY, "Empty");
         add(ScreenPlanter.SET_FILTER, "Set filter");
         add(ScreenPlanter.CLEAR_FILTER, "Clear filter");
         add(ScreenChunkLoader.RADIUS, "Radius:");
@@ -152,5 +155,6 @@ public class EnglishLangProvider extends ATLanguageProvider
         add("jei_cat.advtech.crusher", "Crushing");
         add("jei_cat.advtech.alloy_smelter", "Alloy Smelting");
         add("jei_cat.advtech.metal_press", "Metal Forming");
+        add("jei_cat.advtech.liquifier", "Liquification");
     }
 }

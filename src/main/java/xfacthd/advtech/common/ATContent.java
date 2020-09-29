@@ -54,7 +54,7 @@ public class ATContent
     public static BlockMachine blockCrusher;                    //STATUS: Complete
     public static BlockMachine blockAlloySmelter;               //STATUS: Complete
     public static BlockMachine blockMetalPress;                 //STATUS: Complete
-    public static BlockMachine blockLiquifier;                  //STATUS: Not implemented
+    public static BlockMachine blockLiquifier;                  //STATUS: Complete
     public static BlockMachine blockFluidFiller;                //STATUS: Not implemented
     public static BlockMachine blockFreezer;                    //STATUS: Not implemented
     public static BlockMachine blockCharger;                    //STATUS: Not implemented
@@ -106,6 +106,7 @@ public class ATContent
         registry.register(blockCrusher = new BlockCrusher());
         registry.register(blockAlloySmelter = new BlockAlloySmelter());
         registry.register(blockMetalPress = new BlockMetalPress());
+        registry.register(blockLiquifier = new BlockLiquifier());
         registry.register(blockPlanter = new BlockPlanter());
         registry.register(blockHarvester = new BlockHarvester());
         registry.register(blockFertilizer = new BlockFertilizer());
@@ -135,6 +136,7 @@ public class ATContent
         registry.register(blockCrusher.createItemBlock());
         registry.register(blockAlloySmelter.createItemBlock());
         registry.register(blockMetalPress.createItemBlock());
+        registry.register(blockLiquifier.createItemBlock());
         registry.register(blockPlanter.createItemBlock());
         registry.register(blockHarvester.createItemBlock());
         registry.register(blockFertilizer.createItemBlock());
@@ -180,6 +182,7 @@ public class ATContent
         TileEntityTypes.tileTypeCrusher = TileEntityTypes.create(TileEntityCrusher::new, "tile_crusher", blockCrusher);
         TileEntityTypes.tileTypeAlloySmelter = TileEntityTypes.create(TileEntityAlloySmelter::new, "tile_alloy_smelter", blockAlloySmelter);
         TileEntityTypes.tileTypeMetalPress = TileEntityTypes.create(TileEntityMetalPress::new, "tile_metal_press", blockMetalPress);
+        TileEntityTypes.tileTypeLiquifier = TileEntityTypes.create(TileEntityLiquifier::new, "tile_liquifier", blockLiquifier);
         TileEntityTypes.tileTypePlanter = TileEntityTypes.create(TileEntityPlanter::new, "tile_planter", blockPlanter);
         TileEntityTypes.tileTypeHarvester = TileEntityTypes.create(TileEntityHarvester::new, "tile_harvester", blockHarvester);
         TileEntityTypes.tileTypeFertilizer = TileEntityTypes.create(TileEntityFertilizer::new, "tile_fertilizer", blockFertilizer);
@@ -219,6 +222,12 @@ public class ATContent
         {
             TileEntity te = inv.player.world.getTileEntity(data.readBlockPos());
             return new ContainerMetalPress(windowId, (TileEntityMetalPress)te, inv);
+        });
+
+        ContainerTypes.containerTypeLiquifier = ContainerTypes.create("container_liquifier", (windowId, inv, data) ->
+        {
+            TileEntity te = inv.player.world.getTileEntity(data.readBlockPos());
+            return new ContainerLiquifier(windowId, (TileEntityLiquifier)te, inv);
         });
 
         ContainerTypes.containerTypePlanter = ContainerTypes.create("container_planter", (windowId, inv, data) ->
@@ -273,5 +282,6 @@ public class ATContent
         registry.register(RecipeSerializers.crusher = new CrusherRecipe.Serializer());
         registry.register(RecipeSerializers.alloySmelter = new AlloySmelterRecipe.Serializer());
         registry.register(RecipeSerializers.metalPress = new MetalPressRecipe.Serializer());
+        registry.register(RecipeSerializers.liquifier = new LiquifierRecipe.Serializer());
     }
 }

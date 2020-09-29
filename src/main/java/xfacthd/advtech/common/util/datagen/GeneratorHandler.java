@@ -44,6 +44,7 @@ public class GeneratorHandler
         gen.addProvider(new CrusherRecipeProvider(gen));
         gen.addProvider(new AlloySmelterRecipeProvider(gen));
         gen.addProvider(new MetalPressRecipeProvider(gen));
+        gen.addProvider(new LiquifierRecipeProvider(gen));
 
         gen.addProvider(new EnglishLangProvider(gen));
     }

@@ -1,0 +1,12 @@
+{
+  "type": "advtech:liquifier",
+  "energy": 300000,
+  "input": {
+    "tag": "forge:cobblestone"
+  },
+  "inputCount": 1,
+  "output": {
+    "name": "minecraft:lava",
+    "amount": 1000
+  }
+}

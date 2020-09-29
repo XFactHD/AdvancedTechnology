@@ -8,4 +8,5 @@ public class RecipeSerializers
     public static IRecipeSerializer<CrusherRecipe> crusher;
     public static IRecipeSerializer<AlloySmelterRecipe> alloySmelter;
     public static IRecipeSerializer<MetalPressRecipe> metalPress;
+    public static IRecipeSerializer<LiquifierRecipe> liquifier;
 }
