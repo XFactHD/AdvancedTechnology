@@ -61,6 +61,11 @@ public abstract class ATRecipeCategory<R> implements IRecipeCategory<R>
         TextureDrawer.drawTexture(x, y + (60F - height), 12, height, 0, 1, minV, 1);
     }
 
+    protected static ResourceLocation background(String name)
+    {
+        return new ResourceLocation(AdvancedTechnology.MODID, "textures/gui/" + name + ".png");
+    }
+
     protected static ResourceLocation widget(String name)
     {
         return new ResourceLocation(AdvancedTechnology.MODID, "textures/gui/widgets/" + name + ".png");
