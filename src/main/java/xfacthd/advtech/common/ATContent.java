@@ -57,7 +57,7 @@ public class ATContent
     public static BlockMachine blockLiquifier;                  //STATUS: Complete
     public static BlockMachine blockFluidFiller;                //STATUS: Not implemented
     public static BlockMachine blockFreezer;                    //STATUS: Not implemented
-    public static BlockMachine blockCharger;                    //STATUS: Not implemented
+    public static BlockMachine blockCharger;                    //STATUS: Complete
     public static BlockMachine blockPlanter;                    //STATUS: Complete
     public static BlockMachine blockHarvester;                  //STATUS: Complete
     public static BlockMachine blockFertilizer;                 //STATUS: Complete
@@ -107,6 +107,7 @@ public class ATContent
         registry.register(blockAlloySmelter = new BlockAlloySmelter());
         registry.register(blockMetalPress = new BlockMetalPress());
         registry.register(blockLiquifier = new BlockLiquifier());
+        registry.register(blockCharger = new BlockCharger());
         registry.register(blockPlanter = new BlockPlanter());
         registry.register(blockHarvester = new BlockHarvester());
         registry.register(blockFertilizer = new BlockFertilizer());
@@ -137,6 +138,7 @@ public class ATContent
         registry.register(blockAlloySmelter.createItemBlock());
         registry.register(blockMetalPress.createItemBlock());
         registry.register(blockLiquifier.createItemBlock());
+        registry.register(blockCharger.createItemBlock());
         registry.register(blockPlanter.createItemBlock());
         registry.register(blockHarvester.createItemBlock());
         registry.register(blockFertilizer.createItemBlock());
@@ -183,6 +185,7 @@ public class ATContent
         TileEntityTypes.tileTypeAlloySmelter = TileEntityTypes.create(TileEntityAlloySmelter::new, "tile_alloy_smelter", blockAlloySmelter);
         TileEntityTypes.tileTypeMetalPress = TileEntityTypes.create(TileEntityMetalPress::new, "tile_metal_press", blockMetalPress);
         TileEntityTypes.tileTypeLiquifier = TileEntityTypes.create(TileEntityLiquifier::new, "tile_liquifier", blockLiquifier);
+        TileEntityTypes.tileTypeCharger = TileEntityTypes.create(TileEntityCharger::new, "tile_charger", blockCharger);
         TileEntityTypes.tileTypePlanter = TileEntityTypes.create(TileEntityPlanter::new, "tile_planter", blockPlanter);
         TileEntityTypes.tileTypeHarvester = TileEntityTypes.create(TileEntityHarvester::new, "tile_harvester", blockHarvester);
         TileEntityTypes.tileTypeFertilizer = TileEntityTypes.create(TileEntityFertilizer::new, "tile_fertilizer", blockFertilizer);
@@ -228,6 +231,12 @@ public class ATContent
         {
             TileEntity te = inv.player.world.getTileEntity(data.readBlockPos());
             return new ContainerLiquifier(windowId, (TileEntityLiquifier)te, inv);
+        });
+
+        ContainerTypes.containerTypeCharger = ContainerTypes.create("container_charger", (windowId, inv, data) ->
+        {
+            TileEntity te = inv.player.world.getTileEntity(data.readBlockPos());
+            return new ContainerCharger(windowId, (TileEntityCharger)te, inv);
         });
 
         ContainerTypes.containerTypePlanter = ContainerTypes.create("container_planter", (windowId, inv, data) ->

@@ -40,6 +40,10 @@ public class MachineBlockStateProvider extends ATBlockStateProvider
         ModelFile liquifierModelOn = machineModel("block_liquifier_on");
         machineState(ATContent.blockLiquifier, liquifierModel, liquifierModelOn);
 
+        ModelFile chargerModel = machineModel("block_charger");
+        ModelFile chargerModelOn = machineModel("block_charger_on");
+        machineState(ATContent.blockCharger, chargerModel, chargerModelOn);
+
         ModelFile planterModel = topModel("block_planter");
         ModelFile planterModelOn = topModel("block_planter_on");
         unrotatableMachineState(ATContent.blockPlanter, planterModel, planterModelOn);

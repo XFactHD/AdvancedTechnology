@@ -81,6 +81,7 @@ public class EnglishLangProvider extends ATLanguageProvider
         add(ATContent.blockAlloySmelter, "Alloy Smelter");
         add(ATContent.blockMetalPress, "Metal Press");
         add(ATContent.blockLiquifier, "Liquifier");
+        add(ATContent.blockCharger, "Charger");
         add(ATContent.blockPlanter, "Planter");
         add(ATContent.blockHarvester, "Harvester");
         add(ATContent.blockFertilizer, "Fertilizer");
@@ -132,6 +133,7 @@ public class EnglishLangProvider extends ATLanguageProvider
         add(TileEntityAlloySmelter.TITLE, "Alloy Smelter");
         add(TileEntityMetalPress.TITLE, "Metal Press");
         add(TileEntityLiquifier.TITLE, "Liquifier");
+        add(TileEntityCharger.TITLE, "Charger");
         add(TileEntityPlanter.TITLE, "Planter");
         add(TileEntityHarvester.TITLE, "Harvester");
         add(TileEntityFertilizer.TITLE, "Fertilizer");

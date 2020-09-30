@@ -45,6 +45,7 @@ public class BlockLootTableProvider extends LootTableProvider
             blocks.add(ATContent.blockAlloySmelter);
             blocks.add(ATContent.blockMetalPress);
             blocks.add(ATContent.blockLiquifier);
+            blocks.add(ATContent.blockCharger);
             blocks.add(ATContent.blockPlanter);
             blocks.add(ATContent.blockHarvester);
             blocks.add(ATContent.blockFertilizer);
@@ -71,6 +72,7 @@ public class BlockLootTableProvider extends LootTableProvider
             registerDropSelfLootTable(ATContent.blockAlloySmelter);
             registerDropSelfLootTable(ATContent.blockMetalPress);
             registerDropSelfLootTable(ATContent.blockLiquifier);
+            registerDropSelfLootTable(ATContent.blockCharger);
             registerDropSelfLootTable(ATContent.blockPlanter);
             registerDropSelfLootTable(ATContent.blockHarvester);
             registerDropSelfLootTable(ATContent.blockFertilizer);
