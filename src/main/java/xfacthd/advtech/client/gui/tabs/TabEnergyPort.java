@@ -20,7 +20,7 @@ public class TabEnergyPort extends AbstractTab<ScreenEnergyCube>
     public static final ITextComponent TITLE = new TranslationTextComponent("gui." + AdvancedTechnology.MODID + ".tab.machine_port");
     private static final ResourceLocation ICON_TEXTURE = Utils.modLocation("textures/gui/tabs/icon_port_setting.png");
     private static final ResourceLocation GRID_TEXTURE = Utils.modLocation("textures/gui/tabs/energy_port_setting.png");
-    private static final ResourceLocation PORT_TEXTURE = Utils.modLocation("textures/block/energy/block_energy_cube_port.png");
+    private static final ResourceLocation PORT_TEXTURE = Utils.modLocation("textures/block/storage/block_energy_cube_port.png");
     private static final ResourceLocation BAR_TEXTURE = Utils.modLocation("textures/gui/tabs/energy_port_bar_full.png");
 
     private static final Map<Side, Rectangle2d> PORT_COORDS;
