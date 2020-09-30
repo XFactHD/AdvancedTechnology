@@ -10,6 +10,7 @@ import xfacthd.advtech.common.ATContent;
 import xfacthd.advtech.common.data.ItemGroups;
 import xfacthd.advtech.common.data.states.MachineLevel;
 import xfacthd.advtech.common.data.subtypes.*;
+import xfacthd.advtech.common.item.storage.BlockItemEnergyCube;
 import xfacthd.advtech.common.tileentity.generator.*;
 import xfacthd.advtech.common.tileentity.machine.*;
 import xfacthd.advtech.common.tileentity.utility.*;
@@ -153,6 +154,8 @@ public class EnglishLangProvider extends ATLanguageProvider
         add(ScreenChunkLoader.CHUNKS, "Chunks loaded:");
         add(ScreenChunkLoader.SHOW, "Show chunks");
         add(ScreenChunkLoader.HIDE, "Hide chunks");
+
+        add(BlockItemEnergyCube.STORED, "Stored:");
 
         add("jei_cat.advtech.crusher", "Crushing");
         add("jei_cat.advtech.alloy_smelter", "Alloy Smelting");

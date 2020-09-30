@@ -4,13 +4,16 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Direction;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.energy.CapabilityEnergy;
 import xfacthd.advtech.AdvancedTechnology;
 import xfacthd.advtech.common.capability.energy.ATEnergyStorage;
+import xfacthd.advtech.common.capability.energy.ItemEnergyStorage;
 import xfacthd.advtech.common.container.storage.ContainerEnergyCube;
 import xfacthd.advtech.common.data.states.*;
 import xfacthd.advtech.common.data.types.TileEntityTypes;
@@ -23,8 +26,8 @@ import java.util.Map;
 public class TileEntityEnergyCube extends TileEntityEnergyHandler implements INamedContainerProvider
 {
     public static final ITextComponent TITLE = new TranslationTextComponent("gui." + AdvancedTechnology.MODID + ".energy_cube");
-    private static final int BASE_CAPACITY = 10000;
-    private static final int BASE_TRANSFER = 250;
+    public static final int BASE_CAPACITY = 10000;
+    public static final int BASE_TRANSFER = 250;
 
     private final Map<Side, SideAccess> ports = new EnumMap<>(Side.class);
     private final Map<Direction, SideAccess> cardinalPorts = new EnumMap<>(Direction.class);
@@ -208,12 +211,37 @@ public class TileEntityEnergyCube extends TileEntityEnergyHandler implements INa
         for (Side side : Side.values()) { ports.put(side, SideAccess.values()[nbt.getInt(side.getName())]); }
     }
 
-    public void writeToItemData(CompoundNBT nbt)
+    public void writeToItemData(ItemStack stack)
     {
+        CompoundNBT nbt = stack.getOrCreateChildTag("BlockEntityTag");
         nbt.putInt("level", level.ordinal());
         for (Side side : Side.values()) { nbt.putInt(side.getName(), ports.get(side).ordinal()); }
-
         nbt.put("energy", internalEnergyHandler.serializeNBT());
+
+        stack.getCapability(CapabilityEnergy.ENERGY).ifPresent(handler ->
+        {
+            ItemEnergyStorage storage = (ItemEnergyStorage)handler;
+            storage.initFromTile(
+                    internalEnergyHandler.getMaxEnergyStored(),
+                    internalEnergyHandler.getMaxReceive(),
+                    internalEnergyHandler.getEnergyStored()
+            );
+        });
+    }
+
+    public void readFromItemData(ItemStack stack)
+    {
+        stack.getCapability(CapabilityEnergy.ENERGY).ifPresent(handler ->
+        {
+            ItemEnergyStorage storage = (ItemEnergyStorage)handler;
+            internalEnergyHandler.reconfigure(
+                    storage.getMaxEnergyStored(),
+                    storage.getMaxTransfer(),
+                    storage.getMaxTransfer()
+            );
+            internalEnergyHandler.setEnergyStored(storage.getEnergyStored());
+            markFullUpdate();
+        });
     }
 
     @Override

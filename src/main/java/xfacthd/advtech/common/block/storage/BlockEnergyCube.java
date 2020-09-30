@@ -4,11 +4,10 @@ import com.google.common.collect.Maps;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.item.*;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
@@ -22,6 +21,7 @@ import net.minecraftforge.fml.network.NetworkHooks;
 import xfacthd.advtech.common.block.BlockBase;
 import xfacthd.advtech.common.data.ItemGroups;
 import xfacthd.advtech.common.data.states.MachineLevel;
+import xfacthd.advtech.common.item.storage.BlockItemEnergyCube;
 import xfacthd.advtech.common.item.tool.ItemUpgrade;
 import xfacthd.advtech.common.item.tool.ItemWrench;
 import xfacthd.advtech.common.tileentity.storage.TileEntityEnergyCube;
@@ -64,6 +64,19 @@ public class BlockEnergyCube extends BlockBase
         Direction facing = context.getPlacementHorizontalFacing();
         if (!context.getPlayer().isSneaking()) { facing = facing.getOpposite(); }
         return getDefaultState().with(PropertyHolder.FACING_HOR, facing);
+    }
+
+    @Override
+    public void onBlockPlacedBy(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack)
+    {
+        if (!world.isRemote())
+        {
+            TileEntity te = world.getTileEntity(pos);
+            if (te instanceof TileEntityEnergyCube)
+            {
+                ((TileEntityEnergyCube) te).readFromItemData(stack);
+            }
+        }
     }
 
     @Override
@@ -162,8 +175,8 @@ public class BlockEnergyCube extends BlockBase
         TileEntity te = world.getTileEntity(pos);
         if (te instanceof TileEntityEnergyCube)
         {
-            CompoundNBT nbt = stack.getOrCreateChildTag("BlockEntityTag");
-            ((TileEntityEnergyCube)te).writeToItemData(nbt);
+            //INFO: stored energy is always zero because it is never sent to the client
+            ((TileEntityEnergyCube)te).writeToItemData(stack);
         }
         return stack;
     }
@@ -176,8 +189,7 @@ public class BlockEnergyCube extends BlockBase
         if (te instanceof TileEntityEnergyCube && !stacks.isEmpty())
         {
             ItemStack stack = stacks.get(0);
-            CompoundNBT nbt = stack.getOrCreateChildTag("BlockEntityTag");
-            ((TileEntityEnergyCube) te).writeToItemData(nbt);
+            ((TileEntityEnergyCube) te).writeToItemData(stack);
         }
         return stacks;
     }
@@ -186,6 +198,18 @@ public class BlockEnergyCube extends BlockBase
     public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext context)
     {
         return SHAPES.get(state.get(PropertyHolder.FACING_HOR));
+    }
+
+    @Override
+    protected Item.Properties createItemProperties() { return super.createItemProperties().maxStackSize(1); }
+
+    @Override
+    public Item createItemBlock()
+    {
+        BlockItem item = new BlockItemEnergyCube(this, createItemProperties());
+        //noinspection ConstantConditions
+        item.setRegistryName(getRegistryName());
+        return item;
     }
 
     @Override

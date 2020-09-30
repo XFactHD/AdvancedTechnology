@@ -21,6 +21,12 @@ public class ATEnergyStorage extends EnergyStorage implements INBTSerializable<C
         this.maxExtract = Math.max(this.maxExtract, maxExtract);
     }
 
+    public final void setEnergyStored(int energy) { this.energy = energy; }
+
+    public int getMaxReceive() { return maxReceive; }
+
+    public int getMaxExtract() { return maxExtract; }
+
     @Override
     public CompoundNBT serializeNBT()
     {

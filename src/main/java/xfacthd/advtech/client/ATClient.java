@@ -92,6 +92,7 @@ public class ATClient
     @SubscribeEvent
     public static void onModelBake(final ModelBakeEvent event)
     {
+        RenderItemEnergyCube.handleModel(event.getModelRegistry());
         RenderItemFluidTank.handleModel(event.getModelRegistry());
     }
 

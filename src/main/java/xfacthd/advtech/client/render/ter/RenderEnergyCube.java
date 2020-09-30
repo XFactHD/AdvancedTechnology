@@ -32,6 +32,13 @@ public class RenderEnergyCube extends TileEntityRenderer<TileEntityEnergyCube>
 
         int level = cube.getEnergyLevel();
 
+        renderEnergyBar(buffer, stack, level, overlay, lightmap);
+
+        stack.pop();
+    }
+
+    public static void renderEnergyBar(IRenderTypeBuffer buffer, MatrixStack stack, int level, int overlay, int lightmap)
+    {
         IVertexBuilder builder = buffer.getBuffer(Atlases.getCutoutBlockType());
         Matrix4f matrix = stack.getLast().getMatrix();
         Matrix3f normal = stack.getLast().getNormal();
@@ -63,8 +70,6 @@ public class RenderEnergyCube extends TileEntityRenderer<TileEntityEnergyCube>
             builder.pos(matrix,  3F/16F, 3F/16F, 0).color(255, 255, 255, 255).tex(minU, minV).overlay(overlay).lightmap(lightmap).normal(normal, 0, 0, -1).endVertex();
             builder.pos(matrix,  3F/16F,  swapY, 0).color(255, 255, 255, 255).tex(minU, maxV).overlay(overlay).lightmap(lightmap).normal(normal, 0, 0, -1).endVertex();
         }
-
-        stack.pop();
     }
 
     public static void registerTextures(final TextureStitchEvent.Pre event)

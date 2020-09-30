@@ -61,6 +61,7 @@
   "gui.advtech.tab.redstone_settings": "Redstone",
   "gui.advtech.tank_empty": "Empty",
   "gui.advtech.tooltip.active_output": "Active output",
+  "info.advtech.stored": "Stored:",
   "item.advtech.item_coke": "Coke",
   "item.advtech.item_electric_generator": "Electric Generator",
   "item.advtech.item_electric_motor": "Electric Motor",
