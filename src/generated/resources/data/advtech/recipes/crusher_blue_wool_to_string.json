@@ -5,7 +5,8 @@
     "item": "minecraft:blue_wool"
   },
   "primary": {
-    "item": "minecraft:string"
+    "item": "minecraft:string",
+    "count": 4
   },
   "secondary": {
     "item": "minecraft:blue_dye",

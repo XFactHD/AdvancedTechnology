@@ -210,7 +210,7 @@ public class CrusherRecipeProvider extends ATRecipeProvider
 
         for (DyeColor color : DyeColor.values())
         {
-            CrusherRecipeBuilder.crusherRecipe(Items.STRING)
+            CrusherRecipeBuilder.crusherRecipe(Items.STRING, 4)
                     .input(SheepEntity.WOOL_BY_COLOR.get(color))
                     .energy(3000)
                     .secondary(DyeItem.getItem(color))

@@ -5,7 +5,8 @@
     "item": "minecraft:light_gray_wool"
   },
   "primary": {
-    "item": "minecraft:string"
+    "item": "minecraft:string",
+    "count": 4
   },
   "secondary": {
     "item": "minecraft:light_gray_dye",
