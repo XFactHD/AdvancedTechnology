@@ -12,6 +12,7 @@ import xfacthd.advtech.common.net.packets.container.*;
 import xfacthd.advtech.common.net.packets.debug.*;
 import xfacthd.advtech.common.net.packets.energy.*;
 import xfacthd.advtech.common.net.packets.machine.*;
+import xfacthd.advtech.common.net.packets.tileentity.*;
 
 public class NetworkHandler
 {
@@ -42,6 +43,7 @@ public class NetworkHandler
         CHANNEL.registerMessage(idx++, PacketSyncBoolHolder.class,      PacketSyncBoolHolder::encode,       PacketSyncBoolHolder::new,      PacketSyncBoolHolder::handle);
         CHANNEL.registerMessage(idx++, PacketDebugForcedChunks.class,   PacketDebugForcedChunks::encode,    PacketDebugForcedChunks::new,   PacketDebugForcedChunks::handle);
         CHANNEL.registerMessage(idx++, PacketUpdateFluid.class,         PacketUpdateFluid::encode,          PacketUpdateFluid::new,         PacketUpdateFluid::handle);
+        CHANNEL.registerMessage(idx++, PacketTileSync.class,            PacketTileSync::encode,             PacketTileSync::new,            PacketTileSync::handle);
     }
 
     public static void sendToServer(AbstractPacket packet) { CHANNEL.sendToServer(packet); }

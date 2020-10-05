@@ -72,6 +72,7 @@ public abstract class ContainerMachine<B extends BlockMachine, T extends TileEnt
 
     public void switchEnhancementSlots(boolean open) { enhancementSlots.forEach(slot -> slot.setEnabled(open)); }
 
+    @Override
     public boolean canInteractWith(PlayerEntity player) { return isWithinUsableDistance(worldPosCallable, player, block); }
 
     public final int getStoredEnergy() { return energyHolder.get(); }

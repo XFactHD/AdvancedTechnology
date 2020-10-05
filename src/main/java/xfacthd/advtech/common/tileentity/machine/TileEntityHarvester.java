@@ -6,6 +6,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -51,8 +52,6 @@ public class TileEntityHarvester extends TileEntityInventoryMachine implements I
     @Override
     public void tick()
     {
-        super.tick();
-
         //noinspection ConstantConditions
         if (!world.isRemote())
         {
@@ -126,6 +125,8 @@ public class TileEntityHarvester extends TileEntityInventoryMachine implements I
                 setActive(true);
             }
         }
+
+        super.tick();
     }
 
     private void tryHarvestCrop()
@@ -319,7 +320,7 @@ public class TileEntityHarvester extends TileEntityInventoryMachine implements I
 
             Direction facing = getBlockState().get(PropertyHolder.FACING_HOR);
             scanPos = pos.offset(facing).offset(facing.rotateYCCW(), radius);
-            markFullUpdate();
+            markForSync();
         }
     }
 
@@ -336,7 +337,7 @@ public class TileEntityHarvester extends TileEntityInventoryMachine implements I
             Direction facing = getBlockState().get(PropertyHolder.FACING_HOR);
             scanPos = pos.offset(facing).offset(facing.rotateYCCW());
 
-            markFullUpdate();
+            markForSync();
         }
     }
 
@@ -427,6 +428,20 @@ public class TileEntityHarvester extends TileEntityInventoryMachine implements I
         super.readNetworkNBT(nbt);
 
         radius = nbt.getInt("radius");
+    }
+
+    @Override
+    public void writeSyncPacket(PacketBuffer buffer)
+    {
+        super.writeSyncPacket(buffer);
+        buffer.writeInt(radius);
+    }
+
+    @Override
+    protected void readSyncPacket(PacketBuffer buffer)
+    {
+        super.readSyncPacket(buffer);
+        radius = buffer.readInt();
     }
 
     @Override

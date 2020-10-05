@@ -4,6 +4,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
@@ -30,8 +31,6 @@ public abstract class TileEntityProducer extends TileEntityInventoryMachine
     @Override
     public void tick()
     {
-        super.tick();
-
         //noinspection ConstantConditions
         if (!world.isRemote())
         {
@@ -51,6 +50,8 @@ public abstract class TileEntityProducer extends TileEntityInventoryMachine
                 }
             }
         }
+
+        super.tick();
     }
 
     @Override
@@ -133,5 +134,33 @@ public abstract class TileEntityProducer extends TileEntityInventoryMachine
         super.writeNetworkNBT(nbt);
 
         nbt.putString("recipe", recipe != null ? recipe.getId().toString() : "null");
+    }
+
+    @Override
+    public void writeSyncPacket(PacketBuffer buffer)
+    {
+        super.writeSyncPacket(buffer);
+
+        buffer.writeBoolean(recipe != null);
+        if (recipe != null)
+        {
+            buffer.writeResourceLocation(recipe.getId());
+        }
+    }
+
+    @Override
+    protected void readSyncPacket(PacketBuffer buffer)
+    {
+        super.readSyncPacket(buffer);
+
+        if (buffer.readBoolean()) //Recipe != null
+        {
+            //noinspection ConstantConditions
+            recipe = world.getRecipeManager().getRecipe(buffer.readResourceLocation()).orElse(null);
+        }
+        else
+        {
+            recipe = null;
+        }
     }
 }

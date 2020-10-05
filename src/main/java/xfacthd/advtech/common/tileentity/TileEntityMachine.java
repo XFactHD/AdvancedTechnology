@@ -3,6 +3,7 @@ package xfacthd.advtech.common.tileentity;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
@@ -41,10 +42,18 @@ public abstract class TileEntityMachine extends TileEntityBase implements ITicka
     public void tick()
     {
         //noinspection ConstantConditions
-        if (firstTick && !world.isRemote())
+        if (!world.isRemote())
         {
-            firstTick();
-            firstTick = false;
+            if (firstTick)
+            {
+                firstTick();
+                firstTick = false;
+            }
+
+            if (needsSync())
+            {
+                sendSyncPacket();
+            }
         }
     }
 
@@ -64,23 +73,26 @@ public abstract class TileEntityMachine extends TileEntityBase implements ITicka
     {
         this.level = level;
         onLevelChanged();
-        markFullUpdate();
+        markForSync();
     }
 
     public final MachineLevel getLevel() { return level; }
 
     protected void setActive(boolean active)
     {
-        if (!active)
+        if (active != this.active)
         {
-            //noinspection ConstantConditions
-            lastHiccup = world.getGameTime();
-        }
+            if (!active)
+            {
+                //noinspection ConstantConditions
+                lastHiccup = world.getGameTime();
+            }
 
-        //noinspection ConstantConditions
-        world.setBlockState(pos, getBlockState().with(PropertyHolder.ACTIVE, active));
-        this.active = active;
-        markFullUpdate();
+            //noinspection ConstantConditions
+            world.setBlockState(pos, getBlockState().with(PropertyHolder.ACTIVE, active));
+            this.active = active;
+            markForSync();
+        }
     }
 
     public final boolean isActive() { return active; }
@@ -207,6 +219,26 @@ public abstract class TileEntityMachine extends TileEntityBase implements ITicka
 
         energyHandler.deserializeNBT(nbt.getCompound("energy"));
         upgradeInventory.deserializeNBT(nbt.getCompound("upgrades"));
+    }
+
+    @Override
+    public void writeSyncPacket(PacketBuffer buffer)
+    {
+        buffer.writeInt(level.ordinal());
+        buffer.writeBoolean(active);
+    }
+
+    @Override
+    protected void readSyncPacket(PacketBuffer buffer)
+    {
+        int level = buffer.readInt();
+        if (level != this.level.ordinal())
+        {
+            this.level = MachineLevel.values()[level];
+            markRenderUpdate();
+        }
+
+        active = buffer.readBoolean();
     }
 
     @Override

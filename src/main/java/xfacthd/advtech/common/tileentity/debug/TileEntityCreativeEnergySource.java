@@ -1,6 +1,7 @@
 package xfacthd.advtech.common.tileentity.debug;
 
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
@@ -91,6 +92,12 @@ public class TileEntityCreativeEnergySource extends TileEntityBase implements IT
 
     @Override
     public void readNetworkNBT(CompoundNBT nbt) { }
+
+    @Override
+    public void writeSyncPacket(PacketBuffer buffer) { }
+
+    @Override
+    protected void readSyncPacket(PacketBuffer buffer) { }
 
     private static final class InfiniteSource implements IEnergyStorage
     {

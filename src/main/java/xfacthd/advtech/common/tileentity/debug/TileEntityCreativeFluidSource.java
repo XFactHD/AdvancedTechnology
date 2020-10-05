@@ -2,6 +2,7 @@ package xfacthd.advtech.common.tileentity.debug;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
@@ -58,6 +59,8 @@ public class TileEntityCreativeFluidSource extends TileEntityBase implements ITi
                 neighbor.ifPresent(handler -> handler.fill(fluid, IFluidHandler.FluidAction.EXECUTE));
             }
         }
+
+        if (!world.isRemote() && needsSync()) { sendSyncPacket(); }
     }
 
     private void invalidateNeighbor(Direction side) { neighbors.put(side, LazyOptional.empty()); }
@@ -95,7 +98,7 @@ public class TileEntityCreativeFluidSource extends TileEntityBase implements ITi
             return false;
         }).orElse(false);
 
-        if (success) { markFullUpdate(); }
+        if (success) { markForSync(); }
 
         return true;
     }
@@ -124,6 +127,12 @@ public class TileEntityCreativeFluidSource extends TileEntityBase implements ITi
 
     @Override
     public void readNetworkNBT(CompoundNBT nbt) { source.deserializeNBT(nbt.getCompound("fluid")); }
+
+    @Override
+    public void writeSyncPacket(PacketBuffer buffer) { buffer.writeCompoundTag(source.serializeNBT()); }
+
+    @Override
+    protected void readSyncPacket(PacketBuffer buffer) { source.deserializeNBT(buffer.readCompoundTag()); }
 
     @Override
     public CompoundNBT write(CompoundNBT nbt)

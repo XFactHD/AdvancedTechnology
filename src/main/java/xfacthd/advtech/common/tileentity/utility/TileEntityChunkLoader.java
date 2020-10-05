@@ -5,6 +5,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.text.ITextComponent;
@@ -43,8 +44,6 @@ public class TileEntityChunkLoader extends TileEntityMachine
     @Override
     public void tick()
     {
-        super.tick();
-
         //noinspection ConstantConditions
         if (!world.isRemote())
         {
@@ -62,6 +61,8 @@ public class TileEntityChunkLoader extends TileEntityMachine
                 energyHandler.extractEnergyInternal(perChunkConsumption * loadedChunks.size(), false);
             }
         }
+
+        super.tick();
     }
 
     @Override
@@ -164,7 +165,7 @@ public class TileEntityChunkLoader extends TileEntityMachine
         }
 
         this.radius = radius;
-        markFullUpdate();
+        markForSync();
     }
 
     public int getRadius() { return radius; }
@@ -231,8 +232,6 @@ public class TileEntityChunkLoader extends TileEntityMachine
     {
         super.readNetworkNBT(nbt);
         radius = nbt.getInt("radius");
-
-        if (world != null) { markFullUpdate(); }
     }
 
     @Override
@@ -240,6 +239,20 @@ public class TileEntityChunkLoader extends TileEntityMachine
     {
         super.writeNetworkNBT(nbt);
         nbt.putInt("radius", radius);
+    }
+
+    @Override
+    public void writeSyncPacket(PacketBuffer buffer)
+    {
+        super.writeSyncPacket(buffer);
+        buffer.writeInt(radius);
+    }
+
+    @Override
+    public void readSyncPacket(PacketBuffer buffer)
+    {
+        super.readSyncPacket(buffer);
+        radius = buffer.readInt();
     }
 
     @Override

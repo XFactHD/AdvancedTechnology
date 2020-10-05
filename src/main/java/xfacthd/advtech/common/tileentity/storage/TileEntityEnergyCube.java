@@ -6,6 +6,7 @@ import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -49,8 +50,6 @@ public class TileEntityEnergyCube extends TileEntityEnergyHandler implements INa
     {
         if (firstTick) { firstTick(); }
 
-        super.tick();
-
         //noinspection ConstantConditions
         if (!world.isRemote())
         {
@@ -60,9 +59,11 @@ public class TileEntityEnergyCube extends TileEntityEnergyHandler implements INa
             if (newLevel != energyLevel)
             {
                 energyLevel = newLevel;
-                markFullUpdate();
+                markForSync();
             }
         }
+
+        super.tick();
     }
 
     private void firstTick()
@@ -135,7 +136,8 @@ public class TileEntityEnergyCube extends TileEntityEnergyHandler implements INa
         }
 
         //noinspection ConstantConditions
-        if (changed || world.isRemote()) { markFullUpdate(); }
+        if (world.isRemote()) { markRenderUpdate(); }
+        else if (changed) { markForSync(); }
     }
 
     public MachineLevel getLevel() { return level; }
@@ -144,7 +146,7 @@ public class TileEntityEnergyCube extends TileEntityEnergyHandler implements INa
     {
         this.level = level;
         onLevelChanged();
-        markFullUpdate();
+        markForSync();
     }
 
     public void onLevelChanged()
@@ -196,6 +198,37 @@ public class TileEntityEnergyCube extends TileEntityEnergyHandler implements INa
     }
 
     @Override
+    public void writeSyncPacket(PacketBuffer buffer)
+    {
+        buffer.writeInt(level.ordinal());
+        for (Side side : Side.values()) { buffer.writeInt(ports.get(side).ordinal()); }
+        buffer.writeInt(energyLevel);
+    }
+
+    @Override
+    protected void readSyncPacket(PacketBuffer buffer)
+    {
+        int level = buffer.readInt();
+        if (level != this.level.ordinal())
+        {
+            this.level = MachineLevel.values()[level];
+            markRenderUpdate();
+        }
+
+        for (Side side : Side.values())
+        {
+            int mode = buffer.readInt();
+            if (ports.get(side).ordinal() != mode)
+            {
+                ports.put(side, SideAccess.values()[mode]);
+                markRenderUpdate();
+            }
+        }
+
+        energyLevel = buffer.readInt();
+    }
+
+    @Override
     public CompoundNBT write(CompoundNBT nbt)
     {
         nbt.putInt("level", level.ordinal());
@@ -240,7 +273,7 @@ public class TileEntityEnergyCube extends TileEntityEnergyHandler implements INa
                     storage.getMaxTransfer()
             );
             internalEnergyHandler.setEnergyStored(storage.getEnergyStored());
-            markFullUpdate();
+            markForSync();
         });
     }
 

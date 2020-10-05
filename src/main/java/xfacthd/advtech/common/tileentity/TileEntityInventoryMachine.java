@@ -3,6 +3,7 @@ package xfacthd.advtech.common.tileentity;
 import com.google.common.base.Preconditions;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
@@ -46,8 +47,6 @@ public abstract class TileEntityInventoryMachine extends TileEntityMachine
     @Override
     public void tick()
     {
-        super.tick();
-
         //noinspection ConstantConditions
         if (!world.isRemote())
         {
@@ -59,6 +58,8 @@ public abstract class TileEntityInventoryMachine extends TileEntityMachine
 
             if (forceOutput) { pushOutputs(); }
         }
+
+        super.tick();
     }
 
     @Override
@@ -130,7 +131,8 @@ public abstract class TileEntityInventoryMachine extends TileEntityMachine
         onPortMappingChanged(facing);
 
         //noinspection ConstantConditions
-        if (changed || world.isRemote()) { markFullUpdate(); }
+        if (world.isRemote()) { markRenderUpdate(); }
+        else if (changed) { markForSync(); }
     }
 
     protected void onPortMappingChanged(Direction facing) { }
@@ -284,6 +286,30 @@ public abstract class TileEntityInventoryMachine extends TileEntityMachine
         super.writeNetworkNBT(nbt);
 
         for (Side side : Side.values()) { nbt.putInt(side.getName(), ports.get(side).ordinal()); }
+    }
+
+    @Override
+    public void writeSyncPacket(PacketBuffer buffer)
+    {
+        super.writeSyncPacket(buffer);
+        for (Side side : Side.values()) { buffer.writeInt(ports.get(side).ordinal()); }
+    }
+
+    @Override
+    protected void readSyncPacket(PacketBuffer buffer)
+    {
+        super.readSyncPacket(buffer);
+
+        for (Side side : Side.values())
+        {
+            int mode = buffer.readInt();
+            if (mode != ports.get(side).ordinal())
+            {
+                ports.put(side, SideAccess.values()[mode]);
+                markRenderUpdate();
+            }
+        }
+        remapPorts();
     }
 
     @Override

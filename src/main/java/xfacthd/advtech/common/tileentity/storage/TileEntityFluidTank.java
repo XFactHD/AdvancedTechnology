@@ -3,6 +3,7 @@ package xfacthd.advtech.common.tileentity.storage;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
@@ -70,11 +71,13 @@ public class TileEntityFluidTank extends TileEntityBase implements ITickableTile
                     if (toTransfer > 0)
                     {
                         internalFluidHandler.drain(toTransfer, IFluidHandler.FluidAction.EXECUTE);
-                        markDirty();
+                        markForSync();
                     }
                 }
             });
         }
+
+        if (!world.isRemote() && needsSync()) { sendSyncPacket(); }
     }
 
     private void firstTick()
@@ -89,7 +92,7 @@ public class TileEntityFluidTank extends TileEntityBase implements ITickableTile
         int capacity = BASE_CAPACITY * mult;
         int maxReceive = BASE_TRANSFER * mult;
         internalFluidHandler.reconfigure(capacity, maxReceive);
-        markFullUpdate();
+        markForSync();
     }
 
     public void upgrade(MachineLevel level)
@@ -118,7 +121,7 @@ public class TileEntityFluidTank extends TileEntityBase implements ITickableTile
                 break;
             }
         }
-        markFullUpdate();
+        markForSync();
     }
 
     public MachineLevel getLevel() { return level; }
@@ -183,7 +186,7 @@ public class TileEntityFluidTank extends TileEntityBase implements ITickableTile
         if (fluidLevel != newLevel)
         {
             fluidLevel = newLevel;
-            markFullUpdate();
+            markForSync();
         }
         else
         {
@@ -247,8 +250,35 @@ public class TileEntityFluidTank extends TileEntityBase implements ITickableTile
         level = MachineLevel.values()[nbt.getInt("level")];
         mode = SideAccess.values()[nbt.getInt("mode")];
         internalFluidHandler.readFromNBT(nbt.getCompound("content"));
+    }
 
-        if (world != null) { markFullUpdate(); }
+    @Override
+    public void writeSyncPacket(PacketBuffer buffer)
+    {
+        buffer.writeInt(level.ordinal());
+        buffer.writeInt(mode.ordinal());
+        buffer.writeCompoundTag(internalFluidHandler.writeToNBT(new CompoundNBT()));
+    }
+
+    @Override
+    protected void readSyncPacket(PacketBuffer buffer)
+    {
+        int level = buffer.readInt();
+        if (level != this.level.ordinal())
+        {
+            this.level = MachineLevel.values()[level];
+            markRenderUpdate();
+        }
+
+        int mode = buffer.readInt();
+        if (mode != this.mode.ordinal())
+        {
+            this.mode = SideAccess.values()[mode];
+            markRenderUpdate();
+        }
+
+        //noinspection ConstantConditions
+        internalFluidHandler.readFromNBT(buffer.readCompoundTag());
     }
 
     @Override

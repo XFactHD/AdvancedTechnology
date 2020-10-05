@@ -31,8 +31,6 @@ public class TileEntityBurnerGenerator extends TileEntityGenerator
     @Override
     public void tick()
     {
-        super.tick();
-
         //noinspection ConstantConditions
         if (!world.isRemote())
         {
@@ -76,6 +74,8 @@ public class TileEntityBurnerGenerator extends TileEntityGenerator
                 }
             }
         }
+
+        super.tick();
     }
 
     @Override

@@ -8,6 +8,7 @@ import net.minecraft.inventory.container.Container;
 import net.minecraft.item.BoneMealItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -46,8 +47,6 @@ public class TileEntityFertilizer extends TileEntityInventoryMachine implements 
     @Override
     public void tick()
     {
-        super.tick();
-
         //noinspection ConstantConditions
         if (!world.isRemote())
         {
@@ -121,6 +120,8 @@ public class TileEntityFertilizer extends TileEntityInventoryMachine implements 
                 setActive(true);
             }
         }
+
+        super.tick();
     }
 
     private void tryFertilizeGrowable()
@@ -225,7 +226,7 @@ public class TileEntityFertilizer extends TileEntityInventoryMachine implements 
 
             Direction facing = getBlockState().get(PropertyHolder.FACING_HOR);
             scanPos = pos.offset(facing).offset(facing.rotateYCCW(), radius);
-            markFullUpdate();
+            markForSync();
         }
     }
 
@@ -242,7 +243,7 @@ public class TileEntityFertilizer extends TileEntityInventoryMachine implements 
             Direction facing = getBlockState().get(PropertyHolder.FACING_HOR);
             scanPos = pos.offset(facing).offset(facing.rotateYCCW());
 
-            markFullUpdate();
+            markForSync();
         }
     }
 
@@ -333,6 +334,20 @@ public class TileEntityFertilizer extends TileEntityInventoryMachine implements 
         super.readNetworkNBT(nbt);
 
         radius = nbt.getInt("radius");
+    }
+
+    @Override
+    public void writeSyncPacket(PacketBuffer buffer)
+    {
+        super.writeSyncPacket(buffer);
+        buffer.writeInt(radius);
+    }
+
+    @Override
+    protected void readSyncPacket(PacketBuffer buffer)
+    {
+        super.readSyncPacket(buffer);
+        radius = buffer.readInt();
     }
 
     @Override

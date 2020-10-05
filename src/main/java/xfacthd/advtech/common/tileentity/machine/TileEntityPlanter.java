@@ -7,6 +7,7 @@ import net.minecraft.inventory.container.Container;
 import net.minecraft.item.*;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -52,8 +53,6 @@ public class TileEntityPlanter extends TileEntityInventoryMachine implements IRa
     @Override
     public void tick()
     {
-        super.tick();
-
         //noinspection ConstantConditions
         if (!world.isRemote())
         {
@@ -103,6 +102,8 @@ public class TileEntityPlanter extends TileEntityInventoryMachine implements IRa
                 setActive(true);
             }
         }
+
+        super.tick();
     }
 
     private void tryPlantCrop()
@@ -349,7 +350,7 @@ public class TileEntityPlanter extends TileEntityInventoryMachine implements IRa
             }
 
             scanPos = pos.north(radius).west(radius).up(2);
-            markFullUpdate();
+            markForSync();
         }
     }
 
@@ -366,7 +367,7 @@ public class TileEntityPlanter extends TileEntityInventoryMachine implements IRa
 
             scanPos = pos.north().west().up(2);
 
-            markFullUpdate();
+            markForSync();
         }
     }
 
@@ -387,7 +388,7 @@ public class TileEntityPlanter extends TileEntityInventoryMachine implements IRa
                 filters[i] = stack;
             }
         }
-        markFullUpdate();
+        markForSync();
     }
 
     @Override
@@ -433,6 +434,30 @@ public class TileEntityPlanter extends TileEntityInventoryMachine implements IRa
         for (int i = 0; i < 9; i++)
         {
             filters[i] = ItemStack.read(filterList.getCompound(i));
+        }
+    }
+
+    @Override
+    public void writeSyncPacket(PacketBuffer buffer)
+    {
+        super.writeSyncPacket(buffer);
+
+        buffer.writeInt(radius);
+        for (int i = 0; i < 9; i++)
+        {
+            buffer.writeItemStack(filters[i]);
+        }
+    }
+
+    @Override
+    protected void readSyncPacket(PacketBuffer buffer)
+    {
+        super.readSyncPacket(buffer);
+
+        radius = buffer.readInt();
+        for (int i = 0; i < 9; i++)
+        {
+            filters[i] = buffer.readItemStack();
         }
     }
 

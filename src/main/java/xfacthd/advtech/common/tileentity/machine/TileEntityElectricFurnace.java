@@ -37,8 +37,6 @@ public class TileEntityElectricFurnace extends TileEntityProducer
     @Override
     public void tick()
     {
-        super.tick();
-
         //noinspection ConstantConditions
         if (!world.isRemote())
         {
@@ -75,6 +73,8 @@ public class TileEntityElectricFurnace extends TileEntityProducer
                 setActive(false);
             }
         }
+
+        super.tick();
     }
 
     @Override

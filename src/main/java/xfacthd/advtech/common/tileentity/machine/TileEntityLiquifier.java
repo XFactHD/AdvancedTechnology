@@ -64,8 +64,6 @@ public class TileEntityLiquifier extends TileEntityProducer implements ITileFlui
     @Override
     public void tick()
     {
-        super.tick();
-
         //noinspection ConstantConditions
         if (!world.isRemote())
         {
@@ -109,6 +107,8 @@ public class TileEntityLiquifier extends TileEntityProducer implements ITileFlui
                 setActive(false);
             }
         }
+
+        super.tick();
     }
 
     @Override

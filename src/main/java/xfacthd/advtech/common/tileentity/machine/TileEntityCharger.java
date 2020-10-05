@@ -36,8 +36,6 @@ public class TileEntityCharger extends TileEntityInventoryMachine
     @Override
     public void tick()
     {
-        super.tick();
-
         //noinspection ConstantConditions
         if (!world.isRemote())
         {
@@ -75,6 +73,8 @@ public class TileEntityCharger extends TileEntityInventoryMachine
                 if (stack.isEmpty()) { internalItemHandler.extractItem(0, 1, false); }
             }
         }
+
+        super.tick();
     }
 
     private boolean energyItemFull()

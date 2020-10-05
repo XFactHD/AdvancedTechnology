@@ -40,8 +40,6 @@ public class TileEntityAlloySmelter extends TileEntityProducer
     @Override
     public void tick()
     {
-        super.tick();
-
         //noinspection ConstantConditions
         if (!world.isRemote())
         {
@@ -106,6 +104,8 @@ public class TileEntityAlloySmelter extends TileEntityProducer
                 setActive(false);
             }
         }
+
+        super.tick();
     }
 
     @Override

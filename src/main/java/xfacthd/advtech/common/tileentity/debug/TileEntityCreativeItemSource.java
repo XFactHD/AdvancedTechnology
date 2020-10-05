@@ -2,6 +2,7 @@ package xfacthd.advtech.common.tileentity.debug;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
@@ -50,7 +51,7 @@ public class TileEntityCreativeItemSource extends TileEntityBase
     public void setItem(ItemStack stack)
     {
         itemHandler.setStack(stack);
-        markFullUpdate();
+        sendSyncPacket();
     }
 
     @Override
@@ -58,6 +59,12 @@ public class TileEntityCreativeItemSource extends TileEntityBase
 
     @Override
     public void readNetworkNBT(CompoundNBT nbt) { itemHandler.deserializeNBT(nbt.getCompound("inv")); }
+
+    @Override
+    public void writeSyncPacket(PacketBuffer buffer) { buffer.writeCompoundTag(itemHandler.serializeNBT()); }
+
+    @Override
+    protected void readSyncPacket(PacketBuffer buffer) { itemHandler.deserializeNBT(buffer.readCompoundTag()); }
 
     @Override
     public CompoundNBT write(CompoundNBT nbt)

@@ -39,8 +39,6 @@ public class TileEntityCrusher extends TileEntityProducer
     @Override
     public void tick()
     {
-        super.tick();
-
         //noinspection ConstantConditions
         if (!world.isRemote())
         {
@@ -90,6 +88,8 @@ public class TileEntityCrusher extends TileEntityProducer
                 setActive(false);
             }
         }
+
+        super.tick();
     }
 
     @Override

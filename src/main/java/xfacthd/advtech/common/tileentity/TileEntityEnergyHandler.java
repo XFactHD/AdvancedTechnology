@@ -68,6 +68,8 @@ public abstract class TileEntityEnergyHandler extends TileEntityBase implements 
                     storage.receiveEnergy(transfer, false);
                 });
             }
+
+            if (needsSync()) { sendSyncPacket(); }
         }
     }
 
