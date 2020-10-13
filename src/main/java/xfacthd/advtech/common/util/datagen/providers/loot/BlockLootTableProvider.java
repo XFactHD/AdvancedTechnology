@@ -5,8 +5,11 @@ import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.LootTableProvider;
 import net.minecraft.data.loot.BlockLootTables;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.*;
+import net.minecraft.world.storage.loot.functions.ApplyBonus;
+import net.minecraft.world.storage.loot.functions.SetCount;
 import xfacthd.advtech.AdvancedTechnology;
 import xfacthd.advtech.common.ATContent;
 
@@ -63,7 +66,31 @@ public class BlockLootTableProvider extends LootTableProvider
         @Override
         protected void addTables()
         {
-            ATContent.blockOre.forEach((mat, block) -> registerDropSelfLootTable(block));
+            ATContent.blockOre.forEach((mat, block) ->
+            {
+                switch (mat)
+                {
+                    case SULFUR:
+                    {
+                        registerLootTable(block, b ->
+                                droppingWithSilkTouch(b,
+                                        withExplosionDecay(b,
+                                                ItemLootEntry
+                                                        .builder(ATContent.itemPowder.get(mat))
+                                                        .acceptFunction(SetCount.builder(RandomValueRange.of(3.0F, 9.0F)))
+                                                        .acceptFunction(ApplyBonus.uniformBonusCount(Enchantments.FORTUNE))
+                                        )
+                                )
+                        );
+                        break;
+                    }
+                    default:
+                    {
+                        registerDropSelfLootTable(block);
+                    }
+                }
+            });
+
             ATContent.blockStorage.forEach((mat, block) -> registerDropSelfLootTable(block));
 
             registerDropSelfLootTable(ATContent.blockMachineCasing);

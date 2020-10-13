@@ -31,15 +31,16 @@ public class BlockOre extends BlockBase
     public int getExpDrop(BlockState state, IWorldReader reader, BlockPos pos, int fortune, int silktouch)
     {
         if (material.isMetal()) { return 0; }
-        return silktouch == 0 ? getExperience(RANDOM) : 0;
+        if (silktouch != 0) { return 0; }
+
+        switch (material)
+        {
+            case SULFUR: return MathHelper.nextInt(RANDOM, 0, 2);
+            default: return 0;
+        }
     }
 
     public Materials getMaterial() { return material; }
-
-    protected int getExperience(Random rand)
-    {
-        return MathHelper.nextInt(rand, 0, 2); //TODO: add proper XP values
-    }
 
     public static BlockOre[] registerBlocks()
     {
