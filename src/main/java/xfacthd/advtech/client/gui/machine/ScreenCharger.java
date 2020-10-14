@@ -4,8 +4,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import xfacthd.advtech.client.gui.ScreenInventoryMachine;
-import xfacthd.advtech.client.gui.tabs.TabMachinePort;
-import xfacthd.advtech.client.gui.tabs.TabMachineUpgrades;
+import xfacthd.advtech.client.gui.tabs.*;
 import xfacthd.advtech.common.container.machine.ContainerCharger;
 
 public class ScreenCharger extends ScreenInventoryMachine<ContainerCharger>
@@ -22,7 +21,7 @@ public class ScreenCharger extends ScreenInventoryMachine<ContainerCharger>
     protected void gatherTabs()
     {
         addTab(new TabMachineUpgrades(this));
-        //addTab(new TabRedstoneSettings(this));
+        addTab(new TabRedstoneSettings(this));
         addTab(new TabMachinePort(this));
     }
 

@@ -55,7 +55,7 @@ public class TileEntityHarvester extends TileEntityInventoryMachine implements I
         //noinspection ConstantConditions
         if (!world.isRemote())
         {
-            if (active)
+            if (canRun(progress == 0))
             {
                 if (energyHandler.getEnergyStored() < BASE_CONSUMPTION)
                 {
@@ -120,7 +120,7 @@ public class TileEntityHarvester extends TileEntityInventoryMachine implements I
                     }
                 }
             }
-            else if (energyHandler.getEnergyStored() >= BASE_CONSUMPTION && canStart())
+            else if (energyHandler.getEnergyStored() >= BASE_CONSUMPTION && canRun(true))
             {
                 setActive(true);
             }

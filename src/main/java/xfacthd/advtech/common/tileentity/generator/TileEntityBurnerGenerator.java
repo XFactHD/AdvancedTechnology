@@ -34,11 +34,11 @@ public class TileEntityBurnerGenerator extends TileEntityGenerator
         //noinspection ConstantConditions
         if (!world.isRemote())
         {
-            if (active && progress == -1 && (!fuelLoaded || !energyNotFull()))
+            if (active && progress == -1 && (!fuelLoaded || !energyNotFull() || !canRun(true)))
             {
                 setActive(false);
             }
-            else if (!active && fuelLoaded && canStart() && energyNotFull())
+            else if (!active && fuelLoaded && canRun(true) && energyNotFull())
             {
                 setActive(true);
             }
@@ -61,9 +61,9 @@ public class TileEntityBurnerGenerator extends TileEntityGenerator
                     int produced = Math.min(totalEnergy - progress, production);
                     if (produced > 0)
                     {
-                        produced = energyHandler.receiveEnergyInternal(produced, false);
+                        energyHandler.receiveEnergyInternal(produced, false);
 
-                        progress += produced;
+                        progress += production;
                         if (progress >= totalEnergy)
                         {
                             progress = -1;

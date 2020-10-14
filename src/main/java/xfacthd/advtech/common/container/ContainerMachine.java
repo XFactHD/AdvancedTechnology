@@ -8,7 +8,10 @@ import net.minecraft.util.IntReferenceHolder;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.items.IItemHandler;
 import xfacthd.advtech.common.block.BlockMachine;
+import xfacthd.advtech.common.data.states.RedstoneMode;
 import xfacthd.advtech.common.data.subtypes.MachineType;
+import xfacthd.advtech.common.net.NetworkHandler;
+import xfacthd.advtech.common.net.packets.machine.PacketSetRedstoneMode;
 import xfacthd.advtech.common.tileentity.TileEntityMachine;
 import xfacthd.advtech.common.util.inventory.EnhancementSlot;
 import xfacthd.advtech.common.util.sync.BoolReferenceHolder;
@@ -25,6 +28,7 @@ public abstract class ContainerMachine<B extends BlockMachine, T extends TileEnt
     protected final IntReferenceHolder capacityHolder = IntReferenceHolder.single();
     protected final BoolReferenceHolder activeHolder = new BoolReferenceHolder();
     protected final ByteReferenceHolder progressHolder = new ByteReferenceHolder();
+    protected final ByteReferenceHolder redstoneHolder = new ByteReferenceHolder();
     protected final List<EnhancementSlot> enhancementSlots = new ArrayList<>();
 
     protected ContainerMachine(ContainerType<?> type, int id, B block, T machine, PlayerInventory inventory)
@@ -41,6 +45,7 @@ public abstract class ContainerMachine<B extends BlockMachine, T extends TileEnt
         trackRealInt(capacityHolder);
         trackBool(activeHolder);
         trackByte(progressHolder);
+        trackByte(redstoneHolder);
     }
 
     @Override
@@ -54,6 +59,7 @@ public abstract class ContainerMachine<B extends BlockMachine, T extends TileEnt
 
         activeHolder.set(machine.isActive());
         progressHolder.set((byte)(100F * machine.getProgress()));
+        redstoneHolder.set((byte) machine.getRedstoneMode().ordinal());
 
         super.detectAndSendChanges();
     }
@@ -82,6 +88,10 @@ public abstract class ContainerMachine<B extends BlockMachine, T extends TileEnt
     public boolean isActive() { return activeHolder.get(); }
 
     public float getProgress() { return (float)progressHolder.get() / 100F; }
+
+    public RedstoneMode getRedstoneMode() { return RedstoneMode.values()[redstoneHolder.get()]; }
+
+    public void setRedstoneMode(RedstoneMode mode) { NetworkHandler.sendToServer(new PacketSetRedstoneMode(machine.getPos(), mode)); }
 
     public abstract MachineType getMachineType();
 }

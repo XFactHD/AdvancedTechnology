@@ -48,7 +48,7 @@ public class TileEntityMetalPress extends TileEntityProducer
                 recipe = findRecipe();
             }
 
-            if (recipe != null && hasEnoughEnergy() && (active || canStart()) && slotNotEmpty(0) && slotNotEmpty(1))
+            if (recipe != null && hasEnoughEnergy() && canRun(progress == -1) && slotNotEmpty(0) && slotNotEmpty(1))
             {
                 if (!canFitInSlot(2, recipe.getRecipeOutput()))
                 {

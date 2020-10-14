@@ -4,8 +4,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import xfacthd.advtech.client.gui.ScreenProducer;
-import xfacthd.advtech.client.gui.tabs.TabMachinePort;
-import xfacthd.advtech.client.gui.tabs.TabMachineUpgrades;
+import xfacthd.advtech.client.gui.tabs.*;
 import xfacthd.advtech.common.container.machine.ContainerElectricFurnace;
 
 public class ScreenElectricFurnace extends ScreenProducer<ContainerElectricFurnace>
@@ -22,6 +21,7 @@ public class ScreenElectricFurnace extends ScreenProducer<ContainerElectricFurna
     protected void gatherTabs()
     {
         addTab(new TabMachineUpgrades(this));
+        addTab(new TabRedstoneSettings(this));
         addTab(new TabMachinePort(this));
     }
 

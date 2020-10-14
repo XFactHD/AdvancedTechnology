@@ -47,7 +47,7 @@ public class TileEntityCrusher extends TileEntityProducer
                 recipe = findRecipe();
             }
 
-            if (recipe != null && hasEnoughEnergy() && (active || canStart()) && slotNotEmpty(0))
+            if (recipe != null && hasEnoughEnergy() && canRun(progress == -1) && slotNotEmpty(0))
             {
                 if (!canFitInSlot(1, recipe.getRecipeOutput()) || !canFitInSlot(2, ((CrusherRecipe)recipe).getSecondaryOutput()))
                 {

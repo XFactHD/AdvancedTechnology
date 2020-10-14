@@ -40,7 +40,7 @@ public abstract class TileEntityProducer extends TileEntityInventoryMachine
                 {
                     setActive(false);
                 }
-                else
+                else if (progress != -1)
                 {
                     float mult = (float) energyHandler.getEnergyStored() / (float) energyHandler.getMaxEnergyStored();
                     int actualConsumption = Math.max((int)Math.ceil(energyConsumption * mult), getBaseConsumption());

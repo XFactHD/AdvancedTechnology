@@ -47,11 +47,11 @@ public class TileEntityChunkLoader extends TileEntityMachine
         //noinspection ConstantConditions
         if (!world.isRemote())
         {
-            if (!active && energyHandler.getEnergyStored() >= BASE_CONSUMPTION && canStart())
+            if (!active && energyHandler.getEnergyStored() >= BASE_CONSUMPTION && canRun(true))
             {
                 setActive(true);
             }
-            else if (active && energyHandler.getEnergyStored() < BASE_CONSUMPTION)
+            else if (active && (!canRun(true) || energyHandler.getEnergyStored() < BASE_CONSUMPTION))
             {
                 setActive(false);
             }

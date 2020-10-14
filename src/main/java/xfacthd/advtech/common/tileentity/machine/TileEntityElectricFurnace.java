@@ -40,12 +40,12 @@ public class TileEntityElectricFurnace extends TileEntityProducer
         //noinspection ConstantConditions
         if (!world.isRemote())
         {
-            if (recipe == null && !internalItemHandler.getStackInSlot(0).isEmpty())
+            if (recipe == null && slotNotEmpty(0))
             {
                 recipe = findRecipe();
             }
 
-            if (recipe != null && hasEnoughEnergy() && (active || canStart()) && canFitInSlot(1, recipe.getRecipeOutput()) && slotNotEmpty(0))
+            if (recipe != null && hasEnoughEnergy() && canRun(progress == -1) && canFitInSlot(1, recipe.getRecipeOutput()) && slotNotEmpty(0))
             {
                 if (progress == -1)
                 {

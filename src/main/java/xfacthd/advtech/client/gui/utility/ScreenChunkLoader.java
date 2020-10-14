@@ -41,7 +41,7 @@ public class ScreenChunkLoader extends ScreenMachine<ContainerChunkLoader>
     @Override
     protected void gatherTabs()
     {
-        //addTab(new TabRedstoneSettings(this)); //TODO: activate when implemented
+        addTab(new TabRedstoneSettings(this));
     }
 
     @Override

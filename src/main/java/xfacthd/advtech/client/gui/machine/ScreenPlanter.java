@@ -10,8 +10,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import xfacthd.advtech.AdvancedTechnology;
 import xfacthd.advtech.client.gui.ScreenInventoryMachine;
-import xfacthd.advtech.client.gui.tabs.TabMachinePort;
-import xfacthd.advtech.client.gui.tabs.TabMachineUpgrades;
+import xfacthd.advtech.client.gui.tabs.*;
 import xfacthd.advtech.common.container.machine.ContainerPlanter;
 
 public class ScreenPlanter extends ScreenInventoryMachine<ContainerPlanter>
@@ -39,7 +38,7 @@ public class ScreenPlanter extends ScreenInventoryMachine<ContainerPlanter>
     protected void gatherTabs()
     {
         addTab(new TabMachineUpgrades(this));
-        //addTab(new TabRedstoneSettings(this));
+        addTab(new TabRedstoneSettings(this));
         addTab(new TabMachinePort(this));
     }
 

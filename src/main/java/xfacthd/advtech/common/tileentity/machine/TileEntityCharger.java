@@ -39,7 +39,7 @@ public class TileEntityCharger extends TileEntityInventoryMachine
         //noinspection ConstantConditions
         if (!world.isRemote())
         {
-            if (!internalItemHandler.getStackInSlot(0).isEmpty() && (active || canStart()) && !energyItemFull())
+            if (slotNotEmpty(0) && canRun(true) && !energyItemFull())
             {
                 if (active && energyHandler.getEnergyStored() < BASE_CONSUMPTION)
                 {

@@ -72,7 +72,7 @@ public class TileEntityLiquifier extends TileEntityProducer implements ITileFlui
                 recipe = findRecipe();
             }
 
-            if (recipe != null && hasEnoughEnergy() && (active || canStart()) && slotNotEmpty(0))
+            if (recipe != null && hasEnoughEnergy() && canRun(progress == -1) && slotNotEmpty(0))
             {
                 if (!outputFits())
                 {

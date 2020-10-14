@@ -13,6 +13,7 @@ import net.minecraftforge.energy.CapabilityEnergy;
 import xfacthd.advtech.common.capability.energy.EnergyMachine;
 import xfacthd.advtech.common.capability.item.EnhancementItemStackHandler;
 import xfacthd.advtech.common.data.states.MachineLevel;
+import xfacthd.advtech.common.data.states.RedstoneMode;
 import xfacthd.advtech.common.data.subtypes.Enhancement;
 import xfacthd.advtech.common.item.tool.ItemEnhancement;
 import xfacthd.advtech.common.util.data.PropertyHolder;
@@ -22,6 +23,7 @@ public abstract class TileEntityMachine extends TileEntityBase implements ITicka
     private static final int HICCUP_TIMEOUT = 20;
 
     protected MachineLevel level = MachineLevel.BASIC;
+    protected RedstoneMode redstoneMode = RedstoneMode.OFF;
 
     private LazyOptional<EnergyMachine> lazyEnergyHandler = LazyOptional.empty();
     protected final EnhancementItemStackHandler upgradeInventory = new EnhancementItemStackHandler(this);
@@ -99,6 +101,14 @@ public abstract class TileEntityMachine extends TileEntityBase implements ITicka
 
     public abstract float getProgress();
 
+    public RedstoneMode getRedstoneMode() { return redstoneMode; }
+
+    public void setRedstoneMode(RedstoneMode mode)
+    {
+        this.redstoneMode = mode;
+        markDirty();
+    }
+
     /*
      * Upgrade system
      */
@@ -149,8 +159,29 @@ public abstract class TileEntityMachine extends TileEntityBase implements ITicka
 
     public abstract void onLevelChanged();
 
-    protected boolean canStart()
+    /**
+     * @param cycleStart Wether a new work cycle starts (ie next item in furnace), used to prevent interrupting
+     *                   a running cycle with a redstone mode change
+     */
+    protected boolean canRun(boolean cycleStart)
     {
+        if (redstoneMode != RedstoneMode.OFF && cycleStart)
+        {
+            //noinspection ConstantConditions
+            int power = world.getRedstonePowerFromNeighbors(pos);
+
+            if (redstoneMode == RedstoneMode.HIGH && power == 0)
+            {
+                return false;
+            }
+            else if (redstoneMode == RedstoneMode.LOW && power > 0)
+            {
+                return false;
+            }
+        }
+
+        if (active) { return true; }
+
         //noinspection ConstantConditions
         return world.getGameTime() - lastHiccup > HICCUP_TIMEOUT;
     }
@@ -212,23 +243,6 @@ public abstract class TileEntityMachine extends TileEntityBase implements ITicka
     }
 
     @Override
-    public void read(CompoundNBT nbt)
-    {
-        super.read(nbt);
-        level = MachineLevel.values()[nbt.getInt("level")];
-
-        energyHandler.deserializeNBT(nbt.getCompound("energy"));
-        upgradeInventory.deserializeNBT(nbt.getCompound("upgrades"));
-    }
-
-    @Override
-    public void writeSyncPacket(PacketBuffer buffer)
-    {
-        buffer.writeInt(level.ordinal());
-        buffer.writeBoolean(active);
-    }
-
-    @Override
     protected void readSyncPacket(PacketBuffer buffer)
     {
         int level = buffer.readInt();
@@ -242,9 +256,28 @@ public abstract class TileEntityMachine extends TileEntityBase implements ITicka
     }
 
     @Override
+    public void writeSyncPacket(PacketBuffer buffer)
+    {
+        buffer.writeInt(level.ordinal());
+        buffer.writeBoolean(active);
+    }
+
+    @Override
+    public void read(CompoundNBT nbt)
+    {
+        super.read(nbt);
+        level = MachineLevel.values()[nbt.getInt("level")];
+        redstoneMode = RedstoneMode.values()[nbt.getInt("redstone")];
+
+        energyHandler.deserializeNBT(nbt.getCompound("energy"));
+        upgradeInventory.deserializeNBT(nbt.getCompound("upgrades"));
+    }
+
+    @Override
     public CompoundNBT write(CompoundNBT nbt)
     {
         nbt.putInt("level", level.ordinal());
+        nbt.putInt("redstone", redstoneMode.ordinal());
         nbt.put("energy", energyHandler.serializeNBT());
         nbt.put("upgrades", upgradeInventory.serializeNBT());
         return super.write(nbt);

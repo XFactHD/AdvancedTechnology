@@ -43,12 +43,12 @@ public class TileEntityAlloySmelter extends TileEntityProducer
         //noinspection ConstantConditions
         if (!world.isRemote())
         {
-            if (recipe == null && (!internalItemHandler.getStackInSlot(0).isEmpty() || !internalItemHandler.getStackInSlot(1).isEmpty()))
+            if (recipe == null && (slotNotEmpty(0) || slotNotEmpty(1)))
             {
                 recipe = findRecipe();
             }
 
-            if (recipe != null && hasEnoughEnergy() && (active || canStart()))
+            if (recipe != null && hasEnoughEnergy() && canRun(progress == -1))
             {
                 AlloySmelterRecipe alloyRecipe = (AlloySmelterRecipe)recipe;
 
