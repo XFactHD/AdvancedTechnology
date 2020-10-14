@@ -53,7 +53,8 @@ public class PacketConfigureSide extends AbstractPacket
         {
             //noinspection ConstantConditions
             World world = ctx.get().getSender().world;
-            if (!world.isAreaLoaded(pos, 0)) { return; }
+            //noinspection deprecation
+            if (!world.isBlockLoaded(pos)) { return; }
 
             TileEntity te = world.getTileEntity(pos);
             if (te instanceof TileEntityInventoryMachine)

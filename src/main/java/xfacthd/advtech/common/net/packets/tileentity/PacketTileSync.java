@@ -41,7 +41,8 @@ public class PacketTileSync extends AbstractPacket
         ctx.get().enqueueWork(() ->
         {
             World world = AdvancedTechnology.SIDED_HELPER.getWorld();
-            if (world.isAreaLoaded(pos, 1))
+            //noinspection deprecation
+            if (world.isBlockLoaded(pos))
             {
                 TileEntity te = world.getTileEntity(pos);
                 if (te instanceof TileEntityBase)
