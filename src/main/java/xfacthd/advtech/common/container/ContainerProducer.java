@@ -5,9 +5,9 @@ import net.minecraft.inventory.container.ContainerType;
 import xfacthd.advtech.common.block.BlockMachine;
 import xfacthd.advtech.common.tileentity.TileEntityProducer;
 
-public abstract class ContainerProducer<B extends BlockMachine, T extends TileEntityProducer> extends ContainerInventoryMachine<B, T>
+public abstract class ContainerProducer<T extends TileEntityProducer> extends ContainerInventoryMachine<T>
 {
-    protected ContainerProducer(ContainerType<?> type, int id, B block, T machine, PlayerInventory inventory)
+    protected ContainerProducer(ContainerType<?> type, int id, BlockMachine block, T machine, PlayerInventory inventory)
     {
         super(type, id, block, machine, inventory);
     }

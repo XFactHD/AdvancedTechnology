@@ -11,7 +11,7 @@ import xfacthd.advtech.common.net.NetworkHandler;
 import xfacthd.advtech.common.net.packets.machine.PacketChangeChunkRadius;
 import xfacthd.advtech.common.tileentity.utility.TileEntityChunkLoader;
 
-public class ContainerChunkLoader extends ContainerMachine<BlockChunkLoader, TileEntityChunkLoader>
+public class ContainerChunkLoader extends ContainerMachine<TileEntityChunkLoader>
 {
     private final IntReferenceHolder radiusHolder = IntReferenceHolder.single();
     private final IntReferenceHolder countHolder = IntReferenceHolder.single();
@@ -19,7 +19,7 @@ public class ContainerChunkLoader extends ContainerMachine<BlockChunkLoader, Til
 
     public ContainerChunkLoader(int id, TileEntityChunkLoader machine, PlayerInventory inventory)
     {
-        super(ContainerTypes.containerTypeChunkLoader, id, (BlockChunkLoader) ATContent.blockChunkLoader, machine, inventory);
+        super(ContainerTypes.containerTypeChunkLoader, id, ATContent.blockChunkLoader, machine, inventory);
 
         trackInt(radiusHolder);
         trackInt(countHolder);
@@ -41,9 +41,6 @@ public class ContainerChunkLoader extends ContainerMachine<BlockChunkLoader, Til
     public int getChunkCount() { return countHolder.get(); }
 
     public int getMaxChunkCount() { return maxCountHolder.get(); }
-
-    @Override
-    public MachineType getMachineType() { return MachineType.CHUNK_LOADER; }
 
     public void changeRadius(boolean add)
     {

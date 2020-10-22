@@ -111,7 +111,7 @@ public abstract class AdvancedScreen<T extends Container> extends ContainerScree
 
         if (changedTab instanceof TabMachineUpgrades)
         {
-            ContainerMachine<?, ?> cont = (ContainerMachine<?, ?>)container;
+            ContainerMachine<?> cont = (ContainerMachine<?>)container;
             cont.switchEnhancementSlots(open);
         }
     }

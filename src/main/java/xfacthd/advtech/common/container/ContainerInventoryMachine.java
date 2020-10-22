@@ -12,12 +12,12 @@ import xfacthd.advtech.common.net.packets.machine.PacketSwitchActiveOutput;
 import xfacthd.advtech.common.tileentity.TileEntityInventoryMachine;
 import xfacthd.advtech.common.util.sync.BoolReferenceHolder;
 
-public abstract class ContainerInventoryMachine<B extends BlockMachine, T extends TileEntityInventoryMachine> extends ContainerMachine<B, T>
+public abstract class ContainerInventoryMachine<T extends TileEntityInventoryMachine> extends ContainerMachine<T>
 {
     protected final IIntArray portArray = new IntArray(6);
     protected final BoolReferenceHolder forceHolder = new BoolReferenceHolder();
 
-    protected ContainerInventoryMachine(ContainerType<?> type, int id, B block, T machine, PlayerInventory inventory)
+    protected ContainerInventoryMachine(ContainerType<?> type, int id, BlockMachine block, T machine, PlayerInventory inventory)
     {
         super(type, id, block, machine, inventory);
 

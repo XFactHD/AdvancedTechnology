@@ -45,10 +45,7 @@ public class BlockMachine extends BlockBase
 
         this.type = type;
 
-        if (!type.isCasing())
-        {
-            setDefaultState(getDefaultState().with(PropertyHolder.ACTIVE, false));
-        }
+        setDefaultState(getDefaultState().with(PropertyHolder.ACTIVE, false));
     }
 
     @Override
@@ -263,6 +260,9 @@ public class BlockMachine extends BlockBase
 
     @Override
     public boolean hasTileEntity(BlockState state) { return !type.isCasing(); }
+
+    @Override
+    public TileEntity createTileEntity(BlockState state, IBlockReader world) { return type.getTileFactory().get(); }
 
     public final MachineType getType() { return type; }
 }

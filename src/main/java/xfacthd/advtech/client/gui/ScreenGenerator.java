@@ -5,7 +5,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import xfacthd.advtech.common.container.ContainerGenerator;
 
-public abstract class ScreenGenerator<C extends ContainerGenerator<?, ?>> extends ScreenInventoryMachine<C>
+public abstract class ScreenGenerator<C extends ContainerGenerator<?>> extends ScreenInventoryMachine<C>
 {
     protected ScreenGenerator(C container, PlayerInventory inventory, ITextComponent title, int xSize, int ySize)
     {

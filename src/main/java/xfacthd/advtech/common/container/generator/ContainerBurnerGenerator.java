@@ -5,13 +5,11 @@ import net.minecraft.util.IntReferenceHolder;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import xfacthd.advtech.common.ATContent;
-import xfacthd.advtech.common.block.generator.BlockBurnerGenerator;
 import xfacthd.advtech.common.container.ContainerGenerator;
-import xfacthd.advtech.common.data.subtypes.MachineType;
 import xfacthd.advtech.common.data.types.ContainerTypes;
 import xfacthd.advtech.common.tileentity.generator.TileEntityBurnerGenerator;
 
-public class ContainerBurnerGenerator extends ContainerGenerator<BlockBurnerGenerator, TileEntityBurnerGenerator> //TODO: move fluid stuff to steam generator
+public class ContainerBurnerGenerator extends ContainerGenerator<TileEntityBurnerGenerator> //TODO: move fluid stuff to steam generator
 {
     private final IntReferenceHolder waterStoredHolder = IntReferenceHolder.single();
     private final IntReferenceHolder waterCapacityHolder = IntReferenceHolder.single();
@@ -20,7 +18,7 @@ public class ContainerBurnerGenerator extends ContainerGenerator<BlockBurnerGene
 
     public ContainerBurnerGenerator(int id, TileEntityBurnerGenerator tile, PlayerInventory inventory)
     {
-        super(ContainerTypes.containerTypeBurnerGenerator, id, (BlockBurnerGenerator) ATContent.blockBurnerGenerator, tile, inventory);
+        super(ContainerTypes.containerTypeBurnerGenerator, id, ATContent.blockBurnerGenerator, tile, inventory);
 
         layoutPlayerInventorySlots(8, 105);
 
@@ -57,7 +55,4 @@ public class ContainerBurnerGenerator extends ContainerGenerator<BlockBurnerGene
     public int getSteamStored() { return steamStoredHolder.get(); }
 
     public int getSteamCapacity() { return steamCapacityHolder.get(); }
-
-    @Override
-    public MachineType getMachineType() { return MachineType.BURNER_GENERATOR; }
 }

@@ -96,7 +96,7 @@ sourceSets {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.15.2-31.2.36'
+    minecraft 'net.minecraftforge:forge:1.15.2-31.2.45'
 
     // compileOnly "mekanism:Mekanism:${mekanism_version}:api"
     // runtimeOnly fg.deobf("mekanism:Mekanism:${mekanism_version}")

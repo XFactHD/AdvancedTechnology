@@ -15,7 +15,7 @@ import xfacthd.advtech.common.container.ContainerMachine;
 import java.util.Arrays;
 import java.util.List;
 
-public abstract class ScreenMachine<C extends ContainerMachine<?, ?>> extends AdvancedScreen<C>
+public abstract class ScreenMachine<C extends ContainerMachine<?>> extends AdvancedScreen<C>
 {
     public static final ITextComponent SHOW_AREA = new TranslationTextComponent("gui." + AdvancedTechnology.MODID + ".show_area");
     public static final ITextComponent TANK_EMPTY = new TranslationTextComponent("gui." + AdvancedTechnology.MODID + ".tank_empty");

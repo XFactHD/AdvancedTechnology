@@ -19,9 +19,9 @@ import xfacthd.advtech.common.util.sync.ByteReferenceHolder;
 
 import java.util.*;
 
-public abstract class ContainerMachine<B extends BlockMachine, T extends TileEntityMachine> extends AdvancedContainer
+public abstract class ContainerMachine<T extends TileEntityMachine> extends AdvancedContainer
 {
-    protected final B block;
+    protected final BlockMachine block;
     protected final T machine;
     protected final IWorldPosCallable worldPosCallable;
     protected final IntReferenceHolder energyHolder = IntReferenceHolder.single();
@@ -31,7 +31,7 @@ public abstract class ContainerMachine<B extends BlockMachine, T extends TileEnt
     protected final ByteReferenceHolder redstoneHolder = new ByteReferenceHolder();
     protected final List<EnhancementSlot> enhancementSlots = new ArrayList<>();
 
-    protected ContainerMachine(ContainerType<?> type, int id, B block, T machine, PlayerInventory inventory)
+    protected ContainerMachine(ContainerType<?> type, int id, BlockMachine block, T machine, PlayerInventory inventory)
     {
         super(type, id, inventory);
 
@@ -93,5 +93,5 @@ public abstract class ContainerMachine<B extends BlockMachine, T extends TileEnt
 
     public void setRedstoneMode(RedstoneMode mode) { NetworkHandler.sendToServer(new PacketSetRedstoneMode(machine.getPos(), mode)); }
 
-    public abstract MachineType getMachineType();
+    public final MachineType getMachineType() { return block.getType(); }
 }

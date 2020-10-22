@@ -4,17 +4,15 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import xfacthd.advtech.common.ATContent;
-import xfacthd.advtech.common.block.machine.BlockFertilizer;
 import xfacthd.advtech.common.container.ContainerInventoryMachine;
-import xfacthd.advtech.common.data.subtypes.MachineType;
 import xfacthd.advtech.common.data.types.ContainerTypes;
 import xfacthd.advtech.common.tileentity.machine.TileEntityFertilizer;
 
-public class ContainerFertilizer extends ContainerInventoryMachine<BlockFertilizer, TileEntityFertilizer>
+public class ContainerFertilizer extends ContainerInventoryMachine<TileEntityFertilizer>
 {
     public ContainerFertilizer(int id, TileEntityFertilizer machine, PlayerInventory inventory)
     {
-        super(ContainerTypes.containerTypeFertilizer, id, (BlockFertilizer) ATContent.blockFertilizer, machine, inventory);
+        super(ContainerTypes.containerTypeFertilizer, id, ATContent.blockFertilizer, machine, inventory);
 
         layoutPlayerInventorySlots(8, 105);
         layoutEnhancementSlots(200, 27);
@@ -32,7 +30,4 @@ public class ContainerFertilizer extends ContainerInventoryMachine<BlockFertiliz
     }
 
     public void switchShowArea() { machine.switchShowArea(); }
-
-    @Override
-    public MachineType getMachineType() { return MachineType.FERTILIZER; }
 }

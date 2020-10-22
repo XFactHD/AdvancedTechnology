@@ -4,17 +4,15 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import xfacthd.advtech.common.ATContent;
-import xfacthd.advtech.common.block.machine.BlockHarvester;
 import xfacthd.advtech.common.container.ContainerInventoryMachine;
-import xfacthd.advtech.common.data.subtypes.MachineType;
 import xfacthd.advtech.common.data.types.ContainerTypes;
 import xfacthd.advtech.common.tileentity.machine.TileEntityHarvester;
 
-public class ContainerHarvester extends ContainerInventoryMachine<BlockHarvester, TileEntityHarvester>
+public class ContainerHarvester extends ContainerInventoryMachine<TileEntityHarvester>
 {
     public ContainerHarvester(int id, TileEntityHarvester machine, PlayerInventory inventory)
     {
-        super(ContainerTypes.containerTypeHarvester, id, (BlockHarvester) ATContent.blockHarvester, machine, inventory);
+        super(ContainerTypes.containerTypeHarvester, id, ATContent.blockHarvester, machine, inventory);
 
         layoutPlayerInventorySlots(8, 105);
         layoutEnhancementSlots(200, 27);
@@ -32,7 +30,4 @@ public class ContainerHarvester extends ContainerInventoryMachine<BlockHarvester
     }
 
     public void switchShowArea() { machine.switchShowArea(); }
-
-    @Override
-    public MachineType getMachineType() { return MachineType.HARVESTER; }
 }

@@ -14,10 +14,7 @@ import xfacthd.advtech.AdvancedTechnology;
 import xfacthd.advtech.common.block.*;
 import xfacthd.advtech.common.block.debug.*;
 import xfacthd.advtech.common.block.storage.*;
-import xfacthd.advtech.common.block.generator.*;
-import xfacthd.advtech.common.block.machine.*;
 import xfacthd.advtech.common.block.material.*;
-import xfacthd.advtech.common.block.utility.*;
 import xfacthd.advtech.common.container.storage.*;
 import xfacthd.advtech.common.container.generator.*;
 import xfacthd.advtech.common.container.machine.*;
@@ -101,23 +98,23 @@ public class ATContent
         registry.register(blockCreativeItemSource = new BlockCreativeItemSource());
         registry.register(blockCreativeFluidSource = new BlockCreativeFluidSource());
 
-        registry.register(blockMachineCasing = new BlockMachineCasing());
-        registry.register(blockElectricFurnace = new BlockElectricFurnace());
-        registry.register(blockCrusher = new BlockCrusher());
-        registry.register(blockAlloySmelter = new BlockAlloySmelter());
-        registry.register(blockMetalPress = new BlockMetalPress());
-        registry.register(blockLiquifier = new BlockLiquifier());
-        registry.register(blockCharger = new BlockCharger());
-        registry.register(blockPlanter = new BlockPlanter());
-        registry.register(blockHarvester = new BlockHarvester());
-        registry.register(blockFertilizer = new BlockFertilizer());
+        registry.register(blockMachineCasing = new BlockMachine(MachineType.CASING));
+        registry.register(blockElectricFurnace = new BlockMachine(MachineType.ELECTRIC_FURNACE));
+        registry.register(blockCrusher = new BlockMachine(MachineType.CRUSHER));
+        registry.register(blockAlloySmelter = new BlockMachine(MachineType.ALLOY_SMELTER));
+        registry.register(blockMetalPress = new BlockMachine(MachineType.METAL_PRESS));
+        registry.register(blockLiquifier = new BlockMachine(MachineType.LIQUIFIER));
+        registry.register(blockCharger = new BlockMachine(MachineType.CHARGER));
+        registry.register(blockPlanter = new BlockMachine(MachineType.PLANTER));
+        registry.register(blockHarvester = new BlockMachine(MachineType.HARVESTER));
+        registry.register(blockFertilizer = new BlockMachine(MachineType.FERTILIZER));
 
-        registry.register(blockBurnerGenerator = new BlockBurnerGenerator());
+        registry.register(blockBurnerGenerator = new BlockMachine(MachineType.BURNER_GENERATOR));
 
         registry.register(blockEnergyCube = new BlockEnergyCube());
         registry.register(blockFluidTank = new BlockFluidTank());
 
-        registry.register(blockChunkLoader = new BlockChunkLoader());
+        registry.register(blockChunkLoader = new BlockMachine(MachineType.CHUNK_LOADER));
     }
 
     @SubscribeEvent

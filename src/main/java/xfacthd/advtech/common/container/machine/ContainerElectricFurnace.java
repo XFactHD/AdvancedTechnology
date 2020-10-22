@@ -4,17 +4,15 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import xfacthd.advtech.common.ATContent;
-import xfacthd.advtech.common.block.machine.BlockElectricFurnace;
 import xfacthd.advtech.common.container.ContainerProducer;
-import xfacthd.advtech.common.data.subtypes.MachineType;
 import xfacthd.advtech.common.data.types.ContainerTypes;
 import xfacthd.advtech.common.tileentity.machine.TileEntityElectricFurnace;
 
-public class ContainerElectricFurnace extends ContainerProducer<BlockElectricFurnace, TileEntityElectricFurnace>
+public class ContainerElectricFurnace extends ContainerProducer<TileEntityElectricFurnace>
 {
     public ContainerElectricFurnace(int id, TileEntityElectricFurnace tile, PlayerInventory inventory)
     {
-        super(ContainerTypes.containerTypeElectricFurnace, id, (BlockElectricFurnace) ATContent.blockElectricFurnace, tile, inventory);
+        super(ContainerTypes.containerTypeElectricFurnace, id, ATContent.blockElectricFurnace, tile, inventory);
 
         layoutPlayerInventorySlots(8, 105);
 
@@ -24,7 +22,4 @@ public class ContainerElectricFurnace extends ContainerProducer<BlockElectricFur
             addSlot(new SlotItemHandler(handler, 1, 107, 45));
         });
     }
-
-    @Override
-    public MachineType getMachineType() { return MachineType.ELECTRIC_FURNACE; }
 }

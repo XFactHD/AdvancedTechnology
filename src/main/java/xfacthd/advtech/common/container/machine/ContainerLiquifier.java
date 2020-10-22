@@ -8,16 +8,14 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 import xfacthd.advtech.common.ATContent;
-import xfacthd.advtech.common.block.machine.BlockLiquifier;
 import xfacthd.advtech.common.container.ContainerProducer;
-import xfacthd.advtech.common.data.subtypes.MachineType;
 import xfacthd.advtech.common.data.types.ContainerTypes;
 import xfacthd.advtech.common.net.NetworkHandler;
 import xfacthd.advtech.common.net.packets.machine.PacketUpdateFluid;
 import xfacthd.advtech.common.tileentity.machine.TileEntityLiquifier;
 import xfacthd.advtech.common.util.interfaces.IContainerFluidHandler;
 
-public class ContainerLiquifier extends ContainerProducer<BlockLiquifier, TileEntityLiquifier> implements IContainerFluidHandler
+public class ContainerLiquifier extends ContainerProducer<TileEntityLiquifier> implements IContainerFluidHandler
 {
     private final IntReferenceHolder fluidCapacityHolder = IntReferenceHolder.single();
     private FluidStack lastFluid = FluidStack.EMPTY;
@@ -25,7 +23,7 @@ public class ContainerLiquifier extends ContainerProducer<BlockLiquifier, TileEn
 
     public ContainerLiquifier(int id, TileEntityLiquifier machine, PlayerInventory inventory)
     {
-        super(ContainerTypes.containerTypeLiquifier, id, (BlockLiquifier) ATContent.blockLiquifier, machine, inventory);
+        super(ContainerTypes.containerTypeLiquifier, id, ATContent.blockLiquifier, machine, inventory);
 
         layoutPlayerInventorySlots(8, 105);
 
@@ -67,7 +65,4 @@ public class ContainerLiquifier extends ContainerProducer<BlockLiquifier, TileEn
     public FluidStack getFluidStored() { return lastFluid; }
 
     public int getFluidCapacity() { return fluidCapacityHolder.get(); }
-
-    @Override
-    public MachineType getMachineType() { return MachineType.LIQUIFIER; }
 }

@@ -10,7 +10,7 @@ import xfacthd.advtech.common.data.states.SideAccess;
 
 import java.util.function.Predicate;
 
-public abstract class ScreenInventoryMachine<C extends ContainerInventoryMachine<?, ?>> extends ScreenMachine<C>
+public abstract class ScreenInventoryMachine<C extends ContainerInventoryMachine<?>> extends ScreenMachine<C>
 {
     private static final ResourceLocation SLOT_OVERLAY = widget("slot_overlay");
     private static final ResourceLocation TANK_OVERLAY = widget("tank_overlay");
