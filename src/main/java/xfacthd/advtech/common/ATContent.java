@@ -15,6 +15,7 @@ import xfacthd.advtech.common.block.*;
 import xfacthd.advtech.common.block.debug.*;
 import xfacthd.advtech.common.block.storage.*;
 import xfacthd.advtech.common.block.material.*;
+import xfacthd.advtech.common.block.utility.BlockChunkLoader;
 import xfacthd.advtech.common.container.storage.*;
 import xfacthd.advtech.common.container.generator.*;
 import xfacthd.advtech.common.container.machine.*;
@@ -114,7 +115,7 @@ public class ATContent
         registry.register(blockEnergyCube = new BlockEnergyCube());
         registry.register(blockFluidTank = new BlockFluidTank());
 
-        registry.register(blockChunkLoader = new BlockMachine(MachineType.CHUNK_LOADER));
+        registry.register(blockChunkLoader = new BlockChunkLoader());
     }
 
     @SubscribeEvent
