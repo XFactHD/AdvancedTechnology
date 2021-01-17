@@ -1,5 +1,7 @@
 package xfacthd.advtech.common.tileentity.utility;
 
+import it.unimi.dsi.fastutil.longs.LongArraySet;
+import it.unimi.dsi.fastutil.longs.LongSet;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
@@ -16,15 +18,14 @@ import xfacthd.advtech.AdvancedTechnology;
 import xfacthd.advtech.common.capability.energy.EnergySink;
 import xfacthd.advtech.common.container.utility.ContainerChunkLoader;
 import xfacthd.advtech.common.data.types.TileEntityTypes;
-import xfacthd.advtech.common.net.packets.debug.PacketDebugForcedChunks;
 import xfacthd.advtech.common.tileentity.TileEntityMachine;
+import xfacthd.advtech.common.util.Utils;
+import xfacthd.advtech.common.util.data.ChunkLoadManager;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.function.LongConsumer;
 
 public class TileEntityChunkLoader extends TileEntityMachine
 {
-    private static final AxisAlignedBB NULL_AABB = new AxisAlignedBB(0, 0, 0, 0, 0, 0);
     public static final ITextComponent TITLE = new TranslationTextComponent("gui." + AdvancedTechnology.MODID + ".chunk_loader");
     private static final int BASE_CAPACITY = 100000;
     private static final int BASE_CONSUMPTION = 900;
@@ -33,7 +34,7 @@ public class TileEntityChunkLoader extends TileEntityMachine
     private int maxChunks = 0;
     private int perChunkConsumption = 0;
 
-    private final List<ChunkPos> loadedChunks = new ArrayList<>();
+    private final LongSet loadedChunks = new LongArraySet();
     private int radius = 0;
     private int count = 0;
     private boolean chunksLoaded = false;
@@ -44,25 +45,25 @@ public class TileEntityChunkLoader extends TileEntityMachine
     @Override
     public void tick()
     {
+        super.tick();
+
         //noinspection ConstantConditions
         if (!world.isRemote())
         {
-            if (!active && energyHandler.getEnergyStored() >= BASE_CONSUMPTION && canRun(true))
+            if (!active && canRun(true))
             {
                 setActive(true);
             }
-            else if (active && (!canRun(true) || energyHandler.getEnergyStored() < BASE_CONSUMPTION))
+            else if (active && !canRun(true))
             {
                 setActive(false);
             }
 
             if (active)
             {
-                energyHandler.extractEnergyInternal(perChunkConsumption * loadedChunks.size(), false);
+                energyHandler.extractEnergyInternal(perChunkConsumption * count, false);
             }
         }
-
-        super.tick();
     }
 
     @Override
@@ -71,6 +72,20 @@ public class TileEntityChunkLoader extends TileEntityMachine
         onLevelChanged();
         count = (radius * 2 + 1) * (radius * 2 + 1);
         markFullUpdate();
+
+        //Aquire tickets on initial load if possible, else drop them
+        ServerWorld sWorld = (ServerWorld) world;
+        //noinspection ConstantConditions
+        ChunkLoadManager manager = ChunkLoadManager.get(sWorld);
+        if (active && canRun(true))
+        {
+            manager.loadChunksInitial(sWorld, this, loadedChunks);
+        }
+        else
+        {
+            loadedChunks.forEach((LongConsumer) (chunk -> manager.releaseChunk(sWorld, this, chunk)));
+            loadedChunks.clear();
+        }
     }
 
     @Override
@@ -81,43 +96,17 @@ public class TileEntityChunkLoader extends TileEntityMachine
         //noinspection ConstantConditions
         if (active != chunksLoaded && !world.isRemote())
         {
-            ServerWorld sWorld = (ServerWorld)world;
-
-            if (active)
-            {
-                int centerX = pos.getX() >> 4;
-                int centerZ = pos.getZ() >> 4;
-
-                int startX = centerX - radius;
-                int startZ = centerZ - radius;
-                int endX = centerX + radius;
-                int endZ = centerZ + radius;
-                for (int x = startX; x <= endX; x++)
-                {
-                    for (int z = startZ; z <= endZ; z++)
-                    {
-                        if (sWorld.forceChunk(x, z, true))
-                        {
-                            loadedChunks.add(new ChunkPos(x, z));
-                        }
-                    }
-                }
-            }
-            else
-            {
-                loadedChunks.forEach(cpos -> sWorld.forceChunk(cpos.x, cpos.z, false));
-                loadedChunks.clear();
-            }
+            loadChunks(active ? LoadMode.LOAD : LoadMode.UNLOAD, radius);
 
             chunksLoaded = active;
             markDirty();
-
-            PacketDebugForcedChunks.sendToClient(sWorld);
         }
     }
 
     public void setRadius(int radius)
     {
+        if (radius < 0) { return; }
+
         int count = (radius * 2 + 1) * (radius * 2 + 1);
         if (count > maxChunks) { return; }
         this.count = count;
@@ -125,69 +114,86 @@ public class TileEntityChunkLoader extends TileEntityMachine
         //noinspection ConstantConditions
         if (chunksLoaded && radius != this.radius && !world.isRemote())
         {
-            ServerWorld sWorld = (ServerWorld)world;
-
-            int minRad = Math.min(radius, this.radius);
-            int maxRad = Math.max(radius, this.radius);
-            boolean bigger = radius > this.radius;
-
-            int centerX = pos.getX() >> 4;
-            int centerZ = pos.getZ() >> 4;
-
-            int startX = centerX - maxRad;
-            int startZ = centerZ - maxRad;
-            int endX = centerX + maxRad;
-            int endZ = centerZ + maxRad;
-
-            for (int x = startX; x <= endX; x++)
-            {
-                for (int z = startZ; z <= endZ; z++)
-                {
-                    if (Math.abs(x - centerX) > minRad || Math.abs(z - centerZ) > minRad)
-                    {
-                        if (bigger && sWorld.forceChunk(x, z, true))
-                        {
-                            loadedChunks.add(new ChunkPos(x, z));
-                        }
-                        else if (!bigger)
-                        {
-                            ChunkPos cpos = new ChunkPos(x, z);
-                            if (loadedChunks.remove(cpos))
-                            {
-                                sWorld.forceChunk(x, z, false);
-                            }
-                        }
-                    }
-                }
-            }
-
-            PacketDebugForcedChunks.sendToClient(sWorld);
+            loadChunks(LoadMode.CHANGE_RADIUS, radius);
         }
 
         this.radius = radius;
         markForSync();
     }
 
-    public int getRadius() { return radius; }
+    private void loadChunks(LoadMode mode, int newRadius)
+    {
+        ServerWorld sWorld = (ServerWorld)world;
+        //noinspection ConstantConditions
+        ChunkLoadManager manager = ChunkLoadManager.get(sWorld);
 
-    /**
-     * Returns the amount of chunks actually loaded by this loader in the area given by the set {@link TileEntityChunkLoader#radius}
-     * This value can be different to {@link TileEntityChunkLoader#getMaxChunkCount()} due to the area overlapping with another loader
-     */
-    public int getLoadedChunkCount() { return loadedChunks.size(); }
+        int minRad = Math.min(newRadius, radius);
+        int maxRad = Math.max(newRadius, radius);
+        boolean bigger = newRadius > radius;
+
+        int centerX = pos.getX() >> 4;
+        int centerZ = pos.getZ() >> 4;
+
+        int startX = centerX - maxRad;
+        int startZ = centerZ - maxRad;
+        int endX = centerX + maxRad;
+        int endZ = centerZ + maxRad;
+
+        for (int x = startX; x <= endX; x++)
+        {
+            for (int z = startZ; z <= endZ; z++)
+            {
+                long chunk = ChunkPos.asLong(x, z);
+
+                if (mode == LoadMode.LOAD)
+                {
+                    manager.registerChunk(sWorld, this, chunk);
+                    loadedChunks.add(chunk);
+                }
+                else if (mode == LoadMode.CHANGE_RADIUS)
+                {
+                    if (Math.abs(x - centerX) > minRad || Math.abs(z - centerZ) > minRad)
+                    {
+                        if (bigger)
+                        {
+                            manager.registerChunk(sWorld, this, chunk);
+                            loadedChunks.add(chunk);
+                        }
+                        else
+                        {
+                            manager.releaseChunk(sWorld, this, chunk);
+                            loadedChunks.remove(chunk);
+                        }
+                    }
+                }
+                else if (mode == LoadMode.UNLOAD)
+                {
+                    manager.releaseChunk(sWorld, this, chunk);
+                    loadedChunks.remove(chunk);
+                }
+            }
+        }
+    }
+
+    public int getRadius() { return radius; }
 
     /**
      * Returns the amount of chunks covered by the set {@link TileEntityChunkLoader#radius}
      */
-    public int getMaxChunkCount() { return count; }
+    public int getMaxChunksInRadius() { return count; }
 
     public int getMaxChunks() { return maxChunks; }
-
-    public List<ChunkPos> getChunkList() { return loadedChunks; }
 
     public boolean showChunks() { return showChunks; }
 
     public boolean switchShowChunks() { return (showChunks = !showChunks); }
+
+    @Override
+    protected boolean canRun(boolean cycleStart)
+    {
+        if (!super.canRun(cycleStart)) { return false; }
+        return energyHandler.getEnergyStored() >= (perChunkConsumption * count);
+    }
 
     @Override
     public float getProgress() { return 0; }
@@ -212,8 +218,9 @@ public class TileEntityChunkLoader extends TileEntityMachine
         if (!world.isRemote() && chunksLoaded)
         {
             ServerWorld sWorld = (ServerWorld)world;
+            ChunkLoadManager manager = ChunkLoadManager.get(sWorld);
 
-            loadedChunks.forEach(cpos -> sWorld.forceChunk(cpos.x, cpos.z, false));
+            loadedChunks.forEach((LongConsumer) (chunk -> manager.releaseChunk(sWorld, this, chunk)));
             loadedChunks.clear();
         }
     }
@@ -265,11 +272,10 @@ public class TileEntityChunkLoader extends TileEntityMachine
         chunksLoaded = nbt.getBoolean("loaded");
 
         loadedChunks.clear();
-        nbt.getList("chunks", Constants.NBT.TAG_COMPOUND).stream().map(tag -> (CompoundNBT)tag).forEach(tag ->
-        {
-            ChunkPos cpos = new ChunkPos(tag.getLong("cpos"));
-            loadedChunks.add(cpos);
-        });
+        nbt.getList("chunks", Constants.NBT.TAG_COMPOUND)
+                .stream()
+                .map(tag -> (CompoundNBT)tag)
+                .forEach(tag -> loadedChunks.add(tag.getLong("cpos")));
     }
 
     @Override
@@ -281,12 +287,12 @@ public class TileEntityChunkLoader extends TileEntityMachine
         nbt.putBoolean("loaded", chunksLoaded);
 
         ListNBT list = new ListNBT();
-        loadedChunks.forEach(cpos ->
+        loadedChunks.forEach((LongConsumer) (cpos ->
         {
             CompoundNBT tag = new CompoundNBT();
-            tag.putLong("cpos", cpos.asLong());
+            tag.putLong("cpos", cpos);
             list.add(tag);
-        });
+        }));
         nbt.put("chunks", list);
 
         return super.write(nbt);
@@ -305,5 +311,12 @@ public class TileEntityChunkLoader extends TileEntityMachine
     public double getMaxRenderDistanceSquared() { return showChunks ? Double.MAX_VALUE : 0; }
 
     @Override
-    public AxisAlignedBB getRenderBoundingBox() { return showChunks ? INFINITE_EXTENT_AABB : NULL_AABB; }
+    public AxisAlignedBB getRenderBoundingBox() { return showChunks ? INFINITE_EXTENT_AABB : Utils.NULL_AABB; }
+
+    private enum LoadMode
+    {
+        LOAD,
+        CHANGE_RADIUS,
+        UNLOAD
+    }
 }

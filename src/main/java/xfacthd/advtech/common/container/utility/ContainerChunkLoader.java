@@ -3,9 +3,7 @@ package xfacthd.advtech.common.container.utility;
 import net.minecraft.entity.player.*;
 import net.minecraft.util.IntReferenceHolder;
 import xfacthd.advtech.common.ATContent;
-import xfacthd.advtech.common.block.utility.BlockChunkLoader;
 import xfacthd.advtech.common.container.ContainerMachine;
-import xfacthd.advtech.common.data.subtypes.MachineType;
 import xfacthd.advtech.common.data.types.ContainerTypes;
 import xfacthd.advtech.common.net.NetworkHandler;
 import xfacthd.advtech.common.net.packets.machine.PacketChangeChunkRadius;
@@ -30,8 +28,8 @@ public class ContainerChunkLoader extends ContainerMachine<TileEntityChunkLoader
     public void detectAndSendChanges()
     {
         radiusHolder.set(machine.getRadius());
-        countHolder.set(machine.getLoadedChunkCount());
-        maxCountHolder.set(machine.getMaxChunkCount());
+        countHolder.set(machine.getMaxChunksInRadius());
+        maxCountHolder.set(machine.getMaxChunks());
 
         super.detectAndSendChanges();
     }

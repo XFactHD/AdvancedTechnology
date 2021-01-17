@@ -34,6 +34,8 @@ public class RenderChunkLoader extends TileEntityRenderer<TileEntityChunkLoader>
         int endX = centerX + chunkRadius;
         int endZ = centerZ + chunkRadius;
 
+        boolean active = tile.isActive();
+
         for (int x = startX; x <= endX; x++)
         {
             for (int z = startZ; z <= endZ; z++)
@@ -43,7 +45,9 @@ public class RenderChunkLoader extends TileEntityRenderer<TileEntityChunkLoader>
 
                 for (int y = 0; y < 255; y += 16)
                 {
-                    WorldRenderer.drawBoundingBox(stack, builder, cX, y - tileY, cZ, cX + 16, y + 16 - tileY, cZ + 16, 1, 0, 0, 1);
+                    float red = active ? 0 : 1;
+                    float green = active ? 1 : 0;
+                    WorldRenderer.drawBoundingBox(stack, builder, cX, y - tileY, cZ, cX + 16, y + 16 - tileY, cZ + 16, red, green, 0, 1);
                 }
             }
         }

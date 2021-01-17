@@ -63,7 +63,6 @@ public abstract class TileEntityMachine extends TileEntityBase implements ITicka
     {
         onLevelChanged();
         setActive(false);
-        lastHiccup = 0; //Set to 0 so the machine can start immediately if possible
         markFullUpdate();
     }
 
@@ -168,7 +167,7 @@ public abstract class TileEntityMachine extends TileEntityBase implements ITicka
         if (redstoneMode != RedstoneMode.OFF && cycleStart)
         {
             //noinspection ConstantConditions
-            int power = world.getRedstonePowerFromNeighbors(pos);
+            int power = world.getRedstonePowerFromNeighbors(pos); //TODO: check if this can be cached easily
 
             if (redstoneMode == RedstoneMode.HIGH && power == 0)
             {

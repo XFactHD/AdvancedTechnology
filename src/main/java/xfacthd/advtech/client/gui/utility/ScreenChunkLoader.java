@@ -8,6 +8,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import xfacthd.advtech.AdvancedTechnology;
 import xfacthd.advtech.client.gui.ScreenMachine;
+import xfacthd.advtech.client.gui.tabs.TabMachineUpgrades;
 import xfacthd.advtech.client.gui.tabs.TabRedstoneSettings;
 import xfacthd.advtech.common.container.utility.ContainerChunkLoader;
 
@@ -42,6 +43,7 @@ public class ScreenChunkLoader extends ScreenMachine<ContainerChunkLoader>
     protected void gatherTabs()
     {
         addTab(new TabRedstoneSettings(this));
+        addTab(new TabMachineUpgrades(this));
     }
 
     @Override
@@ -56,7 +58,8 @@ public class ScreenChunkLoader extends ScreenMachine<ContainerChunkLoader>
         int textY = guiTop + 23 + 10 - (font.FONT_HEIGHT / 2);
         drawString(font, text, textX, textY, 0xFFFFFFFF);
 
-        text = CHUNKS.getFormattedText() + " " + container.getChunkCount() + "/" + container.getMaxChunkCount();
+        int loaded = container.isActive() ? container.getChunkCount() : 0;
+        text = CHUNKS.getFormattedText() + " " + loaded + "/" + container.getMaxChunkCount();
         textX = guiLeft + (88 - (font.getStringWidth(text) / 2));
         drawString(font, text, textX, guiTop + 50, 0xFFFFFFFF);
     }
