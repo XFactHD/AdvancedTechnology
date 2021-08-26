@@ -27,12 +27,19 @@ public enum MachineType implements IStringSerializable
     PLANTER         (MachineCategory.PRODUCER, TileEntityPlanter::new, false),
     HARVESTER       (MachineCategory.PRODUCER, TileEntityHarvester::new),
     FERTILIZER      (MachineCategory.PRODUCER, TileEntityFertilizer::new),
+    QUARRY          (MachineCategory.PRODUCER, () -> null),
+    CRAFTER         (MachineCategory.PRODUCER, () -> null),
+    FLUID_PUMP      (MachineCategory.PRODUCER, () -> null),
 
     BURNER_GENERATOR(MachineCategory.GENERATOR, TileEntityBurnerGenerator::new),
     STEAM_GENERATOR (MachineCategory.GENERATOR, () -> null), // Use boiler upgrade to consume steam instead of burnable stuff and water, use steam upgrade to create steam instead of power
     MAGMA_GENERATOR (MachineCategory.GENERATOR, () -> null),
+    SOLAR_PANEL     (MachineCategory.GENERATOR, TileEntitySolarPanel::new, false),
 
-    CHUNK_LOADER    (MachineCategory.UTILITY, TileEntityChunkLoader::new, false);
+    CHUNK_LOADER        (MachineCategory.UTILITY, TileEntityChunkLoader::new, false),
+    TRASH_CAN           (MachineCategory.UTILITY, () -> null, false),
+    WIRELESS_CHARGER    (MachineCategory.UTILITY, () -> null, false),
+    SPATIAL_TRANSPORTER (MachineCategory.UTILITY, () -> null, false);
 
     private final ResourceLocation texture = new ResourceLocation(AdvancedTechnology.MODID, "textures/block/machine/block_" + getName() + ".png");
     private final MachineCategory cat;

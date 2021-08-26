@@ -50,6 +50,7 @@ public class BlockColorMachine implements IBlockColor
         blocks.add(ATContent.blockFertilizer);
 
         blocks.add(ATContent.blockBurnerGenerator);
+        blocks.add(ATContent.blockSolarPanel);
 
         blocks.add(ATContent.blockChunkLoader);
 

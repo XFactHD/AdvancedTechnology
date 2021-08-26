@@ -192,12 +192,14 @@ public abstract class TileEntityMachine extends TileEntityBase implements ITicka
     @Override
     public <C> LazyOptional<C> getCapability(Capability<C> cap, Direction side)
     {
-        if (cap == CapabilityEnergy.ENERGY)
+        if (cap == CapabilityEnergy.ENERGY && supportsEnergyOnSide(side))
         {
             return lazyEnergyHandler.cast();
         }
         return super.getCapability(cap, side);
     }
+
+    protected boolean supportsEnergyOnSide(Direction side) { return true; }
 
     protected abstract void initCapabilities();
 

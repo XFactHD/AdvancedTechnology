@@ -13,6 +13,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 import xfacthd.advtech.AdvancedTechnology;
 import xfacthd.advtech.common.block.*;
 import xfacthd.advtech.common.block.debug.*;
+import xfacthd.advtech.common.block.generator.BlockSolarPanel;
 import xfacthd.advtech.common.block.storage.*;
 import xfacthd.advtech.common.block.material.*;
 import xfacthd.advtech.common.block.utility.BlockChunkLoader;
@@ -63,6 +64,7 @@ public class ATContent
     public static BlockMachine blockBurnerGenerator;            //STATUS: Complete
     public static BlockMachine blockSteamGenerator;             //STATUS: Not implemented
     public static BlockMachine blockMagmaGenerator;             //STATUS: Not implemented
+    public static BlockMachine blockSolarPanel;                 //STATUS: WIP
 
     public static BlockBase blockEnergyCube;                    //STATUS: Complete
     public static BlockBase blockFluidTank;                     //STATUS: Complete
@@ -111,6 +113,7 @@ public class ATContent
         registry.register(blockFertilizer = new BlockMachine(MachineType.FERTILIZER));
 
         registry.register(blockBurnerGenerator = new BlockMachine(MachineType.BURNER_GENERATOR));
+        registry.register(blockSolarPanel = new BlockSolarPanel());
 
         registry.register(blockEnergyCube = new BlockEnergyCube());
         registry.register(blockFluidTank = new BlockFluidTank());
@@ -142,6 +145,7 @@ public class ATContent
         registry.register(blockFertilizer.createItemBlock());
 
         registry.register(blockBurnerGenerator.createItemBlock());
+        registry.register(blockSolarPanel.createItemBlock());
 
         registry.register(blockEnergyCube.createItemBlock());
         registry.register(blockFluidTank.createItemBlock());
@@ -189,6 +193,7 @@ public class ATContent
         TileEntityTypes.tileTypeFertilizer = TileEntityTypes.create(TileEntityFertilizer::new, "tile_fertilizer", blockFertilizer);
 
         TileEntityTypes.tileTypeBurnerGenerator = TileEntityTypes.create(TileEntityBurnerGenerator::new, "tile_burner_generator", blockBurnerGenerator);
+        TileEntityTypes.tileTypeSolarPanel = TileEntityTypes.create(TileEntitySolarPanel::new, "tile_solar_panel", blockSolarPanel);
 
         TileEntityTypes.tileTypeEnergyCube = TileEntityTypes.create(TileEntityEnergyCube::new, "tile_energy_cube", blockEnergyCube);
         TileEntityTypes.tileTypeFluidTank = TileEntityTypes.create(TileEntityFluidTank::new, "tile_fluid_tank", blockFluidTank);
@@ -262,6 +267,12 @@ public class ATContent
             TileEntity te = inv.player.world.getTileEntity(data.readBlockPos());
             return new ContainerBurnerGenerator(windowId, (TileEntityBurnerGenerator)te, inv);
         });
+
+        /*ContainerTypes.containerTypeSolarPanel = ContainerTypes.create("container_solar_panel", ((windowId, inv, data) ->
+        {
+            TileEntity te = inv.player.world.getTileEntity(data.readBlockPos());
+            return new ContainerSolarPanel(windowId, (TileEntitySolarPanel)te, inv); //TODO: implement
+        }));*/
 
 
 

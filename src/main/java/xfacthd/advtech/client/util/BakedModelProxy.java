@@ -80,5 +80,7 @@ public final class BakedModelProxy implements IBakedModel
     @Override
     public TextureAtlasSprite getParticleTexture(IModelData data) { return original.getParticleTexture(data); }
 
+    public IBakedModel getOriginal() { return original; }
+
     public ItemCameraTransforms.TransformType getTransform() { return transform; }
 }

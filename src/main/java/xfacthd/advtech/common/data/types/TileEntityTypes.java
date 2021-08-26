@@ -35,6 +35,7 @@ public class TileEntityTypes
 
     //Generator
     public static TileEntityType<TileEntityBurnerGenerator> tileTypeBurnerGenerator;
+    public static TileEntityType<TileEntitySolarPanel>      tileTypeSolarPanel;
 
     //Storage
     public static TileEntityType<TileEntityEnergyCube>      tileTypeEnergyCube;

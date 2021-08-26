@@ -69,6 +69,6 @@ public class GeneratorHandler
     {
         Environment environment = Launcher.INSTANCE.environment();
         final String launchTarget = environment.getProperty(IEnvironment.Keys.LAUNCHTARGET.get()).orElse("missing").toLowerCase(Locale.ROOT);
-        return !launchTarget.contains("client") && !launchTarget.contains("server");
+        return launchTarget.equals("fmluserdevdata");
     }
 }

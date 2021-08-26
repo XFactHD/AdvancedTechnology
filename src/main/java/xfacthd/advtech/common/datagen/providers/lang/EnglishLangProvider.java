@@ -88,6 +88,7 @@ public class EnglishLangProvider extends ATLanguageProvider
         add(ATContent.blockFertilizer, "Fertilizer");
 
         add(ATContent.blockBurnerGenerator, "Burner Generator");
+        add(ATContent.blockSolarPanel, "Solar Panel");
 
         add(ATContent.blockEnergyCube, "Energy Cube");
         add(ATContent.blockFluidTank, "Fluid Tank");
@@ -139,6 +140,7 @@ public class EnglishLangProvider extends ATLanguageProvider
         add(TileEntityHarvester.TITLE, "Harvester");
         add(TileEntityFertilizer.TITLE, "Fertilizer");
         add(TileEntityBurnerGenerator.TITLE, "Burner Generator");
+        add(TileEntitySolarPanel.TITLE, "Solar Panel");
         add(TileEntityChunkLoader.TITLE, "Chunk Loader");
 
         add(TabMachinePort.TITLE, "Port Settings");

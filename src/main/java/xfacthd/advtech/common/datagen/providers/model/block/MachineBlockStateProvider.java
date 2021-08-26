@@ -1,5 +1,6 @@
 package xfacthd.advtech.common.datagen.providers.model.block;
 
+import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.util.Direction;
 import net.minecraftforge.client.model.generators.*;
@@ -61,6 +62,9 @@ public class MachineBlockStateProvider extends ATBlockStateProvider
         ModelFile burnerGeneratorModel = machineModel("block_burner_generator");
         ModelFile burnerGeneratorModelOn = machineModel("block_burner_generator_on");
         machineState(ATContent.blockBurnerGenerator, burnerGeneratorModel, burnerGeneratorModelOn);
+
+        ModelFile solarPanelModel = models().getExistingFile(modLoc("block/machine/block_solar_panel"));
+        simpleState(ATContent.blockSolarPanel, solarPanelModel);
 
 
 
@@ -242,6 +246,12 @@ public class MachineBlockStateProvider extends ATBlockStateProvider
                 .with(PropertyHolder.ACTIVE, true), confOn);
 
         simpleBlockItem(block, modelOff);
+    }
+
+    private void simpleState(Block block, ModelFile model)
+    {
+        simpleBlock(block, model);
+        simpleBlockItem(block, model);
     }
 
     @Override

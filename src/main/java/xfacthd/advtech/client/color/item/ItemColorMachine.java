@@ -42,6 +42,7 @@ public class ItemColorMachine implements IItemColor
         items.add(ATContent.blockFertilizer);
 
         items.add(ATContent.blockBurnerGenerator);
+        items.add(ATContent.blockSolarPanel);
 
         items.add(ATContent.blockChunkLoader);
 

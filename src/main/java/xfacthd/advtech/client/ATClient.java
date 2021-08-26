@@ -6,8 +6,10 @@ import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.inventory.container.PlayerContainer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.*;
+import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -22,6 +24,7 @@ import xfacthd.advtech.client.gui.machine.*;
 import xfacthd.advtech.client.gui.utility.*;
 import xfacthd.advtech.client.render.ister.*;
 import xfacthd.advtech.client.render.ter.*;
+import xfacthd.advtech.client.util.ISTERModelLoader;
 import xfacthd.advtech.common.ATContent;
 import xfacthd.advtech.common.data.types.*;
 
@@ -44,6 +47,7 @@ public class ATClient
         RenderTypeLookup.setRenderLayer(ATContent.blockFertilizer, RenderType.getCutoutMipped());
 
         RenderTypeLookup.setRenderLayer(ATContent.blockBurnerGenerator, RenderType.getCutoutMipped());
+        RenderTypeLookup.setRenderLayer(ATContent.blockBurnerGenerator, RenderType.getCutoutMipped());
 
         RenderTypeLookup.setRenderLayer(ATContent.blockEnergyCube, type -> type == RenderType.getCutoutMipped() || type == RenderType.getTranslucent());
         RenderTypeLookup.setRenderLayer(ATContent.blockFluidTank, RenderType.getCutoutMipped());
@@ -53,6 +57,7 @@ public class ATClient
         ClientRegistry.bindTileEntityRenderer(TileEntityTypes.tileTypeCreativeItemSource, RenderCreativeItemSource::new);
         ClientRegistry.bindTileEntityRenderer(TileEntityTypes.tileTypeCreativeFluidSource, RenderCreativeFluidSource::new);
 
+        ClientRegistry.bindTileEntityRenderer(TileEntityTypes.tileTypeLiquifier, RenderLiquifier::new);
         ClientRegistry.bindTileEntityRenderer(TileEntityTypes.tileTypePlanter, RenderRangedMachine::new);
         ClientRegistry.bindTileEntityRenderer(TileEntityTypes.tileTypeHarvester, RenderRangedMachine::new);
         ClientRegistry.bindTileEntityRenderer(TileEntityTypes.tileTypeFertilizer, RenderRangedMachine::new);
@@ -76,6 +81,7 @@ public class ATClient
             ScreenManager.registerFactory(ContainerTypes.containerTypeFertilizer, ScreenFertilizer::new);
 
             ScreenManager.registerFactory(ContainerTypes.containerTypeBurnerGenerator, ScreenBurnerGenerator::new);
+            //ScreenManager.registerFactory(ContainerTypes.containerTypeSolarPanel, ScreenSolarPanel::new); //TODO: implement
 
             ScreenManager.registerFactory(ContainerTypes.containerTypeEnergyCube, ScreenEnergyCube::new);
 
@@ -86,7 +92,7 @@ public class ATClient
     @SubscribeEvent
     public static void onRegisterModels(final ModelRegistryEvent event)
     {
-
+        ModelLoaderRegistry.registerLoader(new ResourceLocation(AdvancedTechnology.MODID, "ister_model"), new ISTERModelLoader());
     }
 
     @SubscribeEvent
