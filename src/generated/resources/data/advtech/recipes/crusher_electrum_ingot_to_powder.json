@@ -1,0 +1,10 @@
+{
+  "type": "advtech:crusher",
+  "energy": 2000,
+  "input": {
+    "tag": "forge:ingots/electrum"
+  },
+  "primary": {
+    "item": "advtech:powder_electrum"
+  }
+}

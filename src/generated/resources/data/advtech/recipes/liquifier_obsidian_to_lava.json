@@ -1,0 +1,12 @@
+{
+  "type": "advtech:liquifier",
+  "energy": 300000,
+  "input": {
+    "tag": "forge:obsidian"
+  },
+  "inputCount": 1,
+  "output": {
+    "name": "minecraft:lava",
+    "amount": 1000
+  }
+}

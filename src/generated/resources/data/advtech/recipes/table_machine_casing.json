@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IPI",
+    "PGP",
+    "IPI"
+  ],
+  "key": {
+    "I": {
+      "tag": "forge:ingots/iron"
+    },
+    "P": {
+      "tag": "forge:plates/tin"
+    },
+    "G": {
+      "tag": "forge:gears/copper"
+    }
+  },
+  "result": {
+    "item": "advtech:casing"
+  }
+}

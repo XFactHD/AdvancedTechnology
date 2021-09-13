@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "active=false": {
+      "model": "advtech:block/machine/block_planter"
+    },
+    "active=true": {
+      "model": "advtech:block/machine/block_planter_on"
+    }
+  }
+}

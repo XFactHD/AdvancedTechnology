@@ -1,0 +1,15 @@
+{
+  "type": "advtech:crusher",
+  "energy": 4000,
+  "input": {
+    "tag": "forge:ores/iron"
+  },
+  "primary": {
+    "item": "advtech:powder_iron",
+    "count": 2
+  },
+  "secondary": {
+    "item": "advtech:powder_nickel",
+    "chance": 0.10000000149011612
+  }
+}

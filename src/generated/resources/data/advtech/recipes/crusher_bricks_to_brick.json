@@ -1,0 +1,11 @@
+{
+  "type": "advtech:crusher",
+  "energy": 3000,
+  "input": {
+    "item": "minecraft:bricks"
+  },
+  "primary": {
+    "item": "minecraft:brick",
+    "count": 4
+  }
+}

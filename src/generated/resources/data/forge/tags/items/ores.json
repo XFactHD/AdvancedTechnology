@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "advtech:ore_tin",
+    "advtech:ore_silver",
+    "advtech:ore_lead",
+    "advtech:ore_aluminum",
+    "advtech:ore_nickel",
+    "advtech:ore_platinum",
+    "advtech:ore_sulfur"
+  ]
+}

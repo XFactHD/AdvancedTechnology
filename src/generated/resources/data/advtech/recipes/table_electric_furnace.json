@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "IRI",
+    "BMB",
+    "ICI"
+  ],
+  "key": {
+    "I": {
+      "tag": "forge:ingots/iron"
+    },
+    "R": {
+      "tag": "forge:dusts/redstone"
+    },
+    "B": {
+      "tag": "forge:bricks"
+    },
+    "M": {
+      "item": "advtech:casing"
+    },
+    "C": {
+      "item": "advtech:reception_coil"
+    }
+  },
+  "result": {
+    "item": "advtech:electric_furnace"
+  }
+}

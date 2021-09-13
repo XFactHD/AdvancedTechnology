@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "advtech:furnace_aluminum_powder_to_ingot"
+    ]
+  },
+  "criteria": {
+    "has_powder_aluminum": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:dusts/aluminum"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "advtech:furnace_aluminum_powder_to_ingot"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_powder_aluminum",
+      "has_the_recipe"
+    ]
+  ]
+}

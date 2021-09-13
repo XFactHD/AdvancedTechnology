@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "tag": "forge:dusts/aluminum"
+  },
+  "result": "advtech:ingot_aluminum",
+  "experience": 1.0,
+  "cookingtime": 200
+}

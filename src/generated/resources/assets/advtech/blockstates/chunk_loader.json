@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "active=false": {
+      "model": "advtech:block/machine/block_chunk_loader"
+    },
+    "active=true": {
+      "model": "advtech:block/machine/block_chunk_loader_on"
+    }
+  }
+}

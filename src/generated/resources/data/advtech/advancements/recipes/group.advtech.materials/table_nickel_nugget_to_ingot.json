@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "advtech:table_nickel_nugget_to_ingot"
+    ]
+  },
+  "criteria": {
+    "has_nugget_nickel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:nuggets/nickel"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "advtech:table_nickel_nugget_to_ingot"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_nugget_nickel",
+      "has_the_recipe"
+    ]
+  ]
+}

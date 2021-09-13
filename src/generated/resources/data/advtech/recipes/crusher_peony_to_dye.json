@@ -1,0 +1,11 @@
+{
+  "type": "advtech:crusher",
+  "energy": 2000,
+  "input": {
+    "item": "minecraft:peony"
+  },
+  "primary": {
+    "item": "minecraft:pink_dye",
+    "count": 4
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "type": "advtech:alloy_smelter",
+  "energy": 2400,
+  "primaryInput": {
+    "tag": "forge:ingots/iron"
+  },
+  "primaryInputCount": 1,
+  "secondaryInput": {
+    "tag": "forge:cokes"
+  },
+  "secondaryInputCount": 1,
+  "primaryOutput": {
+    "item": "advtech:ingot_steel"
+  }
+}

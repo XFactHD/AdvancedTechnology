@@ -1,0 +1,11 @@
+{
+  "type": "advtech:crusher",
+  "energy": 2000,
+  "input": {
+    "item": "minecraft:sunflower"
+  },
+  "primary": {
+    "item": "minecraft:yellow_dye",
+    "count": 4
+  }
+}

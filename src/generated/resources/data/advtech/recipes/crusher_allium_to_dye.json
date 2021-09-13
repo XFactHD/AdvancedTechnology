@@ -1,0 +1,11 @@
+{
+  "type": "advtech:crusher",
+  "energy": 2000,
+  "input": {
+    "item": "minecraft:allium"
+  },
+  "primary": {
+    "item": "minecraft:magenta_dye",
+    "count": 4
+  }
+}

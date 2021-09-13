@@ -1,0 +1,12 @@
+{
+  "type": "advtech:liquifier",
+  "energy": 60000,
+  "input": {
+    "tag": "forge:netherrack"
+  },
+  "inputCount": 1,
+  "output": {
+    "name": "minecraft:lava",
+    "amount": 1000
+  }
+}

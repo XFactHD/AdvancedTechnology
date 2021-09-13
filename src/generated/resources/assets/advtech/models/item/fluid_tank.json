@@ -1,0 +1,6 @@
+{
+  "loader": "advtech:bewlr-loader",
+  "model": {
+    "parent": "advtech:block/storage/block_fluid_tank"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "advtech:table_sulfur_ingot_to_block"
+    ]
+  },
+  "criteria": {
+    "has_ingot_sulfur": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {}
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "advtech:table_sulfur_ingot_to_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_ingot_sulfur",
+      "has_the_recipe"
+    ]
+  ]
+}

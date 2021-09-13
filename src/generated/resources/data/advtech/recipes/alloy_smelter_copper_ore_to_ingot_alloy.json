@@ -1,0 +1,16 @@
+{
+  "type": "advtech:alloy_smelter",
+  "energy": 4000,
+  "primaryInput": {
+    "tag": "forge:ores/copper"
+  },
+  "primaryInputCount": 1,
+  "secondaryInput": {
+    "tag": "forge:sand"
+  },
+  "secondaryInputCount": 1,
+  "primaryOutput": {
+    "item": "minecraft:copper_ingot",
+    "count": 2
+  }
+}

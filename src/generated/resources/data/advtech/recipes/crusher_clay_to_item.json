@@ -1,0 +1,11 @@
+{
+  "type": "advtech:crusher",
+  "energy": 3000,
+  "input": {
+    "item": "minecraft:clay"
+  },
+  "primary": {
+    "item": "minecraft:clay_ball",
+    "count": 4
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "advtech:crusher",
+  "energy": 2000,
+  "input": {
+    "tag": "forge:ingots/tin"
+  },
+  "primary": {
+    "item": "advtech:powder_tin"
+  }
+}

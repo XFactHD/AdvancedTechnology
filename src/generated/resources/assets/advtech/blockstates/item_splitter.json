@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "advtech:block/machine/block_item_splitter"
+    },
+    "facing=south": {
+      "model": "advtech:block/machine/block_item_splitter",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "advtech:block/machine/block_item_splitter",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "advtech:block/machine/block_item_splitter",
+      "y": 90
+    }
+  }
+}

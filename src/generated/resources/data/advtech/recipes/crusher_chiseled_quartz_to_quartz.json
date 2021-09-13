@@ -1,0 +1,11 @@
+{
+  "type": "advtech:crusher",
+  "energy": 3000,
+  "input": {
+    "item": "minecraft:chiseled_quartz_block"
+  },
+  "primary": {
+    "item": "minecraft:quartz",
+    "count": 4
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "advtech:table_gear_mold"
+    ]
+  },
+  "criteria": {
+    "has_iron_gear": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "advtech:gear_iron"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "advtech:table_gear_mold"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_iron_gear",
+      "has_the_recipe"
+    ]
+  ]
+}

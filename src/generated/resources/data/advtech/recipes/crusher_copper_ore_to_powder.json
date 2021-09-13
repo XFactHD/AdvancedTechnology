@@ -1,0 +1,15 @@
+{
+  "type": "advtech:crusher",
+  "energy": 4000,
+  "input": {
+    "tag": "forge:ores/copper"
+  },
+  "primary": {
+    "item": "advtech:powder_copper",
+    "count": 2
+  },
+  "secondary": {
+    "item": "advtech:powder_gold",
+    "chance": 0.10000000149011612
+  }
+}

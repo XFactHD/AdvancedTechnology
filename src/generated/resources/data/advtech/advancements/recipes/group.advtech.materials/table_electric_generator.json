@@ -1,0 +1,34 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "advtech:table_electric_generator"
+    ]
+  },
+  "criteria": {
+    "has_transmission_coil": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "advtech:transmission_coil"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "advtech:table_electric_generator"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_transmission_coil",
+      "has_the_recipe"
+    ]
+  ]
+}

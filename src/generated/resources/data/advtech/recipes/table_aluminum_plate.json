@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "II ",
+    "II ",
+    "   "
+  ],
+  "key": {
+    "I": {
+      "tag": "forge:ingots/aluminum"
+    }
+  },
+  "result": {
+    "item": "advtech:plate_aluminum"
+  }
+}

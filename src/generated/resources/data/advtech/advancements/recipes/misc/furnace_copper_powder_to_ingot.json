@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "advtech:furnace_copper_powder_to_ingot"
+    ]
+  },
+  "criteria": {
+    "has_powder_copper": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:dusts/copper"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "advtech:furnace_copper_powder_to_ingot"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_powder_copper",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "type": "advtech:crusher",
+  "energy": 2000,
+  "input": {
+    "item": "minecraft:charcoal"
+  },
+  "primary": {
+    "item": "advtech:powder_coal"
+  }
+}

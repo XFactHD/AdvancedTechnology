@@ -1,0 +1,16 @@
+{
+  "type": "advtech:alloy_smelter",
+  "energy": 2400,
+  "primaryInput": {
+    "tag": "forge:ingots/copper"
+  },
+  "primaryInputCount": 1,
+  "secondaryInput": {
+    "tag": "forge:ingots/nickel"
+  },
+  "secondaryInputCount": 1,
+  "primaryOutput": {
+    "item": "advtech:ingot_constantan",
+    "count": 2
+  }
+}

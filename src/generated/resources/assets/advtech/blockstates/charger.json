@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "active=false,facing=north": {
+      "model": "advtech:block/machine/block_charger"
+    },
+    "active=true,facing=north": {
+      "model": "advtech:block/machine/block_charger_on"
+    },
+    "active=false,facing=south": {
+      "model": "advtech:block/machine/block_charger",
+      "y": 180
+    },
+    "active=true,facing=south": {
+      "model": "advtech:block/machine/block_charger_on",
+      "y": 180
+    },
+    "active=false,facing=west": {
+      "model": "advtech:block/machine/block_charger",
+      "y": 270
+    },
+    "active=true,facing=west": {
+      "model": "advtech:block/machine/block_charger_on",
+      "y": 270
+    },
+    "active=false,facing=east": {
+      "model": "advtech:block/machine/block_charger",
+      "y": 90
+    },
+    "active=true,facing=east": {
+      "model": "advtech:block/machine/block_charger_on",
+      "y": 90
+    }
+  }
+}

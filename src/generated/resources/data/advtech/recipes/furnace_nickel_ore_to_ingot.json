@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "tag": "forge:ores/nickel"
+  },
+  "result": "advtech:ingot_nickel",
+  "experience": 1.0,
+  "cookingtime": 200
+}

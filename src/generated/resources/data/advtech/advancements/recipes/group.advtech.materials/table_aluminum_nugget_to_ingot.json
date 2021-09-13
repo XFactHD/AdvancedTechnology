@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "advtech:table_aluminum_nugget_to_ingot"
+    ]
+  },
+  "criteria": {
+    "has_nugget_aluminum": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:nuggets/aluminum"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "advtech:table_aluminum_nugget_to_ingot"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_nugget_aluminum",
+      "has_the_recipe"
+    ]
+  ]
+}

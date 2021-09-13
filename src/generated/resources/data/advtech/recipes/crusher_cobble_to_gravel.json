@@ -1,0 +1,14 @@
+{
+  "type": "advtech:crusher",
+  "energy": 4000,
+  "input": {
+    "item": "minecraft:cobblestone"
+  },
+  "primary": {
+    "item": "minecraft:gravel"
+  },
+  "secondary": {
+    "item": "minecraft:sand",
+    "chance": 0.15000000596046448
+  }
+}

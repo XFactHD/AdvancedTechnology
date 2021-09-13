@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [
+    "advtech:block_tin",
+    "advtech:block_silver",
+    "advtech:block_lead",
+    "advtech:block_aluminum",
+    "advtech:block_nickel",
+    "advtech:block_platinum",
+    "advtech:block_steel",
+    "advtech:block_electrum",
+    "advtech:block_bronze",
+    "advtech:block_constantan",
+    "advtech:block_charcoal",
+    "advtech:block_coke",
+    "advtech:block_sulfur"
+  ]
+}

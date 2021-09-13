@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "advtech:block/debug/creative_fluid_source"
+    }
+  }
+}

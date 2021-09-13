@@ -1,0 +1,20 @@
+{
+  "type": "advtech:alloy_smelter",
+  "energy": 4000,
+  "primaryInput": {
+    "tag": "forge:netherrack"
+  },
+  "primaryInputCount": 2,
+  "secondaryInput": {
+    "item": "minecraft:soul_sand"
+  },
+  "secondaryInputCount": 1,
+  "primaryOutput": {
+    "item": "minecraft:nether_bricks",
+    "count": 2
+  },
+  "secondaryOutput": {
+    "item": "advtech:powder_sulfur",
+    "chance": 0.25
+  }
+}

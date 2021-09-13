@@ -1,0 +1,11 @@
+{
+  "type": "advtech:crusher",
+  "energy": 6000,
+  "input": {
+    "item": "minecraft:obsidian"
+  },
+  "primary": {
+    "item": "advtech:powder_obsidian",
+    "count": 4
+  }
+}

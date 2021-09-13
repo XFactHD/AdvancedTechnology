@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "advtech:plate_mold",
+    "advtech:gear_mold",
+    "advtech:rod_mold"
+  ]
+}

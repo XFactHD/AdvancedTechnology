@@ -1,0 +1,11 @@
+{
+  "type": "advtech:crusher",
+  "energy": 4000,
+  "input": {
+    "item": "minecraft:lime_terracotta"
+  },
+  "primary": {
+    "item": "minecraft:clay_ball",
+    "count": 4
+  }
+}

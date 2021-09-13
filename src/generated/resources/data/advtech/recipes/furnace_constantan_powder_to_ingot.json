@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "tag": "forge:dusts/constantan"
+  },
+  "result": "advtech:ingot_constantan",
+  "experience": 1.0,
+  "cookingtime": 200
+}

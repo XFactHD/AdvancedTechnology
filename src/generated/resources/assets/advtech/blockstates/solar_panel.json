@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "advtech:block/machine/block_solar_panel"
+    }
+  }
+}

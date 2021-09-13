@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "tag": "forge:dusts/tin"
+  },
+  "result": "advtech:ingot_tin",
+  "experience": 1.0,
+  "cookingtime": 200
+}

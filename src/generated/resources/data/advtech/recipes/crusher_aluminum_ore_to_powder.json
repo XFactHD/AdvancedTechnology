@@ -1,0 +1,15 @@
+{
+  "type": "advtech:crusher",
+  "energy": 4000,
+  "input": {
+    "tag": "forge:ores/aluminum"
+  },
+  "primary": {
+    "item": "advtech:powder_aluminum",
+    "count": 2
+  },
+  "secondary": {
+    "item": "advtech:powder_iron",
+    "chance": 0.10000000149011612
+  }
+}

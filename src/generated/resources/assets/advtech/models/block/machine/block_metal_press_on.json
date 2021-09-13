@@ -1,0 +1,130 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "bottom": "advtech:block/machine/block_machine_bottom",
+    "side": "advtech:block/machine/block_machine_side",
+    "front": "advtech:block/machine/block_metal_press_on",
+    "top": "advtech:block/machine/block_machine_top",
+    "level": "advtech:block/machine/block_machine_level",
+    "port": "advtech:block/machine/block_machine_port",
+    "particle": "advtech:block/machine/block_machine_top"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
+      "faces": {
+        "down": {
+          "texture": "#bottom",
+          "cullface": "down"
+        },
+        "up": {
+          "texture": "#top",
+          "cullface": "up"
+        },
+        "north": {
+          "texture": "#front",
+          "cullface": "north"
+        },
+        "south": {
+          "texture": "#side",
+          "cullface": "south"
+        },
+        "west": {
+          "texture": "#side",
+          "cullface": "west"
+        },
+        "east": {
+          "texture": "#side",
+          "cullface": "east"
+        }
+      }
+    },
+    {
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
+      "faces": {
+        "down": {
+          "texture": "#level",
+          "cullface": "down",
+          "tintindex": 6
+        },
+        "up": {
+          "texture": "#level",
+          "cullface": "up",
+          "tintindex": 6
+        },
+        "north": {
+          "texture": "#level",
+          "cullface": "north",
+          "tintindex": 6
+        },
+        "south": {
+          "texture": "#level",
+          "cullface": "south",
+          "tintindex": 6
+        },
+        "west": {
+          "texture": "#level",
+          "cullface": "west",
+          "tintindex": 6
+        },
+        "east": {
+          "texture": "#level",
+          "cullface": "east",
+          "tintindex": 6
+        }
+      }
+    },
+    {
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
+      "faces": {
+        "down": {
+          "texture": "#port",
+          "tintindex": 0
+        },
+        "up": {
+          "texture": "#port",
+          "tintindex": 1
+        },
+        "south": {
+          "texture": "#port",
+          "tintindex": 3
+        },
+        "west": {
+          "texture": "#port",
+          "tintindex": 4
+        },
+        "east": {
+          "texture": "#port",
+          "tintindex": 5
+        }
+      }
+    }
+  ]
+}
