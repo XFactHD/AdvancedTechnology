@@ -58,9 +58,7 @@ public class ScreenPlanter extends ScreenInventoryMachine<ContainerMenuPlanter>
                 ItemStack filter = menu.getFilterStack(i);
                 if (!filter.isEmpty())
                 {
-                    //TODO: switch back to alpha variant when the item can actually render half transparent
                     ItemRenderHelper.renderFakeItemTransparent(filter, leftPos + slot.x, topPos + slot.y, .25F);
-                    //ItemRenderHelper.renderFakeItem(filter, leftPos + slot.x, topPos + slot.y, .75F, .75F, .75F, 1F);
                 }
             }
         }

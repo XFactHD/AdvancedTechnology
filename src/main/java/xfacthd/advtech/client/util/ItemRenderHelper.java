@@ -16,6 +16,8 @@ import net.minecraft.world.item.ItemStack;
 @SuppressWarnings({ "deprecation", "unused" })
 public class ItemRenderHelper
 {
+    private static final RenderType TRANSLUCENT = RenderType.entityTranslucent(TextureAtlas.LOCATION_BLOCKS);
+
     public static void renderFakeItemTransparent(ItemStack stack, int x, int y, float alpha)
     {
         renderFakeItemColored(stack, x, y, 1F, 1F, 1F, alpha);
@@ -33,7 +35,6 @@ public class ItemRenderHelper
 
     /**
      * {@link ItemRenderer::renderGuiItem} but with color
-     * FIXME: alpha has no effect
      */
     public static void renderItemModel(ItemStack stack, int x, int y, float red, float green, float blue, float alpha, BakedModel model)
     {
@@ -60,8 +61,16 @@ public class ItemRenderHelper
         }
 
         MultiBufferSource.BufferSource buffer = Minecraft.getInstance().renderBuffers().bufferSource();
-        MultiBufferSource wrappedBuffer = renderType -> new TintedVertexConsumer(buffer.getBuffer(renderType), red, green, blue, alpha);
-        itemRenderer().render(stack, ItemTransforms.TransformType.GUI, false, new PoseStack(), wrappedBuffer, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, model);
+        itemRenderer().render(
+                stack,
+                ItemTransforms.TransformType.GUI,
+                false,
+                new PoseStack(),
+                wrapBuffer(buffer, red, green, blue, alpha, alpha < 1F),
+                LightTexture.FULL_BRIGHT,
+                OverlayTexture.NO_OVERLAY,
+                model
+        );
         buffer.endBatch();
 
         RenderSystem.enableDepthTest();
@@ -76,4 +85,9 @@ public class ItemRenderHelper
     }
 
     private static ItemRenderer itemRenderer() { return Minecraft.getInstance().getItemRenderer(); }
+
+    private static MultiBufferSource wrapBuffer(MultiBufferSource buffer, float red, float green, float blue, float alpha, boolean forceTranslucent)
+    {
+        return renderType -> new TintedVertexConsumer(buffer.getBuffer(forceTranslucent ? TRANSLUCENT : renderType), red, green, blue, alpha);
+    }
 }
