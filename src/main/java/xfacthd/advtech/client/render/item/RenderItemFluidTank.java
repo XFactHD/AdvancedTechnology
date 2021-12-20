@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import xfacthd.advtech.client.render.blockentity.RenderFluidTank;
@@ -37,8 +38,9 @@ public class RenderItemFluidTank extends BlockEntityWithoutLevelRenderer
 
         stack.popPose(); //Clear changes made by the call to ItemRenderer#renderItem() that led here
         //noinspection ConstantConditions
-        boolean leftHand = Minecraft.getInstance().player.getOffhandItem() == item;
-        renderer.render(item, transformType, leftHand, stack, buffer, combinedLight, combinedOverlay, tankModel);
+        boolean offHand = Minecraft.getInstance().player.getOffhandItem() == item;
+        boolean rightMain = Minecraft.getInstance().player.getMainArm() == HumanoidArm.RIGHT;
+        renderer.render(item, transformType, offHand == rightMain, stack, buffer, combinedLight, combinedOverlay, tankModel);
         stack.pushPose(); //Push to ensure correct stack size
 
         FluidStack fluid = BlockItemFluidTank.getContents(item);
