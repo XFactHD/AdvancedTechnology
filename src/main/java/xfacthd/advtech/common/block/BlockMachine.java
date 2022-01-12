@@ -21,7 +21,7 @@ import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
-import net.minecraftforge.fmllegacy.network.NetworkHooks;
+import net.minecraftforge.network.NetworkHooks;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import xfacthd.advtech.common.ATContent;
@@ -203,9 +203,9 @@ public class BlockMachine extends Block implements EntityBlock, IBlockItemProvid
     }
 
     @Override
-    public ItemStack getPickBlock(BlockState state, HitResult target, BlockGetter level, BlockPos pos, Player player)
+    public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter level, BlockPos pos, Player player)
     {
-        ItemStack stack = super.getPickBlock(state, target, level, pos, player);
+        ItemStack stack = super.getCloneItemStack(state, target, level, pos, player);
         if (!type.isCasing())
         {
             if (level.getBlockEntity(pos) instanceof BlockEntityMachine be)
@@ -256,7 +256,7 @@ public class BlockMachine extends Block implements EntityBlock, IBlockItemProvid
         return Utils.createBlockEntityTicker(
                 type,
                 ATContent.MACHINE_BE_TYPES.get(getType()).get(),
-                (beLevel, pos, beState, be) -> ((BlockEntityMachine) be).tick()
+                (beLevel, pos, beState, be) -> be.tick()
         );
     }
 

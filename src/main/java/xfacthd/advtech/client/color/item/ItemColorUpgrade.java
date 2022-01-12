@@ -4,7 +4,7 @@ import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
-import net.minecraftforge.fmllegacy.RegistryObject;
+import net.minecraftforge.registries.RegistryObject;
 import xfacthd.advtech.common.ATContent;
 import xfacthd.advtech.common.item.tool.ItemUpgrade;
 

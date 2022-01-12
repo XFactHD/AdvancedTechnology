@@ -2,8 +2,7 @@ package xfacthd.advtech.common.blockentity.machine;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.*;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -19,7 +18,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.PlantType;
-import net.minecraftforge.common.util.Constants;
 import xfacthd.advtech.AdvancedTechnology;
 import xfacthd.advtech.client.util.IRangedMachine;
 import xfacthd.advtech.common.ATContent;
@@ -433,7 +431,7 @@ public class BlockEntityPlanter extends BlockEntityInventoryMachine implements I
         radius = nbt.getInt("radius");
         scanPos = BlockPos.of(nbt.getLong("scanpos")).mutable();
 
-        ListTag filterList = nbt.getList("filters", Constants.NBT.TAG_COMPOUND);
+        ListTag filterList = nbt.getList("filters", Tag.TAG_COMPOUND);
         for (int i = 0; i < 9; i++)
         {
             filters[i] = ItemStack.of(filterList.getCompound(i));
@@ -489,7 +487,7 @@ public class BlockEntityPlanter extends BlockEntityInventoryMachine implements I
     {
         super.load(nbt);
 
-        ListTag filterList = nbt.getList("filters", Constants.NBT.TAG_COMPOUND);
+        ListTag filterList = nbt.getList("filters", Tag.TAG_COMPOUND);
         for (int i = 0; i < 9; i++)
         {
             filters[i] = ItemStack.of(filterList.getCompound(i));
@@ -504,7 +502,7 @@ public class BlockEntityPlanter extends BlockEntityInventoryMachine implements I
     {
         super.writeToItemData(nbt);
 
-        ListTag filterList = nbt.getList("filters", Constants.NBT.TAG_COMPOUND);
+        ListTag filterList = nbt.getList("filters", Tag.TAG_COMPOUND);
         for (int i = 0; i < 9; i++)
         {
             filters[i] = ItemStack.of(filterList.getCompound(i));

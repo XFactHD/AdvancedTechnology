@@ -20,12 +20,11 @@ version = '0.0.1'
 group = 'xfacthd.advtech'
 archivesBaseName = 'AdvancedTechnology'
 
-// Mojang ships Java 16 to end users in 1.17+ instead of Java 8 in 1.16 or lower, so your mod should target Java 16.
-java.toolchain.languageVersion = JavaLanguageVersion.of(16)
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
-    mappings channel: 'parchment', version: '2021.12.12-1.17.1'
+    mappings channel: 'parchment', version: '2021.12.19-1.18.1'
 
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
@@ -89,9 +88,9 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.17.1-37.1.1'
+    minecraft 'net.minecraftforge:forge:1.18.1-39.0.19'
 
-    implementation fg.deobf("curse.maven:jei-238222:3564653")
+    implementation fg.deobf("curse.maven:jei-238222:3599262")
 }
 
 // Example for how to get properties into the manifest for reading at runtime.

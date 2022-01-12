@@ -47,7 +47,7 @@ public class ScreenItemSplitter extends ScreenInventoryMachine<ContainerMenuItem
 
         for (FilterSlot slot : filterSlots)
         {
-            if (slot.isHovered() && !slot.getFilter().isEmpty())
+            if (slot.isHoveredOrFocused() && !slot.getFilter().isEmpty())
             {
                 renderTooltip(pPoseStack, slot.getFilter(), pMouseX - leftPos, pMouseY - topPos);
             }

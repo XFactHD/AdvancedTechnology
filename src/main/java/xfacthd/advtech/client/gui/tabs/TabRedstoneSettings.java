@@ -71,7 +71,7 @@ public class TabRedstoneSettings extends AbstractTab<ScreenMachine<?>>
             RenderSystem.setShaderTexture(0, BUTTON_TEXTURE);
 
             int offY = selected ? 2 : 0;
-            if (isHovered()) { offY += 1; }
+            if (isHovered) { offY += 1; }
 
             float minU = mode.ordinal() * .25F;
             float maxU = minU + .25F;

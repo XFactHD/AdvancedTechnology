@@ -11,13 +11,13 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraftforge.common.extensions.IForgeContainerType;
+import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.fmllegacy.RegistryObject;
-import net.minecraftforge.fmllegacy.network.IContainerFactory;
+import net.minecraftforge.registries.RegistryObject;
+import net.minecraftforge.network.IContainerFactory;
 import net.minecraftforge.registries.*;
 import xfacthd.advtech.AdvancedTechnology;
 import xfacthd.advtech.common.block.BlockMachine;
@@ -295,7 +295,7 @@ public class ATContent
     {
         return MENU_TYPES.register(
                 name,
-                () -> IForgeContainerType.create(factory)
+                () -> IForgeMenuType.create(factory)
         );
     }
 

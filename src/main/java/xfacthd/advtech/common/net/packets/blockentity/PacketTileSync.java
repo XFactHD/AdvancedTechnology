@@ -3,7 +3,7 @@ package xfacthd.advtech.common.net.packets.blockentity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.fmllegacy.network.NetworkEvent;
+import net.minecraftforge.network.NetworkEvent;
 import xfacthd.advtech.client.util.ClientHelper;
 import xfacthd.advtech.common.blockentity.BlockEntityBase;
 import xfacthd.advtech.common.net.packets.AbstractPacket;

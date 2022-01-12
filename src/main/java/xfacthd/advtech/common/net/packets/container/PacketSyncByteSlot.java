@@ -2,7 +2,7 @@ package xfacthd.advtech.common.net.packets.container;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraftforge.fmllegacy.network.NetworkEvent;
+import net.minecraftforge.network.NetworkEvent;
 import xfacthd.advtech.client.util.ClientHelper;
 import xfacthd.advtech.common.menu.AdvancedContainerMenu;
 import xfacthd.advtech.common.net.packets.AbstractPacket;

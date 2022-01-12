@@ -4,7 +4,7 @@ import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.fmllegacy.RegistryObject;
+import net.minecraftforge.registries.RegistryObject;
 import xfacthd.advtech.client.color.block.BlockColorMaterial;
 import xfacthd.advtech.common.ATContent;
 import xfacthd.advtech.common.item.material.ItemMaterial;

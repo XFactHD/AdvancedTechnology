@@ -5,14 +5,12 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.util.Constants;
 import xfacthd.advtech.common.net.NetworkHandler;
 import xfacthd.advtech.common.net.packets.blockentity.PacketTileSync;
-
-import javax.annotation.Nullable;
 
 public abstract class BlockEntityBase extends BlockEntity
 {
@@ -31,7 +29,7 @@ public abstract class BlockEntityBase extends BlockEntity
     {
         setChanged();
         //noinspection ConstantConditions
-        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Constants.BlockFlags.BLOCK_UPDATE);
+        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_ALL);
     }
 
     public final void markForSync()
@@ -47,7 +45,7 @@ public abstract class BlockEntityBase extends BlockEntity
     protected final void forceRenderUpdate()
     {
         //noinspection ConstantConditions
-        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Constants.BlockFlags.RERENDER_MAIN_THREAD);
+        level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), Block.UPDATE_IMMEDIATE);
     }
 
     public abstract void writeNetworkNBT(CompoundTag nbt);
@@ -68,9 +66,12 @@ public abstract class BlockEntityBase extends BlockEntity
     @Override
     public ClientboundBlockEntityDataPacket getUpdatePacket()
     {
-        CompoundTag tag = new CompoundTag();
-        writeNetworkNBT(tag);
-        return new ClientboundBlockEntityDataPacket(worldPosition, -1, tag);
+        return ClientboundBlockEntityDataPacket.create(this, be ->
+        {
+            CompoundTag tag = new CompoundTag();
+            ((BlockEntityBase) be).writeNetworkNBT(tag);
+            return tag;
+        });
     }
 
     public abstract void writeSyncPacket(FriendlyByteBuf buffer);

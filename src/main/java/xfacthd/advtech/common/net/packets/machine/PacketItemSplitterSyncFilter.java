@@ -3,7 +3,7 @@ package xfacthd.advtech.common.net.packets.machine;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.fmllegacy.network.NetworkEvent;
+import net.minecraftforge.network.NetworkEvent;
 import xfacthd.advtech.client.util.ClientHelper;
 import xfacthd.advtech.common.menu.utility.ContainerMenuItemSplitter;
 import xfacthd.advtech.common.net.packets.AbstractPacket;

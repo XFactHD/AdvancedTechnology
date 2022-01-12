@@ -2,8 +2,7 @@ package xfacthd.advtech.common.blockentity.utility;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.*;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.player.Inventory;
@@ -11,7 +10,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.items.ItemHandlerHelper;
 import xfacthd.advtech.AdvancedTechnology;
 import xfacthd.advtech.common.ATContent;
@@ -261,7 +259,7 @@ public class BlockEntityItemSplitter extends BlockEntityInventoryMachine //TODO:
     {
         super.load(nbt);
 
-        ListTag filterList = nbt.getList("filters", Constants.NBT.TAG_COMPOUND);
+        ListTag filterList = nbt.getList("filters", Tag.TAG_COMPOUND);
         for (int i = 0; i < (OUTPUT_COUNT * FILTERS_PER_OUTPUT); i++)
         {
             int output = i / FILTERS_PER_OUTPUT;

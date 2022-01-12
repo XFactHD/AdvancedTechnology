@@ -3,8 +3,7 @@ package xfacthd.advtech.common.blockentity.utility;
 import it.unimi.dsi.fastutil.longs.LongArraySet;
 import it.unimi.dsi.fastutil.longs.LongSet;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.*;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -15,7 +14,6 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.world.ForgeChunkManager;
 import xfacthd.advtech.AdvancedTechnology;
 import xfacthd.advtech.common.ATContent;
@@ -274,7 +272,7 @@ public class BlockEntityChunkLoader extends BlockEntityMachine
         chunksLoaded = nbt.getBoolean("loaded");
 
         loadedChunks.clear();
-        nbt.getList("chunks", Constants.NBT.TAG_COMPOUND)
+        nbt.getList("chunks", Tag.TAG_COMPOUND)
                 .stream()
                 .map(tag -> (CompoundTag)tag)
                 .forEach(tag -> loadedChunks.add(tag.getLong("cpos")));

@@ -32,7 +32,7 @@ public class FilterSlot extends Button
             Minecraft.getInstance().getItemRenderer().renderAndDecorateItem(filterGetter.apply(idx), x + 1, y + 1);
         }
 
-        if (isHovered())
+        if (isHovered)
         {
             AbstractContainerScreen.renderSlotHighlight(poseStack, x + 1, y + 1, getBlitOffset());
         }

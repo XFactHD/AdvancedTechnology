@@ -49,7 +49,7 @@ public record BEWLRItemModel(BakedModel original) implements BakedModel
     }
 
     @Override
-    public boolean isAmbientOcclusion(BlockState state) { return original.isAmbientOcclusion(state); }
+    public boolean useAmbientOcclusion(BlockState state) { return original.useAmbientOcclusion(state); }
 
     @Override
     public boolean doesHandlePerspectives() { return original.doesHandlePerspectives(); }

@@ -23,7 +23,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.*;
-import net.minecraftforge.fmllegacy.network.NetworkHooks;
+import net.minecraftforge.network.NetworkHooks;
 import xfacthd.advtech.common.ATContent;
 import xfacthd.advtech.common.blockentity.storage.BlockEntityEnergyCube;
 import xfacthd.advtech.common.data.ItemGroups;
@@ -127,9 +127,9 @@ public class BlockEnergyCube extends Block implements EntityBlock, IBlockItemPro
     }
 
     @Override
-    public ItemStack getPickBlock(BlockState state, HitResult target, BlockGetter level, BlockPos pos, Player player)
+    public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter level, BlockPos pos, Player player)
     {
-        ItemStack stack = super.getPickBlock(state, target, level, pos, player);
+        ItemStack stack = super.getCloneItemStack(state, target, level, pos, player);
         if (level.getBlockEntity(pos) instanceof BlockEntityEnergyCube cube)
         {
             //INFO: stored energy is always zero because it is never sent to the client

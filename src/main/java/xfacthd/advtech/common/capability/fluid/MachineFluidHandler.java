@@ -2,9 +2,7 @@ package xfacthd.advtech.common.capability.fluid;
 
 import com.google.common.base.Preconditions;
 import net.minecraft.core.NonNullList;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraftforge.common.util.Constants;
+import net.minecraft.nbt.*;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
@@ -182,7 +180,7 @@ public class MachineFluidHandler implements IFluidHandler, INBTSerializable<Comp
     {
         capacity = nbt.getInt("capacity");
 
-        ListTag list = nbt.getList("contents", Constants.NBT.TAG_COMPOUND);
+        ListTag list = nbt.getList("contents", Tag.TAG_COMPOUND);
         for (int i = 0; i < list.size(); i++)
         {
             CompoundTag tag = list.getCompound(i);

@@ -94,7 +94,7 @@ public class ATClient
     public static void onTexturePreStitch(final TextureStitchEvent.Pre event)
     {
         //noinspection deprecation
-        if (event.getMap().location().equals(TextureAtlas.LOCATION_BLOCKS))
+        if (event.getAtlas().location().equals(TextureAtlas.LOCATION_BLOCKS))
         {
             RenderRangedMachine.registerTextures(event);
             RenderEnergyCube.registerTextures(event);
@@ -105,10 +105,10 @@ public class ATClient
     public static void onTexturePostStitch(final TextureStitchEvent.Post event)
     {
         //noinspection deprecation
-        if (event.getMap().location().equals(TextureAtlas.LOCATION_BLOCKS))
+        if (event.getAtlas().location().equals(TextureAtlas.LOCATION_BLOCKS))
         {
-            RenderRangedMachine.retrieveSprites(event.getMap());
-            RenderEnergyCube.retrieveSprites(event.getMap());
+            RenderRangedMachine.retrieveSprites(event.getAtlas());
+            RenderEnergyCube.retrieveSprites(event.getAtlas());
             FluidSpriteCache.invalidateSpriteCache();
         }
     }
