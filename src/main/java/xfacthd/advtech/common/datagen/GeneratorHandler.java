@@ -1,9 +1,7 @@
 package xfacthd.advtech.common.datagen;
 
-import cpw.mods.modlauncher.Environment;
-import cpw.mods.modlauncher.Launcher;
-import cpw.mods.modlauncher.api.IEnvironment;
 import net.minecraft.data.DataGenerator;
+import net.minecraftforge.fml.loading.FMLLoader;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.event.RegistryEvent;
@@ -26,7 +24,7 @@ public class GeneratorHandler
     @SubscribeEvent
     public static void registerRecipeItems(final RegistryEvent.Register<Item> event)
     {
-        if (isDataGen())
+        if (FMLLoader.getLaunchHandler().isData())
         {
 
         }
@@ -64,12 +62,5 @@ public class GeneratorHandler
         gen.addProvider(new LiquifierRecipeProvider(gen));
 
         gen.addProvider(new EnglishLangProvider(gen));
-    }
-
-    private static boolean isDataGen()
-    {
-        Environment environment = Launcher.INSTANCE.environment();
-        final String launchTarget = environment.getProperty(IEnvironment.Keys.LAUNCHTARGET.get()).orElse("missing").toLowerCase(Locale.ROOT);
-        return launchTarget.equals("fmluserdevdata");
     }
 }

@@ -336,11 +336,10 @@ public class BlockEntityFertilizer extends BlockEntityInventoryMachine implement
     }
 
     @Override
-    public CompoundTag save(CompoundTag nbt)
+    public void saveAdditional(CompoundTag nbt)
     {
+        super.saveAdditional(nbt);
         nbt.putInt("radius", radius);
-
-        return super.save(nbt);
     }
 
     @Override

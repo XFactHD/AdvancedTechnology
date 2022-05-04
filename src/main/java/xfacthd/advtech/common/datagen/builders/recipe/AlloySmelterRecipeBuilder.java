@@ -4,7 +4,7 @@ import com.google.common.base.Preconditions;
 import com.google.gson.JsonObject;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -47,7 +47,7 @@ public class AlloySmelterRecipeBuilder
         return this;
     }
 
-    public AlloySmelterRecipeBuilder primaryInput(Tag<Item> item, int count) { return primaryInput(Ingredient.of(item), count); }
+    public AlloySmelterRecipeBuilder primaryInput(TagKey<Item> item, int count) { return primaryInput(Ingredient.of(item), count); }
 
     public AlloySmelterRecipeBuilder primaryInput(ItemLike item, int count) { return primaryInput(Ingredient.of(item), count); }
 
@@ -59,7 +59,7 @@ public class AlloySmelterRecipeBuilder
         return this;
     }
 
-    public AlloySmelterRecipeBuilder secondaryInput(Tag<Item> item, int count) { return secondaryInput(Ingredient.of(item), count); }
+    public AlloySmelterRecipeBuilder secondaryInput(TagKey<Item> item, int count) { return secondaryInput(Ingredient.of(item), count); }
 
     public AlloySmelterRecipeBuilder secondaryInput(ItemLike item, int count) { return secondaryInput(Ingredient.of(item), count); }
 
@@ -156,7 +156,7 @@ public class AlloySmelterRecipeBuilder
         public ResourceLocation getId() { return id; }
 
         @Override
-        public RecipeSerializer<?> getType() { return ATContent.RECIPE_ALLOY_SMELTER.get(); }
+        public RecipeSerializer<?> getType() { return ATContent.RECIPE_SERIALIZER_ALLOY_SMELTER.get(); }
 
         @Override
         public JsonObject serializeAdvancement() { return null; }

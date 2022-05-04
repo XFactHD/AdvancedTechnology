@@ -57,7 +57,8 @@ public abstract class BlockEntityBase extends BlockEntity
     {
         CompoundTag tag = new CompoundTag();
         writeNetworkNBT(tag);
-        return super.save(tag);
+        super.saveAdditional(tag);
+        return tag;
     }
 
     @Override

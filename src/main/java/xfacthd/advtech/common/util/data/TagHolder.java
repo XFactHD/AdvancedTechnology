@@ -1,6 +1,7 @@
 package xfacthd.advtech.common.util.data;
 
 import com.google.common.collect.ImmutableMap;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.*;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -12,38 +13,38 @@ import java.util.Map;
 
 public class TagHolder
 {
-    public static final Map<MaterialType, Tag.Named<Block>> BLOCK_ORES;
-    public static final Map<MaterialType, Tag.Named<Block>> BLOCK_STORAGE_BLOCKS;
+    public static final Map<MaterialType, TagKey<Block>> BLOCK_ORES;
+    public static final Map<MaterialType, TagKey<Block>> BLOCK_STORAGE_BLOCKS;
 
-    public static final Map<MaterialType, Tag.Named<Item>> ITEM_ORES;
-    public static final Map<MaterialType, Tag.Named<Item>> ITEM_STORAGE_BLOCKS;
+    public static final Map<MaterialType, TagKey<Item>> ITEM_ORES;
+    public static final Map<MaterialType, TagKey<Item>> ITEM_STORAGE_BLOCKS;
 
-    public static final Map<MaterialType, Tag.Named<Item>> DUSTS;
-    public static final Map<MaterialType, Tag.Named<Item>> INGOTS;
-    public static final Map<MaterialType, Tag.Named<Item>> NUGGETS;
-    public static final Map<MaterialType, Tag.Named<Item>> GEARS;
-    public static final Map<MaterialType, Tag.Named<Item>> PLATES;
-    public static final Map<MaterialType, Tag.Named<Item>> MATERIALS;
+    public static final Map<MaterialType, TagKey<Item>> DUSTS;
+    public static final Map<MaterialType, TagKey<Item>> INGOTS;
+    public static final Map<MaterialType, TagKey<Item>> NUGGETS;
+    public static final Map<MaterialType, TagKey<Item>> GEARS;
+    public static final Map<MaterialType, TagKey<Item>> PLATES;
+    public static final Map<MaterialType, TagKey<Item>> MATERIALS;
 
-    public static final Tag.Named<Item> BRICKS = forgeItemTag("bricks");
+    public static final TagKey<Item> BRICKS = forgeItemTag("bricks");
 
-    public static final Tag.Named<Item> WRENCHES = forgeItemTag("tools/wrench");
-    public static final Tag.Named<Item> MOLDS = internalItemTag("molds");
+    public static final TagKey<Item> WRENCHES = forgeItemTag("tools/wrench");
+    public static final TagKey<Item> MOLDS = internalItemTag("molds");
 
     static
     {
-        Map<MaterialType, Tag.Named<Block>> blockOres = new EnumMap<>(MaterialType.class);
-        Map<MaterialType, Tag.Named<Block>> blockStorageBlocks = new EnumMap<>(MaterialType.class);
+        Map<MaterialType, TagKey<Block>> blockOres = new EnumMap<>(MaterialType.class);
+        Map<MaterialType, TagKey<Block>> blockStorageBlocks = new EnumMap<>(MaterialType.class);
 
-        Map<MaterialType, Tag.Named<Item>> itemOres = new EnumMap<>(MaterialType.class);
-        Map<MaterialType, Tag.Named<Item>> itemStorageBlocks = new EnumMap<>(MaterialType.class);
+        Map<MaterialType, TagKey<Item>> itemOres = new EnumMap<>(MaterialType.class);
+        Map<MaterialType, TagKey<Item>> itemStorageBlocks = new EnumMap<>(MaterialType.class);
 
-        Map<MaterialType, Tag.Named<Item>> dusts = new EnumMap<>(MaterialType.class);
-        Map<MaterialType, Tag.Named<Item>> ingots = new EnumMap<>(MaterialType.class);
-        Map<MaterialType, Tag.Named<Item>> nuggets = new EnumMap<>(MaterialType.class);
-        Map<MaterialType, Tag.Named<Item>> gears = new EnumMap<>(MaterialType.class);
-        Map<MaterialType, Tag.Named<Item>> plates = new EnumMap<>(MaterialType.class);
-        Map<MaterialType, Tag.Named<Item>> materials = new EnumMap<>(MaterialType.class);
+        Map<MaterialType, TagKey<Item>> dusts = new EnumMap<>(MaterialType.class);
+        Map<MaterialType, TagKey<Item>> ingots = new EnumMap<>(MaterialType.class);
+        Map<MaterialType, TagKey<Item>> nuggets = new EnumMap<>(MaterialType.class);
+        Map<MaterialType, TagKey<Item>> gears = new EnumMap<>(MaterialType.class);
+        Map<MaterialType, TagKey<Item>> plates = new EnumMap<>(MaterialType.class);
+        Map<MaterialType, TagKey<Item>> materials = new EnumMap<>(MaterialType.class);
 
         for (MaterialType material : MaterialType.values())
         {
@@ -104,12 +105,12 @@ public class TagHolder
         MATERIALS = ImmutableMap.copyOf(materials);
     }
 
-    private static Tag.Named<Block> forgeBlockTag(String name) { return BlockTags.bind("forge:" + name); }
+    private static TagKey<Block> forgeBlockTag(String name) { return BlockTags.create(new ResourceLocation("forge", name)); }
 
-    private static Tag.Named<Item> forgeItemTag(String name) { return ItemTags.bind("forge:" + name); }
+    private static TagKey<Item> forgeItemTag(String name) { return ItemTags.create(new ResourceLocation("forge", name)); }
 
-    private static Tag.Named<Item> internalItemTag(String name)
+    private static TagKey<Item> internalItemTag(String name)
     {
-        return ItemTags.bind(AdvancedTechnology.MODID + ":" + name);
+        return ItemTags.create(new ResourceLocation(AdvancedTechnology.MODID, name));
     }
 }

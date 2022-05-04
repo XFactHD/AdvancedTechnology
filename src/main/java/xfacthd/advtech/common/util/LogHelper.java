@@ -8,26 +8,26 @@ public class LogHelper
 {
     private static Logger logger;
 
-    private static void log(Level logLevel, Object object, Object... data)
+    private static void log(Level logLevel, String message, Object... data)
     {
-        logger.log(logLevel, String.valueOf(object), object, data);
+        logger.log(logLevel, message, data);
     }
 
-    public static void all(Object object, Object... data) { log(Level.ALL, object, data); }
+    public static void all(String message, Object... data) { log(Level.ALL, message, data); }
 
-    public static void debug(Object object, Object... data) { log(Level.DEBUG, object, data); }
+    public static void debug(String message, Object... data) { log(Level.DEBUG, message, data); }
 
-    public static void error(Object object, Object... data) { log(Level.ERROR, object, data); }
+    public static void error(String message, Object... data) { log(Level.ERROR, message, data); }
 
-    public static void fatal(Object object, Object... data) { log(Level.FATAL, object, data); }
+    public static void fatal(String message, Object... data) { log(Level.FATAL, message, data); }
 
-    public static void info(Object object, Object... data) { log(Level.INFO, object, data); }
+    public static void info(String message, Object... data) { log(Level.INFO, message, data); }
 
-    public static void off(Object object, Object... data) { log(Level.OFF, object, data); }
+    public static void off(String message, Object... data) { log(Level.OFF, message, data); }
 
-    public static void trace(Object object, Object... data) { log(Level.TRACE, object, data); }
+    public static void trace(String message, Object... data) { log(Level.TRACE, message, data); }
 
-    public static void warn(Object object, Object... data) { log(Level.WARN, object, data); }
+    public static void warn(String message, Object... data) { log(Level.WARN, message, data); }
 
     public static void setLogger(Logger log) { logger = log; }
 }

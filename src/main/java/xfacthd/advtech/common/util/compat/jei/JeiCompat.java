@@ -82,12 +82,13 @@ public class JeiCompat implements IModPlugin
         registration.addGuiContainerHandler(ScreenBurnerGenerator.class, simpleGuiHandler);
         registration.addGuiContainerHandler(ScreenEnergyCube.class, simpleGuiHandler);
         registration.addGuiContainerHandler(ScreenChunkLoader.class, simpleGuiHandler);
+        registration.addGuiContainerHandler(ScreenItemSplitter.class, simpleGuiHandler);
         //Other guis may need extended GuiHandlers because they contain fluid ingredients
 
-        //registration.addRecipeClickArea(ScreenElectricFurnace.class,    77, 45, 22, 16, VanillaRecipeCategoryUid.FURNACE);
-        //registration.addRecipeClickArea(ScreenCrusher.class,            77, 45, 22, 16, CrusherRecipe.UID);
-        //registration.addRecipeClickArea(ScreenAlloySmelter.class,       77, 45, 22, 16, AlloySmelterRecipe.UID);
-        //registration.addRecipeClickArea(ScreenMetalPress.class,         77, 45, 22, 16, MetalPressRecipe.UID);
-        //registration.addRecipeClickArea(ScreenLiquifier.class,          77, 45, 22, 16, LiquifierRecipe.UID);
+        registration.addRecipeClickArea(ScreenElectricFurnace.class,    77, 45, 22, 16, VanillaRecipeCategoryUid.FURNACE);
+        registration.addRecipeClickArea(ScreenCrusher.class,            77, 45, 22, 16, CrusherRecipe.UID);
+        registration.addRecipeClickArea(ScreenAlloySmelter.class,       77, 45, 22, 16, AlloySmelterRecipe.UID);
+        registration.addRecipeClickArea(ScreenMetalPress.class,         77, 45, 22, 16, MetalPressRecipe.UID);
+        registration.addRecipeClickArea(ScreenLiquifier.class,          77, 45, 22, 16, LiquifierRecipe.UID);
     }
 }

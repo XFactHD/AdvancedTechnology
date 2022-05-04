@@ -16,7 +16,6 @@ import java.util.*;
 
 public class LiquifierRecipe extends MachineRecipe
 {
-    public static final RecipeType<LiquifierRecipe> TYPE = registerType("liquifier", new Type());
     public static final ResourceLocation UID = new ResourceLocation(AdvancedTechnology.MODID, "liquifier");
     public static List<LiquifierRecipe> RECIPES = Collections.emptyList();
 
@@ -38,10 +37,10 @@ public class LiquifierRecipe extends MachineRecipe
     public ItemStack getResultItem() { return ItemStack.EMPTY; }
 
     @Override
-    public RecipeSerializer<?> getSerializer() { return ATContent.RECIPE_LIQUIFIER.get(); }
+    public RecipeSerializer<?> getSerializer() { return ATContent.RECIPE_SERIALIZER_LIQUIFIER.get(); }
 
     @Override
-    public RecipeType<?> getType() { return TYPE; }
+    public RecipeType<?> getType() { return ATContent.RECIPE_TYPE_LIQUIFIER.get(); }
 
     public static final class Type implements RecipeType<LiquifierRecipe>
     {

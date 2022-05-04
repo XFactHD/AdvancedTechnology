@@ -267,16 +267,16 @@ public class BlockEntityFluidTank extends BlockEntityBase implements ITileFluidH
     }
 
     @Override
-    public CompoundTag save(CompoundTag nbt)
+    public void saveAdditional(CompoundTag nbt)
     {
+        super.saveAdditional(nbt);
+
         nbt.putInt("level", level.ordinal());
         nbt.putInt("mode", mode.ordinal());
 
         CompoundTag tag = new CompoundTag();
         internalFluidHandler.writeToNBT(tag);
         nbt.put("content", tag);
-
-        return super.save(nbt);
     }
 
     @Override

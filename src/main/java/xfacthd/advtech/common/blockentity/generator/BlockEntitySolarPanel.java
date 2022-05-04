@@ -123,10 +123,10 @@ public class BlockEntitySolarPanel extends BlockEntityMachine
     public int getGeneration() { return generation; }
 
     @Override
-    public CompoundTag save(CompoundTag nbt)
+    public void saveAdditional(CompoundTag nbt)
     {
+        super.saveAdditional(nbt);
         nbt.putBoolean("seesSky", seesSky);
-        return super.save(nbt);
     }
 
     @Override

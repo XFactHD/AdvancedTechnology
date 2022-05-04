@@ -16,7 +16,6 @@ import java.util.*;
 
 public class MetalPressRecipe extends MachineRecipe
 {
-    public static final RecipeType<MetalPressRecipe> TYPE = registerType("metal_press", new Type());
     public static final ResourceLocation UID = new ResourceLocation(AdvancedTechnology.MODID, "metal_press");
     public static List<MetalPressRecipe> RECIPES = Collections.emptyList();
 
@@ -59,10 +58,10 @@ public class MetalPressRecipe extends MachineRecipe
     public ItemStack getToastSymbol() { return new ItemStack(ATContent.machineBlock(MachineType.METAL_PRESS)); }
 
     @Override
-    public RecipeSerializer<?> getSerializer() { return ATContent.RECIPE_METAL_PRESS.get(); }
+    public RecipeSerializer<?> getSerializer() { return ATContent.RECIPE_SERIALIZER_METAL_PRESS.get(); }
 
     @Override
-    public RecipeType<?> getType() { return TYPE; }
+    public RecipeType<?> getType() { return ATContent.RECIPE_TYPE_METAL_PRESS.get(); }
 
     public static final class Type implements RecipeType<MetalPressRecipe>
     {

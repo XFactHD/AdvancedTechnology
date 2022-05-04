@@ -16,7 +16,6 @@ import java.util.*;
 
 public class CrusherRecipe extends MachineRecipe
 {
-    public static final RecipeType<CrusherRecipe> TYPE = registerType("crusher", new Type());
     public static final ResourceLocation UID = new ResourceLocation(AdvancedTechnology.MODID, "crusher");
     public static List<CrusherRecipe> RECIPES = Collections.emptyList();
 
@@ -52,10 +51,10 @@ public class CrusherRecipe extends MachineRecipe
     public ItemStack getToastSymbol() { return new ItemStack(ATContent.machineBlock(MachineType.CRUSHER)); }
 
     @Override
-    public RecipeSerializer<?> getSerializer() { return ATContent.RECIPE_CRUSHER.get(); }
+    public RecipeSerializer<?> getSerializer() { return ATContent.RECIPE_SERIALIZER_CRUSHER.get(); }
 
     @Override
-    public RecipeType<?> getType() { return TYPE; }
+    public RecipeType<?> getType() { return ATContent.RECIPE_TYPE_CRUSHER.get(); }
 
     public static final class Type implements RecipeType<CrusherRecipe>
     {

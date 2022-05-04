@@ -72,10 +72,10 @@ public class BlockEntityCreativeItemSource extends BlockEntityBase
     protected void readSyncPacket(FriendlyByteBuf buffer) { itemHandler.deserializeNBT(buffer.readNbt()); }
 
     @Override
-    public CompoundTag save(CompoundTag nbt)
+    public void saveAdditional(CompoundTag nbt)
     {
+        super.saveAdditional(nbt);
         nbt.put("inv", itemHandler.serializeNBT());
-        return super.save(nbt);
     }
 
     @Override

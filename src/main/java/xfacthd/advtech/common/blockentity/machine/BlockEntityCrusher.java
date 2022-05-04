@@ -38,7 +38,7 @@ public class BlockEntityCrusher extends BlockEntityProducer
 
     public BlockEntityCrusher(BlockPos pos, BlockState state)
     {
-        super(ATContent.machineEntity(MachineType.CRUSHER), pos, state, CrusherRecipe.TYPE);
+        super(ATContent.machineEntity(MachineType.CRUSHER), pos, state, ATContent.RECIPE_TYPE_CRUSHER.get());
     }
 
     @Override

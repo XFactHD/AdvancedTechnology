@@ -139,10 +139,10 @@ public class BlockEntityCreativeFluidSource extends BlockEntityBase
     protected void readSyncPacket(FriendlyByteBuf buffer) { source.deserializeNBT(buffer.readNbt()); }
 
     @Override
-    public CompoundTag save(CompoundTag nbt)
+    public void saveAdditional(CompoundTag nbt)
     {
+        super.saveAdditional(nbt);
         nbt.put("fluid", source.serializeNBT());
-        return super.save(nbt);
     }
 
     @Override

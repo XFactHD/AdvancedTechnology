@@ -4,7 +4,7 @@ import com.google.common.base.Preconditions;
 import com.google.gson.JsonObject;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -37,7 +37,7 @@ public class LiquifierRecipeBuilder
         return this;
     }
 
-    public LiquifierRecipeBuilder input(Tag<Item> item, int count) { return input(Ingredient.of(item), count); }
+    public LiquifierRecipeBuilder input(TagKey<Item> item, int count) { return input(Ingredient.of(item), count); }
 
     public LiquifierRecipeBuilder input(ItemLike item, int count) { return input(Ingredient.of(item), count); }
 
@@ -87,7 +87,7 @@ public class LiquifierRecipeBuilder
         public ResourceLocation getId() { return id; }
 
         @Override
-        public RecipeSerializer<?> getType() { return ATContent.RECIPE_LIQUIFIER.get(); }
+        public RecipeSerializer<?> getType() { return ATContent.RECIPE_SERIALIZER_LIQUIFIER.get(); }
 
         @Override
         public JsonObject serializeAdvancement() { return null; }

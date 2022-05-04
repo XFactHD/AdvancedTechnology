@@ -306,14 +306,14 @@ public abstract class BlockEntityInventoryMachine extends BlockEntityMachine imp
     }
 
     @Override
-    public CompoundTag save(CompoundTag nbt)
+    public void saveAdditional(CompoundTag nbt)
     {
+        super.saveAdditional(nbt);
+
         for (Side side : Side.values()) { nbt.putInt(side.getSerializedName(), ports.get(side).ordinal()); }
 
         nbt.put("inventory", internalItemHandler.serializeNBT());
         nbt.putBoolean("force", forceOutput);
-
-        return super.save(nbt);
     }
 
     @Override

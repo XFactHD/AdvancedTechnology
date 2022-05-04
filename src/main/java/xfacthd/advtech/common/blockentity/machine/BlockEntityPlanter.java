@@ -364,7 +364,9 @@ public class BlockEntityPlanter extends BlockEntityInventoryMachine implements I
 
     public ItemStack getFilterStack(int idx) { return filters[idx]; }
 
-    public void configureFilter(boolean clear) //FIXME: setting the filter clears the inventory
+    //FIXME: setting the filter clears the inventory,
+    //       filters on empty inventory slots get lost on world reload and when the planter is working
+    public void configureFilter(boolean clear)
     {
         for (int i = 0; i < 9; i++)
         {
@@ -467,8 +469,10 @@ public class BlockEntityPlanter extends BlockEntityInventoryMachine implements I
     }
 
     @Override
-    public CompoundTag save(CompoundTag nbt)
+    public void saveAdditional(CompoundTag nbt)
     {
+        super.saveAdditional(nbt);
+
         ListTag filterList = new ListTag();
         for (int i = 0; i < 9; i++)
         {
@@ -478,8 +482,6 @@ public class BlockEntityPlanter extends BlockEntityInventoryMachine implements I
 
         nbt.putInt("radius", radius);
         nbt.putInt("patchSize", patchSize);
-
-        return super.save(nbt);
     }
 
     @Override
@@ -494,7 +496,7 @@ public class BlockEntityPlanter extends BlockEntityInventoryMachine implements I
         }
 
         radius = nbt.getInt("radius");
-        patchSize = nbt.getInt("patchSize");
+        patchSize = Math.max(nbt.getInt("patchSize"), 3);
     }
 
     @Override

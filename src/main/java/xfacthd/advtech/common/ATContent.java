@@ -4,15 +4,18 @@ import com.google.common.base.Preconditions;
 import com.mojang.datafixers.util.Pair;
 import it.unimi.dsi.fastutil.ints.Int2ObjectArrayMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import net.minecraft.core.Registry;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -58,6 +61,7 @@ public class ATContent
     private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, AdvancedTechnology.MODID);
     private static final DeferredRegister<BlockEntityType<?>> BE_TYPES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, AdvancedTechnology.MODID);
     private static final DeferredRegister<MenuType<?>> MENU_TYPES = DeferredRegister.create(ForgeRegistries.CONTAINERS, AdvancedTechnology.MODID);
+    private static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(Registry.RECIPE_TYPE_REGISTRY, AdvancedTechnology.MODID);
     private static final DeferredRegister<RecipeSerializer<?>> RECIPE_SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, AdvancedTechnology.MODID);
 
     /* BLOCKS */
@@ -116,19 +120,27 @@ public class ATContent
 
     public static final RegistryObject<MenuType<ContainerMenuEnergyCube>> MENU_ENERGY_CUBE = registerMenuType("energy_cube", ContainerMenuEnergyCube::create);
 
+    /* RECIPE TYPES */
+    public static final RegistryObject<RecipeType<CrusherRecipe>> RECIPE_TYPE_CRUSHER = RECIPE_TYPES.register("crusher", CrusherRecipe.Type::new);
+    public static final RegistryObject<RecipeType<AlloySmelterRecipe>> RECIPE_TYPE_ALLOY_SMELTER = RECIPE_TYPES.register("alloy_smelter", AlloySmelterRecipe.Type::new);
+    public static final RegistryObject<RecipeType<MetalPressRecipe>> RECIPE_TYPE_METAL_PRESS = RECIPE_TYPES.register("metal_press", MetalPressRecipe.Type::new);
+    public static final RegistryObject<RecipeType<LiquifierRecipe>> RECIPE_TYPE_LIQUIFIER = RECIPE_TYPES.register("liquifier", LiquifierRecipe.Type::new);
+
     /* RECIPE SERIALZERS */
-    public static final RegistryObject<RecipeSerializer<CrusherRecipe>> RECIPE_CRUSHER = RECIPE_SERIALIZERS.register("crusher", CrusherRecipe.Serializer::new);
-    public static final RegistryObject<RecipeSerializer<AlloySmelterRecipe>> RECIPE_ALLOY_SMELTER = RECIPE_SERIALIZERS.register("alloy_smelter", AlloySmelterRecipe.Serializer::new);
-    public static final RegistryObject<RecipeSerializer<MetalPressRecipe>> RECIPE_METAL_PRESS = RECIPE_SERIALIZERS.register("metal_press", MetalPressRecipe.Serializer::new);
-    public static final RegistryObject<RecipeSerializer<LiquifierRecipe>> RECIPE_LIQUIFIER = RECIPE_SERIALIZERS.register("liquifier", LiquifierRecipe.Serializer::new);
+    public static final RegistryObject<RecipeSerializer<CrusherRecipe>> RECIPE_SERIALIZER_CRUSHER = RECIPE_SERIALIZERS.register("crusher", CrusherRecipe.Serializer::new);
+    public static final RegistryObject<RecipeSerializer<AlloySmelterRecipe>> RECIPE_SERIALIZER_ALLOY_SMELTER = RECIPE_SERIALIZERS.register("alloy_smelter", AlloySmelterRecipe.Serializer::new);
+    public static final RegistryObject<RecipeSerializer<MetalPressRecipe>> RECIPE_SERIALIZER_METAL_PRESS = RECIPE_SERIALIZERS.register("metal_press", MetalPressRecipe.Serializer::new);
+    public static final RegistryObject<RecipeSerializer<LiquifierRecipe>> RECIPE_SERIALIZER_LIQUIFIER = RECIPE_SERIALIZERS.register("liquifier", LiquifierRecipe.Serializer::new);
 
     public static void init()
     {
-        BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
-        BE_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
-        MENU_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
-        RECIPE_SERIALIZERS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+        BLOCKS.register(bus);
+        ITEMS.register(bus);
+        BE_TYPES.register(bus);
+        MENU_TYPES.register(bus);
+        RECIPE_TYPES.register(bus);
+        RECIPE_SERIALIZERS.register(bus);
     }
 
     @SubscribeEvent

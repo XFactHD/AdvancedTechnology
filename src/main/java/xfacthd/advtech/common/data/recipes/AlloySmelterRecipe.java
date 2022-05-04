@@ -16,7 +16,6 @@ import java.util.*;
 
 public class AlloySmelterRecipe extends MachineRecipe
 {
-    public static final RecipeType<AlloySmelterRecipe> TYPE = registerType("alloy_smelter", new Type());
     public static final ResourceLocation UID = new ResourceLocation(AdvancedTechnology.MODID, "alloy_smelter");
     public static List<AlloySmelterRecipe> RECIPES = Collections.emptyList();
 
@@ -100,10 +99,10 @@ public class AlloySmelterRecipe extends MachineRecipe
     public ItemStack getToastSymbol() { return new ItemStack(ATContent.machineBlock(MachineType.ALLOY_SMELTER)); }
 
     @Override
-    public RecipeSerializer<?> getSerializer() { return ATContent.RECIPE_ALLOY_SMELTER.get(); }
+    public RecipeSerializer<?> getSerializer() { return ATContent.RECIPE_SERIALIZER_ALLOY_SMELTER.get(); }
 
     @Override
-    public RecipeType<?> getType() { return TYPE; }
+    public RecipeType<?> getType() { return ATContent.RECIPE_TYPE_ALLOY_SMELTER.get(); }
 
     public static final class Type implements RecipeType<AlloySmelterRecipe>
     {

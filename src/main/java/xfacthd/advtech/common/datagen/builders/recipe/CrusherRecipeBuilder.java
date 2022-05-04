@@ -4,7 +4,7 @@ import com.google.common.base.Preconditions;
 import com.google.gson.JsonObject;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -44,7 +44,7 @@ public class CrusherRecipeBuilder
         return this;
     }
 
-    public CrusherRecipeBuilder input(Tag<Item> item) { return input(Ingredient.of(item)); }
+    public CrusherRecipeBuilder input(TagKey<Item> item) { return input(Ingredient.of(item)); }
 
     public CrusherRecipeBuilder input(ItemLike item) { return input(Ingredient.of(item)); }
 
@@ -131,7 +131,7 @@ public class CrusherRecipeBuilder
         public ResourceLocation getId() { return id; }
 
         @Override
-        public RecipeSerializer<?> getType() { return ATContent.RECIPE_CRUSHER.get(); }
+        public RecipeSerializer<?> getType() { return ATContent.RECIPE_SERIALIZER_CRUSHER.get(); }
 
         @Override
         public JsonObject serializeAdvancement() { return null; }

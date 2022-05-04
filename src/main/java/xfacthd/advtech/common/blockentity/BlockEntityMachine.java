@@ -302,8 +302,9 @@ public abstract class BlockEntityMachine extends BlockEntityBase implements Menu
     }
 
     @Override
-    public CompoundTag save(CompoundTag nbt)
+    public void saveAdditional(CompoundTag nbt)
     {
+        super.saveAdditional(nbt);
         nbt.putInt("level", level.ordinal());
         nbt.putInt("redstone", redstoneMode.ordinal());
         if (needPower())
@@ -314,7 +315,6 @@ public abstract class BlockEntityMachine extends BlockEntityBase implements Menu
         {
             nbt.put("upgrades", upgradeInventory.serializeNBT());
         }
-        return super.save(nbt);
     }
 
     public void writeToItemData(CompoundTag nbt)

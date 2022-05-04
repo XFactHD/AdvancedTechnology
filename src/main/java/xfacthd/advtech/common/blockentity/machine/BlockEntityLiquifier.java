@@ -53,7 +53,7 @@ public class BlockEntityLiquifier extends BlockEntityProducer implements ITileFl
 
     public BlockEntityLiquifier(BlockPos pos, BlockState state)
     {
-        super(ATContent.machineEntity(MachineType.LIQUIFIER), pos, state, LiquifierRecipe.TYPE);
+        super(ATContent.machineEntity(MachineType.LIQUIFIER), pos, state, ATContent.RECIPE_TYPE_LIQUIFIER.get());
 
         for (Direction side : Direction.values())
         {
@@ -321,10 +321,10 @@ public class BlockEntityLiquifier extends BlockEntityProducer implements ITileFl
     public FluidStack getFluidStored() { return internalFluidHandler.getFluidInTank(0); }
 
     @Override
-    public CompoundTag save(CompoundTag nbt)
+    public void saveAdditional(CompoundTag nbt)
     {
+        super.saveAdditional(nbt);
         nbt.put("tank", internalFluidHandler.serializeNBT());
-        return super.save(nbt);
     }
 
     @Override

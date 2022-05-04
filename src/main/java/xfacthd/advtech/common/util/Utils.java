@@ -1,8 +1,12 @@
 package xfacthd.advtech.common.util;
 
+import com.google.common.base.Preconditions;
 import com.google.gson.JsonObject;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.phys.AABB;
@@ -10,6 +14,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.tags.ITagManager;
 import xfacthd.advtech.AdvancedTechnology;
 
 public class Utils
@@ -67,4 +72,18 @@ public class Utils
     }
 
     public static ResourceLocation modLocation(String name) { return new ResourceLocation(AdvancedTechnology.MODID, name); }
+
+    public static boolean tagContains(TagKey<Block> tag, Block item)
+    {
+        ITagManager<Block> tagManager = ForgeRegistries.BLOCKS.tags();
+        Preconditions.checkNotNull(tagManager, "ForgeRegistries.ITEMS is missing its ITagManager?!");
+        return tagManager.getTag(tag).contains(item);
+    }
+
+    public static boolean tagContains(TagKey<Item> tag, Item item)
+    {
+        ITagManager<Item> tagManager = ForgeRegistries.ITEMS.tags();
+        Preconditions.checkNotNull(tagManager, "ForgeRegistries.ITEMS is missing its ITagManager?!");
+        return tagManager.getTag(tag).contains(item);
+    }
 }

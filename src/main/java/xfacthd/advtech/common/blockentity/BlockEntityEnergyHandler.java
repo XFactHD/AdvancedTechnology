@@ -154,10 +154,10 @@ public abstract class BlockEntityEnergyHandler extends BlockEntityBase
     }
 
     @Override
-    public CompoundTag save(CompoundTag tag)
+    public void saveAdditional(CompoundTag tag)
     {
+        super.saveAdditional(tag);
         tag.put("energy", internalEnergyHandler.serializeNBT());
-        return super.save(tag);
     }
 
     @Override

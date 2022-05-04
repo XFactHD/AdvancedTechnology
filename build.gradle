@@ -24,7 +24,7 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
-    mappings channel: 'parchment', version: '2021.12.19-1.18.1'
+    mappings channel: 'parchment', version: '2022.03.13-1.18.2'
 
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
@@ -88,9 +88,9 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.18.1-39.0.19'
+    minecraft 'net.minecraftforge:forge:1.18.2-40.0.44'
 
-    implementation fg.deobf("curse.maven:jei-238222:3599262")
+    implementation fg.deobf("curse.maven:jei-238222:3723913")
 }
 
 // Example for how to get properties into the manifest for reading at runtime.

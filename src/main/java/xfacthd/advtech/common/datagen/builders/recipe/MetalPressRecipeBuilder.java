@@ -4,14 +4,13 @@ import com.google.common.base.Preconditions;
 import com.google.gson.JsonObject;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
 import xfacthd.advtech.common.ATContent;
-import xfacthd.advtech.common.util.data.TagHolder;
 
 import java.util.function.Consumer;
 
@@ -45,7 +44,7 @@ public class MetalPressRecipeBuilder
         return this;
     }
 
-    public MetalPressRecipeBuilder input(Tag<Item> item, int count) { return input(Ingredient.of(item), count); }
+    public MetalPressRecipeBuilder input(TagKey<Item> item, int count) { return input(Ingredient.of(item), count); }
 
     public MetalPressRecipeBuilder input(ItemLike item, int count) { return input(Ingredient.of(item), count); }
 
@@ -118,7 +117,7 @@ public class MetalPressRecipeBuilder
         public ResourceLocation getId() { return id; }
 
         @Override
-        public RecipeSerializer<?> getType() { return ATContent.RECIPE_METAL_PRESS.get(); }
+        public RecipeSerializer<?> getType() { return ATContent.RECIPE_SERIALIZER_METAL_PRESS.get(); }
 
         @Override
         public JsonObject serializeAdvancement() { return null; }

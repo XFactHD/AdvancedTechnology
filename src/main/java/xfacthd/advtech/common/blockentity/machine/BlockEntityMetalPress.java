@@ -23,6 +23,7 @@ import xfacthd.advtech.common.menu.machine.ContainerMenuMetalPress;
 import xfacthd.advtech.common.data.recipes.MetalPressRecipe;
 import xfacthd.advtech.common.data.states.Side;
 import xfacthd.advtech.common.data.states.SideAccess;
+import xfacthd.advtech.common.util.Utils;
 import xfacthd.advtech.common.util.data.TagHolder;
 import xfacthd.advtech.common.util.inventory.RecipeSearchInventory;
 
@@ -38,7 +39,7 @@ public class BlockEntityMetalPress extends BlockEntityProducer
 
     public BlockEntityMetalPress(BlockPos pos, BlockState state)
     {
-        super(ATContent.machineEntity(MachineType.METAL_PRESS), pos, state, MetalPressRecipe.TYPE);
+        super(ATContent.machineEntity(MachineType.METAL_PRESS), pos, state, ATContent.RECIPE_TYPE_METAL_PRESS.get());
     }
 
     @Override
@@ -161,7 +162,7 @@ public class BlockEntityMetalPress extends BlockEntityProducer
         }
         else if (slot == 1)
         {
-            return stack.getCount() == 1 && TagHolder.MOLDS.contains(stack.getItem());
+            return stack.getCount() == 1 && Utils.tagContains(TagHolder.MOLDS, stack.getItem());
         }
         else if (slot == 2)
         {

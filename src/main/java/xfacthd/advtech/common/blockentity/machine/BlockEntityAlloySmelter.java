@@ -39,7 +39,7 @@ public class BlockEntityAlloySmelter extends BlockEntityProducer
 
     public BlockEntityAlloySmelter(BlockPos pos, BlockState state)
     {
-        super(ATContent.machineEntity(MachineType.ALLOY_SMELTER), pos, state, AlloySmelterRecipe.TYPE);
+        super(ATContent.machineEntity(MachineType.ALLOY_SMELTER), pos, state, ATContent.RECIPE_TYPE_ALLOY_SMELTER.get());
     }
 
     @Override

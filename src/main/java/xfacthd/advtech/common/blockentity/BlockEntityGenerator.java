@@ -128,9 +128,9 @@ public abstract class BlockEntityGenerator extends BlockEntityInventoryMachine
     }
 
     @Override
-    public CompoundTag save(CompoundTag nbt)
+    public void saveAdditional(CompoundTag nbt)
     {
+        super.saveAdditional(nbt);
         nbt.putInt("progress", progress);
-        return super.save(nbt);
     }
 }

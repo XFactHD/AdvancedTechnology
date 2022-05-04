@@ -238,8 +238,10 @@ public class BlockEntityItemSplitter extends BlockEntityInventoryMachine //TODO:
     public Side getFrontSide() { return Side.TOP; }
 
     @Override
-    public CompoundTag save(CompoundTag nbt)
+    public void saveAdditional(CompoundTag nbt)
     {
+        super.saveAdditional(nbt);
+
         ListTag filterList = new ListTag();
         for (int i = 0; i < (OUTPUT_COUNT * FILTERS_PER_OUTPUT); i++)
         {
@@ -250,8 +252,6 @@ public class BlockEntityItemSplitter extends BlockEntityInventoryMachine //TODO:
             filterList.addTag(i, filter);
         }
         nbt.put("filters", filterList);
-
-        return super.save(nbt);
     }
 
     @Override

@@ -279,8 +279,10 @@ public class BlockEntityChunkLoader extends BlockEntityMachine
     }
 
     @Override
-    public CompoundTag save(CompoundTag nbt)
+    public void saveAdditional(CompoundTag nbt)
     {
+        super.saveAdditional(nbt);
+
         nbt.putInt("radius", radius);
         nbt.putInt("count", count);
         nbt.putBoolean("active", active);
@@ -294,8 +296,6 @@ public class BlockEntityChunkLoader extends BlockEntityMachine
             list.add(tag);
         }));
         nbt.put("chunks", list);
-
-        return super.save(nbt);
     }
 
     @Override

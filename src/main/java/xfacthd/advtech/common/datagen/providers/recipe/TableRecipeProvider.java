@@ -2,7 +2,7 @@ package xfacthd.advtech.common.datagen.providers.recipe;
 
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.*;
-import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.common.Tags;
@@ -23,7 +23,7 @@ public class TableRecipeProvider extends ATRecipeProvider
         {
             if (material.hasBlock())
             {
-                Tag<Item> tag;
+                TagKey<Item> tag;
                 if (material.isMetal()) { tag = TagHolder.INGOTS.get(material); }
                 else if (material == MaterialType.SULFUR) { tag = TagHolder.DUSTS.get(material); }
                 else { tag = TagHolder.MATERIALS.get(material); }
