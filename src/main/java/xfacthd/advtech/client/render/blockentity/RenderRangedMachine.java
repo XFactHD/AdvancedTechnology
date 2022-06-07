@@ -4,6 +4,8 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Matrix3f;
 import com.mojang.math.Matrix4f;
+import net.minecraft.client.GraphicsStatus;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
@@ -147,7 +149,15 @@ public class RenderRangedMachine<T extends BlockEntityMachine & IRangedMachine> 
 
     private void drawSurfaces(MultiBufferSource buffer, Matrix4f matrix, Matrix3f normal, int startX, int startZ, int endX, int endZ, int botY, int topY, int r, int g, int b)
     {
-        VertexConsumer builder = buffer.getBuffer(Sheets.translucentCullBlockSheet());
+        VertexConsumer builder;
+        if (Minecraft.getInstance().options.graphicsMode == GraphicsStatus.FABULOUS)
+        {
+            builder = buffer.getBuffer(Sheets.translucentItemSheet());
+        }
+        else
+        {
+            builder = buffer.getBuffer(Sheets.translucentCullBlockSheet());
+        }
 
         float minU = WHITE.getU0();
         float maxU = WHITE.getU1();
@@ -161,10 +171,10 @@ public class RenderRangedMachine<T extends BlockEntityMachine & IRangedMachine> 
         builder.vertex(matrix, startX, botY,   endZ).color(r, g, b, 0xAA).uv(minU, maxV).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(240).normal(normal, 0, -1, 0).endVertex();
 
         //Top
-        builder.vertex(matrix,   endX, topY, startZ).color(r, g, b, 0xAA).uv(minU, minV).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(240).normal(normal, 0, 1, 0).endVertex();
-        builder.vertex(matrix, startX, topY, startZ).color(r, g, b, 0xAA).uv(maxU, minV).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(240).normal(normal, 0, 1, 0).endVertex();
-        builder.vertex(matrix, startX, topY,   endZ).color(r, g, b, 0xAA).uv(maxU, maxV).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(240).normal(normal, 0, 1, 0).endVertex();
-        builder.vertex(matrix,   endX, topY,   endZ).color(r, g, b, 0xAA).uv(minU, maxV).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(240).normal(normal, 0, 1, 0).endVertex();
+        builder.vertex(matrix,   endX, topY, startZ).color(r, g, b, 0xAA).uv(minU, minV).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(240).normal(normal, 0,  1, 0).endVertex();
+        builder.vertex(matrix, startX, topY, startZ).color(r, g, b, 0xAA).uv(maxU, minV).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(240).normal(normal, 0,  1, 0).endVertex();
+        builder.vertex(matrix, startX, topY,   endZ).color(r, g, b, 0xAA).uv(maxU, maxV).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(240).normal(normal, 0,  1, 0).endVertex();
+        builder.vertex(matrix,   endX, topY,   endZ).color(r, g, b, 0xAA).uv(minU, maxV).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(240).normal(normal, 0,  1, 0).endVertex();
 
         //North
         builder.vertex(matrix, startX, botY, startZ).color(r, g, b, 0xAA).uv(minU, minV).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(240).normal(normal, 0, 0, -1).endVertex();
@@ -173,10 +183,10 @@ public class RenderRangedMachine<T extends BlockEntityMachine & IRangedMachine> 
         builder.vertex(matrix,   endX, botY, startZ).color(r, g, b, 0xAA).uv(maxU, minV).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(240).normal(normal, 0, 0, -1).endVertex();
 
         //South
-        builder.vertex(matrix,   endX, botY,   endZ).color(r, g, b, 0xAA).uv(minU, minV).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(240).normal(normal, 0, 0, 1).endVertex();
-        builder.vertex(matrix,   endX, topY,   endZ).color(r, g, b, 0xAA).uv(minU, maxV).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(240).normal(normal, 0, 0, 1).endVertex();
-        builder.vertex(matrix, startX, topY,   endZ).color(r, g, b, 0xAA).uv(maxU, maxV).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(240).normal(normal, 0, 0, 1).endVertex();
-        builder.vertex(matrix, startX, botY,   endZ).color(r, g, b, 0xAA).uv(maxU, minV).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(240).normal(normal, 0, 0, 1).endVertex();
+        builder.vertex(matrix,   endX, botY,   endZ).color(r, g, b, 0xAA).uv(minU, minV).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(240).normal(normal, 0, 0,  1).endVertex();
+        builder.vertex(matrix,   endX, topY,   endZ).color(r, g, b, 0xAA).uv(minU, maxV).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(240).normal(normal, 0, 0,  1).endVertex();
+        builder.vertex(matrix, startX, topY,   endZ).color(r, g, b, 0xAA).uv(maxU, maxV).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(240).normal(normal, 0, 0,  1).endVertex();
+        builder.vertex(matrix, startX, botY,   endZ).color(r, g, b, 0xAA).uv(maxU, minV).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(240).normal(normal, 0, 0,  1).endVertex();
 
         //West
         builder.vertex(matrix, startX, botY,   endZ).color(r, g, b, 0xAA).uv(minU, minV).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(240).normal(normal, -1, 0, 0).endVertex();
@@ -185,10 +195,10 @@ public class RenderRangedMachine<T extends BlockEntityMachine & IRangedMachine> 
         builder.vertex(matrix, startX, botY, startZ).color(r, g, b, 0xAA).uv(maxU, minV).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(240).normal(normal, -1, 0, 0).endVertex();
 
         //East
-        builder.vertex(matrix,   endX, botY, startZ).color(r, g, b, 0xAA).uv(minU, minV).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(240).normal(normal, 1, 0, 0).endVertex();
-        builder.vertex(matrix,   endX, topY, startZ).color(r, g, b, 0xAA).uv(minU, maxV).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(240).normal(normal, 1, 0, 0).endVertex();
-        builder.vertex(matrix,   endX, topY,   endZ).color(r, g, b, 0xAA).uv(maxU, maxV).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(240).normal(normal, 1, 0, 0).endVertex();
-        builder.vertex(matrix,   endX, botY,   endZ).color(r, g, b, 0xAA).uv(maxU, minV).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(240).normal(normal, 1, 0, 0).endVertex();
+        builder.vertex(matrix,   endX, botY, startZ).color(r, g, b, 0xAA).uv(minU, minV).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(240).normal(normal,  1, 0, 0).endVertex();
+        builder.vertex(matrix,   endX, topY, startZ).color(r, g, b, 0xAA).uv(minU, maxV).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(240).normal(normal,  1, 0, 0).endVertex();
+        builder.vertex(matrix,   endX, topY,   endZ).color(r, g, b, 0xAA).uv(maxU, maxV).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(240).normal(normal,  1, 0, 0).endVertex();
+        builder.vertex(matrix,   endX, botY,   endZ).color(r, g, b, 0xAA).uv(maxU, minV).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(240).normal(normal,  1, 0, 0).endVertex();
     }
 
     @Override
